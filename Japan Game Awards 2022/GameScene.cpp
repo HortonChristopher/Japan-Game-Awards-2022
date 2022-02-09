@@ -9,6 +9,8 @@
 
 using namespace DirectX;
 
+//あんじょうテスト
+
 GameScene::GameScene()
 {
 }
