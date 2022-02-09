@@ -10,6 +10,7 @@
 using namespace DirectX;
 
 //あんじょうテスト
+//よっしーテスト♡
 
 GameScene::GameScene()
 {
