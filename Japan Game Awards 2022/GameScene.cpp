@@ -6,6 +6,7 @@
 #include"FbxLoader.h"
 #include"FbxObject3d.h"
 #include"Camera.h"
+#include "Controller.h"
 
 using namespace DirectX;
 
