@@ -4,14 +4,14 @@
 
 #pragma comment(lib, "d3dcompiler.lib")
 
-// 静的メンバ変数の実体
+// 静的メンバ変数の実体 The entity of a static member variable
 ID3D12Device* Mesh::device = nullptr;
 
 void Mesh::StaticInitialize(ID3D12Device * device)
 {
 	Mesh::device = device;	
 
-	// マテリアルの静的初期化
+	// マテリアルの静的初期化 Static initialization of material
 	Material::StaticInitialize(device);
 }
 
@@ -40,7 +40,7 @@ void Mesh::CreateBuffers()
 	HRESULT result;
 		
 	UINT sizeVB = static_cast<UINT>(sizeof(VertexPosNormalUv)*vertices.size());
-	// 頂点バッファ生成
+	// 頂点バッファ生成 Vertex buffer generation
 	result = device->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
 		D3D12_HEAP_FLAG_NONE,
@@ -49,7 +49,7 @@ void Mesh::CreateBuffers()
 		nullptr,
 		IID_PPV_ARGS(&vertBuff));
 
-	// 頂点バッファへのデータ転送
+	// 頂点バッファへのデータ転送 Data transfer to vertex buffer
 	VertexPosNormalUv* vertMap = nullptr;
 	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
 	if (SUCCEEDED(result)) {
@@ -57,7 +57,7 @@ void Mesh::CreateBuffers()
 		vertBuff->Unmap(0, nullptr);
 	}
 
-	// 頂点バッファビューの作成
+	// 頂点バッファビューの作成 Creating a vertex buffer view
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(vertices[0]);
@@ -68,7 +68,7 @@ void Mesh::CreateBuffers()
 	}
 
 	UINT sizeIB = static_cast<UINT>(sizeof(unsigned short)*indices.size());
-	// インデックスバッファ生成
+	// インデックスバッファ生成 Index buffer generation
 	result = device->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
 		D3D12_HEAP_FLAG_NONE,
@@ -81,7 +81,7 @@ void Mesh::CreateBuffers()
 		return;
 	}	
 
-	// インデックスバッファへのデータ転送
+	// インデックスバッファへのデータ転送 Data transfer to index buffer
 	unsigned short* indexMap = nullptr;
 	result = indexBuff->Map(0, nullptr, (void**)&indexMap);
 	if (SUCCEEDED(result)) {
@@ -89,7 +89,7 @@ void Mesh::CreateBuffers()
 		indexBuff->Unmap(0, nullptr);
 	}
 	
-	// インデックスバッファビューの作成
+	// インデックスバッファビューの作成 Creating an index buffer view
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
@@ -97,18 +97,18 @@ void Mesh::CreateBuffers()
 
 void Mesh::Draw(ID3D12GraphicsCommandList * cmdList)
 {
-	// 頂点バッファをセット
+	// 頂点バッファをセット Set vertex buffer
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
-	// インデックスバッファをセット
+	// インデックスバッファをセット Set index buffer
 	cmdList->IASetIndexBuffer(&ibView);	
 	
-	// シェーダリソースビューをセット
+	// シェーダリソースビューをセット Set shader resource view
 	cmdList->SetGraphicsRootDescriptorTable(2, material->GetGpuHandle());
 
-	// マテリアルの定数バッファをセット
+	// マテリアルの定数バッファをセット Set constant buffer for material
 	ID3D12Resource* constBuff = material->GetConstantBuffer();
 	cmdList->SetGraphicsRootConstantBufferView(1, constBuff->GetGPUVirtualAddress());
 
-	// 描画コマンド
+	// 描画コマンド Drawing command
 	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }
