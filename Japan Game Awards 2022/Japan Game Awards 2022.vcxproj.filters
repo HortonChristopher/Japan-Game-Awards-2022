@@ -68,6 +68,9 @@
     <ClCompile Include="ParticleManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -143,5 +146,6 @@
     <ClInclude Include="ParticleManager.h">
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h" />
   </ItemGroup>
 </Project>

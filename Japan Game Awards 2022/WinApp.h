@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <Windows.h>
 
+#define WINDOW_H_
+#define WINDOW_CLASS_NAME "DirectXGame"	//!< ウィンドウクラス名
+
 // ウィンドウズアプリケーション
 class WinApp
 {
