@@ -146,6 +146,8 @@
     <ClInclude Include="ParticleManager.h">
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Controller.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

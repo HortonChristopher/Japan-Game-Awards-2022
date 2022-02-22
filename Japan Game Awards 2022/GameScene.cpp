@@ -29,6 +29,7 @@ GameScene::~GameScene()
 
 	safe_delete( fbxobject1 );
 	safe_delete( fbxmodel1 );
+	ReleaseInput();
 }
 
 void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio )
@@ -56,6 +57,9 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	// グラフィックスパイプライン生成 Graphics pipeline generation
 	FbxObject3d::CreateGraphicsPipeline();
+
+	//コントローラー初期化
+	InitInput();
 
 
 	// デバッグテキスト用テクスチャ読み込み Import texture for debug text
@@ -112,7 +116,7 @@ void GameScene::Update()
 		XMFLOAT3 position = objFighter->GetPosition();
 
 		// 移動後の座標を計算 Calculate the coordinates after moving
-		if ( input->PushKey( DIK_I ) ) { position.y += 1.0f; }
+		if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }
 		else if ( input->PushKey( DIK_K ) ) { position.y -= 1.0f; }
 		if ( input->PushKey( DIK_L ) ) { position.x += 1.0f; }
 		else if ( input->PushKey( DIK_J ) ) { position.x -= 1.0f; }
@@ -137,6 +141,8 @@ void GameScene::Update()
 	MoveCamera();
 	// パーティクル生成 Particle generation
 	CreateParticles();
+
+	UpdateInput();
 
 	camera->Update();
 	particleMan->Update();
@@ -183,8 +189,10 @@ void GameScene::Draw()
 	fbxobject1->Draw( cmdList );
 
 	// パーティクルの描画 Drawing particles
-	particleMan->Draw( cmdList );
-	
+	if (IsButtonDown(ButtonKind::Button_A))
+	{
+		particleMan->Draw(cmdList);
+	}
 	// ここに3Dオブジェクトの描画処理を追加できる You can add 3D object drawing process here
 
 	// 3Dオブジェクト描画後処理 Post-processing of 3D object drawing
