@@ -189,7 +189,7 @@ void GameScene::Draw()
 	fbxobject1->Draw( cmdList );
 
 	// パーティクルの描画 Drawing particles
-	if (IsButtonDown(ButtonKind::Button_A))
+	if (IsButtonDown(ButtonKind::Button_31))
 	{
 		particleMan->Draw(cmdList);
 	}

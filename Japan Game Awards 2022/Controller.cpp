@@ -450,6 +450,127 @@ void UpdateGamePad()
 		case 1:
 			is_push[ButtonKind::Button_B] = true;
 			break;
+		case 2:
+			is_push[ButtonKind::Button_X] = true;
+			break;
+		case 3:
+			is_push[ButtonKind::Button_Y] = true;
+			break;
+		case 4:
+			is_push[ButtonKind::Button_LB] = true;
+			break;
+		case 5:
+			is_push[ButtonKind::Button_RB] = true;
+			break;
+		case 6:
+			is_push[ButtonKind::Button_LeftMenu] = true;
+			break;
+		case 7:
+			is_push[ButtonKind::Button_RightMenu] = true;
+			break;
+		case 8:
+			is_push[ButtonKind::Button_LeftStick] = true;
+			break;
+		case 9:
+			is_push[ButtonKind::Button_RightStick] = true;
+			break;
+		case 10:
+			is_push[ButtonKind::Button_1] = true;
+			break;
+		case 11:
+			is_push[ButtonKind::Button_2] = true;
+			break;
+		case 12:
+			is_push[ButtonKind::Button_3] = true;
+			break;
+		case 13:
+			is_push[ButtonKind::Button_4] = true;
+			break;
+		case 14:
+			is_push[ButtonKind::Button_5] = true;
+			break;
+		case 15:
+			is_push[ButtonKind::Button_6] = true;
+			break;
+		case 16:
+			is_push[ButtonKind::Button_7] = true;
+			break;
+		case 17:
+			is_push[ButtonKind::Button_8] = true;
+			break;
+		case 18:
+			is_push[ButtonKind::Button_9] = true;
+			break;
+		case 19:
+			is_push[ButtonKind::Button_10] = true;
+			break;
+		case 20:
+			is_push[ButtonKind::Button_11] = true;
+			break;
+		case 21:
+			is_push[ButtonKind::Button_12] = true;
+			break;
+		case 22:
+			is_push[ButtonKind::Button_13] = true;
+			break;
+		case 23:
+			is_push[ButtonKind::Button_14] = true;
+			break;
+		case 24:
+			is_push[ButtonKind::Button_15] = true;
+			break;
+		case 25:
+			is_push[ButtonKind::Button_16] = true;
+			break;
+		case 26:
+			is_push[ButtonKind::Button_17] = true;
+			break;
+		case 27:
+			is_push[ButtonKind::Button_18] = true;
+			break;
+		case 28:
+			is_push[ButtonKind::Button_19] = true;
+			break;
+		case 29:
+			is_push[ButtonKind::Button_20] = true;
+			break;
+		case 30:
+			is_push[ButtonKind::Button_21] = true;
+			break;
+		case 31:
+			is_push[ButtonKind::Button_22] = true;
+			break;
+		case 32:
+			is_push[ButtonKind::Button_23] = true;
+			break;
+		case 33:
+			is_push[ButtonKind::Button_24] = true;
+			break;
+		case 34:
+			is_push[ButtonKind::Button_25] = true;
+			break;
+		case 35:
+			is_push[ButtonKind::Button_26] = true;
+			break;
+		case 36:
+			is_push[ButtonKind::Button_27] = true;
+			break;
+		case 37:
+			is_push[ButtonKind::Button_28] = true;
+			break;
+		case 38:
+			is_push[ButtonKind::Button_29] = true;
+			break;
+		case 39:
+			is_push[ButtonKind::Button_30] = true;
+			break;
+		case 40:
+			is_push[ButtonKind::Button_31] = true;
+			break;
+		case 41:
+			is_push[ButtonKind::Button_20] = true;
+			break;
+
 		}
 	}
 
