@@ -3,30 +3,30 @@
 #include <Windows.h>
 #include <wrl.h>
 
-#define DIRECTINPUT_VERSION     0x0800          // DirectInputのバージョン指定
+#define DIRECTINPUT_VERSION     0x0800          // DirectInputのバージョン指定 DirectInput version specification
 #include <dinput.h>
 
-// 入力
+// 入力 input
 class Input
 {
-private: // エイリアス
+private: // エイリアス alias
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-public: // メンバ関数
-	// 初期化
+public: // メンバ関数 Member function
+	// 初期化 Initialization
 	bool Initialize(HINSTANCE hInstance, HWND hwnd);
 
-	// 毎フレーム処理
+	// 毎フレーム処理 Every frame processing
 	void Update();
 
-	// キーの押下をチェック
+	// キーの押下をチェック Check key press
 	bool PushKey(BYTE keyNumber);
 
-	// キーのトリガーをチェック
+	// キーのトリガーをチェック Check key trigger
 	bool TriggerKey(BYTE keyNumber);
 
-private: // メンバ変数
+private: // メンバ変数 Member variables
 	ComPtr<IDirectInput8> dinput;
 	ComPtr<IDirectInputDevice8> devkeyboard;
 	BYTE key[256] = {};

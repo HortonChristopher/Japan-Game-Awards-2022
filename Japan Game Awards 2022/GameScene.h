@@ -11,10 +11,10 @@
 #include "FbxObject3d.h"
 #include "ParticleManager.h"
 
-// ゲームシーン
+// ゲームシーン Game scene
 class GameScene
 {
-private: // エイリアス
+private: // エイリアス alias
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	// DirectX::を省略
@@ -23,39 +23,39 @@ private: // エイリアス
 	using XMFLOAT4 = DirectX::XMFLOAT4;
 	using XMMATRIX = DirectX::XMMATRIX;
 
-private: // 静的メンバ変数
+private: // 静的メンバ変数 Static member variables
 	static const int debugTextTexNumber = 0;
 
-public: // メンバ関数
+public: // メンバ関数 Member function
 	
-	// コンストクラタ
+	// コンストクラタ Constcrater
 	GameScene();
 	
-	// デストラクタ
+	// デストラクタ Destructor
 	~GameScene();
 	
-	// 初期化
+	// 初期化 Initialization
 	void Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio);
 	
-	// 毎フレーム処理
+	// 毎フレーム処理 Every frame processing
 	void Update();
 	
-	// 描画
+	// 描画 drawing
 	void Draw();
 
-	// カメラ移動
+	// カメラ移動 Camera movement
 	void MoveCamera();
 	
-	// パーティクル生成
+	// パーティクル生成 Particle generation
 	void CreateParticles();
 
-private: // メンバ変数
+private: // メンバ変数 Member variables
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
 	DebugText debugText;	
 
-	// ゲームシーン用
+	// ゲームシーン用 For game scenes
 	Camera *camera = nullptr;
 	 
 	Sprite* spriteBG = nullptr;

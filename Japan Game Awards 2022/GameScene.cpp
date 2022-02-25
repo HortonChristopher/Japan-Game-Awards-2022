@@ -205,7 +205,7 @@ void GameScene::Draw()
 
 	// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
 
-	//// 描画
+	//// 描画 drawing
 	//sprite1->Draw();
 	//sprite2->Draw();
 

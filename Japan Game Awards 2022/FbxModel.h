@@ -12,25 +12,25 @@
 
 struct Node
 {
-	// 名前
+	// 名前 name
 	std::string name;
 
-	// ローカルスケール
+	// ローカルスケール Local scale
 	DirectX::XMVECTOR scaling = { 1,1,1,0 };
 
-	// ローカル回転角
+	// ローカル回転角 Local angle of rotation
 	DirectX::XMVECTOR rotation = { 0,0,0,0 };
 
-	// ローカル移動
+	// ローカル移動 Local move
 	DirectX::XMVECTOR translation = { 0,0,0,1 };
 
-	// ローカル変形行列
+	// ローカル変形行列 Local transformation matrix
 	DirectX::XMMATRIX transform;
 
-	// グローバル変形行列
+	// グローバル変形行列 Global transformation matrix
 	DirectX::XMMATRIX globalTransform;
 
-	// 親ノード
+	// 親ノード Parent node
 	Node *parent = nullptr;
 };
 
@@ -38,7 +38,7 @@ struct Node
 
 class FbxModel
 {
-private: // エイリアス
+private: // エイリアス alias
 // Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	// DirectX::を省略
@@ -53,37 +53,37 @@ private: // エイリアス
 	using string = std::string;
 	template <class T> using vector = std::vector<T>;
 
-public: // 定数
-// ボーンインデックスの最大数
+public: // 定数 constant
+// ボーンインデックスの最大数 Maximum number of bone indexes
 	static const int MAX_BONE_INDICES = 4;
 
-public: // サブクラス
-// 頂点データ構造体
+public: // サブクラス Subclass
+// 頂点データ構造体 Vertex data structure
 	struct VertexPosNormalUvSkin
 	{
-		DirectX::XMFLOAT3 pos; // xyz座標
-		DirectX::XMFLOAT3 normal; // 法線ベクトル
-		DirectX::XMFLOAT2 uv; // uv座標
-		UINT boneIndex[MAX_BONE_INDICES]; // ボーン 番号
-		float boneWeight[MAX_BONE_INDICES]; // ボーン 重み
+		DirectX::XMFLOAT3 pos; // xyz座標 xyz coordinates
+		DirectX::XMFLOAT3 normal; // 法線ベクトルNormal vector
+		DirectX::XMFLOAT2 uv; // uv座標 uv coordinates
+		UINT boneIndex[MAX_BONE_INDICES]; // ボーン 番号 Bone number
+		float boneWeight[MAX_BONE_INDICES]; // ボーン 重み Bone weight
 	};
 
 public:
-	// フレンドクラス
+	// フレンドクラス Friend class
 	friend class FbxLoader;
 
 	struct Bone
 	{
-		// 名前
+		// 名前 name
 		std::string name;
 
-		// 初期姿勢の逆行列
+		// 初期姿勢の逆行列 Inverse matrix of initial posture
 		DirectX::XMMATRIX invInitialPose;
 
-		// クラスター(FBX側のボーン情報)
+		// クラスター(FBX側のボーン情報) Cluster (bone information on the FBX side)
 		FbxCluster *fbxCluster;
 
-		// コンストラクタ
+		// コンストラクタ constructor
 		Bone( const std::string &name )
 		{
 			this->name = name;
@@ -91,54 +91,54 @@ public:
 	};
 
 public:
-	// 描画
+	// 描画 drawing
 	void Draw( ID3D12GraphicsCommandList *cmdList );
 
-private: // メンバ変数
-	// モデル名
+private: // メンバ変数 Member variables
+	// モデル名 Model name
 	std::string name;
 
-	// ノード配列
+	// ノード配列 Node array
 	std::vector<Node> nodes;
-	// メッシュを持つノード
+	// メッシュを持つノード Node with mesh
 	Node *meshNode = nullptr;
-	// 頂点バッファ
+	// 頂点バッファVertex buffer
 	ComPtr<ID3D12Resource> vertBuff;
-	// インデックスバッファ
+	// インデックスバッファ Index buffer
 	ComPtr<ID3D12Resource> indexBuff;
-	// テクスチャバッファ
+	// テクスチャバッファ Texture buffer
 	ComPtr<ID3D12Resource> texBuff;
-	// 頂点バッファビュー
+	// 頂点バッファビュー Vertex buffer view
 	D3D12_VERTEX_BUFFER_VIEW vbView = {};
-	// インデックスバッファビュー
+	// インデックスバッファビュー Index buffer view
 	D3D12_INDEX_BUFFER_VIEW ibView = {};
-	// SRV用デスクリプタヒープ
+	// SRV用デスクリプタヒープ Descriptor heap for SRV
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV;
-	// 頂点データ配列
+	// 頂点データ配列 Vertex data array
 	std::vector<VertexPosNormalUvSkin> vertices;
-	// 頂点インデックス配列
+	// 頂点インデックス配列 Vertex index array
 	std::vector<unsigned short> indices;
 
-	// アンビエント係数
+	// アンビエント係数 Ambient coefficient
 	DirectX::XMFLOAT3 ambient = { 1,1,1 };
-	// ディフューズ係数
+	// ディフューズ係数 Diffuse coefficient
 	DirectX::XMFLOAT3 diffuse = { 1,1,1 };
-	// テクスチャメタデータ
+	// テクスチャメタデータ Texture metadata
 	DirectX::TexMetadata metadata = {};
-	// スクラッチイメージ
+	// スクラッチイメージ Scratch image
 	DirectX::ScratchImage scratchImg = {};
 
-	// ボーン配列
+	// ボーン配列 Bone array
 	std::vector<Bone> bones;
 
-	// FBXシーン
+	// FBXシーン FBX scene
 	FbxScene *fbxScene = nullptr;
 
 public:
-	// バッファ生成
+	// バッファ生成 Buffer generation
 	void CreatBuffers( ID3D12Device *device );
 
-	// モデルの変形行列取得
+	// モデルの変形行列取得 Get model transformation matrix
 	const XMMATRIX &GetModelTransform() { return meshNode->globalTransform; }
 
 	// getter
@@ -147,7 +147,7 @@ public:
 	// getter
 	FbxScene *GetFbxScene() { return fbxScene; }
 
-	// デストラクタ
+	// デストラクタ Destructor
 	~FbxModel();
 };
 

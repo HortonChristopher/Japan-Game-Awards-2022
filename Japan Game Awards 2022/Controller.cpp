@@ -18,16 +18,16 @@ static ButtonState g_ButtonStates[ButtonKind::ButtonKindMax];
 
 WinApp* win = nullptr;
 
-// 入力インターフェースの作成
+// 入力インターフェースの作成 Creating an input interface
 bool CreateInputInterface();
 
-// ゲームパッドデバイスの作成
+// ゲームパッドデバイスの作成 Creating a gamepad device
 bool CreateGamePadDevice();
 
-// ゲームパッドの更新
+// ゲームパッドの更新 Gamepad updates
 void UpdateGamePad();
 
-//ゲームパッドデバイスの作成-デバイス列挙の結果を受け取る構造体
+//ゲームパッドデバイスの作成-デバイス列挙の結果を受け取る構造体 Creating a gamepad device-a structure that receives the results of device enumeration
 struct DeviceEnumParameter
 {
 	LPDIRECTINPUTDEVICE8* GamePadDevice;
@@ -36,7 +36,7 @@ struct DeviceEnumParameter
 
 BOOL SetUpCooperativeLevel(LPDIRECTINPUTDEVICE8 device)
 {
-	//協調モードの設定
+	//協調モードの設定 Cooperative mode setting
 	if (FAILED(device->SetCooperativeLevel(
 		FindWindowA(WINDOW_CLASS_NAME, nullptr),
 		DISCL_EXCLUSIVE | DISCL_FOREGROUND)
@@ -50,13 +50,13 @@ BOOL SetUpCooperativeLevel(LPDIRECTINPUTDEVICE8 device)
 
 BOOL StartGamePadControl()
 {
-	// デバイスが生成されてない
+	// デバイスが生成されてない No device generated
 	if (g_GamePadDevice == nullptr)
 	{
 		return false;
 	}
-
-	// 制御開始
+	
+	// 制御開始 Start control
 	if (FAILED(g_GamePadDevice->Acquire()))
 	{
 		return false;
@@ -64,15 +64,15 @@ BOOL StartGamePadControl()
 
 	DIDEVCAPS cap;
 	g_GamePadDevice->GetCapabilities(&cap);
-	// ポーリング判定
+	// ポーリング判定 Polling judgment
 	if (cap.dwFlags & DIDC_POLLEDDATAFORMAT)
 	{
 		DWORD error = GetLastError();
-		// ポーリング開始
+		// ポーリング開始 Start polling
 		/*
-			PollはAcquireの前に行うとされていたが、
-			Acquireの前で実行すると失敗したので
-			後で実行するようにした
+			PollはAcquireの前に行うとされていたが、 Poll was supposed to be done before Acquire,
+			Acquireの前で実行すると失敗したので When I ran it before Acquire, it failed.
+			後で実行するようにした I tried to execute it later
 		*/
 		if (FAILED(g_GamePadDevice->Poll()))
 		{
@@ -85,7 +85,7 @@ BOOL StartGamePadControl()
 
 BOOL SetUpGamePadProperty(LPDIRECTINPUTDEVICE8 device)
 {
-	// 軸モードを絶対値モードとして設定
+	// 軸モードを絶対値モードとして設定 Set axis mode as absolute mode
 	DIPROPDWORD diprop;
 	ZeroMemory(&diprop, sizeof(diprop));
 	diprop.diph.dwSize = sizeof(diprop);
@@ -98,7 +98,7 @@ BOOL SetUpGamePadProperty(LPDIRECTINPUTDEVICE8 device)
 		return false;
 	}
 
-	// X軸の値の範囲設定
+	// X軸の値の範囲設定 X-axis value range setting
 	DIPROPRANGE diprg;
 	ZeroMemory(&diprg, sizeof(diprg));
 	diprg.diph.dwSize = sizeof(diprg);
@@ -112,7 +112,7 @@ BOOL SetUpGamePadProperty(LPDIRECTINPUTDEVICE8 device)
 		return false;
 	}
 
-	// Y軸の値の範囲設定
+	// Y軸の値の範囲設定 Y-axis value range setting
 	diprg.diph.dwObj = DIJOFS_Y;
 	if (FAILED(device->SetProperty(DIPROP_RANGE, &diprg.diph)))
 	{
@@ -127,13 +127,13 @@ BOOL CALLBACK DeviceFindCallBack(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
 	DeviceEnumParameter* parameter = (DeviceEnumParameter*)pvRef;
 	LPDIRECTINPUTDEVICE8 device = nullptr;
 
-	// 既に発見しているなら終了
+	// 既に発見しているなら終了 Finish if you have already found
 	if (parameter->FindCount >= 1)
 	{
 		return DIENUM_STOP;
 	}
 
-	// デバイス生成
+	// デバイス生成 Device generation
 	HRESULT hr = g_InputInterface->CreateDevice(
 		lpddi->guidInstance,
 		parameter->GamePadDevice,
@@ -144,7 +144,7 @@ BOOL CALLBACK DeviceFindCallBack(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
 		return DIENUM_STOP;
 	}
 
-	// 入力フォーマットの指定
+	// 入力フォーマットの指定 Specifying the input format
 	device = *parameter->GamePadDevice;
 	hr = device->SetDataFormat(&c_dfDIJoystick);
 
@@ -153,19 +153,19 @@ BOOL CALLBACK DeviceFindCallBack(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
 		return DIENUM_STOP;
 	}
 
-	// プロパティの設定
+	// プロパティの設定 Property settings
 	if (SetUpGamePadProperty(device) == false)
 	{
 		return DIENUM_STOP;
 	}
 
-	// 協調レベルの設定
+	// 協調レベルの設定 Coordination level setting
 	if (SetUpCooperativeLevel(device) == false)
 	{
 		return DIENUM_STOP;
 	}
 
-	// 発見数をカウント
+	// 発見数をカウント Count the number of discoveries
 	parameter->FindCount++;
 
 	return DIENUM_CONTINUE;
@@ -173,13 +173,13 @@ BOOL CALLBACK DeviceFindCallBack(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
 
 bool InitInput()
 {
-	// インターフェース作成
+	// インターフェース作成 Interface creation
 	if (CreateInputInterface() == false)
 	{
 		return false;
 	}
 
-	// デバイス作成
+	// デバイス作成 Device creation
 	if (CreateGamePadDevice() == false)
 	{
 		
@@ -187,7 +187,7 @@ bool InitInput()
 		return false;
 	}
 
-	// 入力情報の初期化
+	// 入力情報の初期化 Initialization of input information
 	for (int i = 0; i < ButtonKind::ButtonKindMax; i++)
 	{
 		g_ButtonStates[i] = ButtonState::ButtonStateNone;
@@ -198,7 +198,7 @@ bool InitInput()
 
 void ReleaseInput()
 {
-	// デバイスの解放
+	// デバイスの解放 Release the device
 	if (g_GamePadDevice != nullptr)
 	{
 		// 制御を停止
@@ -207,7 +207,7 @@ void ReleaseInput()
 		g_GamePadDevice = nullptr;
 	}
 
-	// インターフェースの解放
+	// インターフェースの解放 Interface release
 	if (g_InputInterface != nullptr)
 	{
 		g_InputInterface->Release();
@@ -252,13 +252,13 @@ bool IsButtonDown(ButtonKind button)
 
 bool CreateInputInterface()
 {
-	// インターフェース作成
+	// インターフェース作成 Interface creation
 	HRESULT ret = DirectInput8Create(
-		GetModuleHandle(nullptr),	// インスタンスハンドル
-		DIRECTINPUT_VERSION,		// DirectInputのバージョン
-		IID_IDirectInput8,			// 使用する機能
-		(void**)&g_InputInterface,	// 作成されたインターフェース代入用
-		NULL						// NULL固定
+		GetModuleHandle(nullptr),	// インスタンスハンドル Instance handle
+		DIRECTINPUT_VERSION,		// DirectInputのバージョン DirectInput version
+		IID_IDirectInput8,			// 使用する機能 Functions to use
+		(void**)&g_InputInterface,	// 作成されたインターフェース代入用 For created interface assignment
+		NULL						// NULL固定 Null fixed
 	);
 
 	if (FAILED(ret))
@@ -276,15 +276,15 @@ bool CreateGamePadDevice()
 	parameter.FindCount = 0;
 	parameter.GamePadDevice = &g_GamePadDevice;
 
-	// GAMEPADを調べる
+	// GAMEPADを調べる Examine GAMEPAD
 	g_InputInterface->EnumDevices(
-		DI8DEVTYPE_GAMEPAD,			// 検索するデバイスの種類
-		DeviceFindCallBack,			// 発見時に実行する関数
-		&parameter,					// 関数に渡す値
-		DIEDFL_ATTACHEDONLY			// 検索方法
+		DI8DEVTYPE_GAMEPAD,			// 検索するデバイスの種類 Type of device to search
+		DeviceFindCallBack,			// 発見時に実行する関数 Function to execute at the time of discovery
+		&parameter,					// 関数に渡す値 Value to pass to the function
+		DIEDFL_ATTACHEDONLY			// 検索方法 retrieval method
 	);
 
-	// JOYSTICKを調べる
+	// JOYSTICKを調べる Examine JOYSTICK
 	g_InputInterface->EnumDevices(
 		DI8DEVTYPE_JOYSTICK,
 		DeviceFindCallBack,
@@ -292,14 +292,14 @@ bool CreateGamePadDevice()
 		DIEDFL_ATTACHEDONLY
 	);
 
-	// どちらも見つけることが出来なかったら失敗
+	// どちらも見つけることが出来なかったら失敗 Failure if neither can be found
 	if (parameter.FindCount == 0)
 	{
 		return false;
 	}
 
 	int count = 0;
-	// 制御開始
+	// 制御開始 Start control
 	while (StartGamePadControl() == false)
 	{
 		Sleep(100);
@@ -322,11 +322,11 @@ void UpdateGamePad()
 
 	DIJOYSTATE pad_data;
 
-	// デバイス取得
+	// デバイス取得 Device acquisition
 	HRESULT hr = g_GamePadDevice->GetDeviceState(sizeof(DIJOYSTATE), &pad_data);
 	if (FAILED(hr))
 	{
-		// 再度制御開始
+		// 再度制御開始 Start control again
 		if (FAILED(g_GamePadDevice->Acquire()))
 		{
 			for (int i = 0; i < ButtonKind::ButtonKindMax; i++)
@@ -339,7 +339,7 @@ void UpdateGamePad()
 	}
 
 	bool is_push[ButtonKind::ButtonKindMax];
-	// スティック判定
+	// スティック判定 Stick judgment
 	int unresponsive_range = 200;
 	if (pad_data.lX < -unresponsive_range)
 	{
@@ -359,13 +359,13 @@ void UpdateGamePad()
 		is_push[ButtonKind::DownButton] = true;
 	}
 
-	// 十字キー判定
+	// 十字キー判定 Cross key judgment
 	//if (pad_data.rgdwPOV[0] != 0xFFFFFFFF)
 	//{
 	//	float rad = pad_data.rgdwPOV[0] * 3.14159265f / 180.0f;
 
-	//	// 本来はxがcos、yがsinだけど、rgdwPOVは0が上から始まるので、
-	//	// cosとsinを逆にした方が都合がいい
+	//	// 本来はxがcos、yがsinだけど、rgdwPOVは0が上から始まるので、 Originally, x is cos and y is sin, but rgdwPOV starts from 0, so
+	//	// cosとsinを逆にした方が都合がいい It is convenient to reverse cos and sin
 	//	float x = sinf(rad);
 	//	float y = cosf(rad);
 
@@ -388,13 +388,13 @@ void UpdateGamePad()
 	//	}
 	//}
 
-	 //十字キー判定
+	 //十字キー判定 Cross key judgment
 		 if (pad_data.rgdwPOV[0] != 0xFFFFFFFF)
 		 {
-			 //八方向全てを書く 
+			 //八方向全てを書く Write all eight directions
 			 switch (pad_data.rgdwPOV[0])
 			 {
-				 //上
+				 //上 Up
 			 case 0:
 				 is_push[ButtonKind::UpButton] = true;
 				 break;
@@ -434,7 +434,7 @@ void UpdateGamePad()
 			 }
 		 }
 
-	// ボタン判定
+	// ボタン判定 Button judgment
 	for (int i = 0; i < 32; i++)
 	{
 		if (!(pad_data.rgbButtons[i] & 0x80))
@@ -574,7 +574,7 @@ void UpdateGamePad()
 		}
 	}
 
-	// 入力情報からボタンの状態を更新する
+	// 入力情報からボタンの状態を更新する Update the button status from the input information
 	for (int i = 0; i < ButtonKind::ButtonKindMax; i++)
 	{
 		if (is_push[i] == true)
