@@ -1,6 +1,7 @@
 ﻿#include "GameScene.h"
 #include "Model.h"
 #include <cassert>
+#include "Collision.h"
 #include <sstream>
 #include <iomanip>
 #include"FbxLoader.h"

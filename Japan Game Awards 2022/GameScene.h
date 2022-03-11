@@ -3,6 +3,7 @@
 #include "SafeDelete.h"
 #include "DirectXCommon.h"
 #include <DirectXMath.h>
+#include "CollisionPrimitive.h"
 #include "Input.h"
 #include "Sprite.h"
 #include "Object3d.h"
