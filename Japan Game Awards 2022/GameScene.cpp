@@ -2,11 +2,14 @@
 #include "Model.h"
 #include <cassert>
 #include "Collision.h"
+#include "SphereCollider.h"
+#include "CollisionManager.h"
+#include "Player.h"
 #include <sstream>
 #include <iomanip>
-#include"FbxLoader.h"
-#include"FbxObject3d.h"
-#include"Camera.h"
+#include "FbxLoader.h"
+#include "FbxObject3d.h"
+#include "Camera.h"
 #include "Controller.h"
 
 using namespace DirectX;

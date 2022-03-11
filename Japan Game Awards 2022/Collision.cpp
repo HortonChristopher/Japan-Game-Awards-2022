@@ -2,6 +2,27 @@
 
 using namespace DirectX;
 
+bool Collision::CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter)
+{
+	// 中心点の距離の２乗 <= 半径の和の２乗　なら交差 If the square of the distance of the center point <= the square of the sum of the radii, then they intersect
+	float dist = XMVector3LengthSq(sphereA.center - sphereB.center).m128_f32[0];
+
+	float radius2 = sphereA.radius + sphereB.radius;
+	radius2 *= radius2;
+
+	if (dist <= radius2) {
+		if (inter) {
+			// Aの半径が0の時座標はBの中心　Bの半径が0の時座標はAの中心　となるよう補完 
+			// When the radius of A is 0, the coordinates are the center of B. When the radius of B is 0, the coordinates are complemented to be the center of A.
+			float t = sphereB.radius / (sphereA.radius + sphereB.radius);
+			*inter = XMVectorLerp(sphereA.center, sphereB.center, t);
+		}
+		return true;
+	}
+
+	return false;
+}
+
 bool Collision::CheckSphere2Plane(const Sphere& sphere, const Plane& plane, DirectX::XMVECTOR* inter)
 {
 	// 座標系の原点から球の中心座標への距離 Distance from the origin of the coordinate system to the center coordinates of the sphere

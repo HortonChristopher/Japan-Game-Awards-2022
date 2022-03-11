@@ -1,4 +1,6 @@
 ﻿#include "Object3d.h"
+#include "BaseCollider.h"
+#include "CollisionManager.h"
 #include <d3dcompiler.h>
 #include <fstream>
 #include <sstream>
@@ -16,6 +18,16 @@ ID3D12Device *Object3d::device = nullptr;
 ID3D12GraphicsCommandList *Object3d::cmdList = nullptr;
 Object3d::PipelineSet Object3d::pipelineSet;
 Camera *Object3d::camera = nullptr;
+
+Object3d::~Object3d()
+{
+	if (collider) {
+		// コリジョンマネージャから登録を解除する Unregister from Collision Manager
+		CollisionManager::GetInstance()->RemoveCollider(collider);
+
+		delete collider;
+	}
+}
 
 void Object3d::StaticInitialize( ID3D12Device *device, Camera *camera )
 {
@@ -245,11 +257,19 @@ bool Object3d::Initialize()
 		nullptr,
 		IID_PPV_ARGS( &constBuffB0 ) );
 
+	// クラス名の文字例を取得 Get character examples of class name
+	name = typeid(*this).name();
+
 	return true;
 }
 
 void Object3d::Update()
 {
+	// 当たり判定更新 Collision detection update
+	if (collider) {
+		collider->Update();
+	}
+
 	assert( camera );
 
 	HRESULT result;
@@ -314,4 +334,16 @@ void Object3d::Draw()
 
 	// モデル描画 Model drawing
 	model->Draw( cmdList );
+}
+
+void Object3d::SetCollider(BaseCollider* collider)
+{
+	collider->SetObject(this);
+	this->collider = collider;
+
+	// コリジョンマネージャ登録 Collision manager registration
+	CollisionManager::GetInstance()->AddCollider(collider);
+
+	// コライダーを更新しておく Keep the collider updated
+	collider->Update();
 }
