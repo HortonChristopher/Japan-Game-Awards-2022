@@ -140,6 +140,14 @@ public: // メンバ関数 Member function
 
 	void SetBillboard(bool isBillboard) { this->isBillboard = isBillboard; }
 
+	/// <summary>
+	/// モデルを取得 Get the model
+	/// </summary>
+	/// <returns>モデル</returns>
+	inline Model* GetModel() { return model; }
+
+	void UpdateWorldMatrix();
+
 //private: // メンバ変数 Member variables
 protected: // メンバ変数 Member variables
 

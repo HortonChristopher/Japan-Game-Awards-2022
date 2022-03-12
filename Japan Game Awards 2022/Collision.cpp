@@ -2,7 +2,7 @@
 
 using namespace DirectX;
 
-bool Collision::CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter)
+bool Collision::CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter, DirectX::XMVECTOR* reject)
 {
 	// 中心点の距離の２乗 <= 半径の和の２乗　なら交差 If the square of the distance of the center point <= the square of the sum of the radii, then they intersect
 	float dist = XMVector3LengthSq(sphereA.center - sphereB.center).m128_f32[0];
@@ -16,6 +16,12 @@ bool Collision::CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB,
 			// When the radius of A is 0, the coordinates are the center of B. When the radius of B is 0, the coordinates are complemented to be the center of A.
 			float t = sphereB.radius / (sphereA.radius + sphereB.radius);
 			*inter = XMVectorLerp(sphereA.center, sphereB.center, t);
+		}
+		// 押し出すベクトルを計算
+		if (reject) {
+			float rejectLen = sphereA.radius + sphereB.radius - sqrtf(dist);
+			*reject = XMVector3Normalize(sphereA.center - sphereB.center);
+			*reject *= rejectLen;
 		}
 		return true;
 	}
@@ -115,7 +121,7 @@ void Collision::ClosestPtPoint2Triangle(const DirectX::XMVECTOR& point, const Tr
 	*closest = triangle.p0 + p0_p1 * v + p0_p2 * w;
 }
 
-bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter)
+bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter, DirectX::XMVECTOR* reject)
 {
 	XMVECTOR p;
 	// 球の中心に対する最近接点である三角形上にある点ｐを見つける Find the point p on the triangle that is the most recent point of contact with the center of the sphere
@@ -131,6 +137,13 @@ bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& trian
 	if (inter) {
 		// 三角形上の最近接点ｐを擬似交点とする Let the most recent contact p on the triangle be a pseudo intersection
 		*inter = p;
+	}
+	// 押し出すベクトルを計算
+	if (reject) {
+		float ds = XMVector3Dot(sphere.center, triangle.normal).m128_f32[0];
+		float dt = XMVector3Dot(triangle.p0, triangle.normal).m128_f32[0];
+		float rejectLen = dt - ds + sphere.radius;
+		*reject = triangle.normal * rejectLen;
 	}
 	return true;
 }

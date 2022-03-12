@@ -10,7 +10,9 @@
 class BaseCollider
 {
 public:
+	friend class CollisionManager;
 	BaseCollider() = default;
+
 	// 仮想デストラクタ Virtual destructor
 	virtual ~BaseCollider() = default;
 
@@ -36,8 +38,22 @@ public:
 	// 形状タイプ取得 Shape type acquisition
 	inline CollisionShapeType GetShapeType() { return shapeType; }
 
+	inline void SetAttribute(unsigned short attribute) {
+		this->attribute = attribute;
+	}
+
+	inline void AddAttribute(unsigned short attribute) {
+		this->attribute |= attribute;
+	}
+
+	inline void RemoveAttribute(unsigned short attribute) {
+		this->attribute &= !attribute;
+	}
+
 protected:
 	Object3d* object3d = nullptr;
 	// 形状タイプ Shape type
 	CollisionShapeType shapeType = SHAPE_UNKNOWN;
+
+	unsigned short attribute = 0b1111111111111111;
 };

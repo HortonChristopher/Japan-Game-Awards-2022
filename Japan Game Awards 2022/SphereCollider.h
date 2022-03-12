@@ -29,6 +29,12 @@ public:
 
 	inline void SetRadius(float radius) { this->radius = radius; }
 
+	inline const XMVECTOR& GetOffset() { return offset; }
+
+	inline void SetOffset(const XMVECTOR& offset) { this->offset = offset; }
+
+	inline float GetRadius() { return radius; }
+
 private:
 	//オブジェクト中心からのオフセット Offset from object center
 	XMVECTOR offset;

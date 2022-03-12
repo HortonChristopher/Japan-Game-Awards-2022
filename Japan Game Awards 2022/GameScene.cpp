@@ -11,6 +11,7 @@
 #include "FbxObject3d.h"
 #include "Camera.h"
 #include "Controller.h"
+#include "TouchableObject.h"
 
 using namespace DirectX;
 
@@ -23,6 +24,10 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
+	for (auto object : objects) {
+		safe_delete(object);
+	}
+
 	safe_delete( spriteBG );
 	safe_delete( objSkydome );
 	safe_delete( objGround );
@@ -30,6 +35,9 @@ GameScene::~GameScene()
 	safe_delete( modelSkydome );
 	safe_delete( modelGround );
 	safe_delete( modelFighter );
+	safe_delete(modelPlane);
+	safe_delete(modelBox);
+	safe_delete(modelPyramid);
 
 	safe_delete( fbxobject1 );
 	safe_delete( fbxmodel1 );
@@ -50,6 +58,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	// カメラ生成 Camera generation
 	camera = new Camera( WinApp::window_width, WinApp::window_height );
 
+	collisionManager = CollisionManager::GetInstance();
 
 	// カメラセット Camera set
 	Object3d::SetCamera( camera );
@@ -87,8 +96,6 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
-	objGround = Object3d::Create();
-	objFighter = Object3d::Create();
 
 	// テクスチャ2番に読み込み Load into texture # 2
 	Sprite::LoadTexture( 2, L"Resources/texture.png" );
@@ -96,53 +103,92 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	modelSkydome = Model::CreateFromOBJ( "skydome" );
 	modelGround = Model::CreateFromOBJ( "ground" );
 	modelFighter = Model::CreateFromOBJ( "chr_sword" );
+	modelPlane = Model::CreateFromOBJ("plane1x1");
+	modelBox = Model::CreateFromOBJ("box1x1x1");
+	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 
 	objSkydome->SetModel( modelSkydome );
-	objGround->SetModel( modelGround );
-	objFighter->SetModel( modelFighter );
+	//objGround->SetModel( modelGround );
+	//objFighter->SetModel( modelFighter );
 
-	fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
+	objGround = TouchableObject::Create(modelGround);
+	objFighter = Player::Create(modelFighter);
+
+	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
 	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "cube" );
 	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bone" );
 
 	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
-	fbxobject1 = new FbxObject3d;
-	fbxobject1->Initialize();
-	fbxobject1->SetModel( fbxmodel1 );
+	//fbxobject1 = new FbxObject3d;
+	//fbxobject1->Initialize();
+	//fbxobject1->SetModel( fbxmodel1 );
+
+	// モデルテーブル Model table
+	Model* modeltable[10] = {
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelBox,
+		modelBox,
+	};
+
+	const int DIV_NUM = 10;
+	const float LAND_SCALE = 3.0f;
+	for (int i = 0; i < DIV_NUM; i++) {
+		for (int j = 0; j < DIV_NUM; j++) {
+
+			int modelIndex = rand() % 10;
+
+			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
+			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			objects.push_back(object);
+		}
+	}
+
+	objFighter->SetPosition({ 0, 0, 0 });
+	objFighter->SetScale({ 30,30,30 });
+
+	camera->SetTarget({ 0, 1, 0 });
 }
 
 void GameScene::Update()
 {
-	// オブジェクト移動 Move object
-	if ( input->PushKey( DIK_I ) || input->PushKey( DIK_K ) || input->PushKey( DIK_J ) || input->PushKey( DIK_L ) )
-	{
-		// 現在の座標を取得 Get current coordinates
-		XMFLOAT3 position = objFighter->GetPosition();
+	//// オブジェクト移動 Move object
+	//if ( input->PushKey( DIK_I ) || input->PushKey( DIK_K ) || input->PushKey( DIK_J ) || input->PushKey( DIK_L ) )
+	//{
+	//	// 現在の座標を取得 Get current coordinates
+	//	XMFLOAT3 position = objFighter->GetPosition();
 
-		// 移動後の座標を計算 Calculate the coordinates after moving
-		if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }
-		else if ( input->PushKey( DIK_K ) ) { position.y -= 1.0f; }
-		if ( input->PushKey( DIK_L ) ) { position.x += 1.0f; }
-		else if ( input->PushKey( DIK_J ) ) { position.x -= 1.0f; }
+	//	// 移動後の座標を計算 Calculate the coordinates after moving
+	//	if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }
+	//	else if ( input->PushKey( DIK_K ) ) { position.y -= 1.0f; }
+	//	if ( input->PushKey( DIK_L ) ) { position.x += 1.0f; }
+	//	else if ( input->PushKey( DIK_J ) ) { position.x -= 1.0f; }
 
-		// 座標の変更を反映 Reflect the change in coordinates
-		objFighter->SetPosition( position );
+	//	// 座標の変更を反映 Reflect the change in coordinates
+	//	objFighter->SetPosition( position );
 
-		// 現在の座標を取得 Get current coordinates
-		XMFLOAT3 PlayerPosition = fbxobject1->GetPosition();
+	//	// 現在の座標を取得 Get current coordinates
+	//	XMFLOAT3 PlayerPosition = fbxobject1->GetPosition();
 
-		// 移動後の座標を計算 Calculate the coordinates after moving
-		if ( input->PushKey( DIK_I ) ) { PlayerPosition.y += 1.0f; }
-		else if ( input->PushKey( DIK_K ) ) { PlayerPosition.y -= 1.0f; }
-		if ( input->PushKey( DIK_L ) ) { PlayerPosition.x += 1.0f; }
-		else if ( input->PushKey( DIK_J ) ) { PlayerPosition.x -= 1.0f; }
+	//	// 移動後の座標を計算 Calculate the coordinates after moving
+	//	if ( input->PushKey( DIK_I ) ) { PlayerPosition.y += 1.0f; }
+	//	else if ( input->PushKey( DIK_K ) ) { PlayerPosition.y -= 1.0f; }
+	//	if ( input->PushKey( DIK_L ) ) { PlayerPosition.x += 1.0f; }
+	//	else if ( input->PushKey( DIK_J ) ) { PlayerPosition.x -= 1.0f; }
 
-		// 座標の変更を反映 Reflect the change in coordinates
-		fbxobject1->SetPosition( PlayerPosition );
-	}
-
+	//	// 座標の変更を反映 Reflect the change in coordinates
+	//	fbxobject1->SetPosition( PlayerPosition );
+	//}
 
 	MoveCamera();
+	
 	// パーティクル生成 Particle generation
 	CreateParticles();
 
@@ -152,14 +198,19 @@ void GameScene::Update()
 	particleMan->Update();
 
 	objSkydome->Update();
+	for (auto object : objects) {
+		object->Update();
+	}
 	objGround->Update();
 	objFighter->Update();
 
-	fbxobject1->Update();
+	//fbxobject1->Update();
 
-	debugText.Print( "AD: move camera LeftRight", 50, 50, 1.0f );
-	debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
-	debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
+	//debugText.Print( "AD: move camera LeftRight", 50, 50, 1.0f );
+	//debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
+	//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
+
+	collisionManager->CheckAllCollisions();
 }
 
 void GameScene::Draw()
@@ -188,9 +239,12 @@ void GameScene::Draw()
 	// 3Dオブクジェクトの描画 Drawing 3D objects
 	/* objSkydome->Draw();
 	 objGround->Draw();*/
+	for (auto object : objects) {
+		object->Draw();
+	}
 	objFighter->Draw();
 
-	fbxobject1->Draw( cmdList );
+	//fbxobject1->Draw( cmdList );
 
 	// パーティクルの描画 Drawing particles
 	if (IsButtonDown(ButtonKind::Button_31))

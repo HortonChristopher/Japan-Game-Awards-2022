@@ -9,4 +9,5 @@ enum CollisionShapeType
 	SHAPE_UNKNOWN = -1, // –¢İ’è Not set
 
 	COLLISIONSHAPE_SPHERE, // ‹… Sphere
+	COLLISIONSHAPE_MESH, // ƒƒbƒVƒ… Mesh
 };

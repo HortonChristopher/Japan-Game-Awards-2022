@@ -2,6 +2,7 @@
 
 #include "CollisionPrimitive.h"
 #include "RaycastHit.h"
+#include "QueryCallback.h"
 
 #include <forward_list>
 #include <d3d12.h>
@@ -43,6 +44,16 @@ public: // メンバ関数 Member function
 	/// <param name="maxDistance">最大距離</param>
 	/// <returns>レイが任意のコライダーと交わる場合はtrue、それ以外はfalse</returns>
 	bool Raycast(const Ray& ray, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
+
+	bool Raycast(const Ray& ray, unsigned short attribute, RaycastHit* hitInfo = nullptr, float maxDistance = D3D12_FLOAT32_MAX);
+
+	/// <summary>
+	/// 球による衝突全検索
+	/// </summary>
+	/// <param name="sphere">球</param>
+	/// <param name="callback">衝突時コールバック</param>
+	/// <param name="attribute">対象の衝突属性</param>
+	void QuerySphere(const Sphere& sphere, QueryCallback* callback, unsigned short attribute = (unsigned short)0xffffffff);
 
 private:
 	CollisionManager() = default;

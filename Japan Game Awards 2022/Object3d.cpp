@@ -273,37 +273,40 @@ void Object3d::Update()
 	assert( camera );
 
 	HRESULT result;
-	XMMATRIX matScale, matRot, matTrans;
 
-	// スケール、回転、平行移動行列の計算 Calculation of scale, rotation, translation matrix
-	matScale = XMMatrixScaling( scale.x, scale.y, scale.z );
-	matRot = XMMatrixIdentity();
-	matRot *= XMMatrixRotationZ( XMConvertToRadians( rotation.z ) );
-	matRot *= XMMatrixRotationX( XMConvertToRadians( rotation.x ) );
-	matRot *= XMMatrixRotationY( XMConvertToRadians( rotation.y ) );
-	matTrans = XMMatrixTranslation( position.x, position.y, position.z );
+	UpdateWorldMatrix();
 
-	// ワールド行列の合成 World matrix composition
-	matWorld = XMMatrixIdentity(); // 変形をリセット Reset transformation
-	matWorld *= matScale; // ワールド行列にスケーリングを反映 Reflect scaling in world matrix
-	matWorld *= matRot; // ワールド行列に回転を反映 Reflect the rotation in the world matrix
-	matWorld *= matTrans; // ワールド行列に平行移動を反映 Reflect translation in world matrix
+	//XMMATRIX matScale, matRot, matTrans;
 
-	if ( isBillboard ) {
-		const XMMATRIX &matBillboard = camera->GetBillboardMatrix();
+	//// スケール、回転、平行移動行列の計算 Calculation of scale, rotation, translation matrix
+	//matScale = XMMatrixScaling( scale.x, scale.y, scale.z );
+	//matRot = XMMatrixIdentity();
+	//matRot *= XMMatrixRotationZ( XMConvertToRadians( rotation.z ) );
+	//matRot *= XMMatrixRotationX( XMConvertToRadians( rotation.x ) );
+	//matRot *= XMMatrixRotationY( XMConvertToRadians( rotation.y ) );
+	//matTrans = XMMatrixTranslation( position.x, position.y, position.z );
 
-		matWorld = XMMatrixIdentity();
-		matWorld *= matScale; // ワールド行列にスケーリングを反映 Reflect scaling in world matrix
-		matWorld *= matRot; // ワールド行列に回転を反映 Reflect the rotation in the world matrix
-		matWorld *= matBillboard;
-		matWorld *= matTrans; // ワールド行列に平行移動を反映 Reflect translation in world matrix
-	}
+	//// ワールド行列の合成 World matrix composition
+	//matWorld = XMMatrixIdentity(); // 変形をリセット Reset transformation
+	//matWorld *= matScale; // ワールド行列にスケーリングを反映 Reflect scaling in world matrix
+	//matWorld *= matRot; // ワールド行列に回転を反映 Reflect the rotation in the world matrix
+	//matWorld *= matTrans; // ワールド行列に平行移動を反映 Reflect translation in world matrix
 
-	// 親オブジェクトがあれば If there is a parent object
-	if ( parent != nullptr ) {
-		// 親オブジェクトのワールド行列を掛ける Multiply the world matrix of the parent object
-		matWorld *= parent->matWorld;
-	}
+	//if ( isBillboard ) {
+	//	const XMMATRIX &matBillboard = camera->GetBillboardMatrix();
+
+	//	matWorld = XMMatrixIdentity();
+	//	matWorld *= matScale; // ワールド行列にスケーリングを反映 Reflect scaling in world matrix
+	//	matWorld *= matRot; // ワールド行列に回転を反映 Reflect the rotation in the world matrix
+	//	matWorld *= matBillboard;
+	//	matWorld *= matTrans; // ワールド行列に平行移動を反映 Reflect translation in world matrix
+	//}
+
+	//// 親オブジェクトがあれば If there is a parent object
+	//if ( parent != nullptr ) {
+	//	// 親オブジェクトのワールド行列を掛ける Multiply the world matrix of the parent object
+	//	matWorld *= parent->matWorld;
+	//}
 
 	const XMMATRIX &matViewProjection = camera->GetViewProjectionMatrix();
 
@@ -312,6 +315,11 @@ void Object3d::Update()
 	result = constBuffB0->Map( 0, nullptr, (void **)&constMap );
 	constMap->mat = matWorld * matViewProjection;	// 行列の合成 Matrix composition
 	constBuffB0->Unmap( 0, nullptr );
+
+	// 当たり判定更新 Collision detection update
+	if (collider) {
+		collider->Update();
+	}
 }
 
 void Object3d::Draw()
@@ -344,6 +352,43 @@ void Object3d::SetCollider(BaseCollider* collider)
 	// コリジョンマネージャ登録 Collision manager registration
 	CollisionManager::GetInstance()->AddCollider(collider);
 
+	UpdateWorldMatrix();
 	// コライダーを更新しておく Keep the collider updated
 	collider->Update();
+}
+
+void Object3d::UpdateWorldMatrix()
+{
+	assert(camera);
+
+	XMMATRIX matScale, matRot, matTrans;
+
+	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
+	matRot = XMMatrixIdentity();
+	matRot *= XMMatrixRotationZ(XMConvertToRadians(rotation.z));
+	matRot *= XMMatrixRotationX(XMConvertToRadians(rotation.x));
+	matRot *= XMMatrixRotationY(XMConvertToRadians(rotation.y));
+	matTrans = XMMatrixTranslation(position.x, position.y, position.z);
+
+	// ワールド行列の合成 World matrix composition
+	if (isBillboard && camera) {
+		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
+
+		matWorld = XMMatrixIdentity();
+		matWorld *= matScale; // ワールド行列にスケーリングを反映
+		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= matBillboard;
+		matWorld *= matTrans; // ワールド行列に平行移動を反映
+	} else {
+		matWorld = XMMatrixIdentity(); // 変形をリセット
+		matWorld *= matScale; // ワールド行列にスケーリングを反映
+		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= matTrans; // ワールド行列に平行移動を反映
+	}
+
+	// 親オブジェクトがあれば If there is a parent object
+	if (parent != nullptr) {
+		// 親オブジェクトのワールド行列を掛ける
+		matWorld *= parent->matWorld;
+	}
 }

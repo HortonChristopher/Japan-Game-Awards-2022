@@ -71,6 +71,18 @@ public: // メンバ関数 Member function
 	// 描画 drawing
 	void Draw(ID3D12GraphicsCommandList* cmdList);
 
+	/// <summary>
+	/// 頂点配列を取得 Get an array of vertices
+	/// </summary>
+	/// <returns>頂点配列</returns>
+	inline const std::vector<VertexPosNormalUv>& GetVertices() { return vertices; }
+
+	/// <summary>
+	/// インデックス配列を取得 Get index array
+	/// </summary>
+	/// <returns>インデックス配列</returns>
+	inline const std::vector<unsigned short>& GetIndices() { return indices; }
+
 private: // メンバ変数 Member variables
 	// 名前 name
 	std::string name;

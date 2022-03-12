@@ -14,7 +14,8 @@ public:
 	/// <param name="sphere">球</param>
 	/// <param name="inter">交点（平面上の最近接点）</param>
 	/// <returns>交差しているか否か</returns>
-	static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter);
+	//static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter);
+	static bool CheckSphere2Sphere(const Sphere& sphereA, const Sphere& sphereB, DirectX::XMVECTOR* inter = nullptr, DirectX::XMVECTOR* reject = nullptr);
 
 	/// <summary>
 	/// 球と平面の当たり判定 Collision Detection between sphere and plane
@@ -40,7 +41,8 @@ public:
 	/// <param name="triangle">三角形</param>
 	/// <param name="inter">交点（三角形上の最近接点）</param>
 	/// <returns>交差しているか否か</returns>
-	static bool CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter = nullptr);
+	//static bool CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter = nullptr);
+	static bool CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter = nullptr, DirectX::XMVECTOR* reject = nullptr);
 
 	/// <summary>
 	/// レイと平面の当たり判定 Collision detection between ray and plane
