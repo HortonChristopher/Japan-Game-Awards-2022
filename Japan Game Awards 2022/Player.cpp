@@ -60,7 +60,7 @@ void Player::Update()
 		rotation.y += 2.0f;
 	}
 
-	// 移動ベクトルをY軸回りの角度で回転 Rotate he movement vector at an angle around the Y axis
+	// 移動ベクトルをY軸回りの角度で回転 Rotate the movement vector at an angle around the Y axis
 	XMVECTOR move = { 0, 0, 0.1f, 0 };
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(rotation.y));
 	move = XMVector3TransformNormal(move, matRot);
@@ -162,13 +162,13 @@ void Player::Update()
 
 			Object3d::Update();
 		}
-
+		//
 		else {
 			onGround = false;
 			fallV = {};
 		}
 	}
-
+	//
 	else if (fallV.m128_f32[1] <= 0.0f) {
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
 

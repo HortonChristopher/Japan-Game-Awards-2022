@@ -103,7 +103,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	modelSkydome = Model::CreateFromOBJ( "skydome" );
 	modelGround = Model::CreateFromOBJ( "ground" );
 	modelFighter = Model::CreateFromOBJ( "chr_sword" );
-	modelPlane = Model::CreateFromOBJ("plane1x1");
+	modelPlane = Model::CreateFromOBJ("ground");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 
@@ -152,7 +152,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	}
 
 	objFighter->SetPosition({ 0, 0, 0 });
-	objFighter->SetScale({ 30,30,30 });
+	objFighter->SetScale({ 1,1,1 });
 
 	camera->SetTarget({ 0, 1, 0 });
 }
@@ -193,6 +193,8 @@ void GameScene::Update()
 	CreateParticles();
 
 	UpdateInput();
+
+	//objFighter->SetPosition({ 0, 0, 0 });
 
 	camera->Update();
 	particleMan->Update();
