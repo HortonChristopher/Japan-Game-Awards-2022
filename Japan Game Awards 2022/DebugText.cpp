@@ -11,6 +11,12 @@ DebugText::~DebugText()
 	}
 }
 
+DebugText* DebugText::GetInstance()
+{
+	static DebugText instance;
+	return &instance;
+}
+
 void DebugText::Initialize(UINT texnumber)
 {
 	// 全てのスプライトデータについて About all sprite data

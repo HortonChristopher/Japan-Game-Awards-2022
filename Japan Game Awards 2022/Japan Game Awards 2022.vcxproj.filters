@@ -71,6 +71,27 @@
     <ClCompile Include="Controller.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionPrimitive.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCollider.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TouchableObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -147,6 +168,45 @@
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionPrimitive.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionTypes.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCollider.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionInfo.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RaycastHit.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCollider.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TouchableObject.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionAttribute.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryCallback.h">
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
   </ItemGroup>

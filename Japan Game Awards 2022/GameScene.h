@@ -3,6 +3,7 @@
 #include "SafeDelete.h"
 #include "DirectXCommon.h"
 #include <DirectXMath.h>
+#include "CollisionPrimitive.h"
 #include "Input.h"
 #include "Sprite.h"
 #include "Object3d.h"
@@ -10,6 +11,12 @@
 #include "Audio.h"
 #include "FbxObject3d.h"
 #include "ParticleManager.h"
+
+#include <vector>
+
+class CollisionManager;
+class Player;
+class TouchableObject;
 
 // ゲームシーン Game scene
 class GameScene
@@ -65,12 +72,17 @@ private: // メンバ変数 Member variables
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
 	Model* modelFighter = nullptr;
+	Model* modelPlane = nullptr;
+	Model* modelBox = nullptr;
+	Model* modelPyramid = nullptr;
 
 	FbxModel *fbxmodel1 = nullptr;
 
 	Object3d* objSkydome = nullptr;
-	Object3d* objGround = nullptr;
-	Object3d* objFighter = nullptr;
+
+	TouchableObject* objGround = nullptr;
+
+	Player* objFighter = nullptr;
 
 	FbxObject3d *fbxobject1 = nullptr;
 

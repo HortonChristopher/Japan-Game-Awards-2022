@@ -9,6 +9,9 @@
 // 入力 input
 class Input
 {
+public: // 静的メンバ関数 Static member function
+	static Input* GetInstance();
+
 private: // エイリアス alias
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;

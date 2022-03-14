@@ -12,6 +12,9 @@
 // パーティクルマネージャ Particle manager
 class ParticleManager
 {
+public: // 静的メンバ関数 Static member function
+	/*static ParticleManager* GetInstance();*/
+
 private: // エイリアス alias
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;

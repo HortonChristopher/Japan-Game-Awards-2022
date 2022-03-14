@@ -7,6 +7,9 @@
 // デバッグ用文字表示 Character display for debugging
 class DebugText
 {
+public: // 静的メンバ関数 Static member function
+	static DebugText* GetInstance();
+
 public:	
 	// デバッグテキスト用のテクスチャ番号を指定 Specify texture number for debug text
 	static const int maxCharCount = 256;	// 最大文字数 Maximum number of characters
