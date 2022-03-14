@@ -238,6 +238,7 @@ void GameScene::Update()
 			PlayerPosition.x -= move;
 			position.x += move;
 		}
+	}
 
 	//	// 移動後の座標を計算 Calculate the coordinates after moving
 	//	if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }

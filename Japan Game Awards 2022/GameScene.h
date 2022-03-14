@@ -94,5 +94,9 @@ private: // メンバ変数 Member variables
 
 	XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
 	XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
+
+	CollisionManager* collisionManager;
+
+	std::vector<Object3d*> objects;
 };
 
