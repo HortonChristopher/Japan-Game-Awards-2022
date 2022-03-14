@@ -103,7 +103,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	modelSkydome = Model::CreateFromOBJ( "skydome" );
 	modelGround = Model::CreateFromOBJ( "ground" );
 	modelFighter = Model::CreateFromOBJ( "chr_sword" );
-	modelPlane = Model::CreateFromOBJ("3x3x3");
+	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 
@@ -185,10 +185,10 @@ void GameScene::Update()
 	if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN)/*IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton)*/)
 	{
 		// 現在の座標を取得 Get current coordinates
-		/*XMFLOAT3*/ //PlayerPosition = fbxobject1->GetPosition();
+		/*XMFLOAT3*/// PlayerPosition = fbxobject1->GetPosition();
 
 		// 現在の座標を取得 Get current coordinates
-		/*XMFLOAT3 */position = objFighter->GetPosition();
+		/*XMFLOAT3 *///position = objFighter->GetPosition();
 
 		//// 移動後の座標を計算 Calculate the coordinates after moving
 		//if (IsButtonPush(ButtonKind::UpButton))
@@ -209,7 +209,7 @@ void GameScene::Update()
 		//	position.x -= move;
 		//}
 
-		//else if (IsButtonPush(ButtonKind::LeftButton) ) 
+		//else if (IsButtonPush(ButtonKind::LeftButton) )
 		//{
 		//	PlayerPosition.x -= move; 
 		//	position.x += move;
@@ -218,13 +218,13 @@ void GameScene::Update()
 		if (input->PushKey(DIK_UP))
 		{
 			PlayerPosition.y += move;
-			position.y -= move;
+			position.y += move;
 		}
 
 		if (input->PushKey(DIK_DOWN))
 		{
 			PlayerPosition.y -= move;
-			position.y += move;
+			position.y -= move;
 		}
 
 		if (input->PushKey(DIK_RIGHT))
