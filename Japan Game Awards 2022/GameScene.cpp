@@ -110,28 +110,87 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 void GameScene::Update()
 {
 	// オブジェクト移動 Move object
-	if ( input->PushKey( DIK_I ) || input->PushKey( DIK_K ) || input->PushKey( DIK_J ) || input->PushKey( DIK_L ) )
+
+	//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
+	//{
+	//	if (IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+	//	{
+	//		//斜め移動の時は移動倍率を0.71に設定する
+	//		rate = 0.71f;
+	//	}
+	//}
+
+	if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT))
+	{
+		if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN))
+		{
+			//斜め移動の時は移動倍率を0.71に設定する
+			rate = 0.71f;
+		}
+	}
+
+	//オブジェクトの移動スピードは通常の移動スピードに移動倍率係数を掛ける
+	move = Speed * rate;
+
+	if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN)/*IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton)*/)
 	{
 		// 現在の座標を取得 Get current coordinates
-		XMFLOAT3 position = objFighter->GetPosition();
+		/*XMFLOAT3*/ PlayerPosition = fbxobject1->GetPosition();
 
-		// 移動後の座標を計算 Calculate the coordinates after moving
-		if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }
-		else if ( input->PushKey( DIK_K ) ) { position.y -= 1.0f; }
-		if ( input->PushKey( DIK_L ) ) { position.x += 1.0f; }
-		else if ( input->PushKey( DIK_J ) ) { position.x -= 1.0f; }
+		// 現在の座標を取得 Get current coordinates
+		/*XMFLOAT3 */position = objFighter->GetPosition();
+
+		//// 移動後の座標を計算 Calculate the coordinates after moving
+		//if (IsButtonPush(ButtonKind::UpButton))
+		//{
+		//	PlayerPosition.y += move; 
+		//	position.y -= move;
+		//}
+
+		//else if (IsButtonPush(ButtonKind::DownButton) ) 
+		//{
+		//	PlayerPosition.y -= move; 
+		//	position.y += move;
+		//}
+
+		//if (IsButtonPush(ButtonKind::RightButton) ) 
+		//{
+		//	PlayerPosition.x += move; 
+		//	position.x -= move;
+		//}
+
+		//else if (IsButtonPush(ButtonKind::LeftButton) ) 
+		//{
+		//	PlayerPosition.x -= move; 
+		//	position.x += move;
+		//}
+
+		if (input->PushKey(DIK_UP))
+		{
+			PlayerPosition.y += move;
+			position.y -= move;
+		}
+
+		if (input->PushKey(DIK_DOWN))
+		{
+			PlayerPosition.y -= move;
+			position.y += move;
+		}
+
+		if (input->PushKey(DIK_RIGHT))
+		{
+			PlayerPosition.x += move;
+			position.x -= move;
+		}
+
+		if (input->PushKey(DIK_LEFT))
+		{
+			PlayerPosition.x -= move;
+			position.x += move;
+		}
 
 		// 座標の変更を反映 Reflect the change in coordinates
 		objFighter->SetPosition( position );
-
-		// 現在の座標を取得 Get current coordinates
-		XMFLOAT3 PlayerPosition = fbxobject1->GetPosition();
-
-		// 移動後の座標を計算 Calculate the coordinates after moving
-		if ( input->PushKey( DIK_I ) ) { PlayerPosition.y += 1.0f; }
-		else if ( input->PushKey( DIK_K ) ) { PlayerPosition.y -= 1.0f; }
-		if ( input->PushKey( DIK_L ) ) { PlayerPosition.x += 1.0f; }
-		else if ( input->PushKey( DIK_J ) ) { PlayerPosition.x -= 1.0f; }
 
 		// 座標の変更を反映 Reflect the change in coordinates
 		fbxobject1->SetPosition( PlayerPosition );
@@ -189,7 +248,7 @@ void GameScene::Draw()
 	fbxobject1->Draw( cmdList );
 
 	// パーティクルの描画 Drawing particles
-	if (IsButtonDown(ButtonKind::Button_31))
+	if (IsButtonPush(ButtonKind::Button_A))
 	{
 		particleMan->Draw(cmdList);
 	}

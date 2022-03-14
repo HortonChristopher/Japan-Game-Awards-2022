@@ -110,7 +110,7 @@ private: // メンバ変数 Member variables
 	// X,Y,Z軸回りのローカル回転角 Local rotation angle around the X, Y, Z axes
 	XMFLOAT3 rotation = { 0,0,0 };
 	// ローカル座標 Local coordinates
-	XMFLOAT3 position = { 0,0,0 };
+	XMFLOAT3 position = { -5,0,0 };
 	// ローカルワールド変換行列 Local world transformation matrix
 	XMMATRIX matWorld;
 	// 親オブジェクト Parent object

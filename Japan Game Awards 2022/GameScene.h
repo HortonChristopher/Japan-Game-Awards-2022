@@ -73,5 +73,14 @@ private: // メンバ変数 Member variables
 	Object3d* objFighter = nullptr;
 
 	FbxObject3d *fbxobject1 = nullptr;
+
+
+	float rate = 1.0f;	//移動倍率係数
+	float Speed = 0.4f;	//移動スピード
+
+	float move;
+
+	XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
+	XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
 };
 
