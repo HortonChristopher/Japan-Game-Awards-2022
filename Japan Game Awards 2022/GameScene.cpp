@@ -28,6 +28,10 @@ GameScene::~GameScene()
 		safe_delete(object);
 	}
 
+	for (auto object_2 : objects_2) {
+		safe_delete(object_2);
+	}
+
 	safe_delete( spriteBG );
 	safe_delete( objSkydome );
 	safe_delete( objGround );
@@ -137,10 +141,24 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		modelBox,
 	};
 
+	Model* modeltable_2[10] = {
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+		modelPlane,
+	};
+
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
-	const float LAND_SCALE_2 = 6.0f;
 
+
+	//自分側のマップチップ生成(Map chip generation)
 	for (int i = 0; i < DIV_NUM; i++) {
 		for (int j = 0; j < 5; j++) {
 
@@ -153,14 +171,16 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		}
 	}
 
+
+	//敵側のマップチップ生成(Enemy side map chip generation)
 	for (int i = 0; i < DIV_NUM; i++) {
 		for (int j = 0; j < 5; j++) {
 
 			int modelIndex = rand() % 10;
 
-			TouchableObject* object_2 = TouchableObject::Create(modeltable[modelIndex]);
-			object_2->SetScale({ LAND_SCALE_2, LAND_SCALE_2, LAND_SCALE_2});
-			object_2->SetPosition({(j - DIV_NUM / 2) * LAND_SCALE_2, 0, (i - DIV_NUM / 2) * LAND_SCALE_2});
+			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
+			object_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE});
+			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2), 0, (i - DIV_NUM / 2) * LAND_SCALE});
 			objects_2.push_back(object_2);
 		}
 	}
@@ -292,6 +312,11 @@ void GameScene::Update()
 	for (auto object : objects) {
 		object->Update();
 	}
+
+	for (auto object_2 : objects_2) {
+		object_2->Update();
+	}
+
 	objGround->Update();
 	objFighter->Update();
 
@@ -333,6 +358,11 @@ void GameScene::Draw()
 	for (auto object : objects) {
 		object->Draw();
 	}
+
+	for (auto object_2 : objects_2) {
+		object_2->Draw();
+	}
+
 	objFighter->Draw();
 
 	//fbxobject1->Draw( cmdList );
