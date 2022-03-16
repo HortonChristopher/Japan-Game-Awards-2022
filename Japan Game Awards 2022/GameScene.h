@@ -98,5 +98,6 @@ private: // メンバ変数 Member variables
 	CollisionManager* collisionManager;
 
 	std::vector<Object3d*> objects;
+	std::vector<Object3d*> objects_2;
 };
 

@@ -158,7 +158,7 @@ void Player::Update()
 
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
-			position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			//position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 
 			Object3d::Update();
 		}

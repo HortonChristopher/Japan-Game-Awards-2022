@@ -139,8 +139,10 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
+	const float LAND_SCALE_2 = 6.0f;
+
 	for (int i = 0; i < DIV_NUM; i++) {
-		for (int j = 0; j < DIV_NUM; j++) {
+		for (int j = 0; j < 5; j++) {
 
 			int modelIndex = rand() % 10;
 
@@ -148,6 +150,18 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects.push_back(object);
+		}
+	}
+
+	for (int i = 0; i < DIV_NUM; i++) {
+		for (int j = 0; j < 5; j++) {
+
+			int modelIndex = rand() % 10;
+
+			TouchableObject* object_2 = TouchableObject::Create(modeltable[modelIndex]);
+			object_2->SetScale({ LAND_SCALE_2, LAND_SCALE_2, LAND_SCALE_2});
+			object_2->SetPosition({(j - DIV_NUM / 2) * LAND_SCALE_2, 0, (i - DIV_NUM / 2) * LAND_SCALE_2});
+			objects_2.push_back(object_2);
 		}
 	}
 
