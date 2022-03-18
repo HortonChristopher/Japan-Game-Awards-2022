@@ -104,7 +104,7 @@ protected: // メンバ変数 Member variables
 	// 射影行列ダーティフラグ Projection matrix dirty flag
 	bool projectionDirty = false;
 	// 視点座標 Viewpoint coordinates
-	XMFLOAT3 eye = { 0, 1, -10 };
+	XMFLOAT3 eye = { 0, 15, -30 };
 	// 注視点座標 Gaze point coordinates
 	XMFLOAT3 target = { 0, 0, 0 };
 	// 上方向ベクトル Upward vector

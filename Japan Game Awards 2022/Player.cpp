@@ -60,6 +60,18 @@ void Player::Update()
 		rotation.y += 2.0f;
 	}
 
+	//コントローラー旋回処理
+
+	if (IsButtonPush(ButtonKind::LeftButton))
+	{
+		rotation.y -= 2.0f;
+	}
+
+	else if (IsButtonPush(ButtonKind::RightButton))
+	{
+		rotation.y += 2.0f;
+	}
+
 	// 移動ベクトルをY軸回りの角度で回転 Rotate the movement vector at an angle around the Y axis
 	XMVECTOR move = { 0, 0, 0.1f, 0 };
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(rotation.y));
@@ -72,6 +84,21 @@ void Player::Update()
 		position.z -= move.m128_f32[2];
 	}
 	else if (input->PushKey(DIK_W)) {
+		position.x += move.m128_f32[0];
+		position.y += move.m128_f32[1];
+		position.z += move.m128_f32[2];
+	}
+
+	//コントローラーでの移動処理
+	if (IsButtonPush(ButtonKind::DownButton))
+	{
+		position.x -= move.m128_f32[0];
+		position.y -= move.m128_f32[1];
+		position.z -= move.m128_f32[2];
+	}
+
+	else if (IsButtonPush(ButtonKind::UpButton))
+	{
 		position.x += move.m128_f32[0];
 		position.y += move.m128_f32[1];
 		position.z += move.m128_f32[2];
@@ -93,6 +120,13 @@ void Player::Update()
 	}
 	// ジャンプ操作 Jump operation
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		onGround = false;
+		const float jumpVYFist = 0.2f;
+		fallV = { 0, jumpVYFist, 0, 0 };
+	}
+
+	else if (IsButtonDown(ButtonKind::Button_A))
+	{
 		onGround = false;
 		const float jumpVYFist = 0.2f;
 		fallV = { 0, jumpVYFist, 0, 0 };
@@ -177,6 +211,15 @@ void Player::Update()
 
 			Object3d::Update();
 		}
+	}
+
+	//落下したらプレイヤーの位置を初期値に戻す
+	if (position.y <= -20)
+	{
+		position.x = -5.0f;
+		position.y = 0.0f;
+		position.z = 0.0f;
+
 	}
 
 	// 行列の更新など Matrix update, etc

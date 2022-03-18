@@ -370,7 +370,7 @@ void GameScene::Draw()
 	// パーティクルの描画 Drawing particles
 	if (IsButtonPush(ButtonKind::Button_A))
 	{
-		particleMan->Draw(cmdList);
+		//particleMan->Draw(cmdList);
 	}
 	// ここに3Dオブジェクトの描画処理を追加できる You can add 3D object drawing process here
 
