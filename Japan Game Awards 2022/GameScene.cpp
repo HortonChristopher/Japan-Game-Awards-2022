@@ -185,7 +185,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		}
 	}
 
-	objFighter->SetPosition({ -10, 10, 0 });
+	//objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 1,1,1 });
 
 	camera->SetTarget({ 0, 1, 0 });
@@ -216,63 +216,63 @@ void GameScene::Update()
 	//オブジェクトの移動スピードは通常の移動スピードに移動倍率係数を掛ける
 	move = Speed * rate;
 
-	if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN)/*IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton)*/)
-	{
-		// 現在の座標を取得 Get current coordinates
-		/*XMFLOAT3*/// PlayerPosition = fbxobject1->GetPosition();
+	//if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN)/*IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton)*/)
+	//{
+	//	// 現在の座標を取得 Get current coordinates
+	//	/*XMFLOAT3*/// PlayerPosition = fbxobject1->GetPosition();
 
-		// 現在の座標を取得 Get current coordinates
-		/*XMFLOAT3 *///position = objFighter->GetPosition();
+	//	// 現在の座標を取得 Get current coordinates
+	//	/*XMFLOAT3 *///position = objFighter->GetPosition();
 
-		//// 移動後の座標を計算 Calculate the coordinates after moving
-		//if (IsButtonPush(ButtonKind::UpButton))
-		//{
-		//	PlayerPosition.y += move; 
-		//	position.y -= move;
-		//}
+	//	//// 移動後の座標を計算 Calculate the coordinates after moving
+	//	//if (IsButtonPush(ButtonKind::UpButton))
+	//	//{
+	//	//	PlayerPosition.y += move; 
+	//	//	position.y -= move;
+	//	//}
 
-		//else if (IsButtonPush(ButtonKind::DownButton) ) 
-		//{
-		//	PlayerPosition.y -= move; 
-		//	position.y += move;
-		//}
+	//	//else if (IsButtonPush(ButtonKind::DownButton) ) 
+	//	//{
+	//	//	PlayerPosition.y -= move; 
+	//	//	position.y += move;
+	//	//}
 
-		//if (IsButtonPush(ButtonKind::RightButton) ) 
-		//{
-		//	PlayerPosition.x += move; 
-		//	position.x -= move;
-		//}
+	//	//if (IsButtonPush(ButtonKind::RightButton) ) 
+	//	//{
+	//	//	PlayerPosition.x += move; 
+	//	//	position.x -= move;
+	//	//}
 
-		//else if (IsButtonPush(ButtonKind::LeftButton) )
-		//{
-		//	PlayerPosition.x -= move; 
-		//	position.x += move;
-		//}
+	//	//else if (IsButtonPush(ButtonKind::LeftButton) )
+	//	//{
+	//	//	PlayerPosition.x -= move; 
+	//	//	position.x += move;
+	//	//}
 
-		if (input->PushKey(DIK_UP))
-		{
-			PlayerPosition.y += move;
-			position.y += move;
-		}
+	//	/*if (input->PushKey(DIK_UP))
+	//	{
+	//		PlayerPosition.y += move;
+	//		position.y += move;
+	//	}
 
-		if (input->PushKey(DIK_DOWN))
-		{
-			PlayerPosition.y -= move;
-			position.y -= move;
-		}
+	//	if (input->PushKey(DIK_DOWN))
+	//	{
+	//		PlayerPosition.y -= move;
+	//		position.y -= move;
+	//	}
 
-		if (input->PushKey(DIK_RIGHT))
-		{
-			PlayerPosition.x += move;
-			position.x -= move;
-		}
+	//	if (input->PushKey(DIK_RIGHT))
+	//	{
+	//		PlayerPosition.x += move;
+	//		position.x -= move;
+	//	}
 
-		if (input->PushKey(DIK_LEFT))
-		{
-			PlayerPosition.x -= move;
-			position.x += move;
-		}
-	}
+	//	if (input->PushKey(DIK_LEFT))
+	//	{
+	//		PlayerPosition.x -= move;
+	//		position.x += move;
+	//	}*/
+	//}
 
 	//	// 移動後の座標を計算 Calculate the coordinates after moving
 	//	if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }
@@ -296,14 +296,14 @@ void GameScene::Update()
 	//	fbxobject1->SetPosition( PlayerPosition );
 	//}
 
-	MoveCamera();
+	//MoveCamera();
 	
 	// パーティクル生成 Particle generation
 	CreateParticles();
 
 	UpdateInput();
 
-	//objFighter->SetPosition({ 0, 0, 0 });
+	//objFighter->SetPosition({ playerPosition });
 
 	camera->Update();
 	particleMan->Update();

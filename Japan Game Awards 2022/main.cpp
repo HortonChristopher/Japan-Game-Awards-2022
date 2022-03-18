@@ -26,7 +26,7 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 
 #pragma region 汎用機能初期化 General-purpose function initialization
 	// 入力の初期化 Input initialization
-	input = new Input();
+	input = Input::GetInstance();
 	if ( !input->Initialize( win->GetInstance(), win->GetHwnd() ) ) {
 		assert( 0 );
 		return 1;
@@ -76,7 +76,7 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	// 各種解放 Various releases
 	safe_delete( gameScene );
 	safe_delete( audio );
-	safe_delete( input );
+	//safe_delete( input );
 	safe_delete( dxCommon );
 	FbxLoader::GetInstance()->Finalize();
 

@@ -34,5 +34,16 @@ private: // メンバ変数 Member variables
 	ComPtr<IDirectInputDevice8> devkeyboard;
 	BYTE key[256] = {};
 	BYTE keyPre[256] = {};
+
+protected:
+	Input() = default;
+
+	~Input() = default;
+
+public:
+	Input(Input& other) = delete;
+
+	void operator=(const Input&) = delete;
+
 };
 
