@@ -115,7 +115,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	//objGround->SetModel( modelGround );
 	//objFighter->SetModel( modelFighter );
 
-	objGround = TouchableObject::Create(modelGround);
+	//objGround = TouchableObject::Create(modelGround);
 	objFighter = Player::Create(modelFighter);
 
 	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
@@ -137,8 +137,8 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		modelPlane,
 		modelPlane,
 		modelPlane,
-		modelBox,
-		modelBox,
+		modelPlane,
+		modelPlane,
 	};
 
 	Model* modeltable_2[10] = {
@@ -185,7 +185,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		}
 	}
 
-	objFighter->SetPosition({ 0, 0, 0 });
+	objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 1,1,1 });
 
 	camera->SetTarget({ 0, 1, 0 });
@@ -317,7 +317,7 @@ void GameScene::Update()
 		object_2->Update();
 	}
 
-	objGround->Update();
+	//objGround->Update();
 	objFighter->Update();
 
 	//fbxobject1->Update();

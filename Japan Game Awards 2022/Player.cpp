@@ -158,7 +158,7 @@ void Player::Update()
 
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
-			//position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 
 			Object3d::Update();
 		}
@@ -174,6 +174,8 @@ void Player::Update()
 
 			onGround = true;
 			position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+
+			Object3d::Update();
 		}
 	}
 
@@ -184,7 +186,7 @@ void Player::Update()
 void Player::OnCollision(const CollisionInfo& info)
 {
 	// デバッグテキスト表示 Debug text display
-	DebugText::GetInstance()->Print("Collision detected.", 0.0f, 0.0f, 12.0f);
+	//DebugText::GetInstance()->Print("Collision detected.", 0.0f, 0.0f, 12.0f);
 
 	// 衝突店にパーティクルを発生させる Generate particles at the collision point
 	/*for (int i = 0; i < 1; ++i)

@@ -86,7 +86,6 @@ private: // メンバ変数 Member variables
 
 	FbxObject3d *fbxobject1 = nullptr;
 
-
 	float rate = 1.0f;	//移動倍率係数
 	float Speed = 0.4f;	//移動スピード
 
