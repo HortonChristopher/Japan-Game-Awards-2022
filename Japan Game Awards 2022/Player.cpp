@@ -53,23 +53,116 @@ void Player::Update()
 	Input* input = Input::GetInstance();
 
 	// A,Dで旋回 Turn with A, D
-	if (input->PushKey(DIK_A)) {
-		rotation.y -= 2.0f;
-	}
-	else if (input->PushKey(DIK_D)) {
-		rotation.y += 2.0f;
-	}
 
-	//コントローラー旋回処理
-
-	if (IsButtonPush(ButtonKind::LeftButton))
+	if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 	{
-		rotation.y -= 2.0f;
+		if (input->PushKey(DIK_A) && input->PushKey(DIK_W)) 
+		{
+			rotation.y = 315.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
+		}
+
+		else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+		{
+			rotation.y = 45.0f;
+			position.x += 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
+		}
+
+		else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+		{
+			rotation.y = 135.0f;
+			position.x += 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
+		}
+
+		else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+		{
+			rotation.y = 225.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
+		}
+
+		else if (input->PushKey(DIK_A))
+		{
+			position.x -= 0.2f;
+			rotation.y = 270.0f;
+		}
+
+		else if (input->PushKey(DIK_D))
+		{
+			position.x += 0.2f;
+			rotation.y = 90.0f;
+		}
+
+		else if (input->PushKey(DIK_W))
+		{
+			position.z += 0.2f;
+			rotation.y = 0.0f;
+		}
+
+		else if (input->PushKey(DIK_S))
+		{
+			position.z -= 0.2f;
+			rotation.y = 180.0f;
+		}
 	}
 
-	else if (IsButtonPush(ButtonKind::RightButton))
+	//コントローラー旋回と移動処理
+	if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 	{
-		rotation.y += 2.0f;
+		if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+		{
+			rotation.y = 315.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
+		}
+
+		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+		{
+			rotation.y = 45.0f;
+			position.x += 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
+		}
+
+		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+		{
+			rotation.y = 135.0f;
+			position.x += 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
+		}
+
+		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+		{
+			rotation.y = 225.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
+		}
+
+		else if (IsButtonPush(ButtonKind::LeftButton))
+		{
+			position.x -= 0.2f;
+			rotation.y = 270.0f;
+		}
+
+		else if (IsButtonPush(ButtonKind::RightButton))
+		{
+			position.x += 0.2f;
+			rotation.y = 90.0f;
+		}
+
+		else if (IsButtonPush(ButtonKind::UpButton))
+		{
+			position.z += 0.2f;
+			rotation.y = 0.0f;
+		}
+
+		else if (IsButtonPush(ButtonKind::DownButton))
+		{
+			position.z -= 0.2f;
+			rotation.y = 180.0f;
+		}
 	}
 
 	// 移動ベクトルをY軸回りの角度で回転 Rotate the movement vector at an angle around the Y axis
@@ -90,19 +183,25 @@ void Player::Update()
 	}
 
 	//コントローラーでの移動処理
-	if (IsButtonPush(ButtonKind::DownButton))
+	/*if (IsButtonPush(ButtonKind::DownButton))
 	{
-		position.x -= move.m128_f32[0];
-		position.y -= move.m128_f32[1];
-		position.z -= move.m128_f32[2];
+		position.z -= 0.2f;
 	}
 
 	else if (IsButtonPush(ButtonKind::UpButton))
 	{
-		position.x += move.m128_f32[0];
-		position.y += move.m128_f32[1];
-		position.z += move.m128_f32[2];
+		position.z += 0.2f;
 	}
+
+	else if (IsButtonPush(ButtonKind::LeftButton))
+	{
+		position.x -= 0.2f;
+	}
+
+	else if (IsButtonPush(ButtonKind::RightButton))
+	{
+		position.x += 0.2f;
+	}*/
 
 	// ワールド行列更新
 	UpdateWorldMatrix();
