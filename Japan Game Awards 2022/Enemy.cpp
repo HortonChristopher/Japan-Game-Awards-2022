@@ -58,28 +58,28 @@ void Enemy::Update()
 	{
 		if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 		{
-			rotationE.y = 315.0f;
+			rotationE.y = 45.0f;
 			positionE.x += 0.2f * 0.71f;
 			positionE.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 		{
-			rotationE.y = 45.0f;
+			rotationE.y = 315.0f;
 			positionE.x -= 0.2f * 0.71f;
 			positionE.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 		{
-			rotationE.y = 135.0f;
+			rotationE.y = 225.0f;
 			positionE.x -= 0.2f * 0.71f;
 			positionE.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 		{
-			rotationE.y = 225.0f;
+			rotationE.y = 135.0f;
 			positionE.x += 0.2f * 0.71f;
 			positionE.z -= 0.2f * 0.71f;
 		}
@@ -114,41 +114,41 @@ void Enemy::Update()
 	{
 		if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 		{
-			rotationE.y = 315.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
-		}
-
-		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
-		{
 			rotationE.y = 45.0f;
 			positionE.x += 0.2f * 0.71f;
 			positionE.z += 0.2f * 0.71f;
 		}
 
-		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 		{
-			rotationE.y = 135.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotationE.y = 315.0f;
+			positionE.x -= 0.2f * 0.71f;
+			positionE.z += 0.2f * 0.71f;
 		}
 
-		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 		{
 			rotationE.y = 225.0f;
 			positionE.x -= 0.2f * 0.71f;
 			positionE.z -= 0.2f * 0.71f;
 		}
 
+		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+		{
+			rotationE.y = 135.0f;
+			positionE.x += 0.2f * 0.71f;
+			positionE.z -= 0.2f * 0.71f;
+		}
+
 		else if (IsButtonPush(ButtonKind::LeftButton))
 		{
-			positionE.x -= 0.2f;
+			positionE.x += 0.2f;
 			rotationE.y = 270.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::RightButton))
 		{
-			positionE.x += 0.2f;
+			positionE.x -= 0.2f;
 			rotationE.y = 90.0f;
 		}
 
