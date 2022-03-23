@@ -312,11 +312,11 @@ void GameScene::Update()
 		enemyBulletF = false;
 	}
 
-	if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f))
+	if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 	{
 		enemyAlive = false;
 	}
-	if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f))
+	if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f) && enemyBulletF == true)
 	{
 		playerAlive = false;
 	}

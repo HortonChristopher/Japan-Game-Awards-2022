@@ -316,9 +316,9 @@ void Player::Update()
 	//落下したらプレイヤーの位置を初期値に戻す
 	if (position.y <= -20)
 	{
-		position.x = -5.0f;
+		position.x = -12.0f;
 		position.y = 0.0f;
-		position.z = 0.0f;
+		position.z = -12.0f;
 
 	}
 

@@ -58,30 +58,30 @@ void Enemy::Update()
 	{
 		if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 		{
-			rotationE.y = 45.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
+			rotation.y = 45.0f;
+			position.x += 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 		{
-			rotationE.y = 315.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
+			rotation.y = 315.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 		{
-			rotationE.y = 225.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotation.y = 225.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 		{
-			rotationE.y = 135.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotation.y = 135.0f;
+			position.x += 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A))
@@ -114,42 +114,42 @@ void Enemy::Update()
 	{
 		if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 		{
-			rotation.y = 315.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
-		}
-
-		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
-		{
 			rotation.y = 45.0f;
 			position.x += 0.2f * 0.71f;
 			position.z += 0.2f * 0.71f;
 		}
 
-		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 		{
-			rotation.y = 135.0f;
-			position.x += 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
+			rotation.y = 315.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
-		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 		{
 			rotation.y = 225.0f;
 			position.x -= 0.2f * 0.71f;
 			position.z -= 0.2f * 0.71f;
 		}
 
+		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+		{
+			rotation.y = 135.0f;
+			position.x += 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
+		}
+
 		else if (IsButtonPush(ButtonKind::LeftButton))
 		{
 			position.x += 0.2f;
-			rotation.y = 270.0f;
+			rotation.y = 90.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::RightButton))
 		{
 			position.x -= 0.2f;
-			rotation.y = 90.0f;
+			rotation.y = 270.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::UpButton))
@@ -314,9 +314,9 @@ void Enemy::Update()
 	//落下したらプレイヤーの位置を初期値に戻す
 	if (position.y <= -20)
 	{
-		position.x = 0.0f;
+		position.x = 12.0f;
 		position.y = 0.0f;
-		position.z = 0.0f;
+		position.z = -12.0f;
 
 	}
 
