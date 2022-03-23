@@ -58,30 +58,30 @@ void Enemy::Update()
 	{
 		if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 		{
-			rotation.y = 315.0f;
-			position.x += 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
+			rotationE.y = 45.0f;
+			positionE.x += 0.2f * 0.71f;
+			positionE.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 		{
-			rotation.y = 45.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
+			rotationE.y = 315.0f;
+			positionE.x -= 0.2f * 0.71f;
+			positionE.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 		{
-			rotation.y = 135.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
+			rotationE.y = 225.0f;
+			positionE.x -= 0.2f * 0.71f;
+			positionE.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 		{
-			rotation.y = 225.0f;
-			position.x += 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
+			rotationE.y = 135.0f;
+			positionE.x += 0.2f * 0.71f;
+			positionE.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A))
