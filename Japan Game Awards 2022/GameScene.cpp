@@ -273,6 +273,10 @@ void GameScene::Update()
 	if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 	{
 		playerBulletF = true;
+	}
+
+	if (intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
+	{
 		enemyBulletF = true;
 	}
 
@@ -308,9 +312,13 @@ void GameScene::Update()
 		enemyBulletF = false;
 	}
 
-	if (intersect(playerBullet, { enemyPosition.x, 0, enemyPosition.z / 2.0f }, 1.0f, 20.0f, 20.0f))
+	if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f))
 	{
 		enemyAlive = false;
+	}
+	if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f))
+	{
+		playerAlive = false;
 	}
 	
 	// パーティクル生成 Particle generation
@@ -352,8 +360,22 @@ void GameScene::Update()
 	//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
 
 	lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
+	lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
 
 	collisionManager->CheckAllCollisions();
+
+	//Debug Start
+	char msgbuf[256];
+	char msgbuf2[256];
+	//char msgbuf3[256];
+
+	sprintf_s(msgbuf, 256, "Enemy X: %f\n", enemyPosition.x);
+	sprintf_s(msgbuf2, 256, "Enemy Z: %f\n", enemyPosition.z);
+	//sprintf_s(msgbuf3, 256, "isTouchingGround: %f\n", isTouchingGround);
+	OutputDebugStringA(msgbuf);
+	OutputDebugStringA(msgbuf2);
+	//OutputDebugStringA(msgbuf3);
+	//Debug End
 }
 
 void GameScene::Draw()
@@ -390,7 +412,11 @@ void GameScene::Draw()
 		object_2->Draw();
 	}
 
-	objFighter->Draw();
+	if (playerAlive)
+	{
+		objFighter->Draw();
+	}
+	
 	if (enemyAlive)
 	{
 		objClone->Draw();
