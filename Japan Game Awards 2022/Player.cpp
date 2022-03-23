@@ -171,16 +171,17 @@ void Player::Update()
 	move = XMVector3TransformNormal(move, matRot);
 
 	// 向いている方向に移動 Move in the direction you are facing
-	if (input->PushKey(DIK_S)) {
+	/*if (input->PushKey(DIK_S)) {
 		position.x -= move.m128_f32[0];
 		position.y -= move.m128_f32[1];
 		position.z -= move.m128_f32[2];
 	}
-	else if (input->PushKey(DIK_W)) {
+
+	if (input->PushKey(DIK_W)) {
 		position.x += move.m128_f32[0];
 		position.y += move.m128_f32[1];
 		position.z += move.m128_f32[2];
-	}
+	}*/
 
 	//コントローラーでの移動処理
 	/*if (IsButtonPush(ButtonKind::DownButton))

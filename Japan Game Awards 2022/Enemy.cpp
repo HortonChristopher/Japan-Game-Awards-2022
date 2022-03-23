@@ -98,13 +98,13 @@ void Enemy::Update()
 
 		else if (input->PushKey(DIK_W))
 		{
-			positionE.z += 0.4f;
+			positionE.z += 0.2f;
 			rotationE.y = 180.0f;
 		}
 
 		else if (input->PushKey(DIK_S))
 		{
-			positionE.z -= 0.005f;
+			positionE.z -= 0.2f;
 			rotationE.y = 0.0f;
 		}
 	}
@@ -171,7 +171,7 @@ void Enemy::Update()
 	move = XMVector3TransformNormal(move, matRot);
 
 	// 向いている方向に移動 Move in the direction you are facing
-	if (input->PushKey(DIK_S)) {
+	/*if (input->PushKey(DIK_S)) {
 		positionE.x -= move.m128_f32[0];
 		positionE.y -= move.m128_f32[1];
 		positionE.z -= move.m128_f32[2];
@@ -179,7 +179,7 @@ void Enemy::Update()
 		positionE.x += move.m128_f32[0];
 		positionE.y += move.m128_f32[1];
 		positionE.z += move.m128_f32[2];
-	}
+	}*/
 
 	//コントローラーでの移動処理
 	/*if (IsButtonPush(ButtonKind::DownButton))
