@@ -16,6 +16,7 @@
 
 class CollisionManager;
 class Player;
+class Enemy;
 class TouchableObject;
 
 // ゲームシーン Game scene
@@ -56,6 +57,14 @@ public: // メンバ関数 Member function
 	// パーティクル生成 Particle generation
 	void CreateParticles();
 
+	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
+
+	bool lastIntersect = false;
+	bool enemyAlive = true;
+
+	bool playerBulletF = false;
+	bool enemyBulletF = false;
+
 private: // メンバ変数 Member variables
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
@@ -75,14 +84,23 @@ private: // メンバ変数 Member variables
 	Model* modelPlane = nullptr;
 	Model* modelBox = nullptr;
 	Model* modelPyramid = nullptr;
+	Model* modelTempWall = nullptr;
+	Model* modelTempTrigger = nullptr;
+	Model* modelTempBullet = nullptr;
 
 	FbxModel *fbxmodel1 = nullptr;
 
 	Object3d* objSkydome = nullptr;
+	Object3d* objTempTrigger = nullptr;
+	Object3d* objTempTriggerE = nullptr;
+	Object3d* objTempBullet = nullptr;
+	Object3d* objTempBulletE = nullptr;
 
 	TouchableObject* objGround = nullptr;
 
 	Player* objFighter = nullptr;
+
+	Enemy* objClone = nullptr;
 
 	FbxObject3d *fbxobject1 = nullptr;
 
@@ -92,7 +110,7 @@ private: // メンバ変数 Member variables
 	float move;
 
 	XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
-	XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
+	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
 
 	CollisionManager* collisionManager;
 

@@ -5,6 +5,7 @@
 #include "SphereCollider.h"
 #include "CollisionManager.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <sstream>
 #include <iomanip>
 #include "FbxLoader.h"
@@ -36,6 +37,11 @@ GameScene::~GameScene()
 	safe_delete( objSkydome );
 	safe_delete( objGround );
 	safe_delete( objFighter );
+	safe_delete( objClone );
+	safe_delete(objTempTrigger);
+	safe_delete(objTempTriggerE);
+	safe_delete(objTempBullet);
+	safe_delete(objTempBulletE);
 	safe_delete( modelSkydome );
 	safe_delete( modelGround );
 	safe_delete( modelFighter );
@@ -100,6 +106,10 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
+	objTempTrigger = Object3d::Create();
+	objTempTriggerE = Object3d::Create();
+	objTempBullet = Object3d::Create();
+	objTempBulletE = Object3d::Create();
 
 	// テクスチャ2番に読み込み Load into texture # 2
 	Sprite::LoadTexture( 2, L"Resources/texture.png" );
@@ -110,13 +120,21 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
+	modelTempWall = Model::CreateFromOBJ("TempWall");
+	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
+	modelTempBullet = Model::CreateFromOBJ("bullet2");
 
 	objSkydome->SetModel( modelSkydome );
 	//objGround->SetModel( modelGround );
 	//objFighter->SetModel( modelFighter );
+	objTempTrigger->SetModel(modelTempTrigger);
+	objTempTriggerE->SetModel(modelTempTrigger);
+	objTempBullet->SetModel(modelTempBullet);
+	objTempBulletE->SetModel(modelTempBullet);
 
 	//objGround = TouchableObject::Create(modelGround);
 	objFighter = Player::Create(modelFighter);
+	objClone = Enemy::Create(modelFighter);
 
 	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
 	//fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "cube" );
@@ -128,7 +146,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	//fbxobject1->SetModel( fbxmodel1 );
 
 	// モデルテーブル Model table
-	Model* modeltable[10] = {
+	Model* modeltable[11] = {
 		modelPlane,
 		modelPlane,
 		modelPlane,
@@ -139,9 +157,10 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		modelPlane,
 		modelPlane,
 		modelPlane,
+		modelTempWall,
 	};
 
-	Model* modeltable_2[10] = {
+	Model* modeltable_2[11] = {
 		modelPlane,
 		modelPlane,
 		modelPlane,
@@ -152,6 +171,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		modelPlane,
 		modelPlane,
 		modelPlane,
+		modelTempWall,
 	};
 
 	const int DIV_NUM = 10;
@@ -159,10 +179,20 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 
 	//自分側のマップチップ生成(Map chip generation)
-	for (int i = 0; i < DIV_NUM; i++) {
-		for (int j = 0; j < 5; j++) {
+	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 5; j++) { // x coordinate - Left to Right
 
 			int modelIndex = rand() % 10;
+
+			if (i == 2 && j == 2)
+			{
+				modelIndex = 10;
+			}
+
+			if (i == 5 && j == 3)
+			{
+				modelIndex = 10;
+			}
 
 			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
 			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
@@ -173,10 +203,15 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 
 	//敵側のマップチップ生成(Enemy side map chip generation)
-	for (int i = 0; i < DIV_NUM; i++) {
-		for (int j = 0; j < 5; j++) {
+	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 5; j++) { // x coordinate - Left to Right
 
 			int modelIndex = rand() % 10;
+
+			if (i == 5 && j == 3)
+			{
+				modelIndex = 10;
+			}
 
 			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
 			object_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE});
@@ -187,12 +222,31 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	//objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 1,1,1 });
+	objClone->SetScale({ 1,1,1 });
+
+	objFighter->SetPosition({ -12,0,-12 });
+	objClone->SetPosition({ 12,0,-12 });
+
+	objTempTrigger->SetPosition({ -10.0f, 0, 0 });
+	objTempTriggerE->SetPosition({ 10.0f, 0, 0 });
+
+	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
+	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
+	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
+	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
 	camera->SetTarget({ 0, 1, 0 });
 }
 
 void GameScene::Update()
 {
+	XMFLOAT3 playerPosition = objFighter->GetPosition();
+	XMFLOAT3 enemyPosition = objClone->GetPosition();
+	XMFLOAT3 playerTrigger = objTempTrigger->GetPosition();
+	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
+	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
+	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
+
 	// オブジェクト移動 Move object
 
 	//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
@@ -216,87 +270,48 @@ void GameScene::Update()
 	//オブジェクトの移動スピードは通常の移動スピードに移動倍率係数を掛ける
 	move = Speed * rate;
 
-	//if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN)/*IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton)*/)
-	//{
-	//	// 現在の座標を取得 Get current coordinates
-	//	/*XMFLOAT3*/// PlayerPosition = fbxobject1->GetPosition();
+	if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
+	{
+		playerBulletF = true;
+		enemyBulletF = true;
+	}
 
-	//	// 現在の座標を取得 Get current coordinates
-	//	/*XMFLOAT3 *///position = objFighter->GetPosition();
+	if (playerBulletF)
+	{
+		playerBullet.x += 0.1f;
+		objTempBullet->SetPosition(playerBullet);
+	}
+	else
+	{
+		playerBullet.x = -6.0f;
+		objTempBullet->SetPosition(playerBullet);
+	}
 
-	//	//// 移動後の座標を計算 Calculate the coordinates after moving
-	//	//if (IsButtonPush(ButtonKind::UpButton))
-	//	//{
-	//	//	PlayerPosition.y += move; 
-	//	//	position.y -= move;
-	//	//}
+	if (enemyBulletF)
+	{
+		enemyBullet.x -= 0.1f;
+		objTempBulletE->SetPosition(enemyBullet);
+	} 
+	else
+	{
+		enemyBullet.x = 6.0f;
+		objTempBulletE->SetPosition(enemyBullet);
+	}
 
-	//	//else if (IsButtonPush(ButtonKind::DownButton) ) 
-	//	//{
-	//	//	PlayerPosition.y -= move; 
-	//	//	position.y += move;
-	//	//}
+	if (playerBullet.x > 6.0f)
+	{
+		playerBulletF = false;
+	}
 
-	//	//if (IsButtonPush(ButtonKind::RightButton) ) 
-	//	//{
-	//	//	PlayerPosition.x += move; 
-	//	//	position.x -= move;
-	//	//}
+	if (enemyBullet.x < -6.0f)
+	{
+		enemyBulletF = false;
+	}
 
-	//	//else if (IsButtonPush(ButtonKind::LeftButton) )
-	//	//{
-	//	//	PlayerPosition.x -= move; 
-	//	//	position.x += move;
-	//	//}
-
-	//	/*if (input->PushKey(DIK_UP))
-	//	{
-	//		PlayerPosition.y += move;
-	//		position.y += move;
-	//	}
-
-	//	if (input->PushKey(DIK_DOWN))
-	//	{
-	//		PlayerPosition.y -= move;
-	//		position.y -= move;
-	//	}
-
-	//	if (input->PushKey(DIK_RIGHT))
-	//	{
-	//		PlayerPosition.x += move;
-	//		position.x -= move;
-	//	}
-
-	//	if (input->PushKey(DIK_LEFT))
-	//	{
-	//		PlayerPosition.x -= move;
-	//		position.x += move;
-	//	}*/
-	//}
-
-	//	// 移動後の座標を計算 Calculate the coordinates after moving
-	//	if (input->PushKey( DIK_I ) ) { position.y += 1.0f; }
-	//	else if ( input->PushKey( DIK_K ) ) { position.y -= 1.0f; }
-	//	if ( input->PushKey( DIK_L ) ) { position.x += 1.0f; }
-	//	else if ( input->PushKey( DIK_J ) ) { position.x -= 1.0f; }
-
-	//	// 座標の変更を反映 Reflect the change in coordinates
-	//	objFighter->SetPosition( position );
-
-	//	// 現在の座標を取得 Get current coordinates
-	//	XMFLOAT3 PlayerPosition = fbxobject1->GetPosition();
-
-	//	// 移動後の座標を計算 Calculate the coordinates after moving
-	//	if ( input->PushKey( DIK_I ) ) { PlayerPosition.y += 1.0f; }
-	//	else if ( input->PushKey( DIK_K ) ) { PlayerPosition.y -= 1.0f; }
-	//	if ( input->PushKey( DIK_L ) ) { PlayerPosition.x += 1.0f; }
-	//	else if ( input->PushKey( DIK_J ) ) { PlayerPosition.x -= 1.0f; }
-
-	//	// 座標の変更を反映 Reflect the change in coordinates
-	//	fbxobject1->SetPosition( PlayerPosition );
-	//}
-
-	//MoveCamera();
+	if (intersect(playerBullet, { enemyPosition.x, 0, enemyPosition.z / 2.0f }, 1.0f, 20.0f, 20.0f))
+	{
+		enemyAlive = false;
+	}
 	
 	// パーティクル生成 Particle generation
 	CreateParticles();
@@ -319,12 +334,24 @@ void GameScene::Update()
 
 	//objGround->Update();
 	objFighter->Update();
+	objClone->Update();
+
+	objTempTrigger->Update();
+	objTempTriggerE->Update();
+
+	objTempBullet->SetPosition(playerBullet);
+	objTempBulletE->SetPosition(enemyBullet);
+
+	objTempBullet->Update();
+	objTempBulletE->Update();
 
 	//fbxobject1->Update();
 
-	//debugText.Print( "AD: move camera LeftRight", 50, 50, 1.0f );
+	//debugText.Print( "", 50, 50, 1.0f );
 	//debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
 	//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
+
+	lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
 
 	collisionManager->CheckAllCollisions();
 }
@@ -364,6 +391,16 @@ void GameScene::Draw()
 	}
 
 	objFighter->Draw();
+	if (enemyAlive)
+	{
+		objClone->Draw();
+	}
+
+	objTempTrigger->Draw();
+	objTempTriggerE->Draw();
+
+	objTempBullet->Draw();
+	objTempBulletE->Draw();
 
 	//fbxobject1->Draw( cmdList );
 
@@ -438,4 +475,22 @@ void GameScene::CreateParticles()
 		// 追加 addition
 		particleMan->Add( 60, pos, vel, acc, 1.0f, 0.0f );
 	}
+}
+
+int GameScene::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH)
+{
+	XMFLOAT2 circleDistance;
+
+	circleDistance.x = abs(player.x - wall.x);
+	circleDistance.y = abs(player.z - wall.z);
+
+	if (circleDistance.x > (rectW / 2.0f + circleR)) { return false; }
+	if (circleDistance.y > (rectH / 2.0f + circleR)) { return false; }
+
+	if (circleDistance.x <= (rectW / 2.0f)) { return true; }
+	if (circleDistance.y <= (rectH / 2.0f)) { return true; }
+
+	float cornerDistance_sq = ((circleDistance.x - rectW / 2.0f) * (circleDistance.x - rectW / 2.0f)) + ((circleDistance.y - rectH / 2.0f) * (circleDistance.y - rectH / 2.0f));
+
+	return (cornerDistance_sq <= (circleR * circleR));
 }

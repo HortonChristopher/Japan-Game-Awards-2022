@@ -92,6 +92,9 @@
     <ClCompile Include="TouchableObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -207,6 +210,9 @@
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
     <ClInclude Include="QueryCallback.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
   </ItemGroup>

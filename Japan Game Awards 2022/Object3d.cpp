@@ -361,7 +361,7 @@ void Object3d::UpdateWorldMatrix()
 {
 	assert(camera);
 
-	XMMATRIX matScale, matRot, matTrans;
+	XMMATRIX matScale, matRot, matTrans, matScale2, matRot2, matTrans2;
 
 	matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	matRot = XMMatrixIdentity();
@@ -370,20 +370,59 @@ void Object3d::UpdateWorldMatrix()
 	matRot *= XMMatrixRotationY(XMConvertToRadians(rotation.y));
 	matTrans = XMMatrixTranslation(position.x, position.y, position.z);
 
+	matScale2 = XMMatrixScaling(scale2.x, scale2.y, scale2.z);
+	matRot2 = XMMatrixIdentity();
+	matRot2 *= XMMatrixRotationZ(XMConvertToRadians(rotationE.z));
+	matRot2 *= XMMatrixRotationX(XMConvertToRadians(rotationE.x));
+	matRot2 *= XMMatrixRotationY(XMConvertToRadians(rotationE.y));
+	matTrans2 = XMMatrixTranslation(positionE.x, positionE.y, positionE.z);
+
 	// ワールド行列の合成 World matrix composition
 	if (isBillboard && camera) {
 		const XMMATRIX& matBillboard = camera->GetBillboardMatrix();
 
+		//matWorld = XMMatrixIdentity();
+		//matWorld *= matScale; // ワールド行列にスケーリングを反映
+		//matWorld *= matRot; // ワールド行列に回転を反映
+		//matWorld *= matBillboard;
+		//matWorld *= matTrans; // ワールド行列に平行移動を反映
+
+		//matWorldE = XMMatrixIdentity();
+		//matWorldE *= matScale2;
+		//matWorldE *= matRot2;
+		//matWorldE *= matBillboard;
+		//matWorldE *= matTrans2;
+
+		//matWorld *= matWorldE;
+
 		matWorld = XMMatrixIdentity();
-		matWorld *= matScale; // ワールド行列にスケーリングを反映
-		matWorld *= matRot; // ワールド行列に回転を反映
+		matWorld *= (matScale * matScale2);
+		//matWorld *= matScale;
+		matWorld *= (matRot * matRot2);
+		//matWorld *= matRot;
 		matWorld *= matBillboard;
-		matWorld *= matTrans; // ワールド行列に平行移動を反映
+		matWorld *= (matTrans * matTrans2);
+		//matWorld *= matTrans;
 	} else {
-		matWorld = XMMatrixIdentity(); // 変形をリセット
-		matWorld *= matScale; // ワールド行列にスケーリングを反映
-		matWorld *= matRot; // ワールド行列に回転を反映
-		matWorld *= matTrans; // ワールド行列に平行移動を反映
+		//matWorld = XMMatrixIdentity(); // 変形をリセット
+		//matWorld *= matScale; // ワールド行列にスケーリングを反映
+		//matWorld *= matRot; // ワールド行列に回転を反映
+		//matWorld *= matTrans; // ワールド行列に平行移動を反映
+
+		//matWorldE = XMMatrixIdentity();
+		//matWorldE *= matScale2;
+		//matWorldE *= matRot2;
+		//matWorldE *= matTrans2;
+
+		//matWorld *= matWorldE;
+
+		matWorld = XMMatrixIdentity();
+		matWorld *= (matScale * matScale2);
+		//matWorld *= matScale;
+		matWorld *= (matRot * matRot2);
+		//matWorld *= matRot;
+		matWorld *= (matTrans * matTrans2);
+		//matWorld *= matTrans;
 	}
 
 	// 親オブジェクトがあれば If there is a parent object
