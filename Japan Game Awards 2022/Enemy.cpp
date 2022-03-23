@@ -142,13 +142,13 @@ void Enemy::Update()
 
 		else if (IsButtonPush(ButtonKind::LeftButton))
 		{
-			position.x -= 0.2f;
+			position.x += 0.2f;
 			rotation.y = 270.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::RightButton))
 		{
-			position.x += 0.2f;
+			position.x -= 0.2f;
 			rotation.y = 90.0f;
 		}
 
