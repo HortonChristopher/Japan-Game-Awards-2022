@@ -60,7 +60,10 @@ public: // メンバ関数 Member function
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
 	bool lastIntersect = false;
+	bool lastIntersectE = false;
+
 	bool enemyAlive = true;
+	bool playerAlive = true;
 
 	bool playerBulletF = false;
 	bool enemyBulletF = false;
@@ -109,7 +112,7 @@ private: // メンバ変数 Member variables
 
 	float move;
 
-	XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
+	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
 	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
 
 	CollisionManager* collisionManager;
