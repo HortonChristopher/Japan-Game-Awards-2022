@@ -58,54 +58,54 @@ void Enemy::Update()
 	{
 		if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 		{
-			rotationE.y = 315.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
+			rotation.y = 315.0f;
+			position.x += 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 		{
-			rotationE.y = 45.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
+			rotation.y = 45.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 		{
-			rotationE.y = 135.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotation.y = 135.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 		{
-			rotationE.y = 225.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotation.y = 225.0f;
+			position.x += 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
 		}
 
 		else if (input->PushKey(DIK_A))
 		{
-			positionE.x += 0.2f;
-			rotationE.y = 90.0f;
+			position.x += 0.2f;
+			rotation.y = 90.0f;
 		}
 
 		else if (input->PushKey(DIK_D))
 		{
-			positionE.x -= 0.2f;
-			rotationE.y = 270.0f;
+			position.x -= 0.2f;
+			rotation.y = 270.0f;
 		}
 
 		else if (input->PushKey(DIK_W))
 		{
-			positionE.z += 0.2f;
-			rotationE.y = 180.0f;
+			position.z += 0.2f;
+			rotation.y = 0.0f;
 		}
 
 		else if (input->PushKey(DIK_S))
 		{
-			positionE.z -= 0.2f;
-			rotationE.y = 0.0f;
+			position.z -= 0.2f;
+			rotation.y = 180.0f;
 		}
 	}
 
@@ -114,54 +114,54 @@ void Enemy::Update()
 	{
 		if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 		{
-			rotationE.y = 315.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
+			rotation.y = 315.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
 		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 		{
-			rotationE.y = 45.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z += 0.2f * 0.71f;
+			rotation.y = 45.0f;
+			position.x += 0.2f * 0.71f;
+			position.z += 0.2f * 0.71f;
 		}
 
 		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 		{
-			rotationE.y = 135.0f;
-			positionE.x += 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotation.y = 135.0f;
+			position.x += 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
 		}
 
 		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
 		{
-			rotationE.y = 225.0f;
-			positionE.x -= 0.2f * 0.71f;
-			positionE.z -= 0.2f * 0.71f;
+			rotation.y = 225.0f;
+			position.x -= 0.2f * 0.71f;
+			position.z -= 0.2f * 0.71f;
 		}
 
 		else if (IsButtonPush(ButtonKind::LeftButton))
 		{
-			positionE.x -= 0.2f;
-			rotationE.y = 270.0f;
+			position.x -= 0.2f;
+			rotation.y = 270.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::RightButton))
 		{
-			positionE.x += 0.2f;
-			rotationE.y = 90.0f;
+			position.x += 0.2f;
+			rotation.y = 90.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::UpButton))
 		{
-			positionE.z += 0.2f;
-			rotationE.y = 0.0f;
+			position.z += 0.2f;
+			rotation.y = 0.0f;
 		}
 
 		else if (IsButtonPush(ButtonKind::DownButton))
 		{
-			positionE.z -= 0.2f;
-			rotationE.y = 180.0f;
+			position.z -= 0.2f;
+			rotation.y = 180.0f;
 		}
 	}
 
@@ -171,15 +171,15 @@ void Enemy::Update()
 	move = XMVector3TransformNormal(move, matRot);
 
 	// 向いている方向に移動 Move in the direction you are facing
-	/*if (input->PushKey(DIK_S)) {
-		positionE.x -= move.m128_f32[0];
-		positionE.y -= move.m128_f32[1];
-		positionE.z -= move.m128_f32[2];
-	} else if (input->PushKey(DIK_W)) {
-		positionE.x += move.m128_f32[0];
-		positionE.y += move.m128_f32[1];
-		positionE.z += move.m128_f32[2];
-	}*/
+	//if (input->PushKey(DIK_S)) {
+	//	positionE.x -= move.m128_f32[0];
+	//	positionE.y -= move.m128_f32[1];
+	//	positionE.z -= move.m128_f32[2];
+	//} else if (input->PushKey(DIK_W)) {
+	//	positionE.x += move.m128_f32[0];
+	//	positionE.y += move.m128_f32[1];
+	//	positionE.z += move.m128_f32[2];
+	//}
 
 	//コントローラーでの移動処理
 	/*if (IsButtonPush(ButtonKind::DownButton))
@@ -212,9 +212,9 @@ void Enemy::Update()
 
 		fallV.m128_f32[1] = max(fallV.m128_f32[1] + fallAcc, fallVYMin);
 
-		positionE.x += fallV.m128_f32[0];
-		positionE.y += fallV.m128_f32[1];
-		positionE.z += fallV.m128_f32[2];
+		position.x += fallV.m128_f32[0];
+		position.y += fallV.m128_f32[1];
+		position.z += fallV.m128_f32[2];
 	}
 	// ジャンプ操作 Jump operation
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
@@ -271,9 +271,9 @@ void Enemy::Update()
 	// 球と地形の交差を全検索
 	CollisionManager::GetInstance()->QuerySphere(*sphereCollider, &callback, COLLISION_ATTR_LANDSHAPE);
 	// 交差による排斥分動かす
-	positionE.x += callback.move.m128_f32[0];
-	positionE.y += callback.move.m128_f32[1];
-	positionE.z += callback.move.m128_f32[2];
+	position.x += callback.move.m128_f32[0];
+	position.y += callback.move.m128_f32[1];
+	position.z += callback.move.m128_f32[2];
 	// ワールド行列更新
 	UpdateWorldMatrix();
 	collider->Update();
@@ -290,7 +290,7 @@ void Enemy::Update()
 
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f + adsDistance)) {
 			onGround = true;
-			positionE.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 
 			Object3d::Update();
 		}
@@ -305,18 +305,18 @@ void Enemy::Update()
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
 
 			onGround = true;
-			positionE.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
+			position.y -= (raycastHit.distance - sphereCollider->GetRadius() * 2.0f);
 
 			Object3d::Update();
 		}
 	}
 
 	//落下したらプレイヤーの位置を初期値に戻す
-	if (positionE.y <= -20)
+	if (position.y <= -20)
 	{
-		positionE.x = 0.0f;
-		positionE.y = 0.0f;
-		positionE.z = 0.0f;
+		position.x = 0.0f;
+		position.y = 0.0f;
+		position.z = 0.0f;
 
 	}
 
