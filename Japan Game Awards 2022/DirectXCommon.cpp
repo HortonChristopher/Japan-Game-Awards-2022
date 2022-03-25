@@ -212,6 +212,7 @@ bool DirectXCommon::CreateSwapChain()
 	DXGI_SWAP_CHAIN_DESC1 swapchainDesc{};
 	swapchainDesc.Width = WinApp::window_width;
 	swapchainDesc.Height = WinApp::window_height;
+	
 	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	// 色情報の書式を一般的なものに Make the format of color information general
 	swapchainDesc.SampleDesc.Count = 1; // マルチサンプルしない Do not multisample
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;	// バックバッファとして使えるように To be used as a back buffer
@@ -270,6 +271,12 @@ bool DirectXCommon::CreateFinalRenderTargets()
 	HRESULT result = S_FALSE;
 
 	DXGI_SWAP_CHAIN_DESC swcDesc = {};
+
+	//リフレッシュレートの最大有理数
+	swcDesc.BufferDesc.RefreshRate.Numerator = 60;
+	//リフレッシュレートの最小有理数
+	swcDesc.BufferDesc.RefreshRate.Denominator = 1;
+
 	result = swapchain->GetDesc(&swcDesc);
 	if (FAILED(result)) {
 		assert(0);
