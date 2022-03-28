@@ -6,6 +6,10 @@
 #include <wrl.h>
 #include <d3dx12.h>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <timeapi.h>
+#pragma comment(lib, "winmm.lib")
 
 #include "WinApp.h"
 
@@ -111,4 +115,5 @@ private: // メンバ関数
 	/// <returns>成否</returns>
 	bool CreateFence();	
 };
+
 

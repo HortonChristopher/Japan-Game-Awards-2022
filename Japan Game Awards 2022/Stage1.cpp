@@ -172,11 +172,12 @@ void Stage1::Initialize()
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
 
+	//ステージ1用外壁マップチップ
+	const int WALL_NUM = 23;
 
 	//自分側のマップチップ生成(Map chip generation)
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
-		for (int j = 0; j < 5; j++) { // x coordinate - Left to Right
-
+		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
 			int modelIndex = rand() % 10;
 
 			if (i == 2 && j == 2)
@@ -189,17 +190,46 @@ void Stage1::Initialize()
 				modelIndex = 10;
 			}
 
+			//ステージ外壁の配置
+			//下
+			if (i == 0 && j == j)
+			{
+				modelIndex = 10;
+			}
+
+			//上
+			if (i == 9 && j == j)
+			{
+				modelIndex = 10;
+			}
+
+			//左
+			if (i == i && j == 0)
+			{
+				modelIndex = 10;
+			}
+
+			//右
+			if (i == i && j == 5)
+			{
+				modelIndex = 10;
+			}
+
+			if (i == 5 && j == 5)
+			{
+				modelIndex = 0;
+			}
+
 			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
 			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects.push_back(object);
 		}
 	}
 
-
 	//敵側のマップチップ生成(Enemy side map chip generation)
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
-		for (int j = 0; j < 5; j++) { // x coordinate - Left to Right
+		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
 
 			int modelIndex = rand() % 10;
 
@@ -208,9 +238,40 @@ void Stage1::Initialize()
 				modelIndex = 10;
 			}
 
+			//ステージ外壁の配置
+			//下
+			if (i == 0 && j == j)
+			{
+				modelIndex = 10;
+			}
+
+			//上
+			if (i == 9 && j == j)
+			{
+				modelIndex = 10;
+			}
+
+			//左
+			if (i == i && j == 0)
+			{
+				modelIndex = 10;
+			}
+
+			//右
+			if (i == i && j == 5)
+			{
+				modelIndex = 10;
+			}
+
+			if (i == 5 && j == 5)
+			{
+				modelIndex = 0;
+			}
+
+
 			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
-			object_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE});
-			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2), 0, (i - DIV_NUM / 2) * LAND_SCALE});
+			object_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_2.push_back(object_2);
 		}
 	}
@@ -222,8 +283,8 @@ void Stage1::Initialize()
 	objFighter->SetPosition({ -12,0,-12 });
 	objClone->SetPosition({ 12,0,-12 });
 
-	objTempTrigger->SetPosition({ -10.0f, 0, 0 });
-	objTempTriggerE->SetPosition({ 10.0f, 0, 0 });
+	objTempTrigger->SetPosition({ -12.0f, 0, 0 });
+	objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
 
 	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
 	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
@@ -279,10 +340,9 @@ void Stage1::Update()
 	{
 		playerBullet.x += 0.1f;
 		objTempBullet->SetPosition(playerBullet);
-	}
-	else
+	} else
 	{
-		playerBullet.x = -6.0f;
+		playerBullet.x = InitBulletPos_PX;
 		objTempBullet->SetPosition(playerBullet);
 	}
 
@@ -290,19 +350,18 @@ void Stage1::Update()
 	{
 		enemyBullet.x -= 0.1f;
 		objTempBulletE->SetPosition(enemyBullet);
-	} 
-	else
+	} else
 	{
-		enemyBullet.x = 6.0f;
+		enemyBullet.x = InitBulletPos_EX;
 		objTempBulletE->SetPosition(enemyBullet);
 	}
 
-	if (playerBullet.x > 6.0f)
+	if (playerBullet.x > 9.0f)
 	{
 		playerBulletF = false;
 	}
 
-	if (enemyBullet.x < -6.0f)
+	if (enemyBullet.x < -9.0f)
 	{
 		enemyBulletF = false;
 	}

@@ -112,8 +112,14 @@ private: // メンバ変数 Member variables
 
 	//FbxObject3d *fbxobject1 = nullptr;
 
-	//float rate = 1.0f;	//移動倍率係数
-	//float Speed = 0.4f;	//移動スピード
+	//球の初期位置変数
+	float InitBulletPos_PX = -9.0f;
+
+	//敵側の球の初期位置
+	float InitBulletPos_EX = 9.0f;
+
+	float rate = 1.0f;	//移動倍率係数
+	float Speed = 0.4f;	//移動スピード
 
 	//float move;
 
@@ -122,8 +128,9 @@ private: // メンバ変数 Member variables
 
 	CollisionManager* collisionManager;
 
-	//std::vector<Object3d*> objects;
-	//std::vector<Object3d*> objects_2;
+	std::vector<Object3d*> objects;
+	std::vector<Object3d*> objects_2;
+	std::vector<Object3d*> objects_Wall;
 
 	TitleScene* titleScene = nullptr;
 	Stage1* stage1 = nullptr;
