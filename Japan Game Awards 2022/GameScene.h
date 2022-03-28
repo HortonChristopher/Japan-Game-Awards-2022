@@ -18,6 +18,8 @@ class CollisionManager;
 class Player;
 class Enemy;
 class TouchableObject;
+class TitleScene;
+class Stage1;
 
 // ゲームシーン Game scene
 class GameScene
@@ -33,6 +35,9 @@ private: // エイリアス alias
 
 private: // 静的メンバ変数 Static member variables
 	static const int debugTextTexNumber = 0;
+
+public:
+	int sceneNo = 0; //タイトル Title
 
 public: // メンバ関数 Member function
 	
@@ -59,14 +64,14 @@ public: // メンバ関数 Member function
 
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
-	bool lastIntersect = false;
+	/*bool lastIntersect = false;
 	bool lastIntersectE = false;
 
 	bool enemyAlive = true;
 	bool playerAlive = true;
 
 	bool playerBulletF = false;
-	bool enemyBulletF = false;
+	bool enemyBulletF = false;*/
 
 private: // メンバ変数 Member variables
 	DirectXCommon* dxCommon = nullptr;
@@ -77,47 +82,50 @@ private: // メンバ変数 Member variables
 	// ゲームシーン用 For game scenes
 	Camera *camera = nullptr;
 	 
-	Sprite* spriteBG = nullptr;
+	//Sprite* spriteBG = nullptr;
 
-	ParticleManager *particleMan = nullptr;
+	//ParticleManager *particleMan = nullptr;
 
-	Model* modelSkydome = nullptr;
-	Model* modelGround = nullptr;
-	Model* modelFighter = nullptr;
-	Model* modelPlane = nullptr;
-	Model* modelBox = nullptr;
-	Model* modelPyramid = nullptr;
-	Model* modelTempWall = nullptr;
-	Model* modelTempTrigger = nullptr;
-	Model* modelTempBullet = nullptr;
+	//Model* modelSkydome = nullptr;
+	//Model* modelGround = nullptr;
+	//Model* modelFighter = nullptr;
+	//Model* modelPlane = nullptr;
+	//Model* modelBox = nullptr;
+	//Model* modelPyramid = nullptr;
+	//Model* modelTempWall = nullptr;
+	//Model* modelTempTrigger = nullptr;
+	//Model* modelTempBullet = nullptr;
 
-	FbxModel *fbxmodel1 = nullptr;
+	//FbxModel *fbxmodel1 = nullptr;
 
-	Object3d* objSkydome = nullptr;
-	Object3d* objTempTrigger = nullptr;
-	Object3d* objTempTriggerE = nullptr;
-	Object3d* objTempBullet = nullptr;
-	Object3d* objTempBulletE = nullptr;
+	//Object3d* objSkydome = nullptr;
+	//Object3d* objTempTrigger = nullptr;
+	//Object3d* objTempTriggerE = nullptr;
+	//Object3d* objTempBullet = nullptr;
+	//Object3d* objTempBulletE = nullptr;
 
-	TouchableObject* objGround = nullptr;
+	//TouchableObject* objGround = nullptr;
 
-	Player* objFighter = nullptr;
+	//Player* objFighter = nullptr;
 
-	Enemy* objClone = nullptr;
+	//Enemy* objClone = nullptr;
 
-	FbxObject3d *fbxobject1 = nullptr;
+	//FbxObject3d *fbxobject1 = nullptr;
 
-	float rate = 1.0f;	//移動倍率係数
-	float Speed = 0.4f;	//移動スピード
+	//float rate = 1.0f;	//移動倍率係数
+	//float Speed = 0.4f;	//移動スピード
 
-	float move;
+	//float move;
 
-	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
-	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
+	////XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
+	////XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
 
 	CollisionManager* collisionManager;
 
-	std::vector<Object3d*> objects;
-	std::vector<Object3d*> objects_2;
+	//std::vector<Object3d*> objects;
+	//std::vector<Object3d*> objects_2;
+
+	TitleScene* titleScene = nullptr;
+	Stage1* stage1 = nullptr;
 };
 

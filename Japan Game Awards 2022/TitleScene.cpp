@@ -1,0 +1,43 @@
+#include "TitleScene.h"
+#include "Audio.h"
+#include "Input.h"
+#include "DebugText.h"
+#include "DirectXCommon.h"
+#include "GameScene.h"
+
+void TitleScene::Initialize()
+{
+	//// デバッグテキスト用テクスチャ読み込み Import texture for debug text
+	//if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
+	//	assert(0);
+	//	return;
+	//}
+
+	//// デバッグテキスト初期化 Debug text initialization
+	//debugText.Initialize(debugTextTexNumber);
+
+	// テクスチャ読み込み Texture loading
+	if (!Sprite::LoadTexture(1, L"Resources/Title.png")) {
+		assert(0);
+		return;
+	}
+
+	// 背景スプライト生成 Background sprite generation
+	titleBG = Sprite::Create(1, { 0.0f,0.0f });
+}
+
+void TitleScene::Finalize()
+{
+	delete titleBG;
+}
+
+void TitleScene::Update()
+{
+
+}
+
+void TitleScene::Draw()
+{
+	// 背景スプライト描画 Background sprite drawing
+	titleBG->Draw();
+}
