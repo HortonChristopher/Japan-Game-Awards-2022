@@ -292,6 +292,7 @@ void Stage1::Initialize()
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
 	camera->SetTarget({ 0, 1, 0 });
+	camera->MoveEyeVector({ 0, 25.0f, 25.0f });
 }
 
 void Stage1::Update()
