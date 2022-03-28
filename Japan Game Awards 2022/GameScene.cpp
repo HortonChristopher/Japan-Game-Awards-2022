@@ -146,7 +146,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	//fbxobject1->SetModel( fbxmodel1 );
 
 	// モデルテーブル Model table
-	Model* modeltable[11] = {
+	Model* modeltable[12] = {
 		modelPlane,
 		modelPlane,
 		modelPlane,
@@ -160,7 +160,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 		modelTempWall,
 	};
 
-	Model* modeltable_2[11] = {
+	Model* modeltable_2[12] = {
 		modelPlane,
 		modelPlane,
 		modelPlane,
@@ -177,10 +177,13 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
 
+	//ステージ1用外壁マップチップ
+	const int WALL_NUM = 23;
+
 
 	//自分側のマップチップ生成(Map chip generation)
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
-		for (int j = 0; j < 5; j++) { // x coordinate - Left to Right
+		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
 
 			int modelIndex = rand() % 10;
 
@@ -194,9 +197,41 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 				modelIndex = 10;
 			}
 
+			
+
+			//ステージ外壁の配置
+				//下
+				if (i == 0 && j == j)
+				{
+					modelIndex = 10;
+				}
+
+				//上
+				if (i == 9 && j == j)
+				{
+					modelIndex = 10;
+				}
+
+				//左
+				if (i == i && j == 0)
+				{
+					modelIndex = 10;
+				}
+
+				//右
+				if (i == i && j == 5)
+				{
+					modelIndex = 10;
+				}
+
+				if (i == 5 && j == 5)
+				{
+					modelIndex = 0;
+				}
+
 			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
 			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object->SetPosition({ (j - DIV_NUM / 2 ) * LAND_SCALE - LAND_SCALE * 1, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects.push_back(object);
 		}
 	}
@@ -204,7 +239,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	//敵側のマップチップ生成(Enemy side map chip generation)
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
-		for (int j = 0; j < 5; j++) { // x coordinate - Left to Right
+		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
 
 			int modelIndex = rand() % 10;
 
@@ -213,12 +248,79 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 				modelIndex = 10;
 			}
 
+			//ステージ外壁の配置
+				//下
+			if (i == 0 && j == j)
+			{
+				modelIndex = 10;
+			}
+
+			//上
+			if (i == 9 && j == j)
+			{
+				modelIndex = 10;
+			}
+
+			//左
+			if (i == i && j == 0)
+			{
+				modelIndex = 10;
+			}
+
+			//右
+			if (i == i && j == 5)
+			{
+				modelIndex = 10;
+			}
+
+			if (i == 5 && j == 5)
+			{
+				modelIndex = 0;
+			}
+
+			
 			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
 			object_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE});
-			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2), 0, (i - DIV_NUM / 2) * LAND_SCALE});
+			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE});
 			objects_2.push_back(object_2);
 		}
 	}
+
+	////ステージの外壁用のマップチップ
+	//for (int i = -1; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
+	//	for (int j = -1; j < WALL_NUM; j++) { // x coordinate - Left to Right
+
+	//		int modelIndex = 10;
+
+	//		if (i == 0 && j == j)
+	//			{
+	//				modelIndex = 10;
+	//			}
+
+	//		TouchableObject* object_Wall = TouchableObject::Create(modeltable_2[modelIndex]);
+	//		object_Wall->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+	//		object_Wall->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2), 0, (i - DIV_NUM / 2) * LAND_SCALE });
+	//		objects_Wall.push_back(object_Wall);
+	//	}
+	//}
+
+	//objFighter->SetPosition({ -10, 10, 0 });
+
+	objFighter->SetScale({ 1,1,1 });
+	objClone->SetScale({ 1,1,1 });
+
+	objFighter->SetPosition({ -12,0,-12 });
+	objClone->SetPosition({ 12,0,-12 });
+
+	objTempTrigger->SetPosition({ InitBulletPos_PX, 0, 0 });
+	objTempTriggerE->SetPosition({ InitBulletPos_EX, 0, 0 });
+
+	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
+	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
+	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
+	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
+
+	camera->SetTarget({ 0, 1, 0 });
 
 	//objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 1,1,1 });
@@ -227,8 +329,8 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objFighter->SetPosition({ -12,0,-12 });
 	objClone->SetPosition({ 12,0,-12 });
 
-	objTempTrigger->SetPosition({ -10.0f, 0, 0 });
-	objTempTriggerE->SetPosition({ 10.0f, 0, 0 });
+	objTempTrigger->SetPosition({ -12.0f, 0, 0 });
+	objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
 
 	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
 	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
@@ -287,7 +389,7 @@ void GameScene::Update()
 	}
 	else
 	{
-		playerBullet.x = -6.0f;
+		playerBullet.x = InitBulletPos_PX;
 		objTempBullet->SetPosition(playerBullet);
 	}
 
@@ -298,16 +400,16 @@ void GameScene::Update()
 	} 
 	else
 	{
-		enemyBullet.x = 6.0f;
+		enemyBullet.x = InitBulletPos_EX;
 		objTempBulletE->SetPosition(enemyBullet);
 	}
 
-	if (playerBullet.x > 6.0f)
+	if (playerBullet.x > 9.0f)
 	{
 		playerBulletF = false;
 	}
 
-	if (enemyBullet.x < -6.0f)
+	if (enemyBullet.x < -9.0f)
 	{
 		enemyBulletF = false;
 	}
@@ -321,6 +423,7 @@ void GameScene::Update()
 		playerAlive = false;
 	}
 	
+
 	// パーティクル生成 Particle generation
 	CreateParticles();
 
@@ -376,6 +479,7 @@ void GameScene::Update()
 	OutputDebugStringA(msgbuf2);
 	//OutputDebugStringA(msgbuf3);
 	//Debug End
+
 }
 
 void GameScene::Draw()
