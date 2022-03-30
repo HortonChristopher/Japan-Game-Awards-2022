@@ -107,6 +107,12 @@
     <ClCompile Include="Stage1.cpp">
       <Filter>ソース ファイル\Stages</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -232,6 +238,12 @@
     </ClInclude>
     <ClInclude Include="Stage1.h">
       <Filter>ヘッダ ファイル\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ヘッダ ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>ヘッダ ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
