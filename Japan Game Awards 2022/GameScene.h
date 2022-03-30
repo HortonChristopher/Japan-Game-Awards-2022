@@ -20,6 +20,8 @@ class Enemy;
 class TouchableObject;
 class TitleScene;
 class Stage1;
+class GameOver;
+class GameClear;
 
 // ゲームシーン Game scene
 class GameScene
@@ -37,7 +39,6 @@ private: // 静的メンバ変数 Static member variables
 	static const int debugTextTexNumber = 0;
 
 public:
-	int sceneNo = 0; //タイトル Title
 
 public: // メンバ関数 Member function
 	
@@ -134,5 +135,7 @@ private: // メンバ変数 Member variables
 
 	TitleScene* titleScene = nullptr;
 	Stage1* stage1 = nullptr;
+	GameOver* gameOver = nullptr;
+	GameClear* gameClear = nullptr;
 };
 

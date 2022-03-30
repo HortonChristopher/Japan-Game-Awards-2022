@@ -15,8 +15,16 @@
 #include "TouchableObject.h"
 #include "TitleScene.h"
 #include "Stage1.h"
+#include "GameOver.h"
+#include "GameClear.h"
 
 using namespace DirectX;
+extern int sceneNo = 0; //タイトル Title
+extern int sceneChange = 0;
+
+//extern GameOver* gameOver = new GameOver();
+//extern GameClear* gameClear = new GameClear();
+extern DirectXCommon* dxCommon;
 
 //あんじょうテスト
 //よっしーテスト♡
@@ -96,6 +104,12 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	//タイトルシーン初期化 Title Scene Initialization
 	titleScene = new TitleScene();
 	titleScene->Initialize();
+
+	gameOver = new GameOver();
+	gameOver->Initialize();
+
+	gameClear = new GameClear();
+	gameOver->Initialize();
 
 	//ステージ初期化 Stage Initialization
 	stage1 = new Stage1();
@@ -336,6 +350,29 @@ void GameScene::Update()
 	case 1:
 		stage1->Update();
 		break;
+
+	case 2:
+		gameClear->Update();
+
+		if (input->PushKey(DIK_T))
+		{
+			sceneNo = 0;
+			titleScene->Initialize();
+			break;
+		}
+
+		break;
+	case 3:
+		gameOver->Update();
+
+		if (input->PushKey(DIK_T))
+		{
+			sceneNo = 0;
+			titleScene->Initialize();
+			break;
+		}
+
+		break;
 	}
 
 	//if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
@@ -423,6 +460,22 @@ void GameScene::Draw()
 	case 1:
 		stage1->DrawBGsprite();
 		break;
+	case 2:
+		if (sceneChange == 0)
+		{
+			gameClear->Initialize();
+			sceneChange = 1;
+		}
+		gameClear->Draw();
+		break;
+	case 3:
+		if (sceneChange == 0)
+		{
+			gameOver->Initialize();
+			sceneChange = 1;
+		}
+		gameOver->Draw();
+		break;
 	}
 	
 	
@@ -444,6 +497,10 @@ void GameScene::Draw()
 		break;
 	case 1:
 		stage1->Draw3Dobject();
+		break;
+	case 2:
+		break;
+	case 3:
 		break;
 	}
 
@@ -503,6 +560,10 @@ void GameScene::Draw()
 		break;
 	case 1:
 		stage1->DrawFGsprite();
+		break;
+	case 2:
+		break;
+	case 3:
 		break;
 	}
 

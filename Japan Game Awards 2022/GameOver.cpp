@@ -1,10 +1,10 @@
-#include "TitleScene.h"
+#include "GameOver.h"
 #include "Audio.h"
 #include "Input.h"
 #include "DebugText.h"
 #include "DirectXCommon.h"
 
-void TitleScene::Initialize()
+void GameOver::Initialize()
 {
 	//// デバッグテキスト用テクスチャ読み込み Import texture for debug text
 	//if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
@@ -16,27 +16,27 @@ void TitleScene::Initialize()
 	//debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(1, L"Resources/Title.png")) {
+	if (!Sprite::LoadTexture(2, L"Resources/GameOver.png")) {
 		assert(0);
 		return;
 	}
 
 	// 背景スプライト生成 Background sprite generation
-	titleBG = Sprite::Create(1, { 0.0f,0.0f });
+	gameOverBG = Sprite::Create(2, { 0.0f,0.0f });
 }
 
-void TitleScene::Finalize()
+void GameOver::Finalize()
 {
-	delete titleBG;
+	delete gameOverBG;
 }
 
-void TitleScene::Update()
+void GameOver::Update()
 {
 
 }
 
-void TitleScene::Draw()
+void GameOver::Draw()
 {
 	// 背景スプライト描画 Background sprite drawing
-	titleBG->Draw();
+	gameOverBG->Draw();
 }
