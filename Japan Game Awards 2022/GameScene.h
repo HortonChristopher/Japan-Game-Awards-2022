@@ -137,5 +137,7 @@ private: // メンバ変数 Member variables
 	Stage1* stage1 = nullptr;
 	GameOver* gameOver = nullptr;
 	GameClear* gameClear = nullptr;
+
+	int stage1Init = 0;
 };
 

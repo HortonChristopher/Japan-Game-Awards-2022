@@ -342,7 +342,12 @@ void GameScene::Update()
 		if (input->PushKey(DIK_SPACE))
 		{
 			sceneNo = 1;
-			stage1->Initialize();
+			titleScene->Finalize();
+			if (stage1Init == 0)
+			{
+				stage1->Initialize();
+				stage1Init = 1;
+			}
 			break;
 		}
 
@@ -357,6 +362,7 @@ void GameScene::Update()
 		if (input->PushKey(DIK_T))
 		{
 			sceneNo = 0;
+			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
 		}
@@ -368,6 +374,7 @@ void GameScene::Update()
 		if (input->PushKey(DIK_T))
 		{
 			sceneNo = 0;
+			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
 		}
@@ -463,6 +470,7 @@ void GameScene::Draw()
 	case 2:
 		if (sceneChange == 0)
 		{
+			stage1->Finalize();
 			gameClear->Initialize();
 			sceneChange = 1;
 		}
@@ -471,6 +479,7 @@ void GameScene::Draw()
 	case 3:
 		if (sceneChange == 0)
 		{
+			stage1->Finalize();
 			gameOver->Initialize();
 			sceneChange = 1;
 		}

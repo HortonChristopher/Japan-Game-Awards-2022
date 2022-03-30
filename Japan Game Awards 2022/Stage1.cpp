@@ -456,6 +456,29 @@ void Stage1::Update()
 	//Debug End
 }
 
+void Stage1::Finalize()
+{
+	objFighter->SetPosition({ -12,0,-12 });
+	objClone->SetPosition({ 12,0,-12 });
+
+	objTempTrigger->SetPosition({ -12.0f, 0, 0 });
+	objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
+
+	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
+	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
+	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
+	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
+
+	//camera->SetTarget({ 0, 1, 0 });
+	//camera->MoveEyeVector({ 0, 25.0f, 25.0f });
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	playerBulletF = false;
+	enemyBulletF = false;
+}
+
 void Stage1::DrawBGsprite()
 {
 	// ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ Background sprite drawing

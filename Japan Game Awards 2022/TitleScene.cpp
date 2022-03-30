@@ -16,13 +16,13 @@ void TitleScene::Initialize()
 	//debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(1, L"Resources/Title.png")) {
+	if (!Sprite::LoadTexture(4, L"Resources/Title.png")) {
 		assert(0);
 		return;
 	}
 
 	// 背景スプライト生成 Background sprite generation
-	titleBG = Sprite::Create(1, { 0.0f,0.0f });
+	titleBG = Sprite::Create(4, { 0.0f,0.0f });
 }
 
 void TitleScene::Finalize()

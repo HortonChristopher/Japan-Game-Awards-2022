@@ -48,6 +48,8 @@ public: // ƒƒ“ƒoŠÖ” Member function
 
 	void Update();
 
+	void Finalize();
+
 	void DrawBGsprite();
 
 	void Draw3Dobject();

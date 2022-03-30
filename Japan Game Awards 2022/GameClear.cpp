@@ -16,13 +16,13 @@ void GameClear::Initialize()
 	//debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(1, L"Resources/GameClear.png")) {
+	if (!Sprite::LoadTexture(3, L"Resources/GameClear.png")) {
 		assert(0);
 		return;
 	}
 
 	// 背景スプライト生成 Background sprite generation
-	gameClearBG = Sprite::Create(1, { 0.0f,0.0f });
+	gameClearBG = Sprite::Create(3, { 0.0f,0.0f });
 }
 
 void GameClear::Finalize()
