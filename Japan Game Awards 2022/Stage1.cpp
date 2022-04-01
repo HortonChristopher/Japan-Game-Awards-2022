@@ -13,8 +13,15 @@
 #include "Camera.h"
 #include "Controller.h"
 #include "TouchableObject.h"
+#include "TitleScene.h"
+#include "GameOver.h"
+#include "GameClear.h"
+#include "GameScene.h"
 
 using namespace DirectX;
+extern int sceneNo;
+extern int sceneChange;
+extern DirectXCommon* dxCommon;
 
 Stage1::Stage1()
 {
@@ -61,6 +68,12 @@ void Stage1::Initialize()
 	//this->dxCommon = dxCommon;
 	//this->input = input;
 	//this->audio = audio;
+
+	gameOver = new GameOver();
+	gameOver->Initialize();
+
+	gameClear = new GameClear();
+	gameOver->Initialize();
 
 	// ƒJƒƒ‰¶¬ Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -295,6 +308,12 @@ void Stage1::Initialize()
 
 	camera->SetTarget({ 0, 1, 0 });
 	camera->MoveEyeVector({ 0, 25.0f, 25.0f });
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	playerBulletF = false;
+	enemyBulletF = false;
 }
 
 void Stage1::Update()
@@ -372,10 +391,17 @@ void Stage1::Update()
 	if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 	{
 		enemyAlive = false;
+		sceneNo = 2;
+		sceneChange = 0;
+		//gameClear->Initialize();
 	}
+	
 	if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f) && enemyBulletF == true)
 	{
 		playerAlive = false;
+		sceneNo = 3;
+		sceneChange = 0;
+		//gameOver->Initialize();
 	}
 
 	UpdateInput();
@@ -430,6 +456,29 @@ void Stage1::Update()
 	OutputDebugStringA(msgbuf2);
 	//OutputDebugStringA(msgbuf3);
 	//Debug End
+}
+
+void Stage1::Finalize()
+{
+	objFighter->SetPosition({ -12,0,-12 });
+	objClone->SetPosition({ 12,0,-12 });
+
+	objTempTrigger->SetPosition({ -12.0f, 0, 0 });
+	objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
+
+	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
+	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
+	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
+	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
+
+	//camera->SetTarget({ 0, 1, 0 });
+	//camera->MoveEyeVector({ 0, 25.0f, 25.0f });
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	playerBulletF = false;
+	enemyBulletF = false;
 }
 
 void Stage1::DrawBGsprite()

@@ -18,6 +18,9 @@ class CollisionManager;
 class Player;
 class Enemy;
 class TouchableObject;
+class TitleScene;
+class GameOver;
+class GameClear;
 
 class Stage1
 {
@@ -45,6 +48,8 @@ public: // ƒƒ“ƒoŠÖ” Member function
 
 	void Update();
 
+	void Finalize();
+
 	void DrawBGsprite();
 
 	void Draw3Dobject();
@@ -63,7 +68,7 @@ private: // ƒƒ“ƒo•Ï” Member variables
 	bool playerBulletF = false;
 	bool enemyBulletF = false;
 
-	DirectXCommon* dxCommon = nullptr;
+	//DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
 	DebugText debugText;
@@ -122,5 +127,8 @@ private: // ƒƒ“ƒo•Ï” Member variables
 	std::vector<Object3d*> objects;
 	std::vector<Object3d*> objects_2;
 	std::vector<Object3d*> objects_Wall;
+
+	GameOver* gameOver = nullptr;
+	GameClear* gameClear = nullptr;
 };
 

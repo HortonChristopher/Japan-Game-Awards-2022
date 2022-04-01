@@ -276,38 +276,6 @@ void Object3d::Update()
 
 	UpdateWorldMatrix();
 
-	//XMMATRIX matScale, matRot, matTrans;
-
-	//// スケール、回転、平行移動行列の計算 Calculation of scale, rotation, translation matrix
-	//matScale = XMMatrixScaling( scale.x, scale.y, scale.z );
-	//matRot = XMMatrixIdentity();
-	//matRot *= XMMatrixRotationZ( XMConvertToRadians( rotation.z ) );
-	//matRot *= XMMatrixRotationX( XMConvertToRadians( rotation.x ) );
-	//matRot *= XMMatrixRotationY( XMConvertToRadians( rotation.y ) );
-	//matTrans = XMMatrixTranslation( position.x, position.y, position.z );
-
-	//// ワールド行列の合成 World matrix composition
-	//matWorld = XMMatrixIdentity(); // 変形をリセット Reset transformation
-	//matWorld *= matScale; // ワールド行列にスケーリングを反映 Reflect scaling in world matrix
-	//matWorld *= matRot; // ワールド行列に回転を反映 Reflect the rotation in the world matrix
-	//matWorld *= matTrans; // ワールド行列に平行移動を反映 Reflect translation in world matrix
-
-	//if ( isBillboard ) {
-	//	const XMMATRIX &matBillboard = camera->GetBillboardMatrix();
-
-	//	matWorld = XMMatrixIdentity();
-	//	matWorld *= matScale; // ワールド行列にスケーリングを反映 Reflect scaling in world matrix
-	//	matWorld *= matRot; // ワールド行列に回転を反映 Reflect the rotation in the world matrix
-	//	matWorld *= matBillboard;
-	//	matWorld *= matTrans; // ワールド行列に平行移動を反映 Reflect translation in world matrix
-	//}
-
-	//// 親オブジェクトがあれば If there is a parent object
-	//if ( parent != nullptr ) {
-	//	// 親オブジェクトのワールド行列を掛ける Multiply the world matrix of the parent object
-	//	matWorld *= parent->matWorld;
-	//}
-
 	const XMMATRIX &matViewProjection = camera->GetViewProjectionMatrix();
 
 	// 定数バッファへデータ転送 Data transfer to a constant buffer
