@@ -115,7 +115,7 @@ void Stage1::Initialize()
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
-	modelTempWall = Model::CreateFromOBJ("TempWall");
+	modelTempWall = Model::CreateFromOBJ("kabe");
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 
@@ -125,7 +125,7 @@ void Stage1::Initialize()
 	objTempTrigger->SetModel(modelTempTrigger);
 	objTempTriggerE->SetModel(modelTempTrigger);
 	objTempBullet->SetModel(modelTempBullet);
-	objTempBulletE->SetModel(modelTempBullet);
+	objTempBulletE->SetModel(modelTempBullet);	
 
 	//objGround = TouchableObject::Create(modelGround);
 	objFighter = Player::Create(modelFighter);
@@ -139,6 +139,7 @@ void Stage1::Initialize()
 	//fbxobject1 = new FbxObject3d;
 	//fbxobject1->Initialize();
 	//fbxobject1->SetModel( fbxmodel1 );
+
 
 	// モデルテーブル Model table
 	Model* modeltable[11] = {
@@ -290,6 +291,7 @@ void Stage1::Initialize()
 	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
+
 
 	camera->SetTarget({ 0, 1, 0 });
 	camera->MoveEyeVector({ 0, 25.0f, 25.0f });

@@ -93,6 +93,8 @@ private: // ƒƒ“ƒo•Ï” Member variables
 	Object3d* objTempBullet = nullptr;
 	Object3d* objTempBulletE = nullptr;
 
+	Object3d* objTempWall = nullptr;
+
 	TouchableObject* objGround = nullptr;
 
 	Player* objFighter = nullptr;
