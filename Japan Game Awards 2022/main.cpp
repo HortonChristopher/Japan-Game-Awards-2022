@@ -58,13 +58,10 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	// メインループ Main loop
 	while ( true )
 	{
-		win->Update();
-
-		win->Draw();
+		
 		// メッセージ処理 Message processing
 		if ( win->ProcessMessage() ) { break; }
 
-		win->Wait();
 
 		// 入力関連の毎フレーム処理 Input-related frame processing
 		input->Update();
