@@ -219,14 +219,14 @@ void Enemy::Update()
 	// ƒWƒƒƒ“ƒv‘€ì Jump operation
 	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
-		const float jumpVYFist = 0.2f;
+		const float jumpVYFist = 0.15f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
 
 	else if (IsButtonDown(ButtonKind::Button_A))
 	{
 		onGround = false;
-		const float jumpVYFist = 0.2f;
+		const float jumpVYFist = 0.15f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
 

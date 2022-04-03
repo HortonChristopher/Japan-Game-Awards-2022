@@ -9,6 +9,9 @@
 
 using namespace Microsoft::WRL;
 
+long t1 = timeGetTime();
+int fpsskipcnt = 0;
+
 void DirectXCommon::Initialize(WinApp* winApp)
 {
 	// nullptrチェック nullptr check
@@ -97,6 +100,23 @@ void DirectXCommon::PostDraw()
 
 	commandAllocator->Reset(); // キューをクリア Clear the queue
 	commandList->Reset(commandAllocator.Get(), nullptr);	// 再びコマンドリストを貯める準備 Preparing to save the command list again
+
+	if (timeGetTime() - t1 < 1000 / 60)
+	{
+		fpsskipcnt = 0;
+	}
+
+	else
+	{
+		fpsskipcnt = 1;
+	}
+
+	while (timeGetTime() - t1 < 1000 / 60)
+	{
+		Sleep(1);
+	}
+
+	t1 = timeGetTime();
 
 	// バッファをフリップ Flip the buffer
 	swapchain->Present(1, 0);

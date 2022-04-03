@@ -54,18 +54,19 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	// ゲームシーンの初期化 Initialize the game scene
 	gameScene = new GameScene();
 	gameScene->Initialize( dxCommon, input, audio );
-	
+
 	// メインループ Main loop
 	while ( true )
 	{
+		
 		// メッセージ処理 Message processing
 		if ( win->ProcessMessage() ) { break; }
+
 
 		// 入力関連の毎フレーム処理 Input-related frame processing
 		input->Update();
 		// ゲームシーンの毎フレーム処理 Every frame processing of the game scene
 		gameScene->Update();
-
 		// 描画開始 Start drawing
 		dxCommon->PreDraw();
 		// ゲームシーンの描画 Drawing the game scene
