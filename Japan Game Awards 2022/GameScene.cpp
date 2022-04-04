@@ -74,6 +74,9 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	this->dxCommon = dxCommon;
 	this->input = input;
 	this->audio = audio;
+
+	//コントローラー初期化
+	InitInput();
 	
 	//// カメラ生成 Camera generation
 	//camera = new Camera( WinApp::window_width, WinApp::window_height );
@@ -302,6 +305,8 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 void GameScene::Update()
 {
+	UpdateInput();
+
 	/*if (playerBulletF)
 	{
 		playerBullet.x += 0.1f;
@@ -334,12 +339,13 @@ void GameScene::Update()
 		enemyBulletF = false;
 	}*/
 
+	//シーン遷移
 	switch (sceneNo)
 	{
 	case 0:
 		titleScene->Update();
 
-		if (input->PushKey(DIK_SPACE))
+		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 1;
 			titleScene->Finalize();
@@ -351,6 +357,19 @@ void GameScene::Update()
 			break;
 		}
 
+		if (IsButtonDown(ButtonKind::Button_A))
+		{
+			sceneNo = 1;
+			titleScene->Finalize();
+			if (stage1Init == 0)
+			{
+				stage1->Initialize();
+				stage1Init = 1;
+			}
+			break;
+		}
+
+
 		break;
 	case 1:
 		stage1->Update();
@@ -359,7 +378,15 @@ void GameScene::Update()
 	case 2:
 		gameClear->Update();
 
-		if (input->PushKey(DIK_T))
+		if (input->TriggerKey(DIK_SPACE))
+		{
+			sceneNo = 0;
+			gameClear->Finalize();
+			titleScene->Initialize();
+			break;
+		}
+
+		if (IsButtonDown(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
 			gameClear->Finalize();
@@ -371,10 +398,18 @@ void GameScene::Update()
 	case 3:
 		gameOver->Update();
 
-		if (input->PushKey(DIK_T))
+		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
 			gameOver->Finalize();
+			titleScene->Initialize();
+			break;
+		}
+
+		if (IsButtonDown(ButtonKind::Button_A))
+		{
+			sceneNo = 0;
+			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
 		}

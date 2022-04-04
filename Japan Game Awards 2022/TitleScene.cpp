@@ -3,6 +3,10 @@
 #include "Input.h"
 #include "DebugText.h"
 #include "DirectXCommon.h"
+#include "Controller.h"
+
+extern int sceneNo;
+extern int sceneChange;
 
 void TitleScene::Initialize()
 {
@@ -21,6 +25,9 @@ void TitleScene::Initialize()
 		return;
 	}
 
+	//コントローラー初期化
+	InitInput();
+
 	// 背景スプライト生成 Background sprite generation
 	titleBG = Sprite::Create(4, { 0.0f,0.0f });
 }
@@ -32,7 +39,7 @@ void TitleScene::Finalize()
 
 void TitleScene::Update()
 {
-
+	
 }
 
 void TitleScene::Draw()
