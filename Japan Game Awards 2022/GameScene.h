@@ -139,5 +139,11 @@ private: // メンバ変数 Member variables
 	GameClear* gameClear = nullptr;
 
 	int stage1Init = 0;
+
+	//コントローラー起動フラグ
+	bool ControllerFlag = false;
+
+	//コントローラー検知用タイマー
+	int ConTimer;
 };
 

@@ -345,6 +345,18 @@ void Stage1::Update()
 	//	}
 	//}
 
+	//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+	if (ConTimer <= 60)
+	{
+		ConTimer += 1;
+	}
+
+	if (ConTimer == 60)
+	{
+		InitInput();
+		ConTimer = 0;
+	}
+
 	//オブジェクトの移動スピードは通常の移動スピードに移動倍率係数を掛ける
 	move = Speed * rate;
 

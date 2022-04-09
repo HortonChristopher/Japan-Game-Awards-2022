@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "fbxsdk.h"
 #include "FbxLoader.h"
+#include "Controller.h"
 
 // Windowsアプリでのエントリーポイント(main関数) Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )

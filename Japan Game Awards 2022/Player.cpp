@@ -38,6 +38,9 @@ bool Player::Initialize()
 		return false;
 	}
 
+	//コントローラー初期化
+	InitInput();
+
 	// コライダーの追加 Add Collider
 	float radius = 0.6f;
 	// 半径分だけ足元から浮いた座標を球の中心にする Make the coordinates floating from your feet the center of the sphere by the radius
@@ -219,7 +222,7 @@ void Player::Update()
 		position.z += fallV.m128_f32[2];
 	}
 	// ジャンプ操作 Jump operation
-	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
 		const float jumpVYFist = 0.15f;
 		fallV = { 0, jumpVYFist, 0, 0 };
@@ -232,6 +235,9 @@ void Player::Update()
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
 
+
+
+	
 	// コライダー更新 Collider update
 	UpdateWorldMatrix();
 	collider->Update();

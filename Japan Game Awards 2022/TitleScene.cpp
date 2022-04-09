@@ -39,7 +39,7 @@ void TitleScene::Finalize()
 
 void TitleScene::Update()
 {
-	
+
 }
 
 void TitleScene::Draw()

@@ -345,6 +345,18 @@ void GameScene::Update()
 	case 0:
 		titleScene->Update();
 
+		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+		if (ConTimer <= 60)
+		{
+			ConTimer += 1;
+		}
+
+		if (ConTimer == 60)
+		{
+			InitInput();
+			ConTimer = 0;
+		}
+
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 1;
@@ -378,6 +390,18 @@ void GameScene::Update()
 	case 2:
 		gameClear->Update();
 
+		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+		if (ConTimer <= 60)
+		{
+			ConTimer += 1;
+		}
+
+		if (ConTimer == 60)
+		{
+			InitInput();
+			ConTimer = 0;
+		}
+
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
@@ -386,7 +410,7 @@ void GameScene::Update()
 			break;
 		}
 
-		if (IsButtonDown(ButtonKind::Button_A))
+		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
 			gameClear->Finalize();
@@ -398,6 +422,18 @@ void GameScene::Update()
 	case 3:
 		gameOver->Update();
 
+		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+		if (ConTimer <= 60)
+		{
+			ConTimer += 1;
+		}
+
+		if (ConTimer == 60)
+		{
+			InitInput();
+			ConTimer = 0;
+		}
+
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
@@ -406,7 +442,7 @@ void GameScene::Update()
 			break;
 		}
 
-		if (IsButtonDown(ButtonKind::Button_A))
+		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
 			gameClear->Finalize();
