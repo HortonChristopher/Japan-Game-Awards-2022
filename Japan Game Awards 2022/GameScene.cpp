@@ -28,6 +28,8 @@ extern XMFLOAT3 playerRotationTemp = { 0,0,0 };
 extern XMFLOAT3 clonePositionTemp = { 0,0,0 };
 extern XMFLOAT3 cloneRotationTemp = { 0,0,0 };
 
+extern int cameraMove = 0; //Temporary Debug
+
 //extern GameOver* gameOver = new GameOver();
 //extern GameClear* gameClear = new GameClear();
 extern DirectXCommon* dxCommon;
@@ -461,6 +463,39 @@ void GameScene::Update()
 		objCloneRun->Update();
 		objPlayerStand->Update();
 		objCloneStand->Update();
+
+		if (input->PushKey(DIK_Z) || input->PushKey(DIK_X) || input->PushKey(DIK_C))
+		{
+			if (input->PushKey(DIK_Z) && !input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 1;
+			}
+			if (input->PushKey(DIK_X) && !input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 2;
+			}
+			if (input->PushKey(DIK_C) && !input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 3;
+			}
+			if (input->PushKey(DIK_Z) && input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 4;
+			}
+			if (input->PushKey(DIK_X) && input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 5;
+			}
+			if (input->PushKey(DIK_C) && input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 6;
+			}
+		}
+		else
+		{
+			cameraMove = 0;
+		}
+
 		break;
 
 	case 2:
