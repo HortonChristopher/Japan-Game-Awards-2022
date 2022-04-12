@@ -330,6 +330,8 @@ void Stage1::Update()
 	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
 	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
 	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
+
+	// GameSceneÇ∆ÇÃç¿ïWã§óL Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
 	playerRotationTemp = playerRotation;
 	clonePositionTemp = enemyPosition;

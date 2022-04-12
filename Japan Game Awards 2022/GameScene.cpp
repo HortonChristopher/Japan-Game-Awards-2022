@@ -182,14 +182,6 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objPlayerStand->Initialize();
 	objPlayerStand->SetModel(modelPlayerStand);
 
-	objPlayerRun->SetPosition({ 0, 0, 0 });
-	objPlayerRun->SetRotation({ 0, 0, 0 });
-	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
-
-	objPlayerStand->SetPosition({ 0, 0, 0 });
-	objPlayerStand->SetRotation({ 0, 0, 0 });
-	objPlayerStand->SetScale({ 0.3, 0.3, 0.3 });
-
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
 	objCloneRun->Initialize();
@@ -199,6 +191,16 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objCloneStand->Initialize();
 	objCloneStand->SetModel(modelPlayerStand);
 
+	// プレイヤー初期化 Player initialization
+	objPlayerRun->SetPosition({ 0, 0, 0 });
+	objPlayerRun->SetRotation({ 0, 0, 0 });
+	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
+
+	objPlayerStand->SetPosition({ 0, 0, 0 });
+	objPlayerStand->SetRotation({ 0, 0, 0 });
+	objPlayerStand->SetScale({ 0.3, 0.3, 0.3 });
+
+	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
 	objCloneRun->SetRotation({ 0, 0, 0 });
 	objCloneRun->SetScale({ 0.3, 0.3, 0.3 });
@@ -237,7 +239,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	//};
 
 	//const int DIV_NUM = 10;
-	//const float LAND_SCALE = 3.0f;
+	//const float LAND_SCALE = 3.0f;w
 
 	////ステージ1用外壁マップチップ
 	//const int WALL_NUM = 23;
