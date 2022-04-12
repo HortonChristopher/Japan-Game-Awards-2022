@@ -488,7 +488,7 @@ void GameScene::Update()
 		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
-			gameClear->Finalize();
+			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
 		}
