@@ -222,7 +222,7 @@ void Player::Update()
 		position.z += fallV.m128_f32[2];
 	}
 	// ƒWƒƒƒ“ƒv‘€ì Jump operation
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	else if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		onGround = false;
 		const float jumpVYFist = 0.15f;
 		fallV = { 0, jumpVYFist, 0, 0 };
