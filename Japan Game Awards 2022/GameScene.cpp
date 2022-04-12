@@ -170,41 +170,40 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	//objFighter = Player::Create(modelFighter);
 	//objClone = Enemy::Create(modelFighter);
 
-	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
-	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "cube" );
-	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bone" );
-
+	// FBXモデルの読み込み Loading FBX model
 	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("Fast Run");
 	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("Standing W_Briefcase Idle");
 
 	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
+	// プレイヤー関連 Player related
 	objPlayerRun = new FbxObject3d;
 	objPlayerRun->Initialize();
 	objPlayerRun->SetModel(modelPlayerRun);
-
-	objCloneRun = new FbxObject3d;
-	objCloneRun->Initialize();
-	objCloneRun->SetModel(modelPlayerRun);
 
 	objPlayerStand = new FbxObject3d;
 	objPlayerStand->Initialize();
 	objPlayerStand->SetModel(modelPlayerStand);
 
-	objCloneStand = new FbxObject3d;
-	objCloneStand->Initialize();
-	objCloneStand->SetModel(modelPlayerStand);
-
 	objPlayerRun->SetPosition({ 0, 0, 0 });
 	objPlayerRun->SetRotation({ 0, 0, 0 });
 	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
 
-	objCloneRun->SetPosition({ 0, 0, 0 });
-	objCloneRun->SetRotation({ 0, 0, 0 });
-	objCloneRun->SetScale({ 0.3, 0.3, 0.3 });
-
 	objPlayerStand->SetPosition({ 0, 0, 0 });
 	objPlayerStand->SetRotation({ 0, 0, 0 });
 	objPlayerStand->SetScale({ 0.3, 0.3, 0.3 });
+
+	// クローン関連 Clone related
+	objCloneRun = new FbxObject3d;
+	objCloneRun->Initialize();
+	objCloneRun->SetModel(modelPlayerRun);
+
+	objCloneStand = new FbxObject3d;
+	objCloneStand->Initialize();
+	objCloneStand->SetModel(modelPlayerStand);
+
+	objCloneRun->SetPosition({ 0, 0, 0 });
+	objCloneRun->SetRotation({ 0, 0, 0 });
+	objCloneRun->SetScale({ 0.3, 0.3, 0.3 });
 
 	objCloneStand->SetPosition({ 0, 0, 0 });
 	objCloneStand->SetRotation({ 0, 0, 0 });
@@ -555,7 +554,7 @@ void GameScene::Update()
 		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
-			gameClear->Finalize();
+			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
 		}
