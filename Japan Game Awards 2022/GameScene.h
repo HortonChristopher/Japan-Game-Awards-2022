@@ -99,6 +99,7 @@ private: // メンバ変数 Member variables
 
 	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
+	FbxModel* modelPlayerStand = nullptr;
 
 	//Object3d* objSkydome = nullptr;
 	//Object3d* objTempTrigger = nullptr;
@@ -109,6 +110,8 @@ private: // メンバ変数 Member variables
 	//TouchableObject* objGround = nullptr;
 	FbxObject3d* objPlayerRun = nullptr;
 	FbxObject3d* objCloneRun = nullptr;
+	FbxObject3d* objPlayerStand = nullptr;
+	FbxObject3d* objCloneStand = nullptr;
 
 	//Player* objFighter = nullptr;
 
@@ -142,6 +145,7 @@ private: // メンバ変数 Member variables
 	GameClear* gameClear = nullptr;
 
 	int stage1Init = 0;
+	int FBXModelChange = 0;
 
 	//コントローラー起動フラグ
 	bool ControllerFlag = false;

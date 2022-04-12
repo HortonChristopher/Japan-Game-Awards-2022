@@ -173,6 +173,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bone" );
 
 	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("Fast Run");
+	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("Standing W_Briefcase Idle");
 
 	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
 	objPlayerRun = new FbxObject3d;
@@ -183,6 +184,14 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objCloneRun->Initialize();
 	objCloneRun->SetModel(modelPlayerRun);
 
+	objPlayerStand = new FbxObject3d;
+	objPlayerStand->Initialize();
+	objPlayerStand->SetModel(modelPlayerStand);
+
+	objCloneStand = new FbxObject3d;
+	objCloneStand->Initialize();
+	objCloneStand->SetModel(modelPlayerStand);
+
 	objPlayerRun->SetPosition({ 0, 0, 0 });
 	objPlayerRun->SetRotation({ 0, 0, 0 });
 	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
@@ -190,6 +199,14 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objCloneRun->SetPosition({ 0, 0, 0 });
 	objCloneRun->SetRotation({ 0, 0, 0 });
 	objCloneRun->SetScale({ 0.3, 0.3, 0.3 });
+
+	objPlayerStand->SetPosition({ 0, 0, 0 });
+	objPlayerStand->SetRotation({ 0, 0, 0 });
+	objPlayerStand->SetScale({ 0.3, 0.3, 0.3 });
+
+	objCloneStand->SetPosition({ 0, 0, 0 });
+	objCloneStand->SetRotation({ 0, 0, 0 });
+	objCloneStand->SetScale({ 0.3, 0.3, 0.3 });
 
 	//// モデルテーブル Model table
 	//Model* modeltable[12] = {
@@ -344,9 +361,22 @@ void GameScene::Update()
 	// 座標の変更を反映
 	objPlayerRun->SetPosition(FBXplayerPosition);
 	objPlayerRun->SetRotation(FBXplayerRotation);
+	objPlayerStand->SetPosition(FBXplayerPosition);
+	objPlayerStand->SetRotation(FBXplayerRotation);
 
 	objCloneRun->SetPosition(FBXclonePosition);
 	objCloneRun->SetRotation(FBXcloneRotation);
+	objCloneStand->SetPosition(FBXclonePosition);
+	objCloneStand->SetRotation(FBXcloneRotation);
+
+	if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W))
+	{
+		FBXModelChange = 1;
+	}
+	else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W))
+	{
+		FBXModelChange = 0;
+	}
 
 	/*if (playerBulletF)
 	{
@@ -428,6 +458,8 @@ void GameScene::Update()
 		stage1->Update();
 		objPlayerRun->Update();
 		objCloneRun->Update();
+		objPlayerStand->Update();
+		objCloneStand->Update();
 		break;
 
 	case 2:
@@ -620,8 +652,16 @@ void GameScene::Draw()
 		break;
 	case 1:
 		stage1->Draw3Dobject();
-		objPlayerRun->Draw(cmdList);
-		objCloneRun->Draw(cmdList);
+		if (FBXModelChange == 1)
+		{
+			objPlayerRun->Draw(cmdList);
+			objCloneRun->Draw(cmdList);
+		}
+		else if (FBXModelChange == 0)
+		{
+			objPlayerStand->Draw(cmdList);
+			objCloneStand->Draw(cmdList);
+		}
 		break;
 	case 2:
 		break;
