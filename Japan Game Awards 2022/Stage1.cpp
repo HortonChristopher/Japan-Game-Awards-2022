@@ -27,6 +27,8 @@ extern XMFLOAT3 clonePositionTemp;
 extern XMFLOAT3 cloneRotationTemp;
 extern DirectXCommon* dxCommon;
 
+extern int cameraMove; //Temporary Debug
+
 Stage1::Stage1()
 {
 }
@@ -309,9 +311,8 @@ void Stage1::Initialize()
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
-
 	camera->SetTarget({ 0, 1, 0 });
-	camera->MoveEyeVector({ 0, 25.0f, 25.0f });
+	camera->MoveEyeVector({ 0.0f, 0.0f, 0.0f });
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -424,6 +425,31 @@ void Stage1::Update()
 		sceneNo = 3;
 		sceneChange = 0;
 		//gameOver->Initialize();
+	}
+
+	if (cameraMove == 1)
+	{
+		camera->MoveEyeVector({ +1.0f, 0, 0 });
+	}
+	if (cameraMove == 2)
+	{
+		camera->MoveEyeVector({ 0, +1.0f, 0 });
+	}
+	if (cameraMove == 3)
+	{
+		camera->MoveEyeVector({ 0,0,+1.0f });
+	}
+	if (cameraMove == 4)
+	{
+		camera->MoveEyeVector({ -1.0f, 0, 0 });
+	}
+	if (cameraMove == 5)
+	{
+		camera->MoveEyeVector({ 0, -1.0f, 0 });
+	}
+	if (cameraMove == 6)
+	{
+		camera->MoveEyeVector({ 0,0,-1.0f });
 	}
 
 	UpdateInput();
