@@ -108,6 +108,7 @@ private: // メンバ変数 Member variables
 
 	//TouchableObject* objGround = nullptr;
 	FbxObject3d* objPlayerRun = nullptr;
+	FbxObject3d* objCloneRun = nullptr;
 
 	//Player* objFighter = nullptr;
 

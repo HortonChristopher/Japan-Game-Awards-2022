@@ -126,6 +126,8 @@ public: // メンバ関数 Member function
 	// 座標の取得 Get coordinates
 	const XMFLOAT3& GetPosition() { return position; }
 
+	const XMFLOAT3& GetRotation() { return rotation; }
+
 	// 座標の設定 Coordinate setting
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
 

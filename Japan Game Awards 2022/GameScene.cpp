@@ -23,6 +23,10 @@ extern int sceneNo = 0; //タイトル Title
 extern int sceneChange = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
+extern XMFLOAT3 playerRotationTemp = { 0,0,0 };
+
+extern XMFLOAT3 clonePositionTemp = { 0,0,0 };
+extern XMFLOAT3 cloneRotationTemp = { 0,0,0 };
 
 //extern GameOver* gameOver = new GameOver();
 //extern GameClear* gameClear = new GameClear();
@@ -175,9 +179,17 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objPlayerRun->Initialize();
 	objPlayerRun->SetModel(modelPlayerRun);
 
+	objCloneRun = new FbxObject3d;
+	objCloneRun->Initialize();
+	objCloneRun->SetModel(modelPlayerRun);
+
 	objPlayerRun->SetPosition({ 0, 0, 0 });
 	objPlayerRun->SetRotation({ 0, 0, 0 });
 	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
+
+	objCloneRun->SetPosition({ 0, 0, 0 });
+	objCloneRun->SetRotation({ 0, 0, 0 });
+	objCloneRun->SetScale({ 0.3, 0.3, 0.3 });
 
 	//// モデルテーブル Model table
 	//Model* modeltable[12] = {
@@ -324,9 +336,17 @@ void GameScene::Update()
 
 	// 現在の座標を取得
 	XMFLOAT3 FBXplayerPosition = playerPositionTemp;
+	XMFLOAT3 FBXplayerRotation = playerRotationTemp;
+	
+	XMFLOAT3 FBXclonePosition = clonePositionTemp;
+	XMFLOAT3 FBXcloneRotation = cloneRotationTemp;
 
 	// 座標の変更を反映
 	objPlayerRun->SetPosition(FBXplayerPosition);
+	objPlayerRun->SetRotation(FBXplayerRotation);
+
+	objCloneRun->SetPosition(FBXclonePosition);
+	objCloneRun->SetRotation(FBXcloneRotation);
 
 	/*if (playerBulletF)
 	{
@@ -407,6 +427,7 @@ void GameScene::Update()
 	case 1:
 		stage1->Update();
 		objPlayerRun->Update();
+		objCloneRun->Update();
 		break;
 
 	case 2:
@@ -600,6 +621,7 @@ void GameScene::Draw()
 	case 1:
 		stage1->Draw3Dobject();
 		objPlayerRun->Draw(cmdList);
+		objCloneRun->Draw(cmdList);
 		break;
 	case 2:
 		break;

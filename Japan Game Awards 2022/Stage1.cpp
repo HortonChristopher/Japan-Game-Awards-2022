@@ -22,6 +22,9 @@ using namespace DirectX;
 extern int sceneNo;
 extern int sceneChange;
 extern XMFLOAT3 playerPositionTemp;
+extern XMFLOAT3 playerRotationTemp;
+extern XMFLOAT3 clonePositionTemp;
+extern XMFLOAT3 cloneRotationTemp;
 extern DirectXCommon* dxCommon;
 
 Stage1::Stage1()
@@ -320,12 +323,17 @@ void Stage1::Initialize()
 void Stage1::Update()
 {
 	XMFLOAT3 playerPosition = objFighter->GetPosition();
+	XMFLOAT3 playerRotation = objFighter->GetRotation();
 	XMFLOAT3 enemyPosition = objClone->GetPosition();
+	XMFLOAT3 enemyRotation = objClone->GetRotation();
 	XMFLOAT3 playerTrigger = objTempTrigger->GetPosition();
 	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
 	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
 	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
 	playerPositionTemp = playerPosition;
+	playerRotationTemp = playerRotation;
+	clonePositionTemp = enemyPosition;
+	cloneRotationTemp = enemyRotation;
 
 	// オブジェクト移動 Move object
 
@@ -516,12 +524,12 @@ void Stage1::Draw3Dobject()
 
 	if (playerAlive)
 	{
-		objFighter->Draw();
+		//objFighter->Draw();
 	}
 	
 	if (enemyAlive)
 	{
-		objClone->Draw();
+		//objClone->Draw();
 	}
 
 	objTempTrigger->Draw();
