@@ -22,6 +22,8 @@ using namespace DirectX;
 extern int sceneNo = 0; //タイトル Title
 extern int sceneChange = 0;
 
+extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
+
 //extern GameOver* gameOver = new GameOver();
 //extern GameClear* gameClear = new GameClear();
 extern DirectXCommon* dxCommon;
@@ -60,8 +62,10 @@ GameScene::~GameScene()
 	safe_delete(modelPyramid);
 
 	safe_delete( fbxobject1 );
-	safe_delete( fbxmodel1 );
-	ReleaseInput();*/
+	safe_delete( fbxmodel1 );*/
+	safe_delete(objPlayerRun);
+	safe_delete(modelPlayerRun);
+	//ReleaseInput();
 }
 
 void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio )
@@ -163,6 +167,17 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bonetest" );
 	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "cube" );
 	////fbxmodel1 = FbxLoader::GetInstance()->LoadModelFromFile( "bone" );
+
+	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("Fast Run");
+
+	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
+	objPlayerRun = new FbxObject3d;
+	objPlayerRun->Initialize();
+	objPlayerRun->SetModel(modelPlayerRun);
+
+	objPlayerRun->SetPosition({ 0, 0, 0 });
+	objPlayerRun->SetRotation({ 0, 0, 0 });
+	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
 
 	//// モデルテーブル Model table
 	//Model* modeltable[12] = {
@@ -307,6 +322,12 @@ void GameScene::Update()
 {
 	UpdateInput();
 
+	// 現在の座標を取得
+	XMFLOAT3 FBXplayerPosition = playerPositionTemp;
+
+	// 座標の変更を反映
+	objPlayerRun->SetPosition(FBXplayerPosition);
+
 	/*if (playerBulletF)
 	{
 		playerBullet.x += 0.1f;
@@ -385,6 +406,7 @@ void GameScene::Update()
 		break;
 	case 1:
 		stage1->Update();
+		objPlayerRun->Update();
 		break;
 
 	case 2:
@@ -577,6 +599,7 @@ void GameScene::Draw()
 		break;
 	case 1:
 		stage1->Draw3Dobject();
+		objPlayerRun->Draw(cmdList);
 		break;
 	case 2:
 		break;

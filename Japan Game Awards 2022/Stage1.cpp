@@ -21,6 +21,7 @@
 using namespace DirectX;
 extern int sceneNo;
 extern int sceneChange;
+extern XMFLOAT3 playerPositionTemp;
 extern DirectXCommon* dxCommon;
 
 Stage1::Stage1()
@@ -324,6 +325,7 @@ void Stage1::Update()
 	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
 	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
 	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
+	playerPositionTemp = playerPosition;
 
 	// オブジェクト移動 Move object
 

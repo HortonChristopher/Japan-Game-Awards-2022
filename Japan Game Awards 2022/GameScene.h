@@ -98,6 +98,7 @@ private: // メンバ変数 Member variables
 	//Model* modelTempBullet = nullptr;
 
 	//FbxModel *fbxmodel1 = nullptr;
+	FbxModel* modelPlayerRun = nullptr;
 
 	//Object3d* objSkydome = nullptr;
 	//Object3d* objTempTrigger = nullptr;
@@ -106,6 +107,7 @@ private: // メンバ変数 Member variables
 	//Object3d* objTempBulletE = nullptr;
 
 	//TouchableObject* objGround = nullptr;
+	FbxObject3d* objPlayerRun = nullptr;
 
 	//Player* objFighter = nullptr;
 
