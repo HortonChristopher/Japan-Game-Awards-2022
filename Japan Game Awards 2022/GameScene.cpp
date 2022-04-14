@@ -28,7 +28,8 @@ extern XMFLOAT3 playerRotationTemp = { 0,0,0 };
 extern XMFLOAT3 clonePositionTemp = { 0,0,0 };
 extern XMFLOAT3 cloneRotationTemp = { 0,0,0 };
 
-extern int cameraMove = 0; //Temporary Debug
+extern int cameraMove = 1;
+extern int prevCameraMove = 0;
 
 //extern GameOver* gameOver = new GameOver();
 //extern GameClear* gameClear = new GameClear();
@@ -466,36 +467,34 @@ void GameScene::Update()
 		objPlayerStand->Update();
 		objCloneStand->Update();
 
-		if (input->PushKey(DIK_Z) || input->PushKey(DIK_X) || input->PushKey(DIK_C))
+		if (input->TriggerKey(DIK_Q) || input->TriggerKey(DIK_E))
 		{
-			if (input->PushKey(DIK_Z) && !input->PushKey(DIK_LSHIFT))
+			if (input->TriggerKey(DIK_Q))
 			{
-				cameraMove = 1;
+				if (cameraMove == 4)
+				{
+					prevCameraMove = cameraMove;
+					cameraMove = 0;
+				}
+				else
+				{
+					prevCameraMove = cameraMove;
+					cameraMove++;
+				}
 			}
-			if (input->PushKey(DIK_X) && !input->PushKey(DIK_LSHIFT))
+			else if (input->TriggerKey(DIK_E))
 			{
-				cameraMove = 2;
+				if (cameraMove == 0)
+				{
+					prevCameraMove = cameraMove;
+					cameraMove = 4;
+				}
+				else
+				{
+					prevCameraMove = cameraMove;
+					cameraMove--;
+				}
 			}
-			if (input->PushKey(DIK_C) && !input->PushKey(DIK_LSHIFT))
-			{
-				cameraMove = 3;
-			}
-			if (input->PushKey(DIK_Z) && input->PushKey(DIK_LSHIFT))
-			{
-				cameraMove = 4;
-			}
-			if (input->PushKey(DIK_X) && input->PushKey(DIK_LSHIFT))
-			{
-				cameraMove = 5;
-			}
-			if (input->PushKey(DIK_C) && input->PushKey(DIK_LSHIFT))
-			{
-				cameraMove = 6;
-			}
-		}
-		else
-		{
-			cameraMove = 0;
 		}
 
 		break;
