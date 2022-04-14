@@ -27,7 +27,8 @@ extern XMFLOAT3 clonePositionTemp;
 extern XMFLOAT3 cloneRotationTemp;
 extern DirectXCommon* dxCommon;
 
-extern int cameraMove; //Temporary Debug
+extern int cameraMove;
+extern int prevCameraMove;
 
 Stage1::Stage1()
 {
@@ -312,10 +313,13 @@ void Stage1::Initialize()
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
 	camera->SetTarget({ 0, 1, 0 });
-	camera->MoveEyeVector({ +100.0f, +100.0f, +100.0f });
+	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
 	enemyAlive = true;
 	playerAlive = true;
+
+	beginStage = false;
+	currentFrame = 0;
 
 	playerBulletF = false;
 	enemyBulletF = false;
@@ -323,14 +327,14 @@ void Stage1::Initialize()
 
 void Stage1::Update()
 {
-	XMFLOAT3 playerPosition = objFighter->GetPosition();
-	XMFLOAT3 playerRotation = objFighter->GetRotation();
-	XMFLOAT3 enemyPosition = objClone->GetPosition();
-	XMFLOAT3 enemyRotation = objClone->GetRotation();
-	XMFLOAT3 playerTrigger = objTempTrigger->GetPosition();
-	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
-	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
-	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
+	playerPosition = objFighter->GetPosition();
+	playerRotation = objFighter->GetRotation();
+	enemyPosition = objClone->GetPosition();
+	enemyRotation = objClone->GetRotation();
+	playerTrigger = objTempTrigger->GetPosition();
+	enemyTrigger = objTempTriggerE->GetPosition();
+	playerBullet = objTempBullet->GetPosition();
+	enemyBullet = objTempBulletE->GetPosition();
 
 	// GameScene‚Æ‚ÌÀ•W‹¤—L Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
@@ -445,29 +449,82 @@ void Stage1::Update()
 			//gameOver->Initialize();
 		}
 
+		//Left Side Eye: {-40, 20, 0}
+		//Right Side Eye: {40, 20, 0}
+		//Normal Eye: {0, 20, -30}
+		//Opposite Side: {0, 20, 30}
+
 		if (cameraMove == 1)
 		{
-			camera->MoveEyeVector({ +1.0f, 0, 0 });
+			/*if (prevCameraMove == 4)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
+				}
+			}
+			else if (prevCameraMove == 2)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+				}
+			}*/
+			camera->SetEye({0.0f, 20.0f, -30.0f});
 		}
 		if (cameraMove == 2)
 		{
-			camera->MoveEyeVector({ 0, +1.0f, 0 });
+			/*if (prevCameraMove == 1)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+				}
+			}
+			else if (prevCameraMove == 3)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
+				}
+			}*/
+			camera->SetEye({ -40.0f, 20.0f, 0.0f });
 		}
 		if (cameraMove == 3)
 		{
-			camera->MoveEyeVector({ 0,0,+1.0f });
+			/*if (prevCameraMove == 2)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+				}
+			}
+			else if (prevCameraMove == 4)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+				}
+			}*/
+			camera->SetEye({ 0.0f, 20.0f, 30.0f });
 		}
 		if (cameraMove == 4)
 		{
-			camera->MoveEyeVector({ -1.0f, 0, 0 });
-		}
-		if (cameraMove == 5)
-		{
-			camera->MoveEyeVector({ 0, -1.0f, 0 });
-		}
-		if (cameraMove == 6)
-		{
-			camera->MoveEyeVector({ 0,0,-1.0f });
+			/*if (prevCameraMove == 3)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+				}
+			}
+			else if (prevCameraMove == 1)
+			{
+				for (int i = 0; i < 40; i++)
+				{
+					camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+				}
+			}*/
+			camera->SetEye({ 40.0f, 20.0f, 0.0f });
 		}
 
 		UpdateInput();
@@ -496,8 +553,15 @@ void Stage1::Update()
 		objTempBullet->SetPosition(playerBullet);
 		objTempBulletE->SetPosition(enemyBullet);
 
-		objTempBullet->Update();
-		objTempBulletE->Update();
+		if (playerBulletF == true)
+		{
+			objTempBullet->Update();
+		}
+
+		if (enemyBulletF == true)
+		{
+			objTempBulletE->Update();
+		}
 
 		//fbxobject1->Update();
 
@@ -511,16 +575,18 @@ void Stage1::Update()
 		collisionManager->CheckAllCollisions();
 
 		//Debug Start
+		XMFLOAT3 eye = camera->GetEye();
+
 		char msgbuf[256];
 		char msgbuf2[256];
-		//char msgbuf3[256];
+		char msgbuf3[256];
 
-		sprintf_s(msgbuf, 256, "Enemy X: %f\n", enemyPosition.x);
-		sprintf_s(msgbuf2, 256, "Enemy Z: %f\n", enemyPosition.z);
-		//sprintf_s(msgbuf3, 256, "isTouchingGround: %f\n", isTouchingGround);
+		sprintf_s(msgbuf, 256, "Eye X: %f\n", eye.x);
+		sprintf_s(msgbuf2, 256, "Eye Y: %f\n", eye.y);
+		sprintf_s(msgbuf3, 256, "Eye Z: %f\n", eye.z);
 		OutputDebugStringA(msgbuf);
 		OutputDebugStringA(msgbuf2);
-		//OutputDebugStringA(msgbuf3);
+		OutputDebugStringA(msgbuf3);
 		//Debug End
 	}
 
