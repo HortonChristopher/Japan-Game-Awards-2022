@@ -39,7 +39,7 @@ bool Player::Initialize()
 	}
 
 	//コントローラー初期化
-	InitInput();
+	//InitInput();
 
 	// コライダーの追加 Add Collider
 	float radius = 0.6f;
