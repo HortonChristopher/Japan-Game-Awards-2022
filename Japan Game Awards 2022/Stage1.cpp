@@ -312,7 +312,7 @@ void Stage1::Initialize()
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
 	camera->SetTarget({ 0, 1, 0 });
-	camera->MoveEyeVector({ 0.0f, 0.0f, 0.0f });
+	camera->MoveEyeVector({ +100.0f, +100.0f, +100.0f });
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -338,130 +338,192 @@ void Stage1::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
-	// オブジェクト移動 Move object
-
-	//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
-	//{
-	//	if (IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
-	//	{
-	//		//斜め移動の時は移動倍率を0.71に設定する
-	//		rate = 0.71f;
-	//	}
-	//}
-
-	//if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT))
-	//{
-	//	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN))
-	//	{
-	//		//斜め移動の時は移動倍率を0.71に設定する
-	//		rate = 0.71f;
-	//	}
-	//}
-
-	//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
-	if (ConTimer <= 60)
+	if (!beginStage)
 	{
-		ConTimer += 1;
+		camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
+		camera->Update();
+		currentFrame++;
+
+		if (currentFrame >= 100)
+		{
+			currentFrame = 0;
+			beginStage = true;
+		}
 	}
-
-	if (ConTimer == 60)
+	if (beginStage)
 	{
-		InitInput();
-		ConTimer = 0;
-	}
+		// オブジェクト移動 Move object
 
-	//オブジェクトの移動スピードは通常の移動スピードに移動倍率係数を掛ける
-	move = Speed * rate;
+		//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
+		//{
+		//	if (IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+		//	{
+		//		//斜め移動の時は移動倍率を0.71に設定する
+		//		rate = 0.71f;
+		//	}
+		//}
 
-	if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
-	{
-		playerBulletF = true;
-	}
+		//if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT))
+		//{
+		//	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN))
+		//	{
+		//		//斜め移動の時は移動倍率を0.71に設定する
+		//		rate = 0.71f;
+		//	}
+		//}
 
-	if (intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
-	{
-		enemyBulletF = true;
-	}
+		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+		if (ConTimer <= 60)
+		{
+			ConTimer += 1;
+		}
 
-	if (playerBulletF)
-	{
-		playerBullet.x += 0.1f;
+		if (ConTimer == 60)
+		{
+			InitInput();
+			ConTimer = 0;
+		}
+
+		//オブジェクトの移動スピードは通常の移動スピードに移動倍率係数を掛ける
+		move = Speed * rate;
+
+		if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
+		{
+			playerBulletF = true;
+		}
+
+		if (intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
+		{
+			enemyBulletF = true;
+		}
+
+		if (playerBulletF)
+		{
+			playerBullet.x += 0.1f;
+			objTempBullet->SetPosition(playerBullet);
+		}
+		else
+		{
+			playerBullet.x = InitBulletPos_PX;
+			objTempBullet->SetPosition(playerBullet);
+		}
+
+		if (enemyBulletF)
+		{
+			enemyBullet.x -= 0.1f;
+			objTempBulletE->SetPosition(enemyBullet);
+		}
+		else
+		{
+			enemyBullet.x = InitBulletPos_EX;
+			objTempBulletE->SetPosition(enemyBullet);
+		}
+
+		if (playerBullet.x > 9.0f)
+		{
+			playerBulletF = false;
+		}
+
+		if (enemyBullet.x < -9.0f)
+		{
+			enemyBulletF = false;
+		}
+
+		if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
+		{
+			enemyAlive = false;
+			sceneNo = 2;
+			sceneChange = 0;
+			//gameClear->Initialize();
+		}
+
+		if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f) && enemyBulletF == true)
+		{
+			playerAlive = false;
+			sceneNo = 3;
+			sceneChange = 0;
+			//gameOver->Initialize();
+		}
+
+		if (cameraMove == 1)
+		{
+			camera->MoveEyeVector({ +1.0f, 0, 0 });
+		}
+		if (cameraMove == 2)
+		{
+			camera->MoveEyeVector({ 0, +1.0f, 0 });
+		}
+		if (cameraMove == 3)
+		{
+			camera->MoveEyeVector({ 0,0,+1.0f });
+		}
+		if (cameraMove == 4)
+		{
+			camera->MoveEyeVector({ -1.0f, 0, 0 });
+		}
+		if (cameraMove == 5)
+		{
+			camera->MoveEyeVector({ 0, -1.0f, 0 });
+		}
+		if (cameraMove == 6)
+		{
+			camera->MoveEyeVector({ 0,0,-1.0f });
+		}
+
+		UpdateInput();
+
+		//objFighter->SetPosition({ playerPosition });
+
+		camera->Update();
+		//particleMan->Update();
+
+		//objSkydome->Update();
+		/*for (auto object : objects) {
+			object->Update();
+		}
+
+		for (auto object_2 : objects_2) {
+			object_2->Update();
+		}*/
+
+		//objGround->Update();
+		objFighter->Update();
+		objClone->Update();
+
+		objTempTrigger->Update();
+		objTempTriggerE->Update();
+
 		objTempBullet->SetPosition(playerBullet);
-	} else
-	{
-		playerBullet.x = InitBulletPos_PX;
-		objTempBullet->SetPosition(playerBullet);
-	}
-
-	if (enemyBulletF)
-	{
-		enemyBullet.x -= 0.1f;
 		objTempBulletE->SetPosition(enemyBullet);
-	} else
-	{
-		enemyBullet.x = InitBulletPos_EX;
-		objTempBulletE->SetPosition(enemyBullet);
+
+		objTempBullet->Update();
+		objTempBulletE->Update();
+
+		//fbxobject1->Update();
+
+		//debugText.Print( "", 50, 50, 1.0f );
+		//debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
+		//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
+
+		lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
+		lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
+
+		collisionManager->CheckAllCollisions();
+
+		//Debug Start
+		char msgbuf[256];
+		char msgbuf2[256];
+		//char msgbuf3[256];
+
+		sprintf_s(msgbuf, 256, "Enemy X: %f\n", enemyPosition.x);
+		sprintf_s(msgbuf2, 256, "Enemy Z: %f\n", enemyPosition.z);
+		//sprintf_s(msgbuf3, 256, "isTouchingGround: %f\n", isTouchingGround);
+		OutputDebugStringA(msgbuf);
+		OutputDebugStringA(msgbuf2);
+		//OutputDebugStringA(msgbuf3);
+		//Debug End
 	}
 
-	if (playerBullet.x > 9.0f)
-	{
-		playerBulletF = false;
-	}
-
-	if (enemyBullet.x < -9.0f)
-	{
-		enemyBulletF = false;
-	}
-
-	if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
-	{
-		enemyAlive = false;
-		sceneNo = 2;
-		sceneChange = 0;
-		//gameClear->Initialize();
-	}
-	
-	if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f) && enemyBulletF == true)
-	{
-		playerAlive = false;
-		sceneNo = 3;
-		sceneChange = 0;
-		//gameOver->Initialize();
-	}
-
-	if (cameraMove == 1)
-	{
-		camera->MoveEyeVector({ +1.0f, 0, 0 });
-	}
-	if (cameraMove == 2)
-	{
-		camera->MoveEyeVector({ 0, +1.0f, 0 });
-	}
-	if (cameraMove == 3)
-	{
-		camera->MoveEyeVector({ 0,0,+1.0f });
-	}
-	if (cameraMove == 4)
-	{
-		camera->MoveEyeVector({ -1.0f, 0, 0 });
-	}
-	if (cameraMove == 5)
-	{
-		camera->MoveEyeVector({ 0, -1.0f, 0 });
-	}
-	if (cameraMove == 6)
-	{
-		camera->MoveEyeVector({ 0,0,-1.0f });
-	}
-
-	UpdateInput();
-
-	//objFighter->SetPosition({ playerPosition });
-
-	camera->Update();
-	//particleMan->Update();
-
-	//objSkydome->Update();
 	for (auto object : objects) {
 		object->Update();
 	}
@@ -469,43 +531,6 @@ void Stage1::Update()
 	for (auto object_2 : objects_2) {
 		object_2->Update();
 	}
-
-	//objGround->Update();
-	objFighter->Update();
-	objClone->Update();
-
-	objTempTrigger->Update();
-	objTempTriggerE->Update();
-
-	objTempBullet->SetPosition(playerBullet);
-	objTempBulletE->SetPosition(enemyBullet);
-
-	objTempBullet->Update();
-	objTempBulletE->Update();
-
-	//fbxobject1->Update();
-
-	//debugText.Print( "", 50, 50, 1.0f );
-	//debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
-	//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
-
-	lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
-	lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
-
-	collisionManager->CheckAllCollisions();
-
-	//Debug Start
-	char msgbuf[256];
-	char msgbuf2[256];
-	//char msgbuf3[256];
-
-	sprintf_s(msgbuf, 256, "Enemy X: %f\n", enemyPosition.x);
-	sprintf_s(msgbuf2, 256, "Enemy Z: %f\n", enemyPosition.z);
-	//sprintf_s(msgbuf3, 256, "isTouchingGround: %f\n", isTouchingGround);
-	OutputDebugStringA(msgbuf);
-	OutputDebugStringA(msgbuf2);
-	//OutputDebugStringA(msgbuf3);
-	//Debug End
 }
 
 void Stage1::Finalize()
@@ -590,4 +615,42 @@ int Stage1::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW
 	float cornerDistance_sq = ((circleDistance.x - rectW / 2.0f) * (circleDistance.x - rectW / 2.0f)) + ((circleDistance.y - rectH / 2.0f) * (circleDistance.y - rectH / 2.0f));
 
 	return (cornerDistance_sq <= (circleR * circleR));
+}
+
+void Stage1::stage1CinematicCamera()
+{
+	CinematicCamera cinematicCamera;
+	if (!beginStage)
+	{
+		cameraFlag = true;
+
+		maximumTime = 300;
+
+		cameraStartPosition = { -100.0f, -100.0f, -100.0f };
+
+		cameraEndPosition = { 0.0f, 0.0f, 0.0f };
+
+		controlPoint = { cameraStartPosition.x - cameraEndPosition.x / 2.0f, cameraEndPosition.y + 500.0f, cameraEndPosition.z + 500.0f };
+	}
+	
+	if (cameraFlag)
+	{
+		currentFrame++;
+
+		timeRate = (float)currentFrame / (float)maximumTime;
+
+		XMFLOAT3 Pos1 = cinematicCamera.cinematicCamera(cameraStartPosition, controlPoint, timeRate);
+		XMFLOAT3 Pos2 = cinematicCamera.cinematicCamera(controlPoint, cameraEndPosition, timeRate);
+
+		XMFLOAT3 cameraPos = cinematicCamera.cinematicCamera(Pos1, Pos2, timeRate);
+
+		camera->SetEye(cameraPos);
+
+		if (timeRate >= 1.0f)
+		{
+			currentFrame = 0.0f;
+			cameraFlag = false;
+			beginStage = true;
+		}
+	}
 }

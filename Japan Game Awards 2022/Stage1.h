@@ -11,6 +11,7 @@
 #include "Audio.h"
 #include "FbxObject3d.h"
 #include "ParticleManager.h"
+#include "CinematicCamera.h"
 
 #include <vector>
 
@@ -57,6 +58,8 @@ public: // メンバ関数 Member function
 	void DrawFGsprite();
 
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
+
+	void stage1CinematicCamera();
 
 private: // メンバ変数 Member variables
 	bool lastIntersect = false;
@@ -136,5 +139,11 @@ private: // メンバ変数 Member variables
 
 	//コントローラー検知用タイマー
 	int ConTimer;
+
+	//Cinematic Camera Variables シネマティックカメラ変数
+	int maximumTime, currentFrame, timeRate;
+	bool beginStage = false;
+	bool cameraFlag = false;
+	XMFLOAT3 controlPoint, cameraStartPosition, cameraEndPosition;
 };
 
