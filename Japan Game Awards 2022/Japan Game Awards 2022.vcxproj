@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CinematicCamera.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="CollisionPrimitive.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="BaseCollider.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CinematicCamera.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionAttribute.h" />
     <ClInclude Include="CollisionInfo.h" />
