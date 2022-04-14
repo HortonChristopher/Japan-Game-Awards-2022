@@ -194,6 +194,9 @@
     <ClCompile Include="TouchableObject.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="CinematicCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\FBX.hlsli">
@@ -325,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="TouchableObject.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CinematicCamera.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
