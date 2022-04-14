@@ -134,6 +134,16 @@ private: // メンバ変数 Member variables
 	GameOver* gameOver = nullptr;
 	GameClear* gameClear = nullptr;
 
+	//オブジェクトのポジション、回転角度
+	XMFLOAT3 playerPosition;
+	XMFLOAT3 playerRotation;
+	XMFLOAT3 enemyPosition;
+	XMFLOAT3 enemyRotation;
+	XMFLOAT3 playerTrigger;
+	XMFLOAT3 enemyTrigger;
+	XMFLOAT3 playerBullet;
+	XMFLOAT3 enemyBullet;
+
 	//コントローラー起動フラグ
 	bool ControllerFlag = false;
 

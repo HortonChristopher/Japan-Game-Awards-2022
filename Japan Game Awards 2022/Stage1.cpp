@@ -327,14 +327,14 @@ void Stage1::Initialize()
 
 void Stage1::Update()
 {
-	XMFLOAT3 playerPosition = objFighter->GetPosition();
-	XMFLOAT3 playerRotation = objFighter->GetRotation();
-	XMFLOAT3 enemyPosition = objClone->GetPosition();
-	XMFLOAT3 enemyRotation = objClone->GetRotation();
-	XMFLOAT3 playerTrigger = objTempTrigger->GetPosition();
-	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
-	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
-	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
+	playerPosition = objFighter->GetPosition();
+	playerRotation = objFighter->GetRotation();
+	enemyPosition = objClone->GetPosition();
+	enemyRotation = objClone->GetRotation();
+	playerTrigger = objTempTrigger->GetPosition();
+	enemyTrigger = objTempTriggerE->GetPosition();
+	playerBullet = objTempBullet->GetPosition();
+	enemyBullet = objTempBulletE->GetPosition();
 
 	// GameScene‚Æ‚ÌÀ•W‹¤—L Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
@@ -553,8 +553,15 @@ void Stage1::Update()
 		objTempBullet->SetPosition(playerBullet);
 		objTempBulletE->SetPosition(enemyBullet);
 
-		objTempBullet->Update();
-		objTempBulletE->Update();
+		if (playerBulletF == true)
+		{
+			objTempBullet->Update();
+		}
+
+		if (enemyBulletF == true)
+		{
+			objTempBulletE->Update();
+		}
 
 		//fbxobject1->Update();
 
