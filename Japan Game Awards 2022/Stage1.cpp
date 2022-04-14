@@ -323,14 +323,14 @@ void Stage1::Initialize()
 
 void Stage1::Update()
 {
-	XMFLOAT3 playerPosition = objFighter->GetPosition();
-	XMFLOAT3 playerRotation = objFighter->GetRotation();
-	XMFLOAT3 enemyPosition = objClone->GetPosition();
-	XMFLOAT3 enemyRotation = objClone->GetRotation();
-	XMFLOAT3 playerTrigger = objTempTrigger->GetPosition();
-	XMFLOAT3 enemyTrigger = objTempTriggerE->GetPosition();
-	XMFLOAT3 playerBullet = objTempBullet->GetPosition();
-	XMFLOAT3 enemyBullet = objTempBulletE->GetPosition();
+	playerPosition = objFighter->GetPosition();
+	playerRotation = objFighter->GetRotation();
+	enemyPosition = objClone->GetPosition();
+	enemyRotation = objClone->GetRotation();
+	playerTrigger = objTempTrigger->GetPosition();
+	enemyTrigger = objTempTriggerE->GetPosition();
+	playerBullet = objTempBullet->GetPosition();
+	enemyBullet = objTempBulletE->GetPosition();
 
 	// GameScene‚Æ‚ÌÀ•W‹¤—L Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
@@ -496,8 +496,15 @@ void Stage1::Update()
 		objTempBullet->SetPosition(playerBullet);
 		objTempBulletE->SetPosition(enemyBullet);
 
-		objTempBullet->Update();
-		objTempBulletE->Update();
+		if (playerBulletF == true)
+		{
+			objTempBullet->Update();
+		}
+
+		if (enemyBulletF == true)
+		{
+			objTempBulletE->Update();
+		}
 
 		//fbxobject1->Update();
 
@@ -518,8 +525,8 @@ void Stage1::Update()
 		sprintf_s(msgbuf, 256, "Enemy X: %f\n", enemyPosition.x);
 		sprintf_s(msgbuf2, 256, "Enemy Z: %f\n", enemyPosition.z);
 		//sprintf_s(msgbuf3, 256, "isTouchingGround: %f\n", isTouchingGround);
-		OutputDebugStringA(msgbuf);
-		OutputDebugStringA(msgbuf2);
+		//OutputDebugStringA(msgbuf);
+		//OutputDebugStringA(msgbuf2);
 		//OutputDebugStringA(msgbuf3);
 		//Debug End
 	}
