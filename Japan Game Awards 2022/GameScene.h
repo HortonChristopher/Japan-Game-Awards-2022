@@ -20,6 +20,7 @@ class Enemy;
 class TouchableObject;
 class TitleScene;
 class Stage1;
+class Stage2;
 class GameOver;
 class GameClear;
 
@@ -141,10 +142,12 @@ private: // メンバ変数 Member variables
 
 	TitleScene* titleScene = nullptr;
 	Stage1* stage1 = nullptr;
+	Stage2* stage2 = nullptr;
 	GameOver* gameOver = nullptr;
 	GameClear* gameClear = nullptr;
 
 	int stage1Init = 0;
+	int stage2Init = 0;
 	int FBXModelChange = 0;
 
 	//コントローラー起動フラグ

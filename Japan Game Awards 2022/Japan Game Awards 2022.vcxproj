@@ -175,6 +175,7 @@
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage1.cpp" />
+    <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TouchableObject.cpp" />
     <ClCompile Include="WinApp.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage1.h" />
+    <ClInclude Include="Stage2.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TouchableObject.h" />
     <ClInclude Include="WinApp.h" />

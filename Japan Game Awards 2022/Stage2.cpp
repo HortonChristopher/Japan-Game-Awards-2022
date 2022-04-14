@@ -1,4 +1,4 @@
-#include "Stage1.h"
+#include "Stage2.h"
 #include "Model.h"
 #include <cassert>
 #include "Collision.h"
@@ -29,11 +29,11 @@ extern DirectXCommon* dxCommon;
 
 extern int cameraMove; //Temporary Debug
 
-Stage1::Stage1()
+Stage2::Stage2()
 {
 }
 
-Stage1::~Stage1()
+Stage2::~Stage2()
 {
 	for (auto object : objects) {
 		safe_delete(object);
@@ -64,7 +64,7 @@ Stage1::~Stage1()
 	ReleaseInput();
 }
 
-void Stage1::Initialize()
+void Stage2::Initialize()
 {
 	// nullptrチェック nullptr check
 	//assert(dxCommon);
@@ -108,12 +108,12 @@ void Stage1::Initialize()
 	debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if ( !Sprite::LoadTexture( 1, L"Resources/background.png" ) ) {
-		assert( 0 );
+	if (!Sprite::LoadTexture(2, L"Resources/background.png")) {
+		assert(0);
 		return;
 	}
 	// 背景スプライト生成 Background sprite generation
-	spriteBG = Sprite::Create( 1, { 0.0f,0.0f } );
+	spriteBG = Sprite::Create(2, { 0.0f,0.0f });
 
 	// パーティクルマネージャー
 	//particleMan = ParticleManager::Create( dxCommon->GetDevice(), camera );
@@ -126,11 +126,11 @@ void Stage1::Initialize()
 	objTempBulletE = Object3d::Create();
 
 	// テクスチャ2番に読み込み Load into texture # 2
-	Sprite::LoadTexture( 2, L"Resources/texture.png" );
+	Sprite::LoadTexture(2, L"Resources/texture.png");
 
-	modelSkydome = Model::CreateFromOBJ( "skydome" );
-	modelGround = Model::CreateFromOBJ( "ground" );
-	modelFighter = Model::CreateFromOBJ( "chr_sword" );
+	modelSkydome = Model::CreateFromOBJ("skydome");
+	modelGround = Model::CreateFromOBJ("ground");
+	modelFighter = Model::CreateFromOBJ("chr_sword");
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
@@ -138,13 +138,13 @@ void Stage1::Initialize()
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 
-	objSkydome->SetModel( modelSkydome );
+	objSkydome->SetModel(modelSkydome);
 	//objGround->SetModel( modelGround );
 	//objFighter->SetModel( modelFighter );
 	objTempTrigger->SetModel(modelTempTrigger);
 	objTempTriggerE->SetModel(modelTempTrigger);
 	objTempBullet->SetModel(modelTempBullet);
-	objTempBulletE->SetModel(modelTempBullet);	
+	objTempBulletE->SetModel(modelTempBullet);
 
 	//objGround = TouchableObject::Create(modelGround);
 	objFighter = Player::Create(modelFighter);
@@ -321,7 +321,7 @@ void Stage1::Initialize()
 	enemyBulletF = false;
 }
 
-void Stage1::Update()
+void Stage2::Update()
 {
 	XMFLOAT3 playerPosition = objFighter->GetPosition();
 	XMFLOAT3 playerRotation = objFighter->GetRotation();
@@ -432,7 +432,7 @@ void Stage1::Update()
 		if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 		{
 			enemyAlive = false;
-			sceneNo = 4;
+			sceneNo = 2;
 			sceneChange = 0;
 			//gameClear->Initialize();
 		}
@@ -533,7 +533,7 @@ void Stage1::Update()
 	}
 }
 
-void Stage1::Finalize()
+void Stage2::Finalize()
 {
 	objFighter->SetPosition({ -12,0,-12 });
 	objClone->SetPosition({ 12,0,-12 });
@@ -556,13 +556,13 @@ void Stage1::Finalize()
 	enemyBulletF = false;
 }
 
-void Stage1::DrawBGsprite()
+void Stage2::DrawBGsprite()
 {
 	// 背景スプライト描画 Background sprite drawing
 	spriteBG->Draw();
 }
 
-void Stage1::Draw3Dobject()
+void Stage2::Draw3Dobject()
 {
 	// 3Dオブクジェクトの描画 Drawing 3D objects
 	//objSkydome->Draw();
@@ -579,7 +579,7 @@ void Stage1::Draw3Dobject()
 	{
 		//objFighter->Draw();
 	}
-	
+
 	if (enemyAlive)
 	{
 		//objClone->Draw();
@@ -594,12 +594,12 @@ void Stage1::Draw3Dobject()
 	//fbxobject1->Draw( cmdList );
 }
 
-void Stage1::DrawFGsprite()
+void Stage2::DrawFGsprite()
 {
 
 }
 
-int Stage1::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH)
+int Stage2::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH)
 {
 	XMFLOAT2 circleDistance;
 
@@ -617,7 +617,7 @@ int Stage1::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW
 	return (cornerDistance_sq <= (circleR * circleR));
 }
 
-void Stage1::stage1CinematicCamera()
+void Stage2::stage2CinematicCamera()
 {
 	CinematicCamera cinematicCamera;
 	if (!beginStage)
@@ -632,7 +632,7 @@ void Stage1::stage1CinematicCamera()
 
 		controlPoint = { cameraStartPosition.x - cameraEndPosition.x / 2.0f, cameraEndPosition.y + 500.0f, cameraEndPosition.z + 500.0f };
 	}
-	
+
 	if (cameraFlag)
 	{
 		currentFrame++;

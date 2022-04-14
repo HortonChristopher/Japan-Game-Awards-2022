@@ -102,6 +102,9 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{6e88e649-eca2-4ee8-a81d-a2dc72ccfdf2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Stages\Stage2">
+      <UniqueIdentifier>{f80009eb-6db0-499c-9fb0-89f03e44f401}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -196,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="CinematicCamera.cpp">
       <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2.cpp">
+      <Filter>Scenes\Stages\Stage2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="CinematicCamera.h">
       <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2.h">
+      <Filter>Scenes\Stages\Stage2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

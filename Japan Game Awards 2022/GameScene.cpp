@@ -15,6 +15,7 @@
 #include "TouchableObject.h"
 #include "TitleScene.h"
 #include "Stage1.h"
+#include "Stage2.h"
 #include "GameOver.h"
 #include "GameClear.h"
 
@@ -126,6 +127,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	//ステージ初期化 Stage Initialization
 	stage1 = new Stage1();
+	stage2 = new Stage2();
 	
 	//// テクスチャ読み込み Texture loading
 	//if ( !Sprite::LoadTexture( 1, L"Resources/background.png" ) ) {
@@ -418,7 +420,7 @@ void GameScene::Update()
 	//シーン遷移
 	switch (sceneNo)
 	{
-	case 0:
+	case 0: // TitleScene
 		titleScene->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -459,7 +461,7 @@ void GameScene::Update()
 
 
 		break;
-	case 1:
+	case 1: // Stage1
 		stage1->Update();
 		objPlayerRun->Update();
 		objCloneRun->Update();
@@ -500,7 +502,7 @@ void GameScene::Update()
 
 		break;
 
-	case 2:
+	case 2: // GameClear
 		gameClear->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -532,7 +534,7 @@ void GameScene::Update()
 		}
 
 		break;
-	case 3:
+	case 3: // GameOver
 		gameOver->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -561,6 +563,52 @@ void GameScene::Update()
 			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
+		}
+
+		break;
+
+	case 4: // Stage2
+		if (stage2Init == 0)
+		{
+			stage2->Initialize();
+			stage2Init = 1;
+		}
+		stage2->Update();
+		objPlayerRun->Update();
+		objCloneRun->Update();
+		objPlayerStand->Update();
+		objCloneStand->Update();
+
+		if (input->PushKey(DIK_Z) || input->PushKey(DIK_X) || input->PushKey(DIK_C))
+		{
+			if (input->PushKey(DIK_Z) && !input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 1;
+			}
+			if (input->PushKey(DIK_X) && !input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 2;
+			}
+			if (input->PushKey(DIK_C) && !input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 3;
+			}
+			if (input->PushKey(DIK_Z) && input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 4;
+			}
+			if (input->PushKey(DIK_X) && input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 5;
+			}
+			if (input->PushKey(DIK_C) && input->PushKey(DIK_LSHIFT))
+			{
+				cameraMove = 6;
+			}
+		}
+		else
+		{
+			cameraMove = 0;
 		}
 
 		break;
@@ -669,6 +717,9 @@ void GameScene::Draw()
 		}
 		gameOver->Draw();
 		break;
+	case 4:
+		stage2->DrawBGsprite();
+		break;
 	}
 	
 	
@@ -704,6 +755,19 @@ void GameScene::Draw()
 	case 2:
 		break;
 	case 3:
+		break;
+	case 4:
+		stage2->Draw3Dobject();
+		if (FBXModelChange == 1)
+		{
+			objPlayerRun->Draw(cmdList);
+			objCloneRun->Draw(cmdList);
+		}
+		else if (FBXModelChange == 0)
+		{
+			objPlayerStand->Draw(cmdList);
+			objCloneStand->Draw(cmdList);
+		}
 		break;
 	}
 
@@ -767,6 +831,9 @@ void GameScene::Draw()
 	case 2:
 		break;
 	case 3:
+		break;
+	case 4:
+		stage2->DrawFGsprite();
 		break;
 	}
 
