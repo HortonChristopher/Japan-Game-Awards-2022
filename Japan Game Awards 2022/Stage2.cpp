@@ -559,7 +559,7 @@ void Stage2::Finalize()
 void Stage2::DrawBGsprite()
 {
 	// ”wŒiƒXƒvƒ‰ƒCƒg•`‰æ Background sprite drawing
-	spriteBG->Draw();
+	// spriteBG->Draw();
 }
 
 void Stage2::Draw3Dobject()
@@ -585,11 +585,11 @@ void Stage2::Draw3Dobject()
 		//objClone->Draw();
 	}
 
-	objTempTrigger->Draw();
-	objTempTriggerE->Draw();
+	//objTempTrigger->Draw();
+	//objTempTriggerE->Draw();
 
-	objTempBullet->Draw();
-	objTempBulletE->Draw();
+	//objTempBullet->Draw();
+	//objTempBulletE->Draw();
 
 	//fbxobject1->Draw( cmdList );
 }
