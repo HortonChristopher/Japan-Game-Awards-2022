@@ -702,7 +702,7 @@ void GameScene::Draw()
 	case 2:
 		if (sceneChange == 0)
 		{
-			stage1->Finalize();
+			stage2->Finalize();
 			gameClear->Initialize();
 			sceneChange = 1;
 		}
@@ -712,6 +712,7 @@ void GameScene::Draw()
 		if (sceneChange == 0)
 		{
 			stage1->Finalize();
+			stage2->Finalize();
 			gameOver->Initialize();
 			sceneChange = 1;
 		}
@@ -719,6 +720,7 @@ void GameScene::Draw()
 		break;
 	case 4:
 		stage2->DrawBGsprite();
+		stage1->Finalize();
 		break;
 	}
 	
