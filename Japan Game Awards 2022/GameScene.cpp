@@ -640,7 +640,7 @@ void GameScene::Update()
 
 			if (playerBulletF)
 			{
-				playerBullet.x += 0.1f;
+				playerBullet.x += 1.0f;
 				objTempBullet->SetPosition(playerBullet);
 			}
 			else
@@ -651,7 +651,7 @@ void GameScene::Update()
 
 			if (enemyBulletF)
 			{
-				enemyBullet.x -= 0.1f;
+				enemyBullet.x -= 1.0f;
 				objTempBulletE->SetPosition(enemyBullet);
 			}
 			else
