@@ -546,11 +546,13 @@ void GameScene::Update()
 					if (cameraMove == 4)
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove = 1;
 					}
 					else
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove++;
 					}
 				}
@@ -559,11 +561,13 @@ void GameScene::Update()
 					if (cameraMove == 1)
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove = 4;
 					}
 					else
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove--;
 					}
 				}
