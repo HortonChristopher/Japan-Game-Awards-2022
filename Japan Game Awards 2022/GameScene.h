@@ -11,6 +11,7 @@
 #include "Audio.h"
 #include "FbxObject3d.h"
 #include "ParticleManager.h"
+#include "CinematicCamera.h"
 
 #include <vector>
 
@@ -19,7 +20,6 @@ class Player;
 class Enemy;
 class TouchableObject;
 class TitleScene;
-class Stage1;
 class GameOver;
 class GameClear;
 
@@ -42,7 +42,7 @@ public:
 
 public: // メンバ関数 Member function
 	
-	// コンストクラタ Constcrater
+	// コンストクラタ Constructor
 	GameScene();
 	
 	// デストラクタ Destructor
@@ -65,16 +65,20 @@ public: // メンバ関数 Member function
 
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
-	/*bool lastIntersect = false;
+	void Stage1Reset();
+
+	void CinematicCamera();
+
+private: // メンバ変数 Member variables
+	bool lastIntersect = false;
 	bool lastIntersectE = false;
 
 	bool enemyAlive = true;
 	bool playerAlive = true;
 
 	bool playerBulletF = false;
-	bool enemyBulletF = false;*/
+	bool enemyBulletF = false;
 
-private: // メンバ変数 Member variables
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
@@ -83,41 +87,44 @@ private: // メンバ変数 Member variables
 	// ゲームシーン用 For game scenes
 	Camera *camera = nullptr;
 	 
-	//Sprite* spriteBG = nullptr;
+	Sprite* spriteBG = nullptr;
 
-	//ParticleManager *particleMan = nullptr;
+	ParticleManager *particleMan = nullptr;
 
-	//Model* modelSkydome = nullptr;
-	//Model* modelGround = nullptr;
-	//Model* modelFighter = nullptr;
-	//Model* modelPlane = nullptr;
-	//Model* modelBox = nullptr;
-	//Model* modelPyramid = nullptr;
-	//Model* modelTempWall = nullptr;
-	//Model* modelTempTrigger = nullptr;
-	//Model* modelTempBullet = nullptr;
+	Model* modelSkydome = nullptr;
+	Model* modelGround = nullptr;
+	Model* modelFighter = nullptr;
+	Model* modelPlane = nullptr;
+	Model* modelBox = nullptr;
+	Model* modelPyramid = nullptr;
+	Model* modelTempWall = nullptr;
+	Model* modelTempTrigger = nullptr;
+	Model* modelTempBullet = nullptr;
 
 	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
 
-	//Object3d* objSkydome = nullptr;
-	//Object3d* objTempTrigger = nullptr;
-	//Object3d* objTempTriggerE = nullptr;
-	//Object3d* objTempBullet = nullptr;
-	//Object3d* objTempBulletE = nullptr;
+	Object3d* objSkydome = nullptr;
+	Object3d* objTempTrigger = nullptr;
+	Object3d* objTempTriggerE = nullptr;
+	Object3d* objTempBullet = nullptr;
+	Object3d* objTempBulletE = nullptr;
 
-	//TouchableObject* objGround = nullptr;
+	Object3d* objTempWall = nullptr;
+
+	TouchableObject* objGround = nullptr;
+
 	FbxObject3d* objPlayerRun = nullptr;
 	FbxObject3d* objCloneRun = nullptr;
 	FbxObject3d* objPlayerStand = nullptr;
 	FbxObject3d* objCloneStand = nullptr;
 
-	//Player* objFighter = nullptr;
+	Player* objFighter = nullptr;
 
-	//Enemy* objClone = nullptr;
+	Enemy* objClone = nullptr;
 
-	//FbxObject3d *fbxobject1 = nullptr;
+	FbxObject3d *fbxobject1 = nullptr;
 
 	//球の初期位置変数
 	float InitBulletPos_PX = -9.0f;
@@ -128,10 +135,10 @@ private: // メンバ変数 Member variables
 	float rate = 1.0f;	//移動倍率係数
 	float Speed = 0.4f;	//移動スピード
 
-	//float move;
+	float move;
 
-	////XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
-	////XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
+	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
+	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
 
 	CollisionManager* collisionManager;
 
@@ -140,9 +147,18 @@ private: // メンバ変数 Member variables
 	std::vector<Object3d*> objects_Wall;
 
 	TitleScene* titleScene = nullptr;
-	Stage1* stage1 = nullptr;
 	GameOver* gameOver = nullptr;
 	GameClear* gameClear = nullptr;
+
+	//オブジェクトのポジション、回転角度
+	XMFLOAT3 playerPosition;
+	XMFLOAT3 playerRotation;
+	XMFLOAT3 enemyPosition;
+	XMFLOAT3 enemyRotation;
+	XMFLOAT3 playerTrigger;
+	XMFLOAT3 enemyTrigger;
+	XMFLOAT3 playerBullet;
+	XMFLOAT3 enemyBullet;
 
 	int stage1Init = 0;
 	int FBXModelChange = 0;
@@ -152,5 +168,11 @@ private: // メンバ変数 Member variables
 
 	//コントローラー検知用タイマー
 	int ConTimer;
+
+	//Cinematic Camera Variables シネマティックカメラ変数
+	int maximumTime, currentFrame, timeRate;
+	bool beginStage = false;
+	bool cameraFlag = false;
+	XMFLOAT3 controlPoint, cameraStartPosition, cameraEndPosition;
 };
 
