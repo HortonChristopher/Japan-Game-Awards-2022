@@ -535,6 +535,36 @@ void GameScene::Update()
 				}
 			}
 
+			if (IsButtonDown(ButtonKind::Button_LB) || IsButtonDown(ButtonKind::Button_RB))
+			{
+				if (IsButtonDown(ButtonKind::Button_LB))
+				{
+					if (cameraMove == 4)
+					{
+						prevCameraMove = cameraMove;
+						cameraMove = 1;
+					}
+					else
+					{
+						prevCameraMove = cameraMove;
+						cameraMove++;
+					}
+				}
+				else if (IsButtonDown(ButtonKind::Button_RB))
+				{
+					if (cameraMove == 1)
+					{
+						prevCameraMove = cameraMove;
+						cameraMove = 4;
+					}
+					else
+					{
+						prevCameraMove = cameraMove;
+						cameraMove--;
+					}
+				}
+			}
+
 			// オブジェクト移動 Move object
 
 			//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
