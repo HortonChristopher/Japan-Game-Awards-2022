@@ -539,7 +539,7 @@ void GameScene::Update()
 				}
 			}
 
-			if (IsButtonDown(ButtonKind::Button_LB) || IsButtonDown(ButtonKind::Button_RB))
+			if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
 			{
 				if (IsButtonDown(ButtonKind::Button_LB))
 				{
