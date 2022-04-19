@@ -11,7 +11,7 @@ private:
 
 public:
 	/// <summary>
-	/// 3Dオブジェクト生成 3D object generation
+	/// 3Dオブジェクト生成 3D object generationd
 	/// </summary>
 	/// <returns>インスタンス</returns>
 	static Player* Create(Model* model = nullptr);
