@@ -1043,8 +1043,15 @@ void GameScene::Draw()
 			objTempTrigger->Draw();
 			objTempTriggerE->Draw();
 
-			objTempBullet->Draw();
-			objTempBulletE->Draw();
+			if (playerBulletF == true)
+			{
+				objTempBullet->Draw();
+			}
+
+			if (enemyBulletF == true)
+			{
+				objTempBulletE->Draw();
+			}
 		}
 
 		if (FBXModelChange == 1)
