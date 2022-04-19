@@ -51,35 +51,35 @@ GameScene::~GameScene()
 		safe_delete(object_2);
 	}
 
-	safe_delete( spriteBG );
-	safe_delete( objSkydome );
-	safe_delete( objGround );
-	safe_delete( objFighter );
-	safe_delete( objClone );
+	safe_delete(spriteBG);
+	safe_delete(objSkydome);
+	safe_delete(objGround);
+	safe_delete(objFighter);
+	safe_delete(objClone);
 	safe_delete(objTempTrigger);
 	safe_delete(objTempTriggerE);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
-	safe_delete( modelSkydome );
-	safe_delete( modelGround );
-	safe_delete( modelFighter );
+	safe_delete(modelSkydome);
+	safe_delete(modelGround);
+	safe_delete(modelFighter);
 	safe_delete(modelPlane);
 	safe_delete(modelBox);
 	safe_delete(modelPyramid);
 
-	safe_delete( fbxobject1 );
+	safe_delete(fbxobject1);
 	//safe_delete( fbxmodel1 );
 	safe_delete(objPlayerRun);
 	safe_delete(modelPlayerRun);
 	ReleaseInput();
 }
 
-void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio )
+void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 {
 	//// nullptrチェック nullptr check
-	assert( dxCommon );
-	assert( input );
-	assert( audio );
+	assert(dxCommon);
+	assert(input);
+	assert(audio);
 
 	this->dxCommon = dxCommon;
 	this->input = input;
@@ -87,18 +87,18 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	//コントローラー初期化
 	InitInput();
-	
+
 	//// カメラ生成 Camera generation
-	camera = new Camera( WinApp::window_width, WinApp::window_height );
+	camera = new Camera(WinApp::window_width, WinApp::window_height);
 
 	collisionManager = CollisionManager::GetInstance();
 
 	// カメラセット Camera set
-	Object3d::SetCamera( camera );
-	FbxObject3d::SetCamera( camera );
+	Object3d::SetCamera(camera);
+	FbxObject3d::SetCamera(camera);
 
 	// デバイスをセット Set the device
-	FbxObject3d::SetDevice( dxCommon->GetDevice() );
+	FbxObject3d::SetDevice(dxCommon->GetDevice());
 
 	// グラフィックスパイプライン生成 Graphics pipeline generation
 	FbxObject3d::CreateGraphicsPipeline();
@@ -107,12 +107,12 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	InitInput();
 
 	// デバッグテキスト用テクスチャ読み込み Import texture for debug text
-	if ( !Sprite::LoadTexture( debugTextTexNumber, L"Resources/debugfont.png" ) ) {
-		assert( 0 );
+	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
+		assert(0);
 		return;
 	}
 	// デバッグテキスト初期化 Debug text initialization
-	debugText.Initialize( debugTextTexNumber );
+	debugText.Initialize(debugTextTexNumber);
 
 	//タイトルシーン初期化 Title Scene Initialization
 	titleScene = new TitleScene();
@@ -123,17 +123,17 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 
 	gameClear = new GameClear();
 	gameOver->Initialize();
-	
+
 	// テクスチャ読み込み Texture loading
-	if ( !Sprite::LoadTexture( 1, L"Resources/background.png" ) ) {
-		assert( 0 );
+	if (!Sprite::LoadTexture(1, L"Resources/background.png")) {
+		assert(0);
 		return;
 	}
 	// 背景スプライト生成 Background sprite generation
-	spriteBG = Sprite::Create( 1, { 0.0f,0.0f } );
+	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
 
 	// パーティクルマネージャー
-	particleMan = ParticleManager::Create( dxCommon->GetDevice(), camera );
+	particleMan = ParticleManager::Create(dxCommon->GetDevice(), camera);
 
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
@@ -143,11 +143,11 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	objTempBulletE = Object3d::Create();
 
 	// テクスチャ2番に読み込み Load into texture # 2
-	Sprite::LoadTexture( 2, L"Resources/texture.png" );
+	Sprite::LoadTexture(2, L"Resources/texture.png");
 
-	modelSkydome = Model::CreateFromOBJ( "skydome" );
-	modelGround = Model::CreateFromOBJ( "ground" );
-	modelFighter = Model::CreateFromOBJ( "chr_sword" );
+	modelSkydome = Model::CreateFromOBJ("skydome");
+	modelGround = Model::CreateFromOBJ("ground");
+	modelFighter = Model::CreateFromOBJ("chr_sword");
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
@@ -155,7 +155,7 @@ void GameScene::Initialize( DirectXCommon *dxCommon, Input *input, Audio *audio 
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 
-	objSkydome->SetModel( modelSkydome );
+	objSkydome->SetModel(modelSkydome);
 	//objGround->SetModel( modelGround );
 	//objFighter->SetModel( modelFighter );
 	objTempTrigger->SetModel(modelTempTrigger);
@@ -379,7 +379,7 @@ void GameScene::Update()
 	// 現在の座標を取得
 	XMFLOAT3 FBXplayerPosition = playerPositionTemp;
 	XMFLOAT3 FBXplayerRotation = playerRotationTemp;
-	
+
 	XMFLOAT3 FBXclonePosition = clonePositionTemp;
 	XMFLOAT3 FBXcloneRotation = cloneRotationTemp;
 
@@ -420,7 +420,7 @@ void GameScene::Update()
 	{
 		enemyBullet.x -= 0.1f;
 		objTempBulletE->SetPosition(enemyBullet);
-	} 
+	}
 	else
 	{
 		enemyBullet.x = InitBulletPos_EX;
@@ -505,31 +505,69 @@ void GameScene::Update()
 		if (beginStage)
 		{
 			// Camera Movement カメラ動く
-			if (input->TriggerKey(DIK_Q) || input->TriggerKey(DIK_E))
+			if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 			{
 				if (input->TriggerKey(DIK_Q))
 				{
 					if (cameraMove == 4)
 					{
 						prevCameraMove = cameraMove;
-						cameraMove = 0;
+						cameraChange = true;
+						cameraMove = 1;
 					}
 					else
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove++;
 					}
 				}
 				else if (input->TriggerKey(DIK_E))
 				{
-					if (cameraMove == 0)
+					if (cameraMove == 1)
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove = 4;
 					}
 					else
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
+						cameraMove--;
+					}
+				}
+			}
+
+			if (IsButtonDown(ButtonKind::Button_LB) || IsButtonDown(ButtonKind::Button_RB))
+			{
+				if (IsButtonDown(ButtonKind::Button_LB))
+				{
+					if (cameraMove == 4)
+					{
+						prevCameraMove = cameraMove;
+						cameraChange = true;
+						cameraMove = 1;
+					}
+					else
+					{
+						prevCameraMove = cameraMove;
+						cameraChange = true;
+						cameraMove++;
+					}
+				}
+				else if (IsButtonDown(ButtonKind::Button_RB))
+				{
+					if (cameraMove == 1)
+					{
+						prevCameraMove = cameraMove;
+						cameraChange = true;
+						cameraMove = 4;
+					}
+					else
+					{
+						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove--;
 					}
 				}
@@ -633,77 +671,88 @@ void GameScene::Update()
 			//Normal Eye: {0, 20, -30}
 			//Opposite Side: {0, 20, 30}
 
-			if (cameraMove == 1)
+			if (cameraChange)
 			{
-				/*if (prevCameraMove == 4)
+				if (cameraMove == 1)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 4)
 					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
 					}
-				}
-				else if (prevCameraMove == 2)
-				{
-					for (int i = 0; i < 40; i++)
+					else if (prevCameraMove == 2)
 					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
 					}
-				}*/
-				camera->SetEye({ 0.0f, 20.0f, -30.0f });
-			}
-			if (cameraMove == 2)
-			{
-				/*if (prevCameraMove == 1)
-				{
-					for (int i = 0; i < 40; i++)
+
+					if (currentCameraFrame >= 40)
 					{
-						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+						camera->SetEye({ 0.0f, 20.0f, -30.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
 					}
 				}
-				else if (prevCameraMove == 3)
+				if (cameraMove == 2)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 1)
 					{
+						currentCameraFrame++;
+						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+					}
+					else if (prevCameraMove == 3)
+					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
 					}
-				}*/
-				camera->SetEye({ -40.0f, 20.0f, 0.0f });
-			}
-			if (cameraMove == 3)
-			{
-				/*if (prevCameraMove == 2)
-				{
-					for (int i = 0; i < 40; i++)
+
+					if (currentCameraFrame >= 40)
 					{
-						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+						camera->SetEye({ -40.0f, 20.0f, 0.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
 					}
 				}
-				else if (prevCameraMove == 4)
+				if (cameraMove == 3)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 2)
 					{
+						currentCameraFrame++;
+						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+					}
+					else if (prevCameraMove == 4)
+					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
 					}
-				}*/
-				camera->SetEye({ 0.0f, 20.0f, 30.0f });
-			}
-			if (cameraMove == 4)
-			{
-				/*if (prevCameraMove == 3)
-				{
-					for (int i = 0; i < 40; i++)
+
+					if (currentCameraFrame >= 40)
 					{
-						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+						camera->SetEye({ 0.0f, 20.0f, 30.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
 					}
 				}
-				else if (prevCameraMove == 1)
+				if (cameraMove == 4)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 3)
 					{
+						currentCameraFrame++;
+						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+					}
+					else if (prevCameraMove == 1)
+					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
 					}
-				}*/
-				camera->SetEye({ 40.0f, 20.0f, 0.0f });
+
+					if (currentCameraFrame >= 40)
+					{
+						camera->SetEye({ 40.0f, 20.0f, 0.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
+					}
+				}
 			}
 
 			UpdateInput();
@@ -860,7 +909,7 @@ void GameScene::Update()
 	//{
 	//	playerAlive = false;
 	//}
-	
+
 
 	// パーティクル生成 Particle generation
 	//CreateParticles();
@@ -922,11 +971,11 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	// コマンドリストの取得 Get command list
-	ID3D12GraphicsCommandList *cmdList = dxCommon->GetCommandList();
+	ID3D12GraphicsCommandList* cmdList = dxCommon->GetCommandList();
 
 #pragma region 背景スプライト描画 Background sprite drawing
 	// 背景スプライト描画前処理 Background sprite drawing pre-processing
-	Sprite::PreDraw( cmdList );
+	Sprite::PreDraw(cmdList);
 	// 背景スプライト描画 Background sprite drawing
 	//spriteBG->Draw();
 	switch (sceneNo)
@@ -956,8 +1005,8 @@ void GameScene::Draw()
 		gameOver->Draw();
 		break;
 	}
-	
-	
+
+
 	// ここに背景スプライトの描画処理を追加できる You can add background sprite drawing processing here
 
 	// スプライト描画後処理 Post-processing of sprite drawing
@@ -968,7 +1017,7 @@ void GameScene::Draw()
 
 #pragma region 3Dオブジェクト描画 3D object drawing
 	// 3Dオブジェクト描画前処理 3D object drawing pre-processing
-	Object3d::PreDraw( cmdList );
+	Object3d::PreDraw(cmdList);
 
 	switch (sceneNo)
 	{
@@ -1026,15 +1075,15 @@ void GameScene::Draw()
 	Object3d::PostDraw();
 #pragma endregion
 
-//#pragma region 前景スプライト描画 Foreground sprite drawing
-//	// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
-//	Sprite::PreDraw( cmdList );
-//
-//	// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
-//
-//	//// 描画 drawing
-//	//sprite1->Draw();
-//	//sprite2->Draw();
+	//#pragma region 前景スプライト描画 Foreground sprite drawing
+	//	// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
+	//	Sprite::PreDraw( cmdList );
+	//
+	//	// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
+	//
+	//	//// 描画 drawing
+	//	//sprite1->Draw();
+	//	//sprite2->Draw();
 
 	switch (sceneNo)
 	{
@@ -1048,36 +1097,36 @@ void GameScene::Draw()
 		break;
 	}
 
-//	// デバッグテキストの描画 Debug text drawing
-//	// debugText.DrawAll(cmdList);
-//
-//	// スプライト描画後処理 Post-processing of sprite drawing
-//	Sprite::PostDraw();
-//#pragma endregion
+	//	// デバッグテキストの描画 Debug text drawing
+	//	// debugText.DrawAll(cmdList);
+	//
+	//	// スプライト描画後処理 Post-processing of sprite drawing
+	//	Sprite::PostDraw();
+	//#pragma endregion
 }
 
 void GameScene::MoveCamera()
 {
 	// カメラ移動 Camera movement
-	if ( input->PushKey( DIK_W ) || input->PushKey( DIK_S ) || input->PushKey( DIK_D ) || input->PushKey( DIK_A ) )
+	if (input->PushKey(DIK_W) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_A))
 	{
-		if ( input->PushKey( DIK_W ) ) { camera->MoveVector( { 0.0f,+0.06f,0.0f } ); }
-		else if ( input->PushKey( DIK_S ) ) { camera->MoveVector( { 0.0f,-0.06f,0.0f } ); }
-		if ( input->PushKey( DIK_D ) ) { camera->MoveVector( { +0.06f,0.0f,0.0f } ); }
-		else if ( input->PushKey( DIK_A ) ) { camera->MoveVector( { -0.06f,0.0f,0.0f } ); }
+		if (input->PushKey(DIK_W)) { camera->MoveVector({ 0.0f,+0.06f,0.0f }); }
+		else if (input->PushKey(DIK_S)) { camera->MoveVector({ 0.0f,-0.06f,0.0f }); }
+		if (input->PushKey(DIK_D)) { camera->MoveVector({ +0.06f,0.0f,0.0f }); }
+		else if (input->PushKey(DIK_A)) { camera->MoveVector({ -0.06f,0.0f,0.0f }); }
 	}
 
 	// カメラ移動 Camera movement
-	if ( input->PushKey( DIK_UP ) || input->PushKey( DIK_DOWN ) )
+	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN))
 	{
-		if ( input->PushKey( DIK_UP ) ) { camera->MoveVector( { 0.0f,0.0f,+0.06f } ); }
-		else if ( input->PushKey( DIK_DOWN ) ) { camera->MoveVector( { 0.0f,0.0f,-0.06f } ); }
+		if (input->PushKey(DIK_UP)) { camera->MoveVector({ 0.0f,0.0f,+0.06f }); }
+		else if (input->PushKey(DIK_DOWN)) { camera->MoveVector({ 0.0f,0.0f,-0.06f }); }
 	}
 }
 
 void GameScene::CreateParticles()
 {
-	for ( int i = 0; i < 10; i++ ) {
+	for (int i = 0; i < 10; i++) {
 		// X,Y,Z全て[-5.0f,+5.0f]でランダムに分布 All X, Y, Z are randomly distributed at [-5.0f, + 5.0f]
 		const float rnd_pos = 10.0f;
 		XMFLOAT3 pos{};

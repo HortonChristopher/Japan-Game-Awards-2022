@@ -41,25 +41,25 @@ private: // 静的メンバ変数 Static member variables
 public:
 
 public: // メンバ関数 Member function
-	
+
 	// コンストクラタ Constructor
 	GameScene();
-	
+
 	// デストラクタ Destructor
 	~GameScene();
-	
+
 	// 初期化 Initialization
 	void Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio);
-	
+
 	// 毎フレーム処理 Every frame processing
 	void Update();
-	
+
 	// 描画 drawing
 	void Draw();
 
 	// カメラ移動 Camera movement
 	void MoveCamera();
-	
+
 	// パーティクル生成 Particle generation
 	void CreateParticles();
 
@@ -82,14 +82,14 @@ private: // メンバ変数 Member variables
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
-	DebugText debugText;	
+	DebugText debugText;
 
 	// ゲームシーン用 For game scenes
-	Camera *camera = nullptr;
-	 
+	Camera* camera = nullptr;
+
 	Sprite* spriteBG = nullptr;
 
-	ParticleManager *particleMan = nullptr;
+	ParticleManager* particleMan = nullptr;
 
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
@@ -124,7 +124,7 @@ private: // メンバ変数 Member variables
 
 	Enemy* objClone = nullptr;
 
-	FbxObject3d *fbxobject1 = nullptr;
+	FbxObject3d* fbxobject1 = nullptr;
 
 	//球の初期位置変数
 	float InitBulletPos_PX = -9.0f;
@@ -174,5 +174,6 @@ private: // メンバ変数 Member variables
 	bool beginStage = false;
 	bool cameraFlag = false;
 	XMFLOAT3 controlPoint, cameraStartPosition, cameraEndPosition;
+	int currentCameraFrame = 0;
+	bool cameraChange = false;
 };
-
