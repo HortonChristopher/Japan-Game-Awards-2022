@@ -291,6 +291,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
 			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (i == 9)
+			{
+				object->SetRotation({ 0, 180, 0 });
+			}
 			objects.push_back(object);
 		}
 	}
@@ -340,6 +344,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
 			object_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (i == 9)
+			{
+				object_2->SetRotation({ 0, 180, 0 });
+			}
 			objects_2.push_back(object_2);
 		}
 	}
