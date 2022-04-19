@@ -295,6 +295,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object->SetRotation({ 0, 180, 0 });
 			}
+			if (i == 2 && j == 2 || i == 5 && j == 3)
+			{
+				object->SetRotation({ -90, 0, 0 });
+				object->SetScale({ LAND_SCALE, 2.0, LAND_SCALE });
+			}
 			objects.push_back(object);
 		}
 	}
@@ -347,6 +352,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			if (i == 9)
 			{
 				object_2->SetRotation({ 0, 180, 0 });
+			}
+			if (i == 5 && j == 3)
+			{
+				object_2->SetRotation({ -90, 0, 0 });
+				object_2->SetScale({ LAND_SCALE, 2.0, LAND_SCALE });
 			}
 			objects_2.push_back(object_2);
 		}
