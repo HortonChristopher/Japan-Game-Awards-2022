@@ -156,4 +156,3 @@ private: // ƒƒ“ƒo•Ï” Member variables
 	bool cameraFlag = false;
 	XMFLOAT3 controlPoint, cameraStartPosition, cameraEndPosition;
 };
-
