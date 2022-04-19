@@ -653,7 +653,7 @@ void GameScene::Update()
 			if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 			{
 				enemyAlive = false;
-				sceneNo = 2;
+				sceneNo = 4;
 				sceneChange = 0;
 				//gameClear->Initialize();
 			}
@@ -899,6 +899,26 @@ void GameScene::Update()
 		}
 
 		break;
+
+
+	case 4:
+	//ステージ2
+		
+		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+		if (ConTimer <= 60)
+		{
+			ConTimer += 1;
+		}
+
+		if (ConTimer == 60)
+		{
+			InitInput();
+			ConTimer = 0;
+		}
+
+
+		break;
+
 	}
 
 	//if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
