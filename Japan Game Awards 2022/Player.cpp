@@ -9,6 +9,9 @@
 
 using namespace DirectX;
 
+extern int cameraMove;
+extern int prevCameraMove;
+
 Player* Player::Create(Model* model)
 {
 	// 3Dオブジェクトのインスタンスを生成 Instantiate a 3D object
@@ -39,7 +42,7 @@ bool Player::Initialize()
 	}
 
 	//コントローラー初期化
-	//InitInput();
+	InitInput();
 
 	// コライダーの追加 Add Collider
 	float radius = 0.6f;
@@ -54,119 +57,601 @@ bool Player::Initialize()
 void Player::Update()
 {
 	Input* input = Input::GetInstance();
+	UpdateInput();
 
-	// A,Dで旋回 Turn with A, D
-
-	if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
+	//正面から見たときの移動処理
+	if (cameraMove == 1)
 	{
-		if (input->PushKey(DIK_A) && input->PushKey(DIK_W)) 
+		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 		{
-			rotation.y = 315.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
+			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
+
+			else if (input->PushKey(DIK_D))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+
+			else if (input->PushKey(DIK_W))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+
+			else if (input->PushKey(DIK_S))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
 		}
 
-		else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+		//コントローラー旋回と移動処理
+		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 		{
-			rotation.y = 45.0f;
-			position.x += 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
+			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::LeftButton))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::UpButton))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::DownButton))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
 		}
 
-		else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+		if (IsButtonDown(ButtonKind::Button_A))
 		{
-			rotation.y = 135.0f;
-			position.x += 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
-		}
-
-		else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
-		{
-			rotation.y = 225.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
-		}
-
-		else if (input->PushKey(DIK_A))
-		{
-			position.x -= 0.2f;
-			rotation.y = 270.0f;
-		}
-
-		else if (input->PushKey(DIK_D))
-		{
-			position.x += 0.2f;
-			rotation.y = 90.0f;
-		}
-
-		else if (input->PushKey(DIK_W))
-		{
-			position.z += 0.2f;
-			rotation.y = 0.0f;
-		}
-
-		else if (input->PushKey(DIK_S))
-		{
-			position.z -= 0.2f;
-			rotation.y = 180.0f;
+			if (cameraMove == 1)
+			{
+				prevCameraMove = cameraMove;
+				cameraMove = 2;
+			}
 		}
 	}
 
-	//コントローラー旋回と移動処理
-	if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+	//左から見たときの移動処理
+	if (cameraMove == 2)
 	{
-		if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+		//キーボードの移動処理
+		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 		{
-			rotation.y = 315.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
+			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+
+			else if (input->PushKey(DIK_D))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
+
+			else if (input->PushKey(DIK_W))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+
+			else if (input->PushKey(DIK_S))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
 		}
 
-		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+		//コントローラー旋回と移動処理
+		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 		{
-			rotation.y = 45.0f;
-			position.x += 0.2f * 0.71f;
-			position.z += 0.2f * 0.71f;
-		}
+			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
 
-		else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
-		{
-			rotation.y = 135.0f;
-			position.x += 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
-		}
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
 
-		else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
-		{
-			rotation.y = 225.0f;
-			position.x -= 0.2f * 0.71f;
-			position.z -= 0.2f * 0.71f;
-		}
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
 
-		else if (IsButtonPush(ButtonKind::LeftButton))
-		{
-			position.x -= 0.2f;
-			rotation.y = 270.0f;
-		}
+			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
 
-		else if (IsButtonPush(ButtonKind::RightButton))
-		{
-			position.x += 0.2f;
-			rotation.y = 90.0f;
-		}
+			else if (IsButtonPush(ButtonKind::LeftButton))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
 
-		else if (IsButtonPush(ButtonKind::UpButton))
-		{
-			position.z += 0.2f;
-			rotation.y = 0.0f;
-		}
+			else if (IsButtonPush(ButtonKind::RightButton))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
 
-		else if (IsButtonPush(ButtonKind::DownButton))
-		{
-			position.z -= 0.2f;
-			rotation.y = 180.0f;
+			else if (IsButtonPush(ButtonKind::UpButton))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::DownButton))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
 		}
 	}
+
+	//奥側から見たときの移動処理
+	if (cameraMove == 3)
+	{
+		//キーボードの移動処理
+		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
+		{
+			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+
+			else if (input->PushKey(DIK_D))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
+
+			else if (input->PushKey(DIK_W))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
+
+			else if (input->PushKey(DIK_S))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+		}
+
+		//コントローラー旋回と移動処理
+		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+		{
+			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::LeftButton))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::UpButton))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::DownButton))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+		}
+	}
+
+	//右側から見たときの移動処理
+	if (cameraMove == 4)
+	{
+		//キーボードの移動処理
+		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
+		{
+			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (input->PushKey(DIK_A))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
+
+			else if (input->PushKey(DIK_D))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+
+			else if (input->PushKey(DIK_W))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
+
+			else if (input->PushKey(DIK_S))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+		}
+
+		//コントローラー旋回と移動処理
+		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+		{
+			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 225.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+			{
+				rotation.y = 315.0f;
+				position.x -= 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 45.0f;
+				position.x += 0.2f * 0.71f;
+				position.z += 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+			{
+				rotation.y = 135.0f;
+				position.x += 0.2f * 0.71f;
+				position.z -= 0.2f * 0.71f;
+			}
+
+			else if (IsButtonPush(ButtonKind::LeftButton))
+			{
+				position.z -= 0.2f;
+				rotation.y = 180.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::RightButton))
+			{
+				position.z += 0.2f;
+				rotation.y = 0.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::UpButton))
+			{
+				position.x -= 0.2f;
+				rotation.y = 270.0f;
+			}
+
+			else if (IsButtonPush(ButtonKind::DownButton))
+			{
+				position.x += 0.2f;
+				rotation.y = 90.0f;
+			}
+		}
+	}
+
+	////キーボードでステージ回転
+	//if (input->TriggerKey(DIK_Q) || input->TriggerKey(DIK_E))
+	//{
+	//	if (input->TriggerKey(DIK_Q))
+	//	{
+	//		if (cameraMove == 1)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 2;
+	//		}
+
+	//		else if (cameraMove == 2)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 3;
+	//		}
+
+	//		else if (cameraMove == 3)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 4;
+	//		}
+
+	//		else if (cameraMove == 4)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 1;
+	//		}
+	//	}
+
+
+	//	if (input->TriggerKey(DIK_E))
+	//	{
+	//		if (cameraMove == 1)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 4;
+	//		}
+
+	//		else if (cameraMove == 4)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 3;
+	//		}
+
+
+	//		else if (cameraMove == 3)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 2;
+	//		}
+
+
+	//		else if (cameraMove == 2)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 1;
+	//		}
+	//	}
+	//}
+
+	////コントローラでステージ回転
+	//if (IsButtonDown(ButtonKind::Button_LB) || IsButtonDown(ButtonKind::Button_RB))
+	//{
+	//	//assert(0);
+	//	if (IsButtonDown(ButtonKind::Button_LB))
+	//	{
+	//		if (cameraMove == 1)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 2;
+	//		}
+
+	//		else if (cameraMove == 2)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 3;
+	//		}
+
+	//		else if (cameraMove == 3)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 4;
+	//		}
+
+	//		else if (cameraMove == 4)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 1;
+	//		}
+	//	}
+
+	//	if (IsButtonDown(ButtonKind::Button_RB))
+	//	{
+	//		if (cameraMove == 1)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 4;
+	//		}
+
+	//		else if (cameraMove == 4)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 3;
+	//		}
+
+
+	//		else if (cameraMove == 3)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 2;
+	//		}
+
+
+	//		else if (cameraMove == 2)
+	//		{
+	//			prevCameraMove = cameraMove;
+	//			cameraMove = 1;
+	//		}
+	//	}
+	//}
 
 	// 移動ベクトルをY軸回りの角度で回転 Rotate the movement vector at an angle around the Y axis
 	XMVECTOR move = { 0, 0, 0.1f, 0 };
