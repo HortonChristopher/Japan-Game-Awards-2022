@@ -505,31 +505,35 @@ void GameScene::Update()
 		if (beginStage)
 		{
 			// Camera Movement カメラ動く
-			if (input->TriggerKey(DIK_Q) || input->TriggerKey(DIK_E))
+			if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 			{
 				if (input->TriggerKey(DIK_Q))
 				{
 					if (cameraMove == 4)
 					{
 						prevCameraMove = cameraMove;
-						cameraMove = 0;
+						cameraChange = true;
+						cameraMove = 1;
 					}
 					else
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove++;
 					}
 				}
 				else if (input->TriggerKey(DIK_E))
 				{
-					if (cameraMove == 0)
+					if (cameraMove == 1)
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove = 4;
 					}
 					else
 					{
 						prevCameraMove = cameraMove;
+						cameraChange = true;
 						cameraMove--;
 					}
 				}
@@ -663,77 +667,88 @@ void GameScene::Update()
 			//Normal Eye: {0, 20, -30}
 			//Opposite Side: {0, 20, 30}
 
-			if (cameraMove == 1)
+			if (cameraChange)
 			{
-				/*if (prevCameraMove == 4)
+				if (cameraMove == 1)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 4)
 					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
 					}
-				}
-				else if (prevCameraMove == 2)
-				{
-					for (int i = 0; i < 40; i++)
+					else if (prevCameraMove == 2)
 					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
 					}
-				}*/
-				camera->SetEye({ 0.0f, 20.0f, -30.0f });
-			}
-			if (cameraMove == 2)
-			{
-				/*if (prevCameraMove == 1)
-				{
-					for (int i = 0; i < 40; i++)
+
+					if (currentCameraFrame >= 40)
 					{
-						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+						camera->SetEye({ 0.0f, 20.0f, -30.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
 					}
 				}
-				else if (prevCameraMove == 3)
+				if (cameraMove == 2)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 1)
 					{
+						currentCameraFrame++;
+						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+					}
+					else if (prevCameraMove == 3)
+					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
 					}
-				}*/
-				camera->SetEye({ -40.0f, 20.0f, 0.0f });
-			}
-			if (cameraMove == 3)
-			{
-				/*if (prevCameraMove == 2)
-				{
-					for (int i = 0; i < 40; i++)
+
+					if (currentCameraFrame >= 40)
 					{
-						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+						camera->SetEye({ -40.0f, 20.0f, 0.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
 					}
 				}
-				else if (prevCameraMove == 4)
+				if (cameraMove == 3)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 2)
 					{
+						currentCameraFrame++;
+						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+					}
+					else if (prevCameraMove == 4)
+					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
 					}
-				}*/
-				camera->SetEye({ 0.0f, 20.0f, 30.0f });
-			}
-			if (cameraMove == 4)
-			{
-				/*if (prevCameraMove == 3)
-				{
-					for (int i = 0; i < 40; i++)
+
+					if (currentCameraFrame >= 40)
 					{
-						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+						camera->SetEye({ 0.0f, 20.0f, 30.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
 					}
 				}
-				else if (prevCameraMove == 1)
+				if (cameraMove == 4)
 				{
-					for (int i = 0; i < 40; i++)
+					if (prevCameraMove == 3)
 					{
+						currentCameraFrame++;
+						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+					}
+					else if (prevCameraMove == 1)
+					{
+						currentCameraFrame++;
 						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
 					}
-				}*/
-				camera->SetEye({ 40.0f, 20.0f, 0.0f });
+
+					if (currentCameraFrame >= 40)
+					{
+						camera->SetEye({ 40.0f, 20.0f, 0.0f });
+						currentCameraFrame = 0;
+						cameraChange = false;
+					}
+				}
 			}
 
 			UpdateInput();

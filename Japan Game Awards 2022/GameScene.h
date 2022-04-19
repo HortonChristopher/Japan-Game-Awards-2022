@@ -174,4 +174,6 @@ private: // メンバ変数 Member variables
 	bool beginStage = false;
 	bool cameraFlag = false;
 	XMFLOAT3 controlPoint, cameraStartPosition, cameraEndPosition;
+	int currentCameraFrame = 0;
+	bool cameraChange = false;
 };
