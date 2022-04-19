@@ -380,6 +380,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	camera->SetTarget({ 0, 1, 0 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
+	originalCamera = camera->GetEye();
+
 	enemyAlive = true;
 	playerAlive = true;
 
@@ -1248,6 +1250,9 @@ void GameScene::Stage1Reset()
 
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
+
+	camera->SetEye(originalCamera);
+	camera->SetTarget({ 0,1,0 });
 
 	beginStage = false;
 }

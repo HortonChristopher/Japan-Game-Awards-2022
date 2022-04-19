@@ -176,4 +176,6 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 controlPoint, cameraStartPosition, cameraEndPosition;
 	int currentCameraFrame = 0;
 	bool cameraChange = false;
+
+	XMFLOAT3 originalCamera;
 };
