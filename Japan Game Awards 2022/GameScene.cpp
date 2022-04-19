@@ -1254,6 +1254,8 @@ void GameScene::Stage1Reset()
 	camera->SetEye(originalCamera);
 	camera->SetTarget({ 0,1,0 });
 
+	cameraMove = 1;
+
 	beginStage = false;
 }
 
