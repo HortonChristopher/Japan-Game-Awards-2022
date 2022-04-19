@@ -18,12 +18,6 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{765e682a-9a24-4ea2-836c-3e3475262342}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Stages">
-      <UniqueIdentifier>{46d9fbb2-3d07-4430-9f8b-92a3818a21ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Stages\Stage1">
-      <UniqueIdentifier>{05ce4092-83a2-46ea-98f7-b3d674314c2e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\GameOver">
       <UniqueIdentifier>{540dda22-e9b4-4bdd-8165-32c9ad1b62f4}</UniqueIdentifier>
     </Filter>
@@ -112,9 +106,6 @@
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage1.cpp">
-      <Filter>Scenes\Stages\Stage1</Filter>
     </ClCompile>
     <ClCompile Include="GameClear.cpp">
       <Filter>Scenes\GameClear</Filter>
@@ -232,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="QueryCallback.h">
       <Filter>ヘッダ ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage1.h">
-      <Filter>Scenes\Stages\Stage1</Filter>
     </ClInclude>
     <ClInclude Include="GameClear.h">
       <Filter>Scenes\GameClear</Filter>
