@@ -18,7 +18,7 @@
 #include "GameClear.h"
 
 using namespace DirectX;
-extern int sceneNo = 0; //タイトル Title
+extern int sceneNo = 4; //タイトル Title
 extern int sceneChange = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
@@ -49,6 +49,30 @@ GameScene::~GameScene()
 
 	for (auto object_2 : objects_2) {
 		safe_delete(object_2);
+	}
+
+	for (auto object_s2_1 : objects_s2_1) {
+		safe_delete(object_s2_1);
+	}
+
+	for (auto object_s2_2 : objects_s2_2) {
+		safe_delete(object_s2_2);
+	}
+
+	for (auto object_s2_y : objects_s2_y) {
+		safe_delete(object_s2_y);
+	}
+
+	for (auto object_s2_y2 : objects_s2_y2) {
+		safe_delete(object_s2_y2);
+	}
+
+	for (auto object_s2_s : objects_s2_s) {
+		safe_delete(object_s2_s);
+	}
+
+	for (auto object_s2_s2 : objects_s2_s2) {
+		safe_delete(object_s2_s2);
 	}
 
 	safe_delete(spriteBG);
@@ -152,6 +176,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 	modelTempWall = Model::CreateFromOBJ("kabe");
+	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 
@@ -237,13 +262,22 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelTempWall,
 	};
 
+	Model* modeltable_s2[2] = {
+		modelPlane,
+		modelTempWall,
+	};
+
+	Model* modeltable_y[1] = {
+		modelYellowWall,
+	};
+
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
 
 	//ステージ1用外壁マップチップ
 	const int WALL_NUM = 23;
 
-	//自分側のマップチップ生成(Map chip generation)
+	//自分側のマップチップ生成(Map chip generation) ステージ　１
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
 		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
 			int modelIndex = rand() % 10;
@@ -304,7 +338,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		}
 	}
 
-	//敵側のマップチップ生成(Enemy side map chip generation)
+	//敵側のマップチップ生成(Enemy side map chip generation)　ステージ　１
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
 		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
 
@@ -362,6 +396,193 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		}
 	}
 
+	//ステージ　２
+	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 8; j++) { // x coordinate - Left to Right
+
+			int modelIndex = 0;
+
+			//ステージ外壁の配置
+			//下
+			if (i == 0 && j == j)
+			{
+				modelIndex = 1;
+			}
+
+			//上
+			if (i == 11 && j == j)
+			{
+				modelIndex = 1;
+			}
+
+			//左
+			if (i == i && j == 0)
+			{
+				modelIndex = 1;
+			}
+
+			//右
+			if (i == i && j == 7)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 5 && j != 3 || i == 1 && j == 3 || i == 2 && j == 4 || i == 6 && j == 6 || i == 7 && j > 2 && j < 6 || i == 9 && j == 3 || i == 10 && j == 1)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 7 && j == 2 || i == 9 && j == 5)
+			{
+				continue;
+			}
+
+			TouchableObject* object_s2_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_s2_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (i == 11)
+			{
+				object_s2_1->SetRotation({ 0, 180, 0 });
+			}
+			objects_s2_1.push_back(object_s2_1);
+		}
+	}
+
+	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 8; j++) { // x coordinate - Left to Right
+
+			int modelIndex = 0;
+
+			//ステージ外壁の配置
+			//下
+			if (i == 0 && j == j)
+			{
+				modelIndex = 1;
+			}
+
+			//上
+			if (i == 11 && j == j)
+			{
+				modelIndex = 1;
+			}
+
+			//左
+			if (i == i && j == 7)
+			{
+				modelIndex = 1;
+			}
+
+			//右
+			if (i == i && j == 0)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 5 && j != 3 || i == 1 && j > 4 && j < 7 || i == 2 && j == 4 || i == 6 && j > 3 && j < 6 || i == 7 && j == 5 || i == 8 && j == 2 || i == 9 && j > 0 && j < 3 || i > 8 && i < 11 && j == 5)
+			{
+				modelIndex = 1;
+			}
+
+			if (i > 5 && i < 11 && j == 6)
+			{
+				continue;
+			}
+
+			TouchableObject* object_s2_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_s2_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (i == 9)
+			{
+				object_s2_2->SetRotation({ 0, 180, 0 });
+			}
+			objects_s2_2.push_back(object_s2_2);
+		}
+	}
+
+	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 8; j++) { // x coordinate - Left to Right
+
+			int modelIndex;
+
+			if (i == 5 && j == 3)
+			{
+				modelIndex = 0;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s2_y = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s2_y->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			objects_s2_y.push_back(object_s2_y);
+		}
+	}
+
+	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 8; j++) { // x coordinate - Left to Right
+
+			int modelIndex;
+
+			if (i == 5 && j == 3)
+			{
+				modelIndex = 0;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s2_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s2_y2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			objects_s2_y2.push_back(object_s2_y2);
+		}
+	}
+
+	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 8; j++) { // x coordinate - Left to Right
+
+			int modelIndex;
+
+			if (i == 7 && j == 2 || i == 9 && j == 5)
+			{
+				modelIndex = 0;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s2_s = TouchableObject::Create(modeltable[modelIndex]);
+			object_s2_s->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_s->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			objects_s2_s.push_back(object_s2_s);
+		}
+	}
+
+	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
+		for (int j = 0; j < 8; j++) { // x coordinate - Left to Right
+
+			int modelIndex;
+
+			if (i > 5 && i < 11 && j == 6)
+			{
+				modelIndex = 0;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s2_s2 = TouchableObject::Create(modeltable[modelIndex]);
+			object_s2_s2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			objects_s2_s2.push_back(object_s2_s2);
+		}
+	}
+
 	//objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 1,1,1 });
 	objClone->SetScale({ 1,1,1 });
@@ -414,6 +635,21 @@ void GameScene::Update()
 	objCloneStand->SetPosition(FBXclonePosition);
 	objCloneStand->SetRotation(FBXcloneRotation);
 
+	playerPosition = objFighter->GetPosition();
+	playerRotation = objFighter->GetRotation();
+	enemyPosition = objClone->GetPosition();
+	enemyRotation = objClone->GetRotation();
+	playerTrigger = objTempTrigger->GetPosition();
+	enemyTrigger = objTempTriggerE->GetPosition();
+	playerBullet = objTempBullet->GetPosition();
+	enemyBullet = objTempBulletE->GetPosition();
+
+	// GameSceneとの座標共有 Coordinate sharing with GameScene
+	playerPositionTemp = playerPosition;
+	playerRotationTemp = playerRotation;
+	clonePositionTemp = enemyPosition;
+	cloneRotationTemp = enemyRotation;
+
 	if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
 		|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
 	{
@@ -425,37 +661,74 @@ void GameScene::Update()
 		FBXModelChange = 0;
 	}
 
-	/*if (playerBulletF)
+	// Camera Movement カメラ動く
+	if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 	{
-		playerBullet.x += 0.1f;
-		objTempBullet->SetPosition(playerBullet);
-	}
-	else
-	{
-		playerBullet.x = InitBulletPos_PX;
-		objTempBullet->SetPosition(playerBullet);
+		if (input->TriggerKey(DIK_Q))
+		{
+			if (cameraMove == 4)
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove = 1;
+			}
+			else
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove++;
+			}
+		}
+		else if (input->TriggerKey(DIK_E))
+		{
+			if (cameraMove == 1)
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove = 4;
+			}
+			else
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove--;
+			}
+		}
 	}
 
-	if (enemyBulletF)
+	if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
 	{
-		enemyBullet.x -= 0.1f;
-		objTempBulletE->SetPosition(enemyBullet);
+		if (IsButtonDown(ButtonKind::Button_LB))
+		{
+			if (cameraMove == 4)
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove = 1;
+			}
+			else
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove++;
+			}
+		}
+		else if (IsButtonDown(ButtonKind::Button_RB))
+		{
+			if (cameraMove == 1)
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove = 4;
+			}
+			else
+			{
+				prevCameraMove = cameraMove;
+				cameraChange = true;
+				cameraMove--;
+			}
+		}
 	}
-	else
-	{
-		enemyBullet.x = InitBulletPos_EX;
-		objTempBulletE->SetPosition(enemyBullet);
-	}
-
-	if (playerBullet.x > 9.0f)
-	{
-		playerBulletF = false;
-	}
-
-	if (enemyBullet.x < -9.0f)
-	{
-		enemyBulletF = false;
-	}*/
 
 	//シーン遷移
 	switch (sceneNo)
@@ -492,21 +765,6 @@ void GameScene::Update()
 
 		break;
 	case 1:
-		playerPosition = objFighter->GetPosition();
-		playerRotation = objFighter->GetRotation();
-		enemyPosition = objClone->GetPosition();
-		enemyRotation = objClone->GetRotation();
-		playerTrigger = objTempTrigger->GetPosition();
-		enemyTrigger = objTempTriggerE->GetPosition();
-		playerBullet = objTempBullet->GetPosition();
-		enemyBullet = objTempBulletE->GetPosition();
-
-		// GameSceneとの座標共有 Coordinate sharing with GameScene
-		playerPositionTemp = playerPosition;
-		playerRotationTemp = playerRotation;
-		clonePositionTemp = enemyPosition;
-		cloneRotationTemp = enemyRotation;
-
 		if (!beginStage)
 		{
 			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
@@ -524,75 +782,6 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
-			// Camera Movement カメラ動く
-			if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
-			{
-				if (input->TriggerKey(DIK_Q))
-				{
-					if (cameraMove == 4)
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove = 1;
-					}
-					else
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove++;
-					}
-				}
-				else if (input->TriggerKey(DIK_E))
-				{
-					if (cameraMove == 1)
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove = 4;
-					}
-					else
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove--;
-					}
-				}
-			}
-
-			if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
-			{
-				if (IsButtonDown(ButtonKind::Button_LB))
-				{
-					if (cameraMove == 4)
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove = 1;
-					}
-					else
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove++;
-					}
-				}
-				else if (IsButtonDown(ButtonKind::Button_RB))
-				{
-					if (cameraMove == 1)
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove = 4;
-					}
-					else
-					{
-						prevCameraMove = cameraMove;
-						cameraChange = true;
-						cameraMove--;
-					}
-				}
-			}
-
 			// オブジェクト移動 Move object
 
 			//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
@@ -673,6 +862,7 @@ void GameScene::Update()
 			if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 			{
 				enemyAlive = false;
+				Stage2Reset();
 				sceneNo = 4;
 				sceneChange = 0;
 				//gameClear->Initialize();
@@ -684,95 +874,6 @@ void GameScene::Update()
 				sceneNo = 3;
 				sceneChange = 0;
 				//gameOver->Initialize();
-			}
-
-			//Left Side Eye: {-40, 20, 0}
-			//Right Side Eye: {40, 20, 0}
-			//Normal Eye: {0, 20, -30}
-			//Opposite Side: {0, 20, 30}
-
-			if (cameraChange)
-			{
-				if (cameraMove == 1)
-				{
-					if (prevCameraMove == 4)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
-					}
-					else if (prevCameraMove == 2)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
-					}
-
-					if (currentCameraFrame >= 40)
-					{
-						camera->SetEye({ 0.0f, 20.0f, -30.0f });
-						currentCameraFrame = 0;
-						cameraChange = false;
-					}
-				}
-				if (cameraMove == 2)
-				{
-					if (prevCameraMove == 1)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
-					}
-					else if (prevCameraMove == 3)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
-					}
-
-					if (currentCameraFrame >= 40)
-					{
-						camera->SetEye({ -40.0f, 20.0f, 0.0f });
-						currentCameraFrame = 0;
-						cameraChange = false;
-					}
-				}
-				if (cameraMove == 3)
-				{
-					if (prevCameraMove == 2)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
-					}
-					else if (prevCameraMove == 4)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
-					}
-
-					if (currentCameraFrame >= 40)
-					{
-						camera->SetEye({ 0.0f, 20.0f, 30.0f });
-						currentCameraFrame = 0;
-						cameraChange = false;
-					}
-				}
-				if (cameraMove == 4)
-				{
-					if (prevCameraMove == 3)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
-					}
-					else if (prevCameraMove == 1)
-					{
-						currentCameraFrame++;
-						camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
-					}
-
-					if (currentCameraFrame >= 40)
-					{
-						camera->SetEye({ 40.0f, 20.0f, 0.0f });
-						currentCameraFrame = 0;
-						cameraChange = false;
-					}
-				}
 			}
 
 			UpdateInput();
@@ -923,89 +1024,197 @@ void GameScene::Update()
 
 	case 4:
 	//ステージ2
-		
-		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
-		if (ConTimer <= 60)
+		if (!beginStage)
 		{
-			ConTimer += 1;
-		}
+			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
+			camera->Update();
+			currentFrame++;
 
-		if (ConTimer == 60)
+			if (currentFrame >= 100)
+			{
+				currentFrame = 0;
+				beginStage = true;
+			}
+
+			//objFighter->Update();
+			//objClone->Update();
+		}
+		if (beginStage)
 		{
-			InitInput();
-			ConTimer = 0;
-		}
+			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+			if (ConTimer <= 60)
+			{
+				ConTimer += 1;
+			}
 
+			if (ConTimer == 60)
+			{
+				InitInput();
+				ConTimer = 0;
+			}
+
+			if (input->TriggerKey(DIK_1)) // debug デバッグ
+			{
+				stage2YellowKabe = false;
+			}
+			if (input->TriggerKey(DIK_2)) // debug デバッグ
+			{
+				stage2Switch = true;
+			}
+
+			for (auto object_s2_1 : objects_s2_1) {
+				object_s2_1->Update();
+			}
+
+			for (auto object_s2_2 : objects_s2_2) {
+				object_s2_2->Update();
+			}
+
+			if (!stage2YellowKabe)
+			{
+				for (auto object_s2_y : objects_s2_y) {
+					object_s2_y->SetPosition({ 0, -100, 0 });
+					object_s2_y->Update();
+				}
+
+				for (auto object_s2_y2 : objects_s2_y2) {
+					object_s2_y2->SetPosition({ 0, -100, 0 });
+					object_s2_y2->Update();
+				}
+			}
+
+			if (stage2Switch)
+			{
+				for (auto object_s2_s : objects_s2_s) {
+					object_s2_s->SetPosition({ 0, -100, 0 });
+				}
+
+				for (auto object_s2_s2 : objects_s2_s2) {
+					object_s2_s2->SetPosition({ 0, -100, 0 });
+				}
+			}
+
+			for (auto object_s2_y : objects_s2_y) {
+				object_s2_y->Update();
+			}
+
+			for (auto object_s2_y2 : objects_s2_y2) {
+				object_s2_y2->Update();
+			}
+
+			for (auto object_s2_s : objects_s2_s) {
+				object_s2_s->Update();
+			}
+
+			for (auto object_s2_s2 : objects_s2_s2) {
+				object_s2_s2->Update();
+			}
+
+			objFighter->Update();
+			objClone->Update();
+
+			objPlayerRun->Update();
+			objPlayerStand->Update();
+
+			objCloneRun->Update();
+			objCloneStand->Update();
+
+			camera->Update();
+
+			collisionManager->CheckAllCollisions();
+		}
 
 		break;
-
 	}
 
-	//if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
-	//{
-	//	enemyAlive = false;
-	//}
-	//if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f) && enemyBulletF == true)
-	//{
-	//	playerAlive = false;
-	//}
+	//Left Side Eye: {-40, 20, 0}
+	//Right Side Eye: {40, 20, 0}
+	//Normal Eye: {0, 20, -30}
+	//Opposite Side: {0, 20, 30}
+	//カメラ回転 Camera Rotation
+	if (cameraChange)
+	{
+		if (cameraMove == 1)
+		{
+			if (prevCameraMove == 4)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
+			}
+			else if (prevCameraMove == 2)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+			}
 
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ 0.0f, 20.0f, -30.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+		if (cameraMove == 2)
+		{
+			if (prevCameraMove == 1)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+			}
+			else if (prevCameraMove == 3)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
+			}
 
-	// パーティクル生成 Particle generation
-	//CreateParticles();
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ -40.0f, 20.0f, 0.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+		if (cameraMove == 3)
+		{
+			if (prevCameraMove == 2)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+			}
+			else if (prevCameraMove == 4)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+			}
 
-	//UpdateInput();
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ 0.0f, 20.0f, 30.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+		if (cameraMove == 4)
+		{
+			if (prevCameraMove == 3)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+			}
+			else if (prevCameraMove == 1)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+			}
 
-	//objFighter->SetPosition({ playerPosition });
-
-	//camera->Update();
-	//particleMan->Update();
-
-	//objSkydome->Update();
-	//for (auto object : objects) {
-	//	object->Update();
-	//}
-
-	//for (auto object_2 : objects_2) {
-	//	object_2->Update();
-	//}
-
-	//objGround->Update();
-	/*objFighter->Update();
-	objClone->Update();
-
-	objTempTrigger->Update();
-	objTempTriggerE->Update();
-
-	objTempBullet->SetPosition(playerBullet);
-	objTempBulletE->SetPosition(enemyBullet);
-
-	objTempBullet->Update();
-	objTempBulletE->Update();*/
-
-	//fbxobject1->Update();
-
-	//debugText.Print( "", 50, 50, 1.0f );
-	//debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
-	//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
-
-	//lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
-	//lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
-
-	//collisionManager->CheckAllCollisions();
-
-	////Debug Start
-	//char msgbuf[256];
-	//char msgbuf2[256];
-	////char msgbuf3[256];
-
-	//sprintf_s(msgbuf, 256, "Enemy X: %f\n", enemyPosition.x);
-	//sprintf_s(msgbuf2, 256, "Enemy Z: %f\n", enemyPosition.z);
-	////sprintf_s(msgbuf3, 256, "isTouchingGround: %f\n", isTouchingGround);
-	//OutputDebugStringA(msgbuf);
-	//OutputDebugStringA(msgbuf2);
-	////OutputDebugStringA(msgbuf3);
-	////Debug End
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ 40.0f, 20.0f, 0.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+	}
 }
 
 void GameScene::Draw()
@@ -1044,6 +1253,8 @@ void GameScene::Draw()
 		}
 		gameOver->Draw();
 		break;
+	case 4:
+		spriteBG->Draw();
 	}
 
 
@@ -1109,6 +1320,47 @@ void GameScene::Draw()
 		break;
 	case 3:
 		break;
+	case 4:
+		if (FBXModelChange == 1)
+		{
+			objPlayerRun->Draw(cmdList);
+			objCloneRun->Draw(cmdList);
+		}
+		else if (FBXModelChange == 0)
+		{
+			objPlayerStand->Draw(cmdList);
+			objCloneStand->Draw(cmdList);
+		}
+
+		for (auto object_s2_1 : objects_s2_1) {
+			object_s2_1->Draw();
+		}
+
+		for (auto object_s2_2 : objects_s2_2) {
+			object_s2_2->Draw();
+		}
+
+		if (stage2YellowKabe)
+		{
+			for (auto object_s2_y : objects_s2_y) {
+				object_s2_y->Draw();
+			}
+
+			for (auto object_s2_y2 : objects_s2_y2) {
+				object_s2_y2->Draw();
+			}
+		}
+
+		if (!stage2Switch)
+		{
+			for (auto object_s2_s : objects_s2_s) {
+				object_s2_s->Draw();
+			}
+
+			for (auto object_s2_s2 : objects_s2_s2) {
+				object_s2_s2->Draw();
+			}
+		}
 	}
 
 	// パーティクルの描画 Drawing particles
@@ -1141,6 +1393,8 @@ void GameScene::Draw()
 	case 2:
 		break;
 	case 3:
+		break;
+	case 4:
 		break;
 	}
 
@@ -1225,9 +1479,6 @@ void GameScene::Stage1Reset()
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
-	//camera->SetTarget({ 0, 1, 0 });
-	//camera->MoveEyeVector({ 0, 25.0f, 25.0f });
-
 	enemyAlive = true;
 	playerAlive = true;
 
@@ -1257,6 +1508,28 @@ void GameScene::Stage1Reset()
 	cameraMove = 1;
 
 	beginStage = false;
+}
+
+void GameScene::Stage2Reset()
+{
+	objFighter->SetPosition({ -12,0,-12 });
+	objClone->SetPosition({ 12,0,-12 });
+
+	objFighter->SetRotation({ 0,0,0 });
+	objClone->SetRotation({ 0,0,0 });
+
+	playerRotationTemp = { 0,0,0 };
+	cloneRotationTemp = { 0,0,0 };
+
+	camera->SetTarget({ 0, 1, 0 });
+	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+
+	camera->SetEye(originalCamera);
+	camera->SetTarget({ 0,1,0 });
+
+	cameraMove = 1;
+
+	//beginStage = false;
 }
 
 void GameScene::CinematicCamera()

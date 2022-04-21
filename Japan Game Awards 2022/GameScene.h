@@ -66,6 +66,7 @@ public: // メンバ関数 Member function
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
 	void Stage1Reset();
+	void Stage2Reset();
 
 	void CinematicCamera();
 
@@ -78,6 +79,9 @@ private: // メンバ変数 Member variables
 
 	bool playerBulletF = false;
 	bool enemyBulletF = false;
+
+	bool stage2YellowKabe = true;
+	bool stage2Switch = false;
 
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
@@ -98,6 +102,7 @@ private: // メンバ変数 Member variables
 	Model* modelBox = nullptr;
 	Model* modelPyramid = nullptr;
 	Model* modelTempWall = nullptr;
+	Model* modelYellowWall = nullptr;
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
 
@@ -142,8 +147,14 @@ private: // メンバ変数 Member variables
 
 	CollisionManager* collisionManager;
 
-	std::vector<Object3d*> objects;
-	std::vector<Object3d*> objects_2;
+	std::vector<Object3d*> objects; //ステージ　１
+	std::vector<Object3d*> objects_2; //ステージ　１
+	std::vector<Object3d*> objects_s2_1; //ステージ　２
+	std::vector<Object3d*> objects_s2_2; //ステージ　２
+	std::vector<Object3d*> objects_s2_y; //ステージ　２
+	std::vector<Object3d*> objects_s2_y2; //ステージ　２
+	std::vector<Object3d*> objects_s2_s; //ステージ　２
+	std::vector<Object3d*> objects_s2_s2; //ステージ　２
 	std::vector<Object3d*> objects_Wall;
 
 	TitleScene* titleScene = nullptr;

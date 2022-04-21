@@ -719,9 +719,6 @@ void Player::Update()
 		const float jumpVYFist = 0.15f;
 		fallV = { 0, jumpVYFist, 0, 0 };
 	}
-
-
-
 	
 	// コライダー更新 Collider update
 	UpdateWorldMatrix();
