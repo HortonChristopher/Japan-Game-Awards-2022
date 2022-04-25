@@ -89,6 +89,9 @@ private: // メンバ変数 Member variables
 	bool playerBulletF = false;
 	bool enemyBulletF = false;
 
+	bool tutorial3YellowKabe1 = true;
+	bool tutorial3YellowKabe2 = true;
+	bool tutorial3YellowKabe3 = true;
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
 
@@ -113,7 +116,7 @@ private: // メンバ変数 Member variables
 
 	ParticleManager* particleMan = nullptr;
 
-	Model* modelSkydome = nullptr;
+	//Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
 	Model* modelFighter = nullptr;
 	Model* modelPlane = nullptr;
@@ -128,10 +131,11 @@ private: // メンバ変数 Member variables
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
 
-	Object3d* objSkydome = nullptr;
+	//Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;
 	Object3d* objTempTriggerE = nullptr;
 	Object3d* objTempYellowTrigger1 = nullptr;
+	Object3d* objTempYellowTrigger2 = nullptr;
 	Object3d* objTempBullet = nullptr;
 	Object3d* objTempBulletE = nullptr;
 
@@ -166,12 +170,19 @@ private: // メンバ変数 Member variables
 
 	CollisionManager* collisionManager;
 
+	//マップチップ mapchip
 	std::vector<Object3d*> objects_t1_1; //チュートリアル　１
 	std::vector<Object3d*> objects_t1_2; //チュートリアル　１
 	std::vector<Object3d*> objects_t2_1; //チュートリアル　２
 	std::vector<Object3d*> objects_t2_2; //チュートリアル　２
 	std::vector<Object3d*> objects_t3_1; //チュートリアル　３
 	std::vector<Object3d*> objects_t3_2; //チュートリアル　３
+	std::vector<Object3d*> objects_t3_y1_1; //チュートリアル　３
+	std::vector<Object3d*> objects_t3_y1_2; //チュートリアル　３
+	std::vector<Object3d*> objects_t3_y1_3; //チュートリアル　３
+	std::vector<Object3d*> objects_t3_y2_1; //チュートリアル　３
+	std::vector<Object3d*> objects_t3_y2_2; //チュートリアル　３
+	std::vector<Object3d*> objects_t3_y2_3; //チュートリアル　３
 	std::vector<Object3d*> objects; //ステージ　１
 	std::vector<Object3d*> objects_2; //ステージ　１
 	std::vector<Object3d*> objects_s2_1; //ステージ　２
@@ -194,6 +205,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 playerTrigger;
 	XMFLOAT3 enemyTrigger;
 	XMFLOAT3 yellowTrigger1;
+	XMFLOAT3 yellowTrigger2;
 	XMFLOAT3 playerBullet;
 	XMFLOAT3 enemyBullet;
 
