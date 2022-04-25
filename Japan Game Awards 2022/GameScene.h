@@ -67,6 +67,8 @@ public: // メンバ関数 Member function
 
 	void Tutorial1Reset();
 	void Tutorial1Move();
+	void Tutorial2Reset();
+	void Tutorial2Move();
 	void Stage1Reset();
 	void Stage1Move();
 	void Stage2Reset();
@@ -90,6 +92,7 @@ private: // メンバ変数 Member variables
 
 	//初めプレイですか？
 	bool t1Time = true;
+	bool t2Time = true;
 	bool firstTime = true;
 	bool secondTime = true;
 
@@ -162,6 +165,8 @@ private: // メンバ変数 Member variables
 
 	std::vector<Object3d*> objects_t1_1; //チュートリアル　１
 	std::vector<Object3d*> objects_t1_2; //チュートリアル　１
+	std::vector<Object3d*> objects_t2_1; //チュートリアル　２
+	std::vector<Object3d*> objects_t2_2; //チュートリアル　２
 	std::vector<Object3d*> objects; //ステージ　１
 	std::vector<Object3d*> objects_2; //ステージ　１
 	std::vector<Object3d*> objects_s2_1; //ステージ　２
