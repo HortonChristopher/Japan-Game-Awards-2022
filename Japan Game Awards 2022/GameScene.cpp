@@ -402,6 +402,57 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		}
 	}
 
+	// チュートリアル 3
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i == 0 || i == 10 || j == 0 || j == 6)
+			{
+				modelIndex = 1;
+			}
+
+			TouchableObject* object_t3_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_t3_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 1)
+			{
+				object_t3_1->SetRotation({ 0, 180, 0 });
+			}
+			objects_t3_1.push_back(object_t3_1);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i == 0 || i == 10 || j == 0 || j == 6)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 9 && j == 3)
+			{
+				continue;
+			}
+
+			TouchableObject* object_t3_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_t3_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 1)
+			{
+				object_t3_2->SetRotation({ 0, 180, 0 });
+			}
+			objects_t3_2.push_back(object_t3_2);
+		}
+	}
+
 	//自分側のマップチップ生成(Map chip generation) ステージ　１
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
 		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
@@ -901,7 +952,6 @@ void GameScene::Update()
 			break;
 		}
 
-
 		break;
 	case 1:
 		if (!beginStage)
@@ -925,26 +975,6 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
-			// オブジェクト移動 Move object
-
-			//if (IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton))
-			//{
-			//	if (IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
-			//	{
-			//		//斜め移動の時は移動倍率を0.71に設定する
-			//		rate = 0.71f;
-			//	}
-			//}
-
-			//if (input->PushKey(DIK_LEFT) || input->PushKey(DIK_RIGHT))
-			//{
-			//	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN))
-			//	{
-			//		//斜め移動の時は移動倍率を0.71に設定する
-			//		rate = 0.71f;
-			//	}
-			//}
-
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -1329,7 +1359,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial1Move();
-				Tutorial1Reset();
+				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
@@ -1365,6 +1395,7 @@ void GameScene::Update()
 		break;
 
 	case 6:
+	//チュートリアル 2
 		if (!beginStage)
 		{
 			if (t2Time)
@@ -1403,7 +1434,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial2Move();
-				Tutorial1Reset();
+				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
@@ -1412,7 +1443,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 1;
 				Tutorial2Move();
-				Stage1Reset();
+				Tutorial3Reset();
 				sceneChange = 0;
 			}
 		}
@@ -1436,6 +1467,83 @@ void GameScene::Update()
 		objCloneRun->Update();
 		objCloneStand->Update();
 		
+		camera->Update();
+
+		break;
+
+	case 7:
+	//チュートリアル 3
+		if (!beginStage)
+		{
+			if (t3Time)
+			{
+				t3Time = false;
+			}
+			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
+			camera->Update();
+			currentFrame++;
+
+			if (currentFrame >= 100)
+			{
+				currentFrame = 0;
+				beginStage = true;
+			}
+
+			objFighter->Update();
+			objClone->Update();
+		}
+		if (beginStage)
+		{
+			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+			if (ConTimer <= 60)
+			{
+				ConTimer += 1;
+			}
+
+			if (ConTimer == 60)
+			{
+				InitInput();
+				ConTimer = 0;
+			}
+
+			if (playerPosition.y <= -2.5f)
+			{
+				playerAlive = false;
+				sceneNo = 3;
+				Tutorial3Move();
+				//Tutorial1Reset();
+				sceneChange = 0;
+				gameOver->Initialize();
+			}
+			else if (enemyPosition.y <= -2.5f)
+			{
+				enemyAlive = false;
+				sceneNo = 1;
+				Tutorial3Move();
+				Stage1Reset();
+				sceneChange = 0;
+			}
+		}
+
+		for (auto object_t3_1 : objects_t3_1)
+		{
+			object_t3_1->Update();
+		}
+
+		for (auto object_t3_2 : objects_t3_2)
+		{
+			object_t3_2->Update();
+		}
+
+		objFighter->Update();
+		objClone->Update();
+
+		objPlayerRun->Update();
+		objPlayerStand->Update();
+
+		objCloneRun->Update();
+		objCloneStand->Update();
+
 		camera->Update();
 
 		break;
@@ -1589,6 +1697,9 @@ void GameScene::Draw()
 		spriteBG->Draw();
 		break;
 	case 6:
+		spriteBG->Draw();
+		break;
+	case 7:
 		spriteBG->Draw();
 		break;
 	}
@@ -1748,6 +1859,29 @@ void GameScene::Draw()
 		}
 
 		break;
+	case 7:
+		if (FBXModelChange == 1)
+		{
+			objPlayerRun->Draw(cmdList);
+			objCloneRun->Draw(cmdList);
+		}
+		else if (FBXModelChange == 0)
+		{
+			objPlayerStand->Draw(cmdList);
+			objCloneStand->Draw(cmdList);
+		}
+
+		for (auto object_t3_1 : objects_t3_1)
+		{
+			object_t3_1->Draw();
+		}
+
+		for (auto object_t3_2 : objects_t3_2)
+		{
+			object_t3_2->Draw();
+		}
+
+		break;
 	}
 
 	// パーティクルの描画 Drawing particles
@@ -1786,6 +1920,8 @@ void GameScene::Draw()
 	case 5:
 		break;
 	case 6:
+		break;
+	case 7:
 		break;
 	}
 
@@ -1971,6 +2107,16 @@ void GameScene::Tutorial2Move()
 	}
 }
 
+void GameScene::Tutorial3Reset()
+{
+
+}
+
+void GameScene::Tutorial3Move()
+{
+
+}
+
 void GameScene::Stage1Reset()
 {
 	if (!firstTime)
@@ -2021,9 +2167,6 @@ void GameScene::Stage1Reset()
 
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
-
-	//camera->SetEye(originalCamera);
-	//camera->SetTarget({ 0,1,0 });
 
 	cameraMove = 1;
 
