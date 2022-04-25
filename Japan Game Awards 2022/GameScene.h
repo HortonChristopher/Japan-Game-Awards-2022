@@ -65,6 +65,8 @@ public: // メンバ関数 Member function
 
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
+	void Tutorial1Reset();
+	void Tutorial1Move();
 	void Stage1Reset();
 	void Stage1Move();
 	void Stage2Reset();
@@ -86,6 +88,8 @@ private: // メンバ変数 Member variables
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
 
+	//初めプレイですか？
+	bool t1Time = true;
 	bool firstTime = true;
 	bool secondTime = true;
 
@@ -156,6 +160,8 @@ private: // メンバ変数 Member variables
 
 	CollisionManager* collisionManager;
 
+	std::vector<Object3d*> objects_t1_1; //チュートリアル　１
+	std::vector<Object3d*> objects_t1_2; //チュートリアル　１
 	std::vector<Object3d*> objects; //ステージ　１
 	std::vector<Object3d*> objects_2; //ステージ　１
 	std::vector<Object3d*> objects_s2_1; //ステージ　２
