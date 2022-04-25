@@ -16,9 +16,10 @@
 #include "TitleScene.h"
 #include "GameOver.h"
 #include "GameClear.h"
+#include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 4; //タイトル Title
+extern int sceneNo = 0; //タイトル Title
 extern int sceneChange = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
@@ -82,6 +83,7 @@ GameScene::~GameScene()
 	safe_delete(objClone);
 	safe_delete(objTempTrigger);
 	safe_delete(objTempTriggerE);
+	safe_delete(objTempYellowTrigger1);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
 	safe_delete(modelSkydome);
@@ -163,6 +165,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objSkydome = Object3d::Create();
 	objTempTrigger = Object3d::Create();
 	objTempTriggerE = Object3d::Create();
+	objTempYellowTrigger1 = Object3d::Create();
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 
@@ -185,6 +188,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	//objFighter->SetModel( modelFighter );
 	objTempTrigger->SetModel(modelTempTrigger);
 	objTempTriggerE->SetModel(modelTempTrigger);
+	objTempYellowTrigger1->SetModel(modelTempTrigger);
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
 
@@ -271,11 +275,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelYellowWall,
 	};
 
-	const int DIV_NUM = 10;
-	const float LAND_SCALE = 3.0f;
+	// チュートリアル 1
 
-	//ステージ1用外壁マップチップ
-	const int WALL_NUM = 23;
 
 	//自分側のマップチップ生成(Map chip generation) ステージ　１
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
@@ -587,21 +588,26 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter->SetScale({ 1,1,1 });
 	objClone->SetScale({ 1,1,1 });
 
-	objFighter->SetPosition({ -12,0,-12 });
-	objClone->SetPosition({ 12,0,-12 });
+	objFighter->SetPosition({ -12,0,-12 }); // -12, -12
+	objClone->SetPosition({ 12,0,-12 }); // 12, -12
 
-	objTempTrigger->SetPosition({ -12.0f, 0, 0 });
-	objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
+	objTempTrigger->SetPosition({ -12.0f, 0, 0.0f }); // -12, 0
+	objTempTriggerE->SetPosition({ 12.0f, 0, 0.0f }); // 12 0
+	objTempYellowTrigger1->SetPosition({ -7.0f, 0, 6.0f });
 
 	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
 	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
+	camera->SetEye({0, 20, -30});
+
 	camera->SetTarget({ 0, 1, 0 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
 	originalCamera = camera->GetEye();
+
+	camera->Update();
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -641,6 +647,7 @@ void GameScene::Update()
 	enemyRotation = objClone->GetRotation();
 	playerTrigger = objTempTrigger->GetPosition();
 	enemyTrigger = objTempTriggerE->GetPosition();
+	yellowTrigger1 = objTempYellowTrigger1->GetPosition();
 	playerBullet = objTempBullet->GetPosition();
 	enemyBullet = objTempBulletE->GetPosition();
 
@@ -750,6 +757,11 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE))
 		{
+			if (!firstTime)
+			{
+				Stage1Reset();
+			}
+			firstTime = false;
 			sceneNo = 1;
 			titleScene->Finalize();
 			break;
@@ -757,6 +769,11 @@ void GameScene::Update()
 
 		if (IsButtonDown(ButtonKind::Button_A))
 		{
+			if (!firstTime)
+			{
+				Stage1Reset();
+			}
+			firstTime = true;
 			sceneNo = 1;
 			titleScene->Finalize();
 			break;
@@ -863,6 +880,7 @@ void GameScene::Update()
 			{
 				enemyAlive = false;
 				Stage2Reset();
+				Stage1Move();
 				sceneNo = 4;
 				sceneChange = 0;
 				//gameClear->Initialize();
@@ -913,31 +931,10 @@ void GameScene::Update()
 				objTempBulletE->Update();
 			}
 
-			//fbxobject1->Update();
-
-			//debugText.Print( "", 50, 50, 1.0f );
-			//debugText.Print( "WS: move camera UpDown", 50, 70, 1.0f );
-			//debugText.Print( "ARROW: move camera FrontBack", 50, 90, 1.0f );
-
 			lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
 			lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
 
 			collisionManager->CheckAllCollisions();
-
-			//Debug Start
-			//XMFLOAT3 eye = camera->GetEye();
-
-			//char msgbuf[256];
-			//char msgbuf2[256];
-			//char msgbuf3[256];
-
-			//sprintf_s(msgbuf, 256, "Eye X: %f\n", eye.x);
-			//sprintf_s(msgbuf2, 256, "Eye Y: %f\n", eye.y);
-			//sprintf_s(msgbuf3, 256, "Eye Z: %f\n", eye.z);
-			//OutputDebugStringA(msgbuf);
-			//OutputDebugStringA(msgbuf2);
-			//OutputDebugStringA(msgbuf3);
-			//Debug End
 		}
 
 		for (auto object : objects) {
@@ -1026,6 +1023,10 @@ void GameScene::Update()
 	//ステージ2
 		if (!beginStage)
 		{
+			if (secondTime)
+			{
+				secondTime = false;
+			}
 			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
 			camera->Update();
 			currentFrame++;
@@ -1036,8 +1037,8 @@ void GameScene::Update()
 				beginStage = true;
 			}
 
-			//objFighter->Update();
-			//objClone->Update();
+			objFighter->Update();
+			objClone->Update();
 		}
 		if (beginStage)
 		{
@@ -1053,79 +1054,132 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
-			if (input->TriggerKey(DIK_1)) // debug デバッグ
+			if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f))
 			{
 				stage2YellowKabe = false;
 			}
-			if (input->TriggerKey(DIK_2)) // debug デバッグ
+			if (intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f) && lastYellowIntersct1 == false)
 			{
 				stage2Switch = true;
 			}
 
-			for (auto object_s2_1 : objects_s2_1) {
-				object_s2_1->Update();
-			}
-
-			for (auto object_s2_2 : objects_s2_2) {
-				object_s2_2->Update();
-			}
-
-			if (!stage2YellowKabe)
+			if (playerPosition.y <= -0.5f)
 			{
-				for (auto object_s2_y : objects_s2_y) {
-					object_s2_y->SetPosition({ 0, -100, 0 });
-					object_s2_y->Update();
-				}
-
-				for (auto object_s2_y2 : objects_s2_y2) {
-					object_s2_y2->SetPosition({ 0, -100, 0 });
-					object_s2_y2->Update();
-				}
+				playerAlive = false;
+				sceneNo = 3;
+				Stage2Move();
+				sceneChange = 0;
+				gameOver->Initialize();
 			}
-
-			if (stage2Switch)
+			else if (enemyPosition.y <= -0.5f)
 			{
-				for (auto object_s2_s : objects_s2_s) {
-					object_s2_s->SetPosition({ 0, -100, 0 });
-				}
-
-				for (auto object_s2_s2 : objects_s2_s2) {
-					object_s2_s2->SetPosition({ 0, -100, 0 });
-				}
+				enemyAlive = false;
+				sceneNo = 2;
+				Stage2Move();
+				sceneChange = 0;
+				gameClear->Initialize();
 			}
 
-			for (auto object_s2_y : objects_s2_y) {
-				object_s2_y->Update();
+			if (input->TriggerKey(DIK_1)) // debug デバッグ
+			{
+				//stage2YellowKabe = false;
+			}
+			if (input->TriggerKey(DIK_2)) // debug デバッグ
+			{
+				//stage2Switch = true;
 			}
 
-			for (auto object_s2_y2 : objects_s2_y2) {
-				object_s2_y2->Update();
-			}
-
-			for (auto object_s2_s : objects_s2_s) {
-				object_s2_s->Update();
-			}
-
-			for (auto object_s2_s2 : objects_s2_s2) {
-				object_s2_s2->Update();
-			}
-
-			objFighter->Update();
-			objClone->Update();
-
-			objPlayerRun->Update();
-			objPlayerStand->Update();
-
-			objCloneRun->Update();
-			objCloneStand->Update();
-
-			camera->Update();
+			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
 
 			collisionManager->CheckAllCollisions();
 		}
 
+		for (auto object_s2_1 : objects_s2_1) {
+			object_s2_1->Update();
+		}
+
+		for (auto object_s2_2 : objects_s2_2) {
+			object_s2_2->Update();
+		}
+
+		if (!stage2YellowKabe)
+		{
+			for (auto object_s2_y : objects_s2_y) {
+				XMFLOAT3 position = object_s2_y->GetPosition();
+				object_s2_y->SetPosition({ position.x, -100, position.z });
+				object_s2_y->Update();
+			}
+
+			for (auto object_s2_y2 : objects_s2_y2) {
+				XMFLOAT3 position = object_s2_y2->GetPosition();
+				object_s2_y2->SetPosition({ position.x, -100, position.z });
+				object_s2_y2->Update();
+			}
+		}
+
+		if (stage2Switch)
+		{
+			for (auto object_s2_s : objects_s2_s) {
+				XMFLOAT3 position = object_s2_s->GetPosition();
+				object_s2_s->SetPosition({ position.x, -100, position.z });
+				object_s2_s->Update();
+			}
+
+			for (auto object_s2_s2 : objects_s2_s2) {
+				XMFLOAT3 position = object_s2_s2->GetPosition();
+				object_s2_s2->SetPosition({ position.x, -100, position.z });
+				object_s2_s2->Update();
+			}
+		}
+
+		for (auto object_s2_y : objects_s2_y) {
+			object_s2_y->Update();
+		}
+
+		for (auto object_s2_y2 : objects_s2_y2) {
+			object_s2_y2->Update();
+		}
+
+		for (auto object_s2_s : objects_s2_s) {
+			object_s2_s->Update();
+		}
+
+		for (auto object_s2_s2 : objects_s2_s2) {
+			object_s2_s2->Update();
+		}
+
+		objFighter->Update();
+		objClone->Update();
+
+		objPlayerRun->Update();
+		objPlayerStand->Update();
+
+		objCloneRun->Update();
+		objCloneStand->Update();
+
+		objTempTrigger->Update();
+		objTempTriggerE->Update();
+		objTempYellowTrigger1->Update();
+
+		camera->Update();
+
 		break;
 	}
+
+	//Debug Start
+	XMFLOAT3 eye = camera->GetEye();
+
+	char msgbuf[256];
+	char msgbuf2[256];
+	char msgbuf3[256];
+
+	sprintf_s(msgbuf, 256, "Player X: %f\n", playerPosition.x);
+	sprintf_s(msgbuf2, 256, "Player Y: %f\n", playerPosition.y);
+	sprintf_s(msgbuf3, 256, "Player Z: %f\n", playerPosition.z);
+	OutputDebugStringA(msgbuf);
+	OutputDebugStringA(msgbuf2);
+	OutputDebugStringA(msgbuf3);
+	//Debug End
 
 	//Left Side Eye: {-40, 20, 0}
 	//Right Side Eye: {40, 20, 0}
@@ -1342,6 +1396,8 @@ void GameScene::Draw()
 
 		if (stage2YellowKabe)
 		{
+			objTempYellowTrigger1->Draw();
+
 			for (auto object_s2_y : objects_s2_y) {
 				object_s2_y->Draw();
 			}
@@ -1353,6 +1409,9 @@ void GameScene::Draw()
 
 		if (!stage2Switch)
 		{
+			objTempTrigger->Draw();
+			objTempTriggerE->Draw();
+
 			for (auto object_s2_s : objects_s2_s) {
 				object_s2_s->Draw();
 			}
@@ -1470,6 +1529,19 @@ int GameScene::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float re
 
 void GameScene::Stage1Reset()
 {
+	for (auto object : objects)
+	{
+		XMFLOAT3 objectPosition = object->GetPosition();
+		object->SetPosition({ objectPosition.x, objectPosition.y + 25.0f, objectPosition.z });
+		object->Update();
+	}
+	for (auto object_2 : objects_2)
+	{
+		XMFLOAT3 objectPosition = object_2->GetPosition();
+		object_2->SetPosition({ objectPosition.x, objectPosition.y + 25.0f, objectPosition.z });
+		object_2->Update();
+	}
+
 	objFighter->SetPosition({ -12,0,-12 });
 	objClone->SetPosition({ 12,0,-12 });
 
@@ -1486,6 +1558,7 @@ void GameScene::Stage1Reset()
 	enemyBulletF = false;
 
 	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 20, -30 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
 	playerBullet.x = InitBulletPos_PX;
@@ -1502,34 +1575,147 @@ void GameScene::Stage1Reset()
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
 
-	camera->SetEye(originalCamera);
-	camera->SetTarget({ 0,1,0 });
+	//camera->SetEye(originalCamera);
+	//camera->SetTarget({ 0,1,0 });
 
 	cameraMove = 1;
 
 	beginStage = false;
 }
 
+void GameScene::Stage1Move()
+{
+	for (auto object : objects)
+	{
+		XMFLOAT3 objectPosition = object->GetPosition();
+		object->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object->Update();
+	}
+	for (auto object_2 : objects_2)
+	{
+		XMFLOAT3 objectPosition = object_2->GetPosition();
+		object_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_2->Update();
+	}
+}
+
 void GameScene::Stage2Reset()
 {
-	objFighter->SetPosition({ -12,0,-12 });
-	objClone->SetPosition({ 12,0,-12 });
+	if (!secondTime)
+	{
+		for (auto object_s2_1 : objects_s2_1) {
+			XMFLOAT3 objectPosition = object_s2_1->GetPosition();
+			object_s2_1->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
+			object_s2_1->Update();
+		}
+
+		for (auto object_s2_2 : objects_s2_2) {
+			XMFLOAT3 objectPosition = object_s2_2->GetPosition();
+			object_s2_2->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
+			object_s2_2->Update();
+		}
+
+		if (!stage2YellowKabe)
+		{
+			for (auto object_s2_y : objects_s2_y) {
+				XMFLOAT3 objectPosition = object_s2_y->GetPosition();
+				object_s2_y->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
+				object_s2_y->Update();
+			}
+
+			for (auto object_s2_y2 : objects_s2_y2) {
+				XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
+				object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
+				object_s2_y2->Update();
+			}
+		}
+
+		if (stage2Switch)
+		{
+			for (auto object_s2_s : objects_s2_s) {
+				XMFLOAT3 objectPosition = object_s2_s->GetPosition();
+				object_s2_s->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
+				object_s2_s->Update();
+			}
+
+			for (auto object_s2_s2 : objects_s2_s2) {
+				XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
+				object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
+				object_s2_s2->Update();
+			}
+		}
+	}
+
+	objFighter->SetPosition({ -24,0,-12 });
+	objClone->SetPosition({ 24,0,-12 });
 
 	objFighter->SetRotation({ 0,0,0 });
 	objClone->SetRotation({ 0,0,0 });
 
-	playerRotationTemp = { 0,0,0 };
-	cloneRotationTemp = { 0,0,0 };
+	playerPositionTemp = playerPosition;
+	playerRotationTemp = playerRotation;
+	clonePositionTemp = enemyPosition;
+	cloneRotationTemp = enemyRotation;
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	objTempTrigger->SetPosition({ -13.0f, 0, -12.0f });
+	objTempTriggerE->SetPosition({ 10.0f, 0, -9.0f });
+	objTempYellowTrigger1->SetPosition({ -7.0f, 0, 6.0f });
 
 	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 20, -30 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
-	camera->SetEye(originalCamera);
-	camera->SetTarget({ 0,1,0 });
+	//camera->SetEye(originalCamera);
+	//camera->SetTarget({ 0,1,0 });
 
 	cameraMove = 1;
 
-	//beginStage = false;
+	stage2YellowKabe = true;
+	stage2Switch = false;
+
+	beginStage = false;
+}
+
+void GameScene::Stage2Move()
+{
+	for (auto object_s2_1 : objects_s2_1) {
+		XMFLOAT3 objectPosition = object_s2_1->GetPosition();
+		object_s2_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s2_1->Update();
+	}
+
+	for (auto object_s2_2 : objects_s2_2) {
+		XMFLOAT3 objectPosition = object_s2_2->GetPosition();
+		object_s2_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s2_2->Update();
+	}
+
+	for (auto object_s2_y : objects_s2_y) {
+		XMFLOAT3 objectPosition = object_s2_y->GetPosition();
+		object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s2_y->Update();
+	}
+
+	for (auto object_s2_y2 : objects_s2_y2) {
+		XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
+		object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s2_y2->Update();
+	}
+
+	for (auto object_s2_s : objects_s2_s) {
+		XMFLOAT3 objectPosition = object_s2_s->GetPosition();
+		object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s2_s->Update();
+	}
+
+	for (auto object_s2_s2 : objects_s2_s2) {
+		XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
+		object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s2_s2->Update();
+	}
 }
 
 void GameScene::CinematicCamera()

@@ -66,13 +66,16 @@ public: // メンバ関数 Member function
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
 	void Stage1Reset();
+	void Stage1Move();
 	void Stage2Reset();
+	void Stage2Move();
 
 	void CinematicCamera();
 
 private: // メンバ変数 Member variables
 	bool lastIntersect = false;
 	bool lastIntersectE = false;
+	bool lastYellowIntersct1 = false;
 
 	bool enemyAlive = true;
 	bool playerAlive = true;
@@ -82,6 +85,11 @@ private: // メンバ変数 Member variables
 
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
+
+	bool firstTime = true;
+	bool secondTime = true;
+
+	bool temp = true;
 
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
@@ -113,6 +121,7 @@ private: // メンバ変数 Member variables
 	Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;
 	Object3d* objTempTriggerE = nullptr;
+	Object3d* objTempYellowTrigger1 = nullptr;
 	Object3d* objTempBullet = nullptr;
 	Object3d* objTempBulletE = nullptr;
 
@@ -168,6 +177,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 enemyRotation;
 	XMFLOAT3 playerTrigger;
 	XMFLOAT3 enemyTrigger;
+	XMFLOAT3 yellowTrigger1;
 	XMFLOAT3 playerBullet;
 	XMFLOAT3 enemyBullet;
 
@@ -189,4 +199,10 @@ private: // メンバ変数 Member variables
 	bool cameraChange = false;
 
 	XMFLOAT3 originalCamera;
+
+	const int DIV_NUM = 10;
+	const float LAND_SCALE = 3.0f;
+
+	//ステージ1用外壁マップチップ
+	const int WALL_NUM = 23;
 };
