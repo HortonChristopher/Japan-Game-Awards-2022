@@ -21,9 +21,6 @@
     <Filter Include="Scenes\GameOver">
       <UniqueIdentifier>{540dda22-e9b4-4bdd-8165-32c9ad1b62f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\TitleScene">
-      <UniqueIdentifier>{5f6aa6b1-f1ae-402b-aa88-9a4e83400873}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\GameClear">
       <UniqueIdentifier>{a26b4764-8df6-469d-9192-189ec74ad9b6}</UniqueIdentifier>
     </Filter>
@@ -96,6 +93,9 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{6e88e649-eca2-4ee8-a81d-a2dc72ccfdf2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\GameScene\TitleScene">
+      <UniqueIdentifier>{5f6aa6b1-f1ae-402b-aa88-9a4e83400873}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -114,7 +114,7 @@
       <Filter>Scenes\GameOver</Filter>
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>Scenes\TitleScene</Filter>
+      <Filter>Scenes\GameScene\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="FbxModel.cpp">
       <Filter>3D\FbxObject\FbxModel</Filter>
@@ -231,7 +231,7 @@
       <Filter>Scenes\GameOver</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>Scenes\TitleScene</Filter>
+      <Filter>Scenes\GameScene\TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="FbxObject3d.h">
       <Filter>3D\FbxObject\FbxObject3d</Filter>
