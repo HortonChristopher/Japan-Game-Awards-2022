@@ -1169,7 +1169,7 @@ void GameScene::Update()
 
 			if (ConTimer == 60)
 			{
-				InitInput();
+				//InitInput();
 				ConTimer = 0;
 			}
 
@@ -1244,20 +1244,15 @@ void GameScene::Update()
 
 			//objSkydome->Update();
 
-			for (auto object : objects) {
+			/*for (auto object : objects) {
 				object->Update();
 			}
 
 			for (auto object_2 : objects_2) {
 				object_2->Update();
-			}
+			}*/
 
 			//objGround->Update();
-			objFighter->Update();
-			objClone->Update();
-
-			objTempTrigger->Update();
-			objTempTriggerE->Update();
 
 			objTempBullet->SetPosition(playerBullet);
 			objTempBulletE->SetPosition(enemyBullet);
@@ -1286,11 +1281,17 @@ void GameScene::Update()
 			object_2->Update();
 		}
 
+		objTempTrigger->Update();
+		objTempTriggerE->Update();
+
 		objPlayerRun->Update();
 		objPlayerStand->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+
+		objFighter->Update();
+		objClone->Update();
 
 		break;
 
@@ -1390,7 +1391,7 @@ void GameScene::Update()
 
 			if (ConTimer == 60)
 			{
-				InitInput();
+				//InitInput();
 				ConTimer = 0;
 			}
 
