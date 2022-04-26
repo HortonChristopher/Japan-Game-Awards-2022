@@ -1040,8 +1040,6 @@ void GameScene::Update()
 	else
 	{
 		FBXModelChange = 0;
-		cloneRotationTemp = { 0,0,0 };
-		playerRotationTemp = { 0,0,0 };
 	}
 
 	// Camera Movement カメラ動く
