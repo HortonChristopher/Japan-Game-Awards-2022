@@ -215,9 +215,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(2, L"Resources/texture.png");
 
 	// テクスチャ2番に読み込み Load into texture # 2
-	Sprite::LoadTexture(3, L"Resources/GuideR.png");
+	Sprite::LoadTexture(5, L"Resources/GuideR.png");
 
-	GuideR = Sprite::Create(3, { 0.0f,0.0f });
+	GuideR = Sprite::Create(5, { 0.0f,0.0f });
 
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
