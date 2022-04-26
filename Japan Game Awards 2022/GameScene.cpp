@@ -2307,6 +2307,7 @@ void GameScene::Draw()
 	case 3:
 		break;
 	case 4:
+		Order_2->Draw();
 		break;
 	case 5:
 		Order_2->Draw();
