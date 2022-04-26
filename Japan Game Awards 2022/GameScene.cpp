@@ -2119,7 +2119,8 @@ void GameScene::Draw()
 
 		if (stage2YellowKabe)
 		{
-			objTempYellowTrigger1->Draw();
+			objTempTriggerE->Draw();
+			objTempTrigger->Draw();
 
 			for (auto object_s2_y : objects_s2_y) {
 				object_s2_y->Draw();
@@ -2132,8 +2133,7 @@ void GameScene::Draw()
 
 		if (!stage2Switch)
 		{
-			objTempTrigger->Draw();
-			objTempTriggerE->Draw();
+			objTempYellowTrigger1->Draw();
 
 			for (auto object_s2_s : objects_s2_s) {
 				object_s2_s->Draw();
