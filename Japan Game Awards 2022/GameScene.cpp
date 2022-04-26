@@ -117,6 +117,7 @@ GameScene::~GameScene()
 	}
 
 	safe_delete(spriteBG);
+	safe_delete(GuideR);
 	//safe_delete(objSkydome);
 	safe_delete(objGround);
 	safe_delete(objFighter);
@@ -212,6 +213,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	// テクスチャ2番に読み込み Load into texture # 2
 	Sprite::LoadTexture(2, L"Resources/texture.png");
+
+	// テクスチャ2番に読み込み Load into texture # 2
+	Sprite::LoadTexture(3, L"Resources/GuideR.png");
+
+	GuideR = Sprite::Create(3, { 0.0f,0.0f });
 
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
@@ -1940,6 +1946,7 @@ void GameScene::Draw()
 		break;
 	case 1:
 		spriteBG->Draw();
+		GuideR->Draw();
 		break;
 	case 2:
 		if (sceneChange == 0)
@@ -1961,15 +1968,19 @@ void GameScene::Draw()
 		break;
 	case 4:
 		spriteBG->Draw();
+		GuideR->Draw();
 		break;
 	case 5:
 		spriteBG->Draw();
+		GuideR->Draw();
 		break;
 	case 6:
 		spriteBG->Draw();
+		GuideR->Draw();
 		break;
 	case 7:
 		spriteBG->Draw();
+		GuideR->Draw();
 		break;
 	}
 
