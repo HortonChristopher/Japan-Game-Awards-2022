@@ -239,8 +239,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objClone = Enemy::Create(modelFighter);
 
 	// FBXモデルの読み込み Loading FBX model
-	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("Fast Run");
-	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("Standing W_Briefcase Idle");
+	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("Running");
+	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("Standing");
 
 	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
 	// プレイヤー関連 Player related
@@ -264,20 +264,20 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// プレイヤー初期化 Player initialization
 	objPlayerRun->SetPosition({ 0, 0, 0 });
 	objPlayerRun->SetRotation({ 0, 0, 0 });
-	objPlayerRun->SetScale({ 0.3, 0.3, 0.3 });
+	objPlayerRun->SetScale({ 0.5, 0.5, 0.5 });
 
 	objPlayerStand->SetPosition({ 0, 0, 0 });
 	objPlayerStand->SetRotation({ 0, 0, 0 });
-	objPlayerStand->SetScale({ 0.3, 0.3, 0.3 });
+	objPlayerStand->SetScale({ 0.5, 0.5, 0.5 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
 	objCloneRun->SetRotation({ 0, 0, 0 });
-	objCloneRun->SetScale({ 0.3, 0.3, 0.3 });
+	objCloneRun->SetScale({ 0.5, 0.5, 0.5 });
 
 	objCloneStand->SetPosition({ 0, 0, 0 });
 	objCloneStand->SetRotation({ 0, 0, 0 });
-	objCloneStand->SetScale({ 0.3, 0.3, 0.3 });
+	objCloneStand->SetScale({ 0.5, 0.5, 0.5 });
 
 	// モデルテーブル Model table
 	Model* modeltable[11] = {
