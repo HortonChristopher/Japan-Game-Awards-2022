@@ -192,7 +192,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// テクスチャ2番に読み込み Load into texture # 2
 	Sprite::LoadTexture(2, L"Resources/texture.png");
 
-	modelSkydome = Model::CreateFromOBJ("skydome");
+	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
 	modelFighter = Model::CreateFromOBJ("chr_sword");
 	modelPlane = Model::CreateFromOBJ("yuka");
