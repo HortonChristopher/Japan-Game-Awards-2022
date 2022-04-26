@@ -268,7 +268,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objPlayerStand->SetPosition({ 0, 0, 0 });
 	objPlayerStand->SetRotation({ 0, 0, 0 });
-	objPlayerStand->SetScale({ 0.5, 0.5, 0.5 });
+	objPlayerStand->SetScale({ 0.5,0.5,0.5 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -960,7 +960,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
-	camera->SetEye({0, 20, -30});
+	camera->SetEye({ 0, 20, -30 });
 
 	camera->SetTarget({ 0, 1, 0 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
@@ -1360,7 +1360,7 @@ void GameScene::Update()
 		break;
 
 	case 4:
-	//ステージ2
+		//ステージ2
 		if (!beginStage)
 		{
 			if (secondTime)
@@ -1497,7 +1497,7 @@ void GameScene::Update()
 		break;
 
 	case 5:
-	//チュートリアル 1
+		//チュートリアル 1
 		if (!beginStage)
 		{
 			if (t1Time)
@@ -1549,7 +1549,7 @@ void GameScene::Update()
 				sceneChange = 0;
 			}
 		}
-		
+
 		for (auto object_t1_1 : objects_t1_1) {
 			object_t1_1->Update();
 		}
@@ -1572,7 +1572,7 @@ void GameScene::Update()
 		break;
 
 	case 6:
-	//チュートリアル 2
+		//チュートリアル 2
 		if (!beginStage)
 		{
 			if (t2Time)
@@ -1643,13 +1643,13 @@ void GameScene::Update()
 
 		objCloneRun->Update();
 		objCloneStand->Update();
-		
+
 		camera->Update();
 
 		break;
 
 	case 7:
-	//チュートリアル 3
+		//チュートリアル 3
 		if (!beginStage)
 		{
 			if (t3Time)
@@ -2527,7 +2527,7 @@ void GameScene::Tutorial3Move()
 
 	for (auto object_t3_y2_1 : objects_t3_y2_1) {
 		XMFLOAT3 objectPosition = object_t3_y2_1->GetPosition();
-		object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y -50.0f, objectPosition.z });
+		object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
 		object_t3_y2_1->Update();
 	}
 
