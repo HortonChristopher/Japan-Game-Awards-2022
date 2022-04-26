@@ -352,7 +352,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				modelIndex = 1;
 			}
 
-			if (i == 9 && j < 6 && j > 3)
+			if (i < 10 && i > 7 && j < 6 && j > 3)
 			{
 				continue;
 			}
@@ -1018,15 +1018,24 @@ void GameScene::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
-	if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
-		|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+	if (beginStage)
 	{
-		FBXModelChange = 1;
+		if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
+			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+		{
+			FBXModelChange = 1;
+		}
+		else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W)
+			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+		{
+			FBXModelChange = 0;
+		}
 	}
-	else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W)
-		|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+	else
 	{
 		FBXModelChange = 0;
+		cloneRotationTemp = { 0,0,0 };
+		playerRotationTemp = { 0,0,0 };
 	}
 
 	// Camera Movement カメラ動く
@@ -1155,6 +1164,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -12,0,-12 });
+			objClone->SetPosition({ 12,0,-12 });
+
+			playerPositionTemp = { -12,0,-12 };
+			clonePositionTemp = { 12,0,-12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -1378,6 +1393,12 @@ void GameScene::Update()
 				beginStage = true;
 			}
 
+			objFighter->SetPosition({ -24,0,-12 });
+			objClone->SetPosition({ 24,0,-12 });
+
+			playerPositionTemp = { -24,0,-12 };
+			clonePositionTemp = { 24,0,-12 };
+
 			objFighter->Update();
 			objClone->Update();
 		}
@@ -1515,8 +1536,14 @@ void GameScene::Update()
 				beginStage = true;
 			}
 
-			objFighter->Update();
-			objClone->Update();
+			objFighter->SetPosition({ -20,0,12 });
+			objClone->SetPosition({ 20,0,12 });
+
+			playerPositionTemp = { -20,0,12 };
+			clonePositionTemp = { 20,0,12 };
+
+			//objFighter->Update();
+			//objClone->Update();
 		}
 		if (beginStage)
 		{
@@ -1589,6 +1616,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -20, 0,-12 });
+			objClone->SetPosition({ 20, 0, -12 });
+
+			playerPositionTemp = { -20, 0,-12 };
+			clonePositionTemp = { 20, 0, -12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -1666,6 +1699,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -20, 0, -12 });
+			objClone->SetPosition({ 20, 0, -12 });
+
+			playerPositionTemp = { -20, 0, -12 };
+			clonePositionTemp = { 20, 0, -12 };
 
 			objFighter->Update();
 			objClone->Update();
