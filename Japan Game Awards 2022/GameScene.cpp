@@ -1798,9 +1798,10 @@ void GameScene::Update()
 			else if (enemyPosition.y <= -2.5f)
 			{
 				enemyAlive = false;
-				sceneNo = 1;
+				sceneNo = 4;
 				Tutorial3Move();
-				Stage1Reset();
+				//Stage1Reset();
+				Stage2Reset();
 				sceneChange = 0;
 			}
 		}
