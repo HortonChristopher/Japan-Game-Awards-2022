@@ -956,8 +956,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter->SetPosition({ -20, 0, 12 }); // -20, 12
 	objClone->SetPosition({ 20, 0, 12 }); // 20, 12
 
-	objTempTrigger->SetPosition({ -8.0f, 0, 6.0f }); // -12, 0
-	objTempTriggerE->SetPosition({ 8.0f, 0, 6.0f }); // 12 0
+	objTempTrigger->SetPosition({ -8.0f, 0, 6.0f }); // -8, 6
+	objTempTriggerE->SetPosition({ 8.0f, 0, 6.0f }); // 8, 6
 	objTempYellowTrigger1->SetPosition({ 20.0f, 0, -3.0f });
 	objTempYellowTrigger2->SetPosition({ 8.0f, 0, -12.0f });
 
@@ -1260,7 +1260,6 @@ void GameScene::Update()
 
 			//objFighter->SetPosition({ playerPosition });
 
-			camera->Update();
 			//particleMan->Update();
 
 			//objSkydome->Update();
@@ -1313,6 +1312,8 @@ void GameScene::Update()
 
 		objFighter->Update();
 		objClone->Update();
+
+		camera->Update();
 
 		break;
 
