@@ -1436,7 +1436,7 @@ void GameScene::Update()
 				stage2Switch = true;
 			}
 
-			if (playerPosition.y <= -0.5f)
+			if (playerPosition.y <= -10.0f)
 			{
 				playerAlive = false;
 				sceneNo = 3;
@@ -1444,7 +1444,7 @@ void GameScene::Update()
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
-			else if (enemyPosition.y <= -0.5f)
+			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
 				sceneNo = 2;
@@ -1570,7 +1570,7 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
-			if (playerPosition.y <= -2.5f)
+			if (playerPosition.y <= -10.0f)
 			{
 				playerAlive = false;
 				sceneNo = 3;
@@ -1579,7 +1579,7 @@ void GameScene::Update()
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
-			else if (enemyPosition.y <= -2.5f)
+			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
 				sceneNo = 6;
@@ -1651,7 +1651,7 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
-			if (playerPosition.y <= -2.5f)
+			if (playerPosition.y <= -10.0f)
 			{
 				playerAlive = false;
 				sceneNo = 3;
@@ -1660,7 +1660,7 @@ void GameScene::Update()
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
-			else if (enemyPosition.y <= -2.5f)
+			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
 				sceneNo = 7;
@@ -1790,7 +1790,7 @@ void GameScene::Update()
 				}
 			}
 
-			if (playerPosition.y <= -2.5f)
+			if (playerPosition.y <= -10.0f)
 			{
 				playerAlive = false;
 				sceneNo = 3;
@@ -1799,7 +1799,7 @@ void GameScene::Update()
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
-			else if (enemyPosition.y <= -2.5f)
+			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
 				sceneNo = 4;
