@@ -119,6 +119,8 @@ GameScene::~GameScene()
 	safe_delete(spriteBG);
 	safe_delete(GuideR);
 	safe_delete(Guide_LRB);
+	safe_delete(Order_1);
+	safe_delete(Order_2);
 	//safe_delete(objSkydome);
 	safe_delete(objGround);
 	safe_delete(objFighter);
@@ -215,15 +217,27 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// テクスチャ2番に読み込み Load into texture # 2
 	Sprite::LoadTexture(2, L"Resources/texture.png");
 
-	// テクスチャ2番に読み込み Load into texture # 2
+	// テクスチャ5番に読み込み Load into texture # 2
 	Sprite::LoadTexture(5, L"Resources/GuideR.png");
 
 	GuideR = Sprite::Create(5, { 0.0f,0.0f });
 
-	// テクスチャ2番に読み込み Load into texture # 2
+	// テクスチャ6番に読み込み Load into texture # 2
 	Sprite::LoadTexture(6, L"Resources/Guide_LRB.png");
 
 	Guide_LRB = Sprite::Create(6, { 0.0f,100.0f });
+
+	// テクスチャ7番に読み込み Load into texture # 2
+	Sprite::LoadTexture(7, L"Resources/order1.png");
+
+	Order_1 = Sprite::Create(7, { 0.0f,0.0f });
+
+	// テクスチャ8番に読み込み Load into texture # 2
+	Sprite::LoadTexture(8, L"Resources/order2.png");
+
+	Order_2 = Sprite::Create(8, { 0.0f,0.0f });
+
+	
 
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
@@ -2269,13 +2283,13 @@ void GameScene::Draw()
 	Object3d::PostDraw();
 #pragma endregion
 
-	//#pragma region 前景スプライト描画 Foreground sprite drawing
-	//	// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
-	//	Sprite::PreDraw( cmdList );
-	//
-	//	// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
-	//
-	//	//// 描画 drawing
+	#pragma region 前景スプライト描画 Foreground sprite drawing
+		// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
+		Sprite::PreDraw( cmdList );
+	
+		// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
+	
+		//// 描画 drawing
 	//	//sprite1->Draw();
 	//	//sprite2->Draw();
 
@@ -2292,18 +2306,21 @@ void GameScene::Draw()
 	case 4:
 		break;
 	case 5:
+		Order_2->Draw();
 		break;
 	case 6:
+		Order_2->Draw();
 		break;
 	case 7:
+		Order_2->Draw();
 		break;
 	}
 
 	//	// デバッグテキストの描画 Debug text drawing
 	//	// debugText.DrawAll(cmdList);
 	//
-	//	// スプライト描画後処理 Post-processing of sprite drawing
-	//	Sprite::PostDraw();
+		// スプライト描画後処理 Post-processing of sprite drawing
+		Sprite::PostDraw();
 	//#pragma endregion
 }
 
