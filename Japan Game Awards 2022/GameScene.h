@@ -114,6 +114,8 @@ private: // メンバ変数 Member variables
 
 	Sprite* spriteBG = nullptr;
 
+	Sprite* GuideR = nullptr;
+
 	ParticleManager* particleMan = nullptr;
 
 	//Model* modelSkydome = nullptr;
