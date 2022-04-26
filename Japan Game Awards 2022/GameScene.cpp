@@ -221,7 +221,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
-	modelFighter = Model::CreateFromOBJ("chr_sword");
+	modelFighter = Model::CreateFromOBJ("kabe"); //chr_sword
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
@@ -274,7 +274,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objPlayerStand->SetPosition({ 0, 0, 0 });
 	objPlayerStand->SetRotation({ 0, 0, 0 });
-	objPlayerStand->SetScale({ 0.5, 0.5, 0.5 });
+	objPlayerStand->SetScale({ 0.5,0.5,0.5 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -358,7 +358,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				modelIndex = 1;
 			}
 
-			if (i == 9 && j < 6 && j > 3)
+			if (i < 10 && i > 7 && j < 6 && j > 3)
 			{
 				continue;
 			}
@@ -966,7 +966,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
-	camera->SetEye({0, 20, -30});
+	camera->SetEye({ 0, 20, -30 });
 
 	camera->SetTarget({ 0, 1, 0 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
@@ -1024,15 +1024,24 @@ void GameScene::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
-	if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
-		|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+	if (beginStage)
 	{
-		FBXModelChange = 1;
+		if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
+			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+		{
+			FBXModelChange = 1;
+		}
+		else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W)
+			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+		{
+			FBXModelChange = 0;
+		}
 	}
-	else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W)
-		|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+	else
 	{
 		FBXModelChange = 0;
+		cloneRotationTemp = { 0,0,0 };
+		playerRotationTemp = { 0,0,0 };
 	}
 
 	// Camera Movement カメラ動く
@@ -1161,6 +1170,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -12,0,-12 });
+			objClone->SetPosition({ 12,0,-12 });
+
+			playerPositionTemp = { -12,0,-12 };
+			clonePositionTemp = { 12,0,-12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -1367,7 +1382,7 @@ void GameScene::Update()
 		break;
 
 	case 4:
-	//ステージ2
+		//ステージ2
 		if (!beginStage)
 		{
 			if (secondTime)
@@ -1383,6 +1398,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -24,0,-12 });
+			objClone->SetPosition({ 24,0,-12 });
+
+			playerPositionTemp = { -24,0,-12 };
+			clonePositionTemp = { 24,0,-12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -1504,7 +1525,7 @@ void GameScene::Update()
 		break;
 
 	case 5:
-	//チュートリアル 1
+		//チュートリアル 1
 		if (!beginStage)
 		{
 			if (t1Time)
@@ -1521,8 +1542,14 @@ void GameScene::Update()
 				beginStage = true;
 			}
 
-			objFighter->Update();
-			objClone->Update();
+			objFighter->SetPosition({ -20,0,12 });
+			objClone->SetPosition({ 20,0,12 });
+
+			playerPositionTemp = { -20,0,12 };
+			clonePositionTemp = { 20,0,12 };
+
+			//objFighter->Update();
+			//objClone->Update();
 		}
 		if (beginStage)
 		{
@@ -1556,7 +1583,7 @@ void GameScene::Update()
 				sceneChange = 0;
 			}
 		}
-		
+
 		for (auto object_t1_1 : objects_t1_1) {
 			object_t1_1->Update();
 		}
@@ -1579,7 +1606,7 @@ void GameScene::Update()
 		break;
 
 	case 6:
-	//チュートリアル 2
+		//チュートリアル 2
 		if (!beginStage)
 		{
 			if (t2Time)
@@ -1595,6 +1622,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -20, 0,-12 });
+			objClone->SetPosition({ 20, 0, -12 });
+
+			playerPositionTemp = { -20, 0,-12 };
+			clonePositionTemp = { 20, 0, -12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -1650,13 +1683,13 @@ void GameScene::Update()
 
 		objCloneRun->Update();
 		objCloneStand->Update();
-		
+
 		camera->Update();
 
 		break;
 
 	case 7:
-	//チュートリアル 3
+		//チュートリアル 3
 		if (!beginStage)
 		{
 			if (t3Time)
@@ -1672,6 +1705,12 @@ void GameScene::Update()
 				currentFrame = 0;
 				beginStage = true;
 			}
+
+			objFighter->SetPosition({ -20, 0, -12 });
+			objClone->SetPosition({ 20, 0, -12 });
+
+			playerPositionTemp = { -20, 0, -12 };
+			clonePositionTemp = { 20, 0, -12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -2539,7 +2578,7 @@ void GameScene::Tutorial3Move()
 
 	for (auto object_t3_y2_1 : objects_t3_y2_1) {
 		XMFLOAT3 objectPosition = object_t3_y2_1->GetPosition();
-		object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y -50.0f, objectPosition.z });
+		object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
 		object_t3_y2_1->Update();
 	}
 
