@@ -215,7 +215,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
-	modelFighter = Model::CreateFromOBJ("chr_sword");
+	modelFighter = Model::CreateFromOBJ("kabe"); //chr_sword
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
