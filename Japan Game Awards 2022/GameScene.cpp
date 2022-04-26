@@ -677,10 +677,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				modelIndex = 10;
 			}
 
-			if (i == 5 && j == 5)
+			/*if (i == 5 && j == 5)
 			{
 				modelIndex = 0;
-			}
+			}*/
 
 			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
 			object->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
@@ -734,10 +734,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				modelIndex = 10;
 			}
 
-			if (i == 5 && j == 5)
+			/*if (i == 5 && j == 5)
 			{
 				modelIndex = 0;
-			}
+			}*/
 
 
 			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
@@ -1112,7 +1112,7 @@ void GameScene::Update()
 
 		if (ConTimer == 60)
 		{
-			InitInput();
+			//InitInput();
 			ConTimer = 0;
 		}
 
@@ -1306,7 +1306,7 @@ void GameScene::Update()
 
 		if (ConTimer == 60)
 		{
-			InitInput();
+			//InitInput();
 			ConTimer = 0;
 		}
 
@@ -1338,7 +1338,7 @@ void GameScene::Update()
 
 		if (ConTimer == 60)
 		{
-			InitInput();
+			//InitInput();
 			ConTimer = 0;
 		}
 
@@ -1528,7 +1528,7 @@ void GameScene::Update()
 
 			if (ConTimer == 60)
 			{
-				InitInput();
+				//InitInput();
 				ConTimer = 0;
 			}
 
@@ -1603,7 +1603,7 @@ void GameScene::Update()
 
 			if (ConTimer == 60)
 			{
-				InitInput();
+				//InitInput();
 				ConTimer = 0;
 			}
 
@@ -1680,7 +1680,7 @@ void GameScene::Update()
 
 			if (ConTimer == 60)
 			{
-				InitInput();
+				//InitInput();
 				ConTimer = 0;
 			}
 
