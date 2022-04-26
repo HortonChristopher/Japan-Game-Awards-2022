@@ -1049,70 +1049,73 @@ void GameScene::Update()
 	}
 
 	// Camera Movement カメラ動く
-	if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
+	if (beginStage)
 	{
-		if (input->TriggerKey(DIK_Q))
+		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
-			if (cameraMove == 4)
+			if (input->TriggerKey(DIK_Q))
 			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove = 1;
+				if (cameraMove == 4)
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove = 1;
+				}
+				else
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove++;
+				}
 			}
-			else
+			else if (input->TriggerKey(DIK_E))
 			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove++;
+				if (cameraMove == 1)
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove = 4;
+				}
+				else
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove--;
+				}
 			}
 		}
-		else if (input->TriggerKey(DIK_E))
-		{
-			if (cameraMove == 1)
-			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove = 4;
-			}
-			else
-			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove--;
-			}
-		}
-	}
 
-	if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
-	{
-		if (IsButtonDown(ButtonKind::Button_LB))
+		if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
 		{
-			if (cameraMove == 4)
+			if (IsButtonDown(ButtonKind::Button_LB))
 			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove = 1;
+				if (cameraMove == 4)
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove = 1;
+				}
+				else
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove++;
+				}
 			}
-			else
+			else if (IsButtonDown(ButtonKind::Button_RB))
 			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove++;
-			}
-		}
-		else if (IsButtonDown(ButtonKind::Button_RB))
-		{
-			if (cameraMove == 1)
-			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove = 4;
-			}
-			else
-			{
-				prevCameraMove = cameraMove;
-				cameraChange = true;
-				cameraMove--;
+				if (cameraMove == 1)
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove = 4;
+				}
+				else
+				{
+					prevCameraMove = cameraMove;
+					cameraChange = true;
+					cameraMove--;
+				}
 			}
 		}
 	}
@@ -2406,6 +2409,7 @@ void GameScene::Tutorial1Reset()
 	cloneRotationTemp = { 0,0,0 };
 
 	cameraMove = 1;
+	cameraChange = false;
 
 	beginStage = false;
 }
@@ -2462,6 +2466,7 @@ void GameScene::Tutorial2Reset()
 	cloneRotationTemp = { 0,0,0 };
 
 	cameraMove = 1;
+	cameraChange = false;
 
 	beginStage = false;
 }
@@ -2563,6 +2568,7 @@ void GameScene::Tutorial3Reset()
 	objTempYellowTrigger2->SetPosition({ 8.0f, 0, -12.0f });
 
 	cameraMove = 1;
+	cameraChange = false;
 
 	beginStage = false;
 }
@@ -2670,6 +2676,7 @@ void GameScene::Stage1Reset()
 	cloneRotationTemp = { 0,0,0 };
 
 	cameraMove = 1;
+	cameraChange = false;
 
 	beginStage = false;
 }
@@ -2760,6 +2767,7 @@ void GameScene::Stage2Reset()
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
 	cameraMove = 1;
+	cameraChange = false;
 
 	stage2YellowKabe = true;
 	stage2Switch = false;
