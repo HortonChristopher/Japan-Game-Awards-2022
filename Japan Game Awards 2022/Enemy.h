@@ -38,5 +38,7 @@ private:
 
 	bool onGround = true;
 
+	float Speed = 0.175f;
+
 	DirectX::XMVECTOR fallV;
 };
