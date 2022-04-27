@@ -138,6 +138,8 @@ private: // メンバ変数 Member variables
 	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
+	FbxModel* modelCloneRun = nullptr;
+	FbxModel* modelCloneStand = nullptr;
 
 	//Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;

@@ -139,8 +139,15 @@ GameScene::~GameScene()
 
 	safe_delete(fbxobject1);
 	//safe_delete( fbxmodel1 );
+	safe_delete(objPlayerStand);
 	safe_delete(objPlayerRun);
+	safe_delete(objCloneStand);
+	safe_delete(objCloneRun);
+
+	safe_delete(modelPlayerStand);
 	safe_delete(modelPlayerRun);
+	safe_delete(modelCloneStand);
+	safe_delete(modelCloneRun);
 	ReleaseInput();
 }
 
@@ -265,8 +272,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objClone = Enemy::Create(modelFighter);
 
 	// FBXモデルの読み込み Loading FBX model
-	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("Running");
-	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("Standing");
+	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("PlayerRunning");
+	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("PlayerStanding");
+	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
+	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
 
 	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
 	// プレイヤー関連 Player related
@@ -281,11 +290,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
 	objCloneRun->Initialize();
-	objCloneRun->SetModel(modelPlayerRun);
+	objCloneRun->SetModel(modelCloneRun);
 
 	objCloneStand = new FbxObject3d;
 	objCloneStand->Initialize();
-	objCloneStand->SetModel(modelPlayerStand);
+	objCloneStand->SetModel(modelCloneStand);
 
 	// プレイヤー初期化 Player initialization
 	objPlayerRun->SetPosition({ 0, 0, 0 });
@@ -2067,6 +2076,7 @@ void GameScene::Draw()
 	switch (sceneNo)
 	{
 	case 0:
+		// objPlayerRun->Draw(cmdList);
 		break;
 	case 1:
 		// 3Dオブクジェクトの描画 Drawing 3D objects
@@ -2287,15 +2297,12 @@ void GameScene::Draw()
 #pragma endregion
 
 	#pragma region 前景スプライト描画 Foreground sprite drawing
-		// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
-		Sprite::PreDraw( cmdList );
+	// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
+	Sprite::PreDraw( cmdList );
 	
-		// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
+	// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
 	
-		//// 描画 drawing
-	//	//sprite1->Draw();
-	//	//sprite2->Draw();
-
+	// 描画 drawing
 	switch (sceneNo)
 	{
 	case 0:
@@ -2323,9 +2330,9 @@ void GameScene::Draw()
 	//	// デバッグテキストの描画 Debug text drawing
 	//	// debugText.DrawAll(cmdList);
 	//
-		// スプライト描画後処理 Post-processing of sprite drawing
-		Sprite::PostDraw();
-	//#pragma endregion
+	// スプライト描画後処理 Post-processing of sprite drawing
+	Sprite::PostDraw();
+	#pragma endregion
 }
 
 void GameScene::MoveCamera()
