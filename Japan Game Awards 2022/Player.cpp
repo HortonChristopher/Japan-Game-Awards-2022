@@ -67,52 +67,52 @@ void Player::Update()
 			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 
 			else if (input->PushKey(DIK_D))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 
 			else if (input->PushKey(DIK_W))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 
 			else if (input->PushKey(DIK_S))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 		}
@@ -123,52 +123,52 @@ void Player::Update()
 			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::UpButton))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::DownButton))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 		}
@@ -192,52 +192,52 @@ void Player::Update()
 			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 
 			else if (input->PushKey(DIK_D))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 
 			else if (input->PushKey(DIK_W))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 
 			else if (input->PushKey(DIK_S))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 		}
@@ -248,52 +248,52 @@ void Player::Update()
 			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::UpButton))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::DownButton))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 		}
@@ -308,52 +308,52 @@ void Player::Update()
 			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 
 			else if (input->PushKey(DIK_D))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 
 			else if (input->PushKey(DIK_W))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 
 			else if (input->PushKey(DIK_S))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 		}
@@ -364,52 +364,52 @@ void Player::Update()
 			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::UpButton))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::DownButton))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 		}
@@ -424,52 +424,52 @@ void Player::Update()
 			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (input->PushKey(DIK_A))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 
 			else if (input->PushKey(DIK_D))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 
 			else if (input->PushKey(DIK_W))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 
 			else if (input->PushKey(DIK_S))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 		}
@@ -480,52 +480,52 @@ void Player::Update()
 			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 225.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
 			{
 				rotation.y = 315.0f;
-				position.x -= 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x -= Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 45.0f;
-				position.x += 0.2f * 0.71f;
-				position.z += 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z += Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
 			{
 				rotation.y = 135.0f;
-				position.x += 0.2f * 0.71f;
-				position.z -= 0.2f * 0.71f;
+				position.x += Speed * 0.71f;
+				position.z -= Speed * 0.71f;
 			}
 
 			else if (IsButtonPush(ButtonKind::LeftButton))
 			{
-				position.z -= 0.2f;
+				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::RightButton))
 			{
-				position.z += 0.2f;
+				position.z += Speed;
 				rotation.y = 0.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::UpButton))
 			{
-				position.x -= 0.2f;
+				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
 
 			else if (IsButtonPush(ButtonKind::DownButton))
 			{
-				position.x += 0.2f;
+				position.x += Speed;
 				rotation.y = 90.0f;
 			}
 		}
