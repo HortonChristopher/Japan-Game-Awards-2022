@@ -116,11 +116,14 @@ GameScene::~GameScene()
 		safe_delete(object_s2_s2);
 	}
 
+	// Sprite
 	safe_delete(spriteBG);
 	safe_delete(GuideR);
 	safe_delete(Guide_LRB);
 	safe_delete(Order_1);
 	safe_delete(Order_2);
+
+	// obj object
 	//safe_delete(objSkydome);
 	safe_delete(objGround);
 	safe_delete(objFighter);
@@ -130,6 +133,8 @@ GameScene::~GameScene()
 	safe_delete(objTempYellowTrigger1);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
+
+	// obj model
 	//safe_delete(modelSkydome);
 	safe_delete(modelGround);
 	safe_delete(modelFighter);
@@ -137,17 +142,24 @@ GameScene::~GameScene()
 	safe_delete(modelBox);
 	safe_delete(modelPyramid);
 
+	// Fbx object
 	safe_delete(fbxobject1);
 	//safe_delete( fbxmodel1 );
 	safe_delete(objPlayerStand);
 	safe_delete(objPlayerRun);
+	safe_delete(objPlayerFight);
 	safe_delete(objCloneStand);
 	safe_delete(objCloneRun);
+	safe_delete(objCloneFight);
 
+	// Fbx model
 	safe_delete(modelPlayerStand);
 	safe_delete(modelPlayerRun);
+	safe_delete(modelPlayerFight);
 	safe_delete(modelCloneStand);
 	safe_delete(modelCloneRun);
+	safe_delete(modelCloneFight);
+	
 	ReleaseInput();
 }
 
@@ -221,9 +233,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 
-	// テクスチャ2番に読み込み Load into texture # 2
-	Sprite::LoadTexture(2, L"Resources/texture.png");
-
+#pragma region Sprite テクスチャの読み込み
 	// テクスチャ5番に読み込み Load into texture # 2
 	Sprite::LoadTexture(5, L"Resources/GuideR.png");
 
@@ -244,8 +254,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Order_2 = Sprite::Create(8, { 0.0f,0.0f });
 
+#pragma endregion
 	
-
+#pragma region Obj モデル読み込み
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
 	modelFighter = Model::CreateFromOBJ("kabe"); //chr_sword
@@ -257,6 +268,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 
+#pragma endregion
+
+#pragma region Obj オブジェクト生成とモデルとセット
 	//objSkydome->SetModel(modelSkydome);
 	//objGround->SetModel( modelGround );
 	//objFighter->SetModel( modelFighter );
@@ -271,11 +285,20 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter = Player::Create(modelFighter);
 	objClone = Enemy::Create(modelFighter);
 
+#pragma endregion
+
+#pragma region Fbx モデル読み込み
 	// FBXモデルの読み込み Loading FBX model
 	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("PlayerRunning");
 	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("PlayerStanding");
+	modelPlayerFight = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFighting");
 	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
 	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
+	modelCloneFight = FbxLoader::GetInstance()->LoadModelFromFile("CloneFighting");
+
+#pragma endregion
+
+#pragma region Fbx オブジェクト生成とモデルとセット
 
 	// FBX3Dオブジェクト生成とモデルとセット FBX3D object generation and model set
 	// プレイヤー関連 Player related
@@ -287,6 +310,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerStand->Initialize();
 	objPlayerStand->SetModel(modelPlayerStand);
 
+	objPlayerFight = new FbxObject3d;
+	objPlayerFight->Initialize();
+	objPlayerFight->SetModel(modelPlayerFight);
+
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
 	objCloneRun->Initialize();
@@ -295,6 +322,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneStand = new FbxObject3d;
 	objCloneStand->Initialize();
 	objCloneStand->SetModel(modelCloneStand);
+
+	objCloneFight = new FbxObject3d;
+	objCloneFight->Initialize();
+	objCloneFight->SetModel(modelCloneFight);
+
+#pragma endregion
+
 
 	// プレイヤー初期化 Player initialization
 	objPlayerRun->SetPosition({ 0, 0, 0 });
@@ -305,6 +339,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerStand->SetRotation({ 0, 0, 0 });
 	objPlayerStand->SetScale({ 0.5,0.5,0.5 });
 
+	objPlayerFight->SetPosition({ 0,0,0 });
+	objPlayerFight->SetRotation({ 0,0,0 });
+	objPlayerFight->SetScale({ 1,1,1 });
+
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
 	objCloneRun->SetRotation({ 0, 0, 0 });
@@ -313,6 +351,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneStand->SetPosition({ 0, 0, 0 });
 	objCloneStand->SetRotation({ 0, 0, 0 });
 	objCloneStand->SetScale({ 0.5, 0.5, 0.5 });
+
+	objCloneFight->SetPosition({ 0,0,0 });
+	objCloneFight->SetRotation({ 0,0,0 });
+	objCloneFight->SetScale({ 1,1,1 });
+
 
 	// モデルテーブル Model table
 	Model* modeltable[11] = {
@@ -1320,7 +1363,7 @@ void GameScene::Update()
 			lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
 			lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
 
-			collisionManager->CheckAllCollisions();
+			//collisionManager->CheckAllCollisions();
 		}
 
 		for (auto object : objects) {
@@ -1481,7 +1524,7 @@ void GameScene::Update()
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
 
-			collisionManager->CheckAllCollisions();
+			//collisionManager->CheckAllCollisions();
 		}
 
 		for (auto object_s2_1 : objects_s2_1) {

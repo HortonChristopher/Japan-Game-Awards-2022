@@ -138,8 +138,11 @@ private: // メンバ変数 Member variables
 	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
+	FbxModel* modelPlayerFight = nullptr;
 	FbxModel* modelCloneRun = nullptr;
 	FbxModel* modelCloneStand = nullptr;
+	FbxModel* modelCloneFight = nullptr;
+
 
 	//Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;
@@ -154,9 +157,12 @@ private: // メンバ変数 Member variables
 	TouchableObject* objGround = nullptr;
 
 	FbxObject3d* objPlayerRun = nullptr;
-	FbxObject3d* objCloneRun = nullptr;
 	FbxObject3d* objPlayerStand = nullptr;
+	FbxObject3d* objPlayerFight = nullptr;
+	FbxObject3d* objCloneRun = nullptr;
 	FbxObject3d* objCloneStand = nullptr;
+	FbxObject3d* objCloneFight = nullptr;
+
 
 	Player* objFighter = nullptr;
 
