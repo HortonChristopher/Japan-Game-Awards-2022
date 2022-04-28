@@ -172,15 +172,6 @@ void Player::Update()
 				rotation.y = 180.0f;
 			}
 		}
-
-		if (IsButtonDown(ButtonKind::Button_A))
-		{
-			if (cameraMove == 1)
-			{
-				prevCameraMove = cameraMove;
-				cameraMove = 2;
-			}
-		}
 	}
 
 	//¶‚©‚çŒ©‚½‚Æ‚«‚ÌˆÚ“®ˆ—
