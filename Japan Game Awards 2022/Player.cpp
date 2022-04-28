@@ -59,6 +59,7 @@ void Player::Update()
 	Input* input = Input::GetInstance();
 	UpdateInput();
 
+#pragma region プレイヤーの移動処理
 	//正面から見たときの移動処理
 	if (cameraMove == 1)
 	{
@@ -521,167 +522,12 @@ void Player::Update()
 			}
 		}
 	}
-
-	////キーボードでステージ回転
-	//if (input->TriggerKey(DIK_Q) || input->TriggerKey(DIK_E))
-	//{
-	//	if (input->TriggerKey(DIK_Q))
-	//	{
-	//		if (cameraMove == 1)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 2;
-	//		}
-
-	//		else if (cameraMove == 2)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 3;
-	//		}
-
-	//		else if (cameraMove == 3)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 4;
-	//		}
-
-	//		else if (cameraMove == 4)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 1;
-	//		}
-	//	}
-
-
-	//	if (input->TriggerKey(DIK_E))
-	//	{
-	//		if (cameraMove == 1)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 4;
-	//		}
-
-	//		else if (cameraMove == 4)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 3;
-	//		}
-
-
-	//		else if (cameraMove == 3)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 2;
-	//		}
-
-
-	//		else if (cameraMove == 2)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 1;
-	//		}
-	//	}
-	//}
-
-	////コントローラでステージ回転
-	//if (IsButtonDown(ButtonKind::Button_LB) || IsButtonDown(ButtonKind::Button_RB))
-	//{
-	//	//assert(0);
-	//	if (IsButtonDown(ButtonKind::Button_LB))
-	//	{
-	//		if (cameraMove == 1)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 2;
-	//		}
-
-	//		else if (cameraMove == 2)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 3;
-	//		}
-
-	//		else if (cameraMove == 3)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 4;
-	//		}
-
-	//		else if (cameraMove == 4)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 1;
-	//		}
-	//	}
-
-	//	if (IsButtonDown(ButtonKind::Button_RB))
-	//	{
-	//		if (cameraMove == 1)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 4;
-	//		}
-
-	//		else if (cameraMove == 4)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 3;
-	//		}
-
-
-	//		else if (cameraMove == 3)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 2;
-	//		}
-
-
-	//		else if (cameraMove == 2)
-	//		{
-	//			prevCameraMove = cameraMove;
-	//			cameraMove = 1;
-	//		}
-	//	}
-	//}
+#pragma endregion
 
 	// 移動ベクトルをY軸回りの角度で回転 Rotate the movement vector at an angle around the Y axis
 	XMVECTOR move = { 0, 0, 0.1f, 0 };
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(rotation.y));
 	move = XMVector3TransformNormal(move, matRot);
-
-	// 向いている方向に移動 Move in the direction you are facing
-	//if (input->PushKey(DIK_S)) {
-	//	position.x -= move.m128_f32[0];
-	//	position.y -= move.m128_f32[1];
-	//	position.z -= move.m128_f32[2];
-	//}
-
-	//if (input->PushKey(DIK_W)) {
-	//	position.x += move.m128_f32[0];
-	//	position.y += move.m128_f32[1];
-	//	position.z += move.m128_f32[2];
-	//}
-
-	//コントローラーでの移動処理
-	/*if (IsButtonPush(ButtonKind::DownButton))
-	{
-		position.z -= 0.2f;
-	}
-
-	else if (IsButtonPush(ButtonKind::UpButton))
-	{
-		position.z += 0.2f;
-	}
-
-	else if (IsButtonPush(ButtonKind::LeftButton))
-	{
-		position.x -= 0.2f;
-	}
-
-	else if (IsButtonPush(ButtonKind::RightButton))
-	{
-		position.x += 0.2f;
-	}*/
 
 	// ワールド行列更新
 	UpdateWorldMatrix();
