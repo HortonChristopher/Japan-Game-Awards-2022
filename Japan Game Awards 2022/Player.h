@@ -40,7 +40,5 @@ private:
 
 	float Speed = 0.175f;
 
-	Input* input = Input::GetInstance();
-
 	DirectX::XMVECTOR fallV;
 };

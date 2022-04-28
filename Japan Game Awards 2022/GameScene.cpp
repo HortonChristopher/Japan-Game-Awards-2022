@@ -159,7 +159,7 @@ GameScene::~GameScene()
 	safe_delete(modelCloneStand);
 	safe_delete(modelCloneRun);
 	safe_delete(modelCloneFight);
-	
+
 	ReleaseInput();
 }
 
@@ -255,7 +255,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Order_2 = Sprite::Create(8, { 0.0f,0.0f });
 
 #pragma endregion
-	
+
 #pragma region Obj モデル読み込み
 	//modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
@@ -327,7 +327,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma endregion
 
-
 	// プレイヤー初期化 Player initialization
 	objPlayerRun->SetPosition({ 0, 0, 0 });
 	objPlayerRun->SetRotation({ 0, 0, 0 });
@@ -393,6 +392,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelYellowWall,
 	};
 
+#pragma region マップチップ生成 チュートリアル1
 	// チュートリアル 1
 	for (int i = 0; i < 11; i++) // Y
 	{
@@ -443,6 +443,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			objects_t1_2.push_back(object_t1_2);
 		}
 	}
+
+#pragma endregion
+
+#pragma region マップチップ生成 チュートリアル2
 
 	// チュートリアル 2
 	for (int i = 0; i < 11; i++) // Y
@@ -499,6 +503,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			objects_t2_2.push_back(object_t2_2);
 		}
 	}
+
+#pragma endregion
+
+#pragma region マップチップ生成 チュートリアル3
 
 	// チュートリアル 3
 	for (int i = 0; i < 11; i++) // Y
@@ -713,6 +721,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		}
 	}
 
+#pragma endregion
+
+#pragma region マップチップ生成 ステージ1
 	//自分側のマップチップ生成(Map chip generation) ステージ　１
 	for (int i = 0; i < DIV_NUM; i++) { // y coordinate - Bottom to Top
 		for (int j = 0; j < 6; j++) { // x coordinate - Left to Right
@@ -831,6 +842,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			objects_2.push_back(object_2);
 		}
 	}
+
+#pragma endregion
+
+#pragma region マップチップ生成 ステージ2
 
 	//ステージ　２
 	for (int i = 0; i < 12; i++) { // y coordinate - Bottom to Top
@@ -1019,6 +1034,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		}
 	}
 
+#pragma endregion
+
+
 	//objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 1,1,1 });
 	objClone->SetScale({ 1,1,1 });
@@ -1112,6 +1130,8 @@ void GameScene::Update()
 		FBXModelChange = 0;
 	}
 
+
+#pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
 	if (beginStage)
 	{
@@ -1184,11 +1204,108 @@ void GameScene::Update()
 		}
 	}
 
+	//カメラ回転 Camera Rotation
+	if (cameraChange)
+	{
+		if (cameraMove == 1)
+		{
+			if (prevCameraMove == 4)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
+			}
+			else if (prevCameraMove == 2)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+			}
+
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ 0.0f, 20.0f, -30.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+		if (cameraMove == 2)
+		{
+			if (prevCameraMove == 1)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+			}
+			else if (prevCameraMove == 3)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
+			}
+
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ -40.0f, 20.0f, 0.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+		if (cameraMove == 3)
+		{
+			if (prevCameraMove == 2)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+			}
+			else if (prevCameraMove == 4)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
+			}
+
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ 0.0f, 20.0f, 30.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+		if (cameraMove == 4)
+		{
+			if (prevCameraMove == 3)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
+			}
+			else if (prevCameraMove == 1)
+			{
+				currentCameraFrame++;
+				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
+			}
+
+			if (currentCameraFrame >= 40)
+			{
+				camera->SetEye({ 40.0f, 20.0f, 0.0f });
+				currentCameraFrame = 0;
+				cameraChange = false;
+			}
+		}
+	}
+#pragma endregion
+
+#pragma region シーン遷移
 	//シーン遷移
 	switch (sceneNo)
 	{
 	case 0:
+		objPlayerFight->SetPosition({ -4,-2,8 });
+		objPlayerFight->SetRotation({ 0,-160,0 });
+		objCloneFight->SetPosition({ -4,-2,-8 });
+		objCloneFight->SetRotation({ 0,-20,0 });
+		camera->SetEye({ -15,10,0 });
+		camera->SetTarget({ 0, 10, 0 });
+
 		titleScene->Update();
+		objPlayerFight->Update();
+		objCloneFight->Update();
+		camera->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 		if (ConTimer <= 60)
@@ -1208,6 +1325,12 @@ void GameScene::Update()
 			{
 				Tutorial1Reset();
 			}
+			else
+			{
+				camera->SetEye({ 0, 20, -30 });
+				camera->SetTarget({ 0, 1, 0 });
+				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+			}
 			sceneNo = 5;
 			titleScene->Finalize();
 			break;
@@ -1219,13 +1342,21 @@ void GameScene::Update()
 			{
 				Tutorial1Reset();
 			}
+			else
+			{
+				camera->SetEye({ 0, 20, -30 });
+				camera->SetTarget({ 0, 1, 0 });
+				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+			}
 			sceneNo = 5;
 			titleScene->Finalize();
 			break;
 		}
 
 		break;
+
 	case 1:
+#pragma region case1
 		if (!beginStage)
 		{
 			if (firstTime)
@@ -1383,7 +1514,7 @@ void GameScene::Update()
 		objClone->Update();
 
 		camera->Update();
-
+#pragma endregion
 		break;
 
 	case 2:
@@ -1932,6 +2063,9 @@ void GameScene::Update()
 		break;
 	}
 
+#pragma endregion
+
+
 	//Debug Start
 	/*XMFLOAT3 eye = camera->GetEye();
 
@@ -1951,90 +2085,8 @@ void GameScene::Update()
 	//Right Side Eye: {40, 20, 0}
 	//Normal Eye: {0, 20, -30}
 	//Opposite Side: {0, 20, 30}
-	//カメラ回転 Camera Rotation
-	if (cameraChange)
-	{
-		if (cameraMove == 1)
-		{
-			if (prevCameraMove == 4)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
-			}
-			else if (prevCameraMove == 2)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
-			}
 
-			if (currentCameraFrame >= 40)
-			{
-				camera->SetEye({ 0.0f, 20.0f, -30.0f });
-				currentCameraFrame = 0;
-				cameraChange = false;
-			}
-		}
-		if (cameraMove == 2)
-		{
-			if (prevCameraMove == 1)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
-			}
-			else if (prevCameraMove == 3)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
-			}
 
-			if (currentCameraFrame >= 40)
-			{
-				camera->SetEye({ -40.0f, 20.0f, 0.0f });
-				currentCameraFrame = 0;
-				cameraChange = false;
-			}
-		}
-		if (cameraMove == 3)
-		{
-			if (prevCameraMove == 2)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
-			}
-			else if (prevCameraMove == 4)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
-			}
-
-			if (currentCameraFrame >= 40)
-			{
-				camera->SetEye({ 0.0f, 20.0f, 30.0f });
-				currentCameraFrame = 0;
-				cameraChange = false;
-			}
-		}
-		if (cameraMove == 4)
-		{
-			if (prevCameraMove == 3)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
-			}
-			else if (prevCameraMove == 1)
-			{
-				currentCameraFrame++;
-				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
-			}
-
-			if (currentCameraFrame >= 40)
-			{
-				camera->SetEye({ 40.0f, 20.0f, 0.0f });
-				currentCameraFrame = 0;
-				cameraChange = false;
-			}
-		}
-	}
 }
 
 void GameScene::Draw()
@@ -2113,7 +2165,8 @@ void GameScene::Draw()
 	switch (sceneNo)
 	{
 	case 0:
-		// objPlayerRun->Draw(cmdList);
+		objPlayerFight->Draw(cmdList);
+		objCloneFight->Draw(cmdList);
 		break;
 	case 1:
 		// 3Dオブクジェクトの描画 Drawing 3D objects
@@ -2333,12 +2386,12 @@ void GameScene::Draw()
 	Object3d::PostDraw();
 #pragma endregion
 
-	#pragma region 前景スプライト描画 Foreground sprite drawing
+#pragma region 前景スプライト描画 Foreground sprite drawing
 	// 前景スプライト描画前処理 Foreground sprite drawing pre-processing
-	Sprite::PreDraw( cmdList );
-	
+	Sprite::PreDraw(cmdList);
+
 	// ここに前景スプライトの描画処理を追加できる You can add foreground sprite drawing processing here
-	
+
 	// 描画 drawing
 	switch (sceneNo)
 	{
@@ -2364,12 +2417,12 @@ void GameScene::Draw()
 		break;
 	}
 
-	//	// デバッグテキストの描画 Debug text drawing
-	//	// debugText.DrawAll(cmdList);
-	//
+	// デバッグテキストの描画 Debug text drawing
+	// debugText.DrawAll(cmdList);
+	// 
 	// スプライト描画後処理 Post-processing of sprite drawing
 	Sprite::PostDraw();
-	#pragma endregion
+#pragma endregion
 }
 
 void GameScene::MoveCamera()
