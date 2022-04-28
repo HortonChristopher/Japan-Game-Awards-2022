@@ -55,6 +55,7 @@ void Enemy::Update()
 {
 	Input* input = Input::GetInstance();
 
+#pragma region エネミーの移動処理
 	//正面から見たときの移動処理
 	if (cameraMove == 1)
 	{
@@ -514,43 +515,12 @@ void Enemy::Update()
 			}
 		}
 	}
+#pragma endregion
 
 	// 移動ベクトルをY軸回りの角度で回転 Rotate the movement vector at an angle around the Y axis
 	XMVECTOR move = { 0, 0, 0.1f, 0 };
 	XMMATRIX matRot = XMMatrixRotationY(XMConvertToRadians(rotationE.y));
 	move = XMVector3TransformNormal(move, matRot);
-
-	// 向いている方向に移動 Move in the direction you are facing
-	//if (input->PushKey(DIK_S)) {
-	//	positionE.x -= move.m128_f32[0];
-	//	positionE.y -= move.m128_f32[1];
-	//	positionE.z -= move.m128_f32[2];
-	//} else if (input->PushKey(DIK_W)) {
-	//	positionE.x += move.m128_f32[0];
-	//	positionE.y += move.m128_f32[1];
-	//	positionE.z += move.m128_f32[2];
-	//}
-
-	//コントローラーでの移動処理
-	/*if (IsButtonPush(ButtonKind::DownButton))
-	{
-		position.z -= 0.2f;
-	}
-
-	else if (IsButtonPush(ButtonKind::UpButton))
-	{
-		position.z += 0.2f;
-	}
-
-	else if (IsButtonPush(ButtonKind::LeftButton))
-	{
-		position.x -= 0.2f;
-	}
-
-	else if (IsButtonPush(ButtonKind::RightButton))
-	{
-		position.x += 0.2f;
-	}*/
 
 	// ワールド行列更新
 	UpdateWorldMatrix();
