@@ -224,6 +224,10 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 yellowTrigger2;
 	XMFLOAT3 playerBullet;
 	XMFLOAT3 enemyBullet;
+	XMFLOAT3 FBXplayerPosition;
+	XMFLOAT3 FBXplayerRotation;
+	XMFLOAT3 FBXclonePosition;
+	XMFLOAT3 FBXcloneRotation;
 
 	int stage1Init = 0;
 	int FBXModelChange = 0;

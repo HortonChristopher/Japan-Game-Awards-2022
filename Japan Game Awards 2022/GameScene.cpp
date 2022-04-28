@@ -272,8 +272,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma region Obj オブジェクト生成とモデルとセット
 	//objSkydome->SetModel(modelSkydome);
-	//objGround->SetModel( modelGround );
-	//objFighter->SetModel( modelFighter );
+
 	objTempTrigger->SetModel(modelTempTrigger);
 	objTempTriggerE->SetModel(modelTempTrigger);
 	objTempYellowTrigger1->SetModel(modelTempTrigger);
@@ -281,7 +280,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
 
-	//objGround = TouchableObject::Create(modelGround);
 	objFighter = Player::Create(modelFighter);
 	objClone = Enemy::Create(modelFighter);
 
@@ -1062,11 +1060,11 @@ void GameScene::Update()
 	UpdateInput();
 
 	// 現在の座標を取得
-	XMFLOAT3 FBXplayerPosition = playerPositionTemp;
-	XMFLOAT3 FBXplayerRotation = playerRotationTemp;
+	FBXplayerPosition = playerPositionTemp;
+	FBXplayerRotation = playerRotationTemp;
 
-	XMFLOAT3 FBXclonePosition = clonePositionTemp;
-	XMFLOAT3 FBXcloneRotation = cloneRotationTemp;
+	FBXclonePosition = clonePositionTemp;
+	FBXcloneRotation = cloneRotationTemp;
 
 	// 座標の変更を反映
 	objPlayerRun->SetPosition(FBXplayerPosition);
@@ -1362,8 +1360,6 @@ void GameScene::Update()
 
 			lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
 			lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
-
-			//collisionManager->CheckAllCollisions();
 		}
 
 		for (auto object : objects) {
@@ -1523,8 +1519,6 @@ void GameScene::Update()
 			}
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
-
-			//collisionManager->CheckAllCollisions();
 		}
 
 		for (auto object_s2_1 : objects_s2_1) {
