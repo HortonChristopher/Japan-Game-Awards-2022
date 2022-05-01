@@ -254,6 +254,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Order_2 = Sprite::Create(8, { 0.0f,0.0f });
 
+	Sprite::LoadTexture(9, L"Resources/press_a.png");
+
+	Press_A = Sprite::Create(9, { 0.0f,400.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -1299,6 +1303,9 @@ void GameScene::Update()
 		objPlayerFight->SetRotation({ 0,-160,0 });
 		objCloneFight->SetPosition({ -4,-2,-8 });
 		objCloneFight->SetRotation({ 0,-20,0 });
+
+
+
 		camera->SetEye({ -15,10,0 });
 		camera->SetTarget({ 0, 10, 0 });
 
@@ -2396,6 +2403,7 @@ void GameScene::Draw()
 	switch (sceneNo)
 	{
 	case 0:
+		Press_A->Draw();
 		break;
 	case 1:
 		break;
