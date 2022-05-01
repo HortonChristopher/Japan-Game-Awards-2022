@@ -19,7 +19,7 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 0; //タイトル Title
+extern int sceneNo = 2; //タイトル Title
 extern int sceneChange = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
@@ -148,6 +148,7 @@ GameScene::~GameScene()
 	safe_delete(objPlayerStand);
 	safe_delete(objPlayerRun);
 	safe_delete(objPlayerFight);
+	safe_delete(objPlayerWin);
 	safe_delete(objCloneStand);
 	safe_delete(objCloneRun);
 	safe_delete(objCloneFight);
@@ -294,6 +295,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlayerRun = FbxLoader::GetInstance()->LoadModelFromFile("PlayerRunning");
 	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("PlayerStanding");
 	modelPlayerFight = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFighting");
+	modelPlayerWin = FbxLoader::GetInstance()->LoadModelFromFile("PlayerWin");
 	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
 	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
 	modelCloneFight = FbxLoader::GetInstance()->LoadModelFromFile("CloneFighting");
@@ -315,6 +317,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerFight = new FbxObject3d;
 	objPlayerFight->Initialize();
 	objPlayerFight->SetModel(modelPlayerFight);
+
+	objPlayerWin = new FbxObject3d;
+	objPlayerWin->Initialize();
+	objPlayerWin->SetModel(modelPlayerWin);
 
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
@@ -340,9 +346,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerStand->SetRotation({ 0, 0, 0 });
 	objPlayerStand->SetScale({ 0.5,0.5,0.5 });
 
-	objPlayerFight->SetPosition({ 0,0,0 });
-	objPlayerFight->SetRotation({ 0,0,0 });
+	objPlayerFight->SetPosition({ -4,-2,8 });
+	objPlayerFight->SetRotation({ 0,-160,0 });
 	objPlayerFight->SetScale({ 1,1,1 });
+
+	objPlayerWin->SetPosition({ 0,-7,-10 });
+	objPlayerWin->SetRotation({ 0,-90,0 });
+	objPlayerWin->SetScale({ 0.5,0.5,0.5 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -353,8 +363,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneStand->SetRotation({ 0, 0, 0 });
 	objCloneStand->SetScale({ 0.5, 0.5, 0.5 });
 
-	objCloneFight->SetPosition({ 0,0,0 });
-	objCloneFight->SetRotation({ 0,0,0 });
+	objCloneFight->SetPosition({ -4,-2,-8 });
+	objCloneFight->SetRotation({ 0,-20,0 });
 	objCloneFight->SetScale({ 1,1,1 });
 
 
@@ -1298,14 +1308,8 @@ void GameScene::Update()
 	//シーン遷移
 	switch (sceneNo)
 	{
-	case 0:
-		objPlayerFight->SetPosition({ -4,-2,8 });
-		objPlayerFight->SetRotation({ 0,-160,0 });
-		objCloneFight->SetPosition({ -4,-2,-8 });
-		objCloneFight->SetRotation({ 0,-20,0 });
-
-
-
+	case 0: // タイトル画面
+#pragma region case0 タイトル画面
 		camera->SetEye({ -15,10,0 });
 		camera->SetTarget({ 0, 10, 0 });
 
@@ -1359,11 +1363,11 @@ void GameScene::Update()
 			titleScene->Finalize();
 			break;
 		}
-
+#pragma endregion
 		break;
 
-	case 1:
-#pragma region case1
+	case 1: // ステージ1
+#pragma region case1 ステージ1
 		if (!beginStage)
 		{
 			if (firstTime)
@@ -1524,8 +1528,14 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 2:
+	case 2: // クリア画面
+#pragma region case2 クリア画面
+		camera->SetEye({ -15,0,0 });
+		camera->SetTarget({ 0, 0, 0 });
+
+		objPlayerWin->Update();
 		gameClear->Update();
+		camera->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 		if (ConTimer <= 60)
@@ -1554,9 +1564,12 @@ void GameScene::Update()
 			titleScene->Initialize();
 			break;
 		}
-
+#pragma endregion
 		break;
-	case 3:
+
+	case 3: // ゲームオーバー画面
+#pragma region case3 ゲームオーバー画面
+
 		gameOver->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -1586,11 +1599,12 @@ void GameScene::Update()
 			titleScene->Initialize();
 			break;
 		}
-
+#pragma endregion
 		break;
 
-	case 4:
-		//ステージ2
+	case 4: // ステージ2
+#pragma region cese4 ステージ2
+
 		if (!beginStage)
 		{
 			if (secondTime)
@@ -1727,11 +1741,11 @@ void GameScene::Update()
 		objTempYellowTrigger1->Update();
 
 		camera->Update();
-
+#pragma endregion
 		break;
 
-	case 5:
-		//チュートリアル 1
+	case 5: // チュートリアル 1
+#pragma region case5 チュートリアル1
 		if (!beginStage)
 		{
 			if (t1Time)
@@ -1808,11 +1822,12 @@ void GameScene::Update()
 		objCloneStand->Update();
 
 		camera->Update();
-
+#pragma endregion
 		break;
 
-	case 6:
-		//チュートリアル 2
+	case 6: // チュートリアル 2
+#pragma region case6 チュートリアル2
+
 		if (!beginStage)
 		{
 			if (t2Time)
@@ -1891,11 +1906,12 @@ void GameScene::Update()
 		objCloneStand->Update();
 
 		camera->Update();
-
+#pragma endregion
 		break;
 
-	case 7:
-		//チュートリアル 3
+	case 7: // チュートリアル 3
+#pragma region case7 チュートリアル3
+
 		if (!beginStage)
 		{
 			if (t3Time)
@@ -2066,7 +2082,7 @@ void GameScene::Update()
 		objTempYellowTrigger2->Update();
 
 		camera->Update();
-
+#pragma endregion
 		break;
 	}
 
@@ -2218,6 +2234,7 @@ void GameScene::Draw()
 		}
 		break;
 	case 2:
+		objPlayerWin->Draw(cmdList);
 		break;
 	case 3:
 		break;
