@@ -19,7 +19,7 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 2; //タイトル Title
+extern int sceneNo = 0; //タイトル Title
 extern int sceneChange = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
@@ -122,9 +122,11 @@ GameScene::~GameScene()
 	safe_delete(Guide_LRB);
 	safe_delete(Order_1);
 	safe_delete(Order_2);
+	safe_delete(Mirror);
+	safe_delete(GameOverLog);
 
 	// obj object
-	//safe_delete(objSkydome);
+	safe_delete(objSkydome);
 	safe_delete(objGround);
 	safe_delete(objFighter);
 	safe_delete(objClone);
@@ -135,7 +137,7 @@ GameScene::~GameScene()
 	safe_delete(objTempBulletE);
 
 	// obj model
-	//safe_delete(modelSkydome);
+	safe_delete(modelSkydome);
 	safe_delete(modelGround);
 	safe_delete(modelFighter);
 	safe_delete(modelPlane);
@@ -149,6 +151,7 @@ GameScene::~GameScene()
 	safe_delete(objPlayerRun);
 	safe_delete(objPlayerFight);
 	safe_delete(objPlayerWin);
+	safe_delete(objPlayerLose);
 	safe_delete(objCloneStand);
 	safe_delete(objCloneRun);
 	safe_delete(objCloneFight);
@@ -157,6 +160,8 @@ GameScene::~GameScene()
 	safe_delete(modelPlayerStand);
 	safe_delete(modelPlayerRun);
 	safe_delete(modelPlayerFight);
+	safe_delete(modelPlayerWin);
+	safe_delete(modelPlayerLose);
 	safe_delete(modelCloneStand);
 	safe_delete(modelCloneRun);
 	safe_delete(modelCloneFight);
@@ -226,7 +231,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	particleMan = ParticleManager::Create(dxCommon->GetDevice(), camera);
 
 	// 3Dオブジェクト生成 3D object generation
-	//objSkydome = Object3d::Create();
+	objSkydome = Object3d::Create();
 	objTempTrigger = Object3d::Create();
 	objTempTriggerE = Object3d::Create();
 	objTempYellowTrigger1 = Object3d::Create();
@@ -259,10 +264,26 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Press_A = Sprite::Create(9, { 0.0f,400.0f });
 
+	Sprite::LoadTexture(10, L"Resources/Mirror.png");
+
+	Mirror = Sprite::Create(10, { 0.0f,0.0f });
+
+	Sprite::LoadTexture(11, L"Resources/GameOver.png");
+
+	GameOverLog = Sprite::Create(11, { 0.0f,-10.0f });
+
+	Sprite::LoadTexture(12, L"Resources/ReStateLog.png");
+
+	ReStateLog = Sprite::Create(12, { 0.0f,470.0f });
+
+	Sprite::LoadTexture(13, L"Resources/StageSelectLog.png");
+
+	StageSelectLog = Sprite::Create(13, { 0.0f,570.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
-	//modelSkydome = Model::CreateFromOBJ("skydome");
+	modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
 	modelFighter = Model::CreateFromOBJ("kabe"); //chr_sword
 	modelPlane = Model::CreateFromOBJ("yuka");
@@ -276,7 +297,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 #pragma endregion
 
 #pragma region Obj オブジェクト生成とモデルとセット
-	//objSkydome->SetModel(modelSkydome);
+	objSkydome->SetModel(modelSkydome);
 
 	objTempTrigger->SetModel(modelTempTrigger);
 	objTempTriggerE->SetModel(modelTempTrigger);
@@ -296,6 +317,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlayerStand = FbxLoader::GetInstance()->LoadModelFromFile("PlayerStanding");
 	modelPlayerFight = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFighting");
 	modelPlayerWin = FbxLoader::GetInstance()->LoadModelFromFile("PlayerWin");
+	modelPlayerLose = FbxLoader::GetInstance()->LoadModelFromFile("PlayerLose");
 	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
 	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
 	modelCloneFight = FbxLoader::GetInstance()->LoadModelFromFile("CloneFighting");
@@ -322,6 +344,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerWin->Initialize();
 	objPlayerWin->SetModel(modelPlayerWin);
 
+	objPlayerLose = new FbxObject3d;
+	objPlayerLose->Initialize();
+	objPlayerLose->SetModel(modelPlayerLose);
+
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
 	objCloneRun->Initialize();
@@ -346,13 +372,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerStand->SetRotation({ 0, 0, 0 });
 	objPlayerStand->SetScale({ 0.5,0.5,0.5 });
 
-	objPlayerFight->SetPosition({ -4,-2,8 });
+	objPlayerFight->SetPosition({ -4,-2,7 });
 	objPlayerFight->SetRotation({ 0,-160,0 });
 	objPlayerFight->SetScale({ 1,1,1 });
 
 	objPlayerWin->SetPosition({ 0,-7,-10 });
 	objPlayerWin->SetRotation({ 0,-90,0 });
 	objPlayerWin->SetScale({ 0.5,0.5,0.5 });
+
+	objPlayerLose->SetPosition({ 0,0,0 });
+	objPlayerLose->SetRotation({ 0,-90,0 });
+	objPlayerLose->SetScale({ 0.7,0.7,0.7 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -363,7 +393,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneStand->SetRotation({ 0, 0, 0 });
 	objCloneStand->SetScale({ 0.5, 0.5, 0.5 });
 
-	objCloneFight->SetPosition({ -4,-2,-8 });
+	objCloneFight->SetPosition({ -4,-2,-7 });
 	objCloneFight->SetRotation({ 0,-20,0 });
 	objCloneFight->SetScale({ 1,1,1 });
 
@@ -1316,6 +1346,7 @@ void GameScene::Update()
 		titleScene->Update();
 		objPlayerFight->Update();
 		objCloneFight->Update();
+		objSkydome->Update();
 		camera->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -1524,6 +1555,8 @@ void GameScene::Update()
 		objFighter->Update();
 		objClone->Update();
 
+		objSkydome->Update();
+
 		camera->Update();
 #pragma endregion
 		break;
@@ -1569,9 +1602,13 @@ void GameScene::Update()
 
 	case 3: // ゲームオーバー画面
 #pragma region case3 ゲームオーバー画面
+		camera->SetEye({ -15,0,0 });
+		camera->SetTarget({ 0, 0, 0 });
 
+		objPlayerLose->Update();
 		gameOver->Update();
 
+		camera->Update();
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 		if (ConTimer <= 60)
 		{
@@ -1740,6 +1777,8 @@ void GameScene::Update()
 		objTempTriggerE->Update();
 		objTempYellowTrigger1->Update();
 
+		objSkydome->Update();
+
 		camera->Update();
 #pragma endregion
 		break;
@@ -1820,6 +1859,8 @@ void GameScene::Update()
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+
+		objSkydome->Update();
 
 		camera->Update();
 #pragma endregion
@@ -1904,6 +1945,8 @@ void GameScene::Update()
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+
+		objSkydome->Update();
 
 		camera->Update();
 #pragma endregion
@@ -2081,6 +2124,8 @@ void GameScene::Update()
 		objTempYellowTrigger1->Update();
 		objTempYellowTrigger2->Update();
 
+		objSkydome->Update();
+
 		camera->Update();
 #pragma endregion
 		break;
@@ -2129,8 +2174,7 @@ void GameScene::Draw()
 		break;
 	case 1:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
+		
 		break;
 	case 2:
 		if (sceneChange == 0)
@@ -2152,23 +2196,19 @@ void GameScene::Draw()
 		break;
 	case 4:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
+	
 		break;
 	case 5:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
+		
 		break;
 	case 6:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
+		
 		break;
 	case 7:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
+		
 		break;
 	}
 
@@ -2190,11 +2230,10 @@ void GameScene::Draw()
 	case 0:
 		objPlayerFight->Draw(cmdList);
 		objCloneFight->Draw(cmdList);
+		objSkydome->Draw();
 		break;
 	case 1:
 		// 3Dオブクジェクトの描画 Drawing 3D objects
-		//objSkydome->Draw();
-		//objGround->Draw();
 		for (auto object : objects) {
 			object->Draw();
 		}
@@ -2232,11 +2271,13 @@ void GameScene::Draw()
 			objPlayerStand->Draw(cmdList);
 			objCloneStand->Draw(cmdList);
 		}
+		objSkydome->Draw();
 		break;
 	case 2:
 		objPlayerWin->Draw(cmdList);
 		break;
 	case 3:
+		objPlayerLose->Draw(cmdList);
 		break;
 	case 4:
 		if (FBXModelChange == 1)
@@ -2285,6 +2326,8 @@ void GameScene::Draw()
 			}
 		}
 
+		objSkydome->Draw();
+
 		break;
 	case 5:
 		if (FBXModelChange == 1)
@@ -2305,6 +2348,8 @@ void GameScene::Draw()
 		for (auto object_t1_2 : objects_t1_2) {
 			object_t1_2->Draw();
 		}
+
+		objSkydome->Draw();
 
 		break;
 	case 6:
@@ -2328,6 +2373,8 @@ void GameScene::Draw()
 		{
 			object_t2_2->Draw();
 		}
+
+		objSkydome->Draw();
 
 		break;
 	case 7:
@@ -2396,6 +2443,8 @@ void GameScene::Draw()
 			}
 		}
 
+		objSkydome->Draw();
+
 		break;
 	}
 
@@ -2420,24 +2469,39 @@ void GameScene::Draw()
 	switch (sceneNo)
 	{
 	case 0:
+		
+		Mirror->Draw();
 		Press_A->Draw();
 		break;
 	case 1:
+		GuideR->Draw();
+		Guide_LRB->Draw();
 		break;
 	case 2:
 		break;
 	case 3:
+		GameOverLog->Draw();
+		ReStateLog->Draw();
+		StageSelectLog->Draw();
 		break;
 	case 4:
+		GuideR->Draw();
+		Guide_LRB->Draw();
 		Order_2->Draw();
 		break;
 	case 5:
+		GuideR->Draw();
+		Guide_LRB->Draw();
 		Order_2->Draw();
 		break;
 	case 6:
+		GuideR->Draw();
+		Guide_LRB->Draw();
 		Order_2->Draw();
 		break;
 	case 7:
+		GuideR->Draw();
+		Guide_LRB->Draw();
 		Order_2->Draw();
 		break;
 	}
