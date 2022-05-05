@@ -130,7 +130,15 @@ private: // メンバ変数 Member variables
 
 	Sprite* ReStateLog = nullptr;
 
-	Sprite* StageSelectLog = nullptr;
+	Sprite* GameOverStageSelectLog = nullptr;
+
+	Sprite* StageClearStageSelectLog = nullptr;
+
+	Sprite* StageClearLog = nullptr;
+
+	Sprite* TitleLog = nullptr;
+
+	Sprite* NextStageLog = nullptr;
 
 	ParticleManager* particleMan = nullptr;
 

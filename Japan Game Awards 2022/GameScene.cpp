@@ -124,6 +124,7 @@ GameScene::~GameScene()
 	safe_delete(Order_2);
 	safe_delete(Mirror);
 	safe_delete(GameOverLog);
+	safe_delete(TitleLog);
 
 	// obj object
 	safe_delete(objSkydome);
@@ -262,7 +263,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(9, L"Resources/press_a.png");
 
-	Press_A = Sprite::Create(9, { 0.0f,400.0f });
+	Press_A = Sprite::Create(9, { 0.0f,500.0f });
 
 	Sprite::LoadTexture(10, L"Resources/Mirror.png");
 
@@ -276,9 +277,25 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	ReStateLog = Sprite::Create(12, { 0.0f,470.0f });
 
-	Sprite::LoadTexture(13, L"Resources/StageSelectLog.png");
+	Sprite::LoadTexture(13, L"Resources/GameOverStageSelectLog.png");
 
-	StageSelectLog = Sprite::Create(13, { 0.0f,570.0f });
+	GameOverStageSelectLog = Sprite::Create(13, { 0.0f,570.0f });
+
+	Sprite::LoadTexture(14, L"Resources/StageClear.png");
+
+	StageClearLog = Sprite::Create(14, { 0.0f,-10.0f });
+
+	Sprite::LoadTexture(15, L"Resources/TitleLog.png");
+
+	TitleLog = Sprite::Create(15, { 0.0f,20.0f });
+
+	Sprite::LoadTexture(16, L"Resources/NextStageLog.png");
+
+	NextStageLog = Sprite::Create(16, { -250.0f,350.0f });
+
+	Sprite::LoadTexture(17, L"Resources/StageClearStageSelectLog.png");
+
+	StageClearStageSelectLog = Sprite::Create(17, { -250.0f,500.0f });
 
 #pragma endregion
 
@@ -376,9 +393,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerFight->SetRotation({ 0,-160,0 });
 	objPlayerFight->SetScale({ 1,1,1 });
 
-	objPlayerWin->SetPosition({ 0,-7,-10 });
-	objPlayerWin->SetRotation({ 0,-90,0 });
-	objPlayerWin->SetScale({ 0.5,0.5,0.5 });
+	objPlayerWin->SetPosition({ 0,-7,-7.5 });
+	objPlayerWin->SetRotation({ 0,-80,0 });
+	objPlayerWin->SetScale({ 0.7,0.7,0.7 });
 
 	objPlayerLose->SetPosition({ 0,0,0 });
 	objPlayerLose->SetRotation({ 0,-90,0 });
@@ -1568,6 +1585,7 @@ void GameScene::Update()
 
 		objPlayerWin->Update();
 		gameClear->Update();
+		objSkydome->Update();
 		camera->Update();
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -2275,6 +2293,7 @@ void GameScene::Draw()
 		break;
 	case 2:
 		objPlayerWin->Draw(cmdList);
+		objSkydome->Draw();
 		break;
 	case 3:
 		objPlayerLose->Draw(cmdList);
@@ -2470,7 +2489,8 @@ void GameScene::Draw()
 	{
 	case 0:
 		
-		Mirror->Draw();
+		// Mirror->Draw();
+		TitleLog->Draw();
 		Press_A->Draw();
 		break;
 	case 1:
@@ -2478,11 +2498,14 @@ void GameScene::Draw()
 		Guide_LRB->Draw();
 		break;
 	case 2:
+		StageClearLog->Draw();
+		NextStageLog->Draw();
+		StageClearStageSelectLog->Draw();
 		break;
 	case 3:
 		GameOverLog->Draw();
 		ReStateLog->Draw();
-		StageSelectLog->Draw();
+		GameOverStageSelectLog->Draw();
 		break;
 	case 4:
 		GuideR->Draw();

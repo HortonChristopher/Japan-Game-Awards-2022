@@ -16,7 +16,7 @@ void GameClear::Initialize()
 	//debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(3, L"Resources/GameClear.png")) {
+	if (!Sprite::LoadTexture(3, L"Resources/StageClearBG.png")) {
 		assert(0);
 		return;
 	}
