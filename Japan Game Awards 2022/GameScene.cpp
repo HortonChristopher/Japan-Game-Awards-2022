@@ -19,7 +19,8 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 2; //タイトル Title
+extern int sceneNo = 0; //タイトル Title
+extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
@@ -233,6 +234,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempYellowTrigger2 = Object3d::Create();
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
+	objT1 = Object3d::Create();
+	objT2 = Object3d::Create();
+	objT3 = Object3d::Create();
+	objS1 = Object3d::Create();
+	objS2 = Object3d::Create();
 
 #pragma region Sprite テクスチャの読み込み
 	// テクスチャ5番に読み込み Load into texture # 2
@@ -259,16 +265,32 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Press_A = Sprite::Create(9, { 0.0f,400.0f });
 
+	Sprite::LoadTexture(10, L"Resources/T1.png");
+	t1Background = Sprite::Create(10, t1BackgroundPosition);
+
+	Sprite::LoadTexture(11, L"Resources/T2.png");
+	t2Background = Sprite::Create(11, t2BackgroundPosition);
+
+	Sprite::LoadTexture(12, L"Resources/T3.png");
+	t3Background = Sprite::Create(12, t3BackgroundPosition);
+
+	Sprite::LoadTexture(13, L"Resources/S1.png");
+	s1Background = Sprite::Create(13, s1BackgroundPosition);
+
+	Sprite::LoadTexture(14, L"Resources/S2.png");
+	s2Background = Sprite::Create(14, s2BackgroundPosition);
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
 	//modelSkydome = Model::CreateFromOBJ("skydome");
-	modelGround = Model::CreateFromOBJ("ground");
+	//modelGround = Model::CreateFromOBJ("ground");
 	modelFighter = Model::CreateFromOBJ("kabe"); //chr_sword
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 	modelTempWall = Model::CreateFromOBJ("kabe");
+	modelTempWall2 = Model::CreateFromOBJ("kabeV2");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
@@ -287,6 +309,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objFighter = Player::Create(modelFighter);
 	objClone = Enemy::Create(modelFighter);
+
+	objT1->SetModel(modelTempWall2);
+	objT2->SetModel(modelTempWall2);
+	objT3->SetModel(modelTempWall2);
+	objS1->SetModel(modelTempWall2);
+	objS2->SetModel(modelTempWall2);
 
 #pragma endregion
 
@@ -1068,10 +1096,26 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
+	objT1->SetPosition({ 0.0f, 0.0f, 0.0f });
+	objT1->SetRotation(T1rotation);
+	objT1->SetScale({ 10.0f, 10.0f, 10.0f });
+	objT2->SetPosition({ 100.0f, 0.0f, 0.0f });
+	objT2->SetRotation(T2rotation);
+	objT2->SetScale({ 10.0f, 10.0f, 10.0f });
+	objT3->SetPosition({ 200.0f, 0.0f, 0.0f });
+	objT3->SetRotation(T3rotation);
+	objT3->SetScale({ 10.0f, 10.0f, 10.0f });
+	objS1->SetPosition({ 300.0f, 0.0f, 0.0f });
+	objS1->SetRotation(S1rotation);
+	objS1->SetScale({ 10.0f, 10.0f, 10.0f });
+	objS2->SetPosition({ 400.0f, 0.0f, 0.0f });
+	objS2->SetRotation(S2rotation);
+	objS2->SetScale({ 10.0f, 10.0f, 10.0f });
+
 	camera->SetEye({ 0, 20, -30 });
 
 	camera->SetTarget({ 0, 1, 0 });
-	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+	//camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
 	originalCamera = camera->GetEye();
 
@@ -1332,7 +1376,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE))
 		{
-			if (!t1Time)
+			/*if (!t1Time)
 			{
 				Tutorial1Reset();
 			}
@@ -1341,15 +1385,17 @@ void GameScene::Update()
 				camera->SetEye({ 0, 20, -30 });
 				camera->SetTarget({ 0, 1, 0 });
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
-			}
-			sceneNo = 5;
+			}*/
+
+			SceneSelectionReset();
+			sceneNo = 8;
 			titleScene->Finalize();
 			break;
 		}
 
 		if (IsButtonDown(ButtonKind::Button_A))
 		{
-			if (!t1Time)
+			/*if (!t1Time)
 			{
 				Tutorial1Reset();
 			}
@@ -1358,8 +1404,10 @@ void GameScene::Update()
 				camera->SetEye({ 0, 20, -30 });
 				camera->SetTarget({ 0, 1, 0 });
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
-			}
-			sceneNo = 5;
+			}*/
+
+			SceneSelectionReset();
+			sceneNo = 8;
 			titleScene->Finalize();
 			break;
 		}
@@ -1621,11 +1669,11 @@ void GameScene::Update()
 				beginStage = true;
 			}
 
-			objFighter->SetPosition({ -24,0,-12 });
-			objClone->SetPosition({ 24,0,-12 });
+			objFighter->SetPosition({ -22,0,-12 });
+			objClone->SetPosition({ 22,0,-12 });
 
-			playerPositionTemp = { -24,0,-12 };
-			clonePositionTemp = { 24,0,-12 };
+			playerPositionTemp = { -22,0,-12 };
+			clonePositionTemp = { 22,0,-12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -2084,6 +2132,118 @@ void GameScene::Update()
 		camera->Update();
 #pragma endregion
 		break;
+
+	case 8: //ステージセレクト画面
+#pragma region case8 ステージセレクト画面
+		T1rotation.x += 2.0f;
+		T2rotation.x += 2.0f;
+		T3rotation.x += 2.0f;
+		S1rotation.x += 2.0f;
+		S2rotation.x += 2.0f;
+		objT1->SetRotation(T1rotation);
+		objT2->SetRotation(T2rotation);
+		objT3->SetRotation(T3rotation);
+		objS1->SetRotation(S1rotation);
+		objS2->SetRotation(S2rotation);
+
+		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 4)
+		{
+			stageMoveRight = true;
+			stageSelect++;
+		}
+
+		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
+		{
+			stageMoveLeft = true;
+			stageSelect--;
+		}
+
+		if (stageMoveRight == true)
+		{
+			camera->MoveVector({ +2.0f, 0.0f, 0.0f });
+			camera->Update();
+			t1BackgroundPosition.x -= 25.6f;
+			t2BackgroundPosition.x -= 25.6f;
+			t3BackgroundPosition.x -= 25.6f;
+			s1BackgroundPosition.x -= 25.6f;
+			s2BackgroundPosition.x -= 25.6f;
+			t1Background->SetPosition(t1BackgroundPosition);
+			t2Background->SetPosition(t2BackgroundPosition);
+			t3Background->SetPosition(t3BackgroundPosition);
+			s1Background->SetPosition(s1BackgroundPosition);
+			s2Background->SetPosition(s2BackgroundPosition);
+			currentFrame++;
+
+			if (currentFrame >= 50)
+			{
+				currentFrame = 0;
+				stageMoveRight = false;
+			}
+		}
+
+		if (stageMoveLeft == true)
+		{
+			camera->MoveVector({ -2.0f, 0.0f, 0.0f });
+			camera->Update();
+			t1BackgroundPosition.x += 25.6f;
+			t2BackgroundPosition.x += 25.6f;
+			t3BackgroundPosition.x += 25.6f;
+			s1BackgroundPosition.x += 25.6f;
+			s2BackgroundPosition.x += 25.6f;
+			t1Background->SetPosition(t1BackgroundPosition);
+			t2Background->SetPosition(t2BackgroundPosition);
+			t3Background->SetPosition(t3BackgroundPosition);
+			s1Background->SetPosition(s1BackgroundPosition);
+			s2Background->SetPosition(s2BackgroundPosition);
+			currentFrame++;
+
+			if (currentFrame >= 50)
+			{
+				currentFrame = 0;
+				stageMoveLeft = false;
+			}
+		}
+
+		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE))
+		{
+			switch (stageSelect)
+			{
+			case 0:
+				Tutorial1Reset();
+				sceneNo = 5;
+
+				break;
+			case 1:
+				Tutorial2Reset();
+				sceneNo = 6;
+
+				break;
+			case 2:
+				Tutorial3Reset();
+				sceneNo = 7;
+
+				break;
+			case 3:
+				Stage1Reset();
+				sceneNo = 1;
+
+				break;
+			case 4:
+				Stage2Reset();
+				sceneNo = 4;
+				break;
+			}
+		}
+
+		objT1->Update();
+		objT2->Update();
+		objT3->Update();
+		objS1->Update();
+		objS2->Update();
+
+		camera->Update();
+#pragma endregion
+		break;
 	}
 
 #pragma endregion
@@ -2108,8 +2268,6 @@ void GameScene::Update()
 	//Right Side Eye: {40, 20, 0}
 	//Normal Eye: {0, 20, -30}
 	//Opposite Side: {0, 20, 30}
-
-
 }
 
 void GameScene::Draw()
@@ -2169,6 +2327,13 @@ void GameScene::Draw()
 		spriteBG->Draw();
 		GuideR->Draw();
 		Guide_LRB->Draw();
+		break;
+	case 8:
+		t1Background->Draw();
+		t2Background->Draw();
+		t3Background->Draw();
+		s1Background->Draw();
+		s2Background->Draw();
 		break;
 	}
 
@@ -2397,6 +2562,14 @@ void GameScene::Draw()
 		}
 
 		break;
+	case 8:
+		objT1->Draw();
+		objT2->Draw();
+		objT3->Draw();
+		objS1->Draw();
+		objS2->Draw();
+
+		break;
 	}
 
 	// パーティクルの描画 Drawing particles
@@ -2439,6 +2612,8 @@ void GameScene::Draw()
 		break;
 	case 7:
 		Order_2->Draw();
+		break;
+	case 8:
 		break;
 	}
 
@@ -2510,6 +2685,31 @@ int GameScene::intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float re
 	float cornerDistance_sq = ((circleDistance.x - rectW / 2.0f) * (circleDistance.x - rectW / 2.0f)) + ((circleDistance.y - rectH / 2.0f) * (circleDistance.y - rectH / 2.0f));
 
 	return (cornerDistance_sq <= (circleR * circleR));
+}
+
+void GameScene::SceneSelectionReset()
+{
+	camera->SetEye(originalCamera);
+	camera->SetTarget({ 0, 1, 0 });
+	camera->Update();
+
+	stageSelect = 0;
+
+	stageMoveLeft = false;
+	stageMoveRight = false;
+	
+	currentFrame = 0;
+
+	T1rotation = { 0.0f, 0.0f, 0.0f };
+	T2rotation = { 0.0f, 0.0f, 0.0f };
+	T3rotation = { 0.0f, 0.0f, 0.0f };
+	S1rotation = { 0.0f, 0.0f, 0.0f };
+	S2rotation = { 0.0f, 0.0f, 0.0f };
+	objT1->Update();
+	objT2->Update();
+	objT3->Update();
+	objS1->Update();
+	objS2->Update();
 }
 
 void GameScene::Tutorial1Reset()
@@ -2884,8 +3084,8 @@ void GameScene::Stage2Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -24,0,-12 });
-	objClone->SetPosition({ 24,0,-12 });
+	objFighter->SetPosition({ -22,0,-12 });
+	objClone->SetPosition({ 22,0,-12 });
 
 	objFighter->SetRotation({ 0,0,0 });
 	objClone->SetRotation({ 0,0,0 });
