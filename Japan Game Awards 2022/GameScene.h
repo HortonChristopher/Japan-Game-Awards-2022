@@ -128,6 +128,22 @@ private: // メンバ変数 Member variables
 
 	Sprite* Press_A = nullptr;
 
+	Sprite* Mirror = nullptr;
+
+	Sprite* GameOverLog = nullptr;
+
+	Sprite* ReStateLog = nullptr;
+
+	Sprite* GameOverStageSelectLog = nullptr;
+
+	Sprite* StageClearStageSelectLog = nullptr;
+
+	Sprite* StageClearLog = nullptr;
+
+	Sprite* TitleLog = nullptr;
+
+	Sprite* NextStageLog = nullptr;
+
 	//レベルセレクト
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
@@ -137,7 +153,7 @@ private: // メンバ変数 Member variables
 
 	ParticleManager* particleMan = nullptr;
 
-	//Model* modelSkydome = nullptr;
+	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
 	Model* modelFighter = nullptr;
 	Model* modelPlane = nullptr;
@@ -154,6 +170,7 @@ private: // メンバ変数 Member variables
 	FbxModel* modelPlayerStand = nullptr;
 	FbxModel* modelPlayerFight = nullptr;
 	FbxModel* modelPlayerWin = nullptr;
+	FbxModel* modelPlayerLose = nullptr;
 	FbxModel* modelCloneRun = nullptr;
 	FbxModel* modelCloneStand = nullptr;
 	FbxModel* modelCloneFight = nullptr;
@@ -165,7 +182,8 @@ private: // メンバ変数 Member variables
 	Object3d* objS1 = nullptr;
 	Object3d* objS2 = nullptr;
 
-	//Object3d* objSkydome = nullptr;
+
+	Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;
 	Object3d* objTempTriggerE = nullptr;
 	Object3d* objTempYellowTrigger1 = nullptr;
@@ -181,6 +199,7 @@ private: // メンバ変数 Member variables
 	FbxObject3d* objPlayerStand = nullptr;
 	FbxObject3d* objPlayerFight = nullptr;
 	FbxObject3d* objPlayerWin = nullptr;
+	FbxObject3d* objPlayerLose = nullptr;
 	FbxObject3d* objCloneRun = nullptr;
 	FbxObject3d* objCloneStand = nullptr;
 	FbxObject3d* objCloneFight = nullptr;
