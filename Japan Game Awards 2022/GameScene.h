@@ -165,6 +165,8 @@ private: // メンバ変数 Member variables
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
 
+	Model* modelTESTONLY = nullptr;
+
 	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;

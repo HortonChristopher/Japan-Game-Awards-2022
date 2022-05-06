@@ -328,10 +328,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelBox = Model::CreateFromOBJ("box1x1x1");
 	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 	modelTempWall = Model::CreateFromOBJ("kabe");
+	//modelTempWall = Model::CreateFromOBJ("TEST");
 	modelTempWall2 = Model::CreateFromOBJ("kabeV2");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
+
+	modelTESTONLY = Model::CreateFromOBJ("TEST");
 
 #pragma endregion
 
@@ -345,8 +348,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
 
-	objFighter = Player::Create(modelFighter);
-	objClone = Enemy::Create(modelFighter);
+	//objFighter = Player::Create(modelFighter);
+	//objClone = Enemy::Create(modelFighter);
+
+	objFighter = Player::Create(modelTESTONLY);
+	objClone = Enemy::Create(modelTESTONLY);
 
 	objT1->SetModel(modelTempWall2);
 	objT2->SetModel(modelTempWall2);
@@ -1127,8 +1133,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 
 	//objFighter->SetPosition({ -10, 10, 0 });
-	objFighter->SetScale({ 1,1,1 });
-	objClone->SetScale({ 1,1,1 });
+	objFighter->SetScale({ 3.0f,3.0f,3.0f });
+	objClone->SetScale({ 3.0f,3.0f,3.0f });
 
 	objFighter->SetPosition({ -20, 0, 12 }); // -20, 12
 	objClone->SetPosition({ 20, 0, 12 }); // 20, 12
@@ -2785,7 +2791,7 @@ void GameScene::SceneSelectionReset()
 	camera->SetTarget({ 0, 1, 0 });
 	camera->Update();
 
-	stageSelect = 0;
+	//stageSelect = 0;
 
 	stageMoveLeft = false;
 	stageMoveRight = false;
