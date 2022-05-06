@@ -244,12 +244,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// テクスチャ5番に読み込み Load into texture # 2
 	Sprite::LoadTexture(5, L"Resources/GuideR.png");
 
-	GuideR = Sprite::Create(5, { 0.0f,0.0f });
+	GuideR = Sprite::Create(5, { 40.0f,620.0f });
 
 	// テクスチャ6番に読み込み Load into texture # 2
 	Sprite::LoadTexture(6, L"Resources/Guide_LRB.png");
 
-	Guide_LRB = Sprite::Create(6, { 0.0f,100.0f });
+	Guide_LRB = Sprite::Create(6, { 650.0f,620.0f });
 
 	// テクスチャ7番に読み込み Load into texture # 2
 	Sprite::LoadTexture(7, L"Resources/order1.png");
@@ -2192,7 +2192,7 @@ void GameScene::Draw()
 		break;
 	case 1:
 		spriteBG->Draw();
-		
+
 		break;
 	case 2:
 		if (sceneChange == 0)
@@ -2214,19 +2214,19 @@ void GameScene::Draw()
 		break;
 	case 4:
 		spriteBG->Draw();
-	
+
 		break;
 	case 5:
 		spriteBG->Draw();
-		
+
 		break;
 	case 6:
 		spriteBG->Draw();
-		
+
 		break;
 	case 7:
 		spriteBG->Draw();
-		
+
 		break;
 	}
 
@@ -2488,7 +2488,7 @@ void GameScene::Draw()
 	switch (sceneNo)
 	{
 	case 0:
-		
+
 		// Mirror->Draw();
 		TitleLog->Draw();
 		Press_A->Draw();
