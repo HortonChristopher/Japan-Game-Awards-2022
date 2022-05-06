@@ -65,6 +65,7 @@ public: // メンバ関数 Member function
 
 	int intersect(XMFLOAT3 player, XMFLOAT3 wall, float circleR, float rectW, float rectH);
 
+	void SceneSelectionReset();
 	void Tutorial1Reset();
 	void Tutorial1Move();
 	void Tutorial2Reset();
@@ -94,6 +95,9 @@ private: // メンバ変数 Member variables
 	bool tutorial3YellowKabe3 = true;
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
+
+	bool stageMoveRight = false;
+	bool stageMoveLeft = false;
 
 	//初めプレイですか？
 	bool t1Time = true;
@@ -140,6 +144,13 @@ private: // メンバ変数 Member variables
 
 	Sprite* NextStageLog = nullptr;
 
+	//レベルセレクト
+	Sprite* t1Background = nullptr;
+	Sprite* t2Background = nullptr;
+	Sprite* t3Background = nullptr;
+	Sprite* s1Background = nullptr;
+	Sprite* s2Background = nullptr;
+
 	ParticleManager* particleMan = nullptr;
 
 	Model* modelSkydome = nullptr;
@@ -149,9 +160,12 @@ private: // メンバ変数 Member variables
 	Model* modelBox = nullptr;
 	Model* modelPyramid = nullptr;
 	Model* modelTempWall = nullptr;
+	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
+
+	Model* modelTESTONLY = nullptr;
 
 	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
@@ -163,7 +177,12 @@ private: // メンバ変数 Member variables
 	FbxModel* modelCloneStand = nullptr;
 	FbxModel* modelCloneFight = nullptr;
 	
-	
+	//ステージセレクト
+	Object3d* objT1 = nullptr;
+	Object3d* objT2 = nullptr;
+	Object3d* objT3 = nullptr;
+	Object3d* objS1 = nullptr;
+	Object3d* objS2 = nullptr;
 
 
 	Object3d* objSkydome = nullptr;
@@ -204,6 +223,19 @@ private: // メンバ変数 Member variables
 	float Speed = 0.4f;	//移動スピード
 
 	float move;
+
+	//ステージセレクト
+	XMFLOAT3 T1rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 T2rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 T3rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 S1rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 S2rotation = { 0.0f, 0.0f, 0.0f };
+
+	XMFLOAT2 t1BackgroundPosition = { 0.0f, 0.0f };
+	XMFLOAT2 t2BackgroundPosition = { 1280.0f, 0.0f };
+	XMFLOAT2 t3BackgroundPosition = { 2560.0f, 0.0f };
+	XMFLOAT2 s1BackgroundPosition = { 3840.0f, 0.0f };
+	XMFLOAT2 s2BackgroundPosition = { 5120.0f, 0.0f };
 
 	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
 	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
