@@ -78,6 +78,8 @@ public: // メンバ関数 Member function
 	void Stage1Move();
 	void Stage2Reset();
 	void Stage2Move();
+	void Stage3Reset();
+	void Stage3Move();
 
 	void CinematicCamera();
 
@@ -98,6 +100,10 @@ private: // メンバ変数 Member variables
 	bool tutorial4YellowKabe = true;
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
+	bool stage3YellowKabe1 = true;
+	bool stage3YellowKabe2 = true;
+	bool stage3YellowKabe3 = true;
+	bool stage3YellowKabe4 = true;
 
 	bool stageMoveRight = false;
 	bool stageMoveLeft = false;
@@ -109,6 +115,7 @@ private: // メンバ変数 Member variables
 	bool t4Time = true;
 	bool firstTime = true;
 	bool secondTime = true;
+	bool thirdTime = true;
 
 	bool temp = true;
 
@@ -155,6 +162,7 @@ private: // メンバ変数 Member variables
 	Sprite* t4Background = nullptr;
 	Sprite* s1Background = nullptr;
 	Sprite* s2Background = nullptr;
+	Sprite* s3Backgorund = nullptr;
 
 	ParticleManager* particleMan = nullptr;
 
@@ -191,6 +199,7 @@ private: // メンバ変数 Member variables
 	Object3d* objT4 = nullptr;
 	Object3d* objS1 = nullptr;
 	Object3d* objS2 = nullptr;
+	Object3d* objS3 = nullptr;
 
 
 	Object3d* objSkydome = nullptr;
@@ -248,6 +257,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 T4rotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 S1rotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 S2rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 S3rotation = { 0.0f, 0.0f, 0.0f };
 
 	XMFLOAT2 t1BackgroundPosition = { 0.0f, 0.0f };
 	XMFLOAT2 t2BackgroundPosition = { 1280.0f, 0.0f };
@@ -255,6 +265,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 t4BackgroundPosition = { 3840.0f, 0.0f };
 	XMFLOAT2 s1BackgroundPosition = { 5120.0f, 0.0f };
 	XMFLOAT2 s2BackgroundPosition = { 6400.0f, 0.0f };
+	XMFLOAT2 s3BackgroundPosition = { 7680.0f, 0.0f };
 
 	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
 	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
@@ -286,6 +297,12 @@ private: // メンバ変数 Member variables
 	std::vector<Object3d*> objects_s2_y2; //ステージ　２
 	std::vector<Object3d*> objects_s2_s; //ステージ　２
 	std::vector<Object3d*> objects_s2_s2; //ステージ　２
+	std::vector<Object3d*> objects_s3_1; //ステージ　3
+	std::vector<Object3d*> objects_s3_2; //ステージ　3
+	std::vector<Object3d*> objects_s3_y1_1; //ステージ　3
+	std::vector<Object3d*> objects_s3_y1_2; //ステージ　3
+	std::vector<Object3d*> objects_s3_y2_1; //ステージ　3
+	std::vector<Object3d*> objects_s3_y2_2; //ステージ　3
 	std::vector<Object3d*> objects_Wall;
 
 	TitleScene* titleScene = nullptr;
