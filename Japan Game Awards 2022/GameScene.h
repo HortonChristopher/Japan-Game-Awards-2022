@@ -72,6 +72,8 @@ public: // メンバ関数 Member function
 	void Tutorial2Move();
 	void Tutorial3Reset();
 	void Tutorial3Move();
+	void Tutorial4Reset();
+	void Tutorial4Move();
 	void Stage1Reset();
 	void Stage1Move();
 	void Stage2Reset();
@@ -93,6 +95,7 @@ private: // メンバ変数 Member variables
 	bool tutorial3YellowKabe1 = true;
 	bool tutorial3YellowKabe2 = true;
 	bool tutorial3YellowKabe3 = true;
+	bool tutorial4YellowKabe = true;
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
 
@@ -103,6 +106,7 @@ private: // メンバ変数 Member variables
 	bool t1Time = true;
 	bool t2Time = true;
 	bool t3Time = true;
+	bool t4Time = true;
 	bool firstTime = true;
 	bool secondTime = true;
 
@@ -148,6 +152,7 @@ private: // メンバ変数 Member variables
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
 	Sprite* t3Background = nullptr;
+	Sprite* t4Background = nullptr;
 	Sprite* s1Background = nullptr;
 	Sprite* s2Background = nullptr;
 
@@ -164,6 +169,8 @@ private: // メンバ変数 Member variables
 	Model* modelYellowWall = nullptr;
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
+	Model* modelTeleporterIn = nullptr;
+	Model* modelTeleporterOut = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
@@ -181,6 +188,7 @@ private: // メンバ変数 Member variables
 	Object3d* objT1 = nullptr;
 	Object3d* objT2 = nullptr;
 	Object3d* objT3 = nullptr;
+	Object3d* objT4 = nullptr;
 	Object3d* objS1 = nullptr;
 	Object3d* objS2 = nullptr;
 
@@ -194,6 +202,15 @@ private: // メンバ変数 Member variables
 	Object3d* objTempBulletE = nullptr;
 
 	Object3d* objTempWall = nullptr;
+
+	Object3d* objTeleporterIn1 = nullptr;
+	Object3d* objTeleporterOut1 = nullptr;
+	Object3d* objTeleporterIn2 = nullptr;
+	Object3d* objTeleporterOut2 = nullptr;
+	Object3d* objTeleporterIn3 = nullptr;
+	Object3d* objTeleporterOut3 = nullptr;
+	Object3d* objTeleporterIn4 = nullptr;
+	Object3d* objTeleporterOut4 = nullptr;
 
 	TouchableObject* objGround = nullptr;
 
@@ -228,14 +245,16 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 T1rotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 T2rotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 T3rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 T4rotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 S1rotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 S2rotation = { 0.0f, 0.0f, 0.0f };
 
 	XMFLOAT2 t1BackgroundPosition = { 0.0f, 0.0f };
 	XMFLOAT2 t2BackgroundPosition = { 1280.0f, 0.0f };
 	XMFLOAT2 t3BackgroundPosition = { 2560.0f, 0.0f };
-	XMFLOAT2 s1BackgroundPosition = { 3840.0f, 0.0f };
-	XMFLOAT2 s2BackgroundPosition = { 5120.0f, 0.0f };
+	XMFLOAT2 t4BackgroundPosition = { 3840.0f, 0.0f };
+	XMFLOAT2 s1BackgroundPosition = { 5120.0f, 0.0f };
+	XMFLOAT2 s2BackgroundPosition = { 6400.0f, 0.0f };
 
 	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
 	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
@@ -255,6 +274,10 @@ private: // メンバ変数 Member variables
 	std::vector<Object3d*> objects_t3_y2_1; //チュートリアル　３
 	std::vector<Object3d*> objects_t3_y2_2; //チュートリアル　３
 	std::vector<Object3d*> objects_t3_y2_3; //チュートリアル　３
+	std::vector<Object3d*> objects_t4_1; //チュートリアル　4
+	std::vector<Object3d*> objects_t4_2; //チュートリアル　4
+	std::vector<Object3d*> objects_t4_y; //チュートリアル　4
+	std::vector<Object3d*> objects_t4_y2; //チュートリアル　4
 	std::vector<Object3d*> objects; //ステージ　１
 	std::vector<Object3d*> objects_2; //ステージ　１
 	std::vector<Object3d*> objects_s2_1; //ステージ　２
