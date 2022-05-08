@@ -169,6 +169,10 @@ GameScene::~GameScene()
 	safe_delete(modelCloneFight);
 
 	ReleaseInput();
+
+	//オーディオ解放
+	audio->Finalize();
+	safe_delete(audio);
 }
 
 void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
@@ -184,6 +188,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//コントローラー初期化
 	InitInput();
+
+	//オーディオ初期化
+	audio->Initialize();
+
+	//音声データのロード
+	audio->LoadWave("Alarm01.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -1415,6 +1425,11 @@ void GameScene::Update()
 		objCloneFight->Update();
 		objSkydome->Update();
 		camera->Update();
+
+		if (input->TriggerKey(DIK_C))
+		{
+			audio->PlayWave("Alarm01.wav");
+		}
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 		if (ConTimer <= 60)
