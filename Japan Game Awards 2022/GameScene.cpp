@@ -3919,7 +3919,7 @@ void GameScene::SceneSelectionReset()
 
 	stageMoveLeft = false;
 	stageMoveRight = false;
-	
+
 	currentFrame = 0;
 
 	T1rotation = { 0.0f, 0.0f, 0.0f };
