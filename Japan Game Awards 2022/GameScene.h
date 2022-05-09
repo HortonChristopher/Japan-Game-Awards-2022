@@ -144,6 +144,10 @@ private: // メンバ変数 Member variables
 
 	Sprite* NextStageLog = nullptr;
 
+	Sprite* StageSelectRB = nullptr;
+
+	Sprite* StageSelectLB = nullptr;
+
 	//レベルセレクト
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;

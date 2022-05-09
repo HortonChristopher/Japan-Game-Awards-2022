@@ -126,6 +126,8 @@ GameScene::~GameScene()
 	safe_delete(Mirror);
 	safe_delete(GameOverLog);
 	safe_delete(TitleLog);
+	safe_delete(StageSelectRB);
+	safe_delete(StageSelectLB);
 
 	// obj object
 	safe_delete(objSkydome);
@@ -246,6 +248,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// パーティクルマネージャー
 	particleMan = ParticleManager::Create(dxCommon->GetDevice(), camera);
 
+#pragma region 3Dオブジェクト生成
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
 	objTempTrigger = Object3d::Create();
@@ -259,6 +262,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objT3 = Object3d::Create();
 	objS1 = Object3d::Create();
 	objS2 = Object3d::Create();
+#pragma endregion
 
 #pragma region Sprite テクスチャの読み込み
 	// テクスチャ5番に読み込み Load into texture # 2
@@ -331,6 +335,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(22, L"Resources/S2.png");
 	s2Background = Sprite::Create(22, s2BackgroundPosition);
+
+	Sprite::LoadTexture(23, L"Resources/StageSelect_RB.png");
+	StageSelectRB = Sprite::Create(23, { 1050.0f,250.0f });
+
+	Sprite::LoadTexture(24, L"Resources/StageSelect_LB.png");
+	StageSelectLB = Sprite::Create(24, { 25.0f,250.0f });
 
 #pragma endregion
 
@@ -2804,6 +2814,33 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 8:
+	
+		switch (stageSelect)
+		{
+		case 0:
+			StageSelectRB->Draw();
+			break;
+
+		case 1:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 2:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 3:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 4:
+			// StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+		}
 		break;
 	}
 
@@ -2887,7 +2924,7 @@ void GameScene::SceneSelectionReset()
 
 	stageMoveLeft = false;
 	stageMoveRight = false;
-	
+
 	currentFrame = 0;
 
 	T1rotation = { 0.0f, 0.0f, 0.0f };
