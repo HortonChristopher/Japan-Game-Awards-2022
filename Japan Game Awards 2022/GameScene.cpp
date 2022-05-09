@@ -242,6 +242,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// パーティクルマネージャー
 	particleMan = ParticleManager::Create(dxCommon->GetDevice(), camera);
 
+#pragma region 3Dオブジェクト生成
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
 	objTempTrigger = Object3d::Create();
@@ -255,6 +256,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objT3 = Object3d::Create();
 	objS1 = Object3d::Create();
 	objS2 = Object3d::Create();
+#pragma endregion
 
 #pragma region Sprite テクスチャの読み込み
 	// テクスチャ5番に読み込み Load into texture # 2
