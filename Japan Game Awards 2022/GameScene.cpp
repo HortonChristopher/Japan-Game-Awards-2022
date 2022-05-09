@@ -194,6 +194,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//音声データのロード
 	audio->LoadWave("Alarm01.wav");
+	audio->LoadWave("GameClear.wav");
+	audio->LoadWave("GameOver.wav");
+	audio->LoadWave("Title.wav");
+	audio->LoadWave("Stage.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -1233,6 +1237,8 @@ void GameScene::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
+	
+
 	if (beginStage)
 	{
 		if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
@@ -1428,8 +1434,21 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_C))
 		{
-			audio->PlayWave("Alarm01.wav");
+			audio->PlayWave("Title.wav", true);
 		}
+
+		//音楽再生	
+		if (PlayFlag == false && SceneNum == 0)
+		{
+			PlayFlag = true;
+			audio->PlayWave("Title.wav", true);
+		}
+
+		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+		{
+			SceneNum = 1;
+		}
+
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 		if (ConTimer <= 60)
@@ -1672,6 +1691,9 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
+
+			audio->StopWave("GameClear.wav");
+			audio->PlayWave("Title.wav");
 			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
@@ -1680,6 +1702,9 @@ void GameScene::Update()
 		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
+
+			audio->StopWave("GameClear.wav");
+			audio->PlayWave("Title.wav");
 			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
@@ -1711,6 +1736,8 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
+			audio->StopWave("GameOver.wav");
+			audio->PlayWave("Title.wav");
 			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
@@ -1719,6 +1746,9 @@ void GameScene::Update()
 		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
+
+			audio->StopWave("GameOver.wav");
+			audio->PlayWave("Title.wav");
 			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
@@ -1783,6 +1813,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Stage2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -1791,6 +1823,8 @@ void GameScene::Update()
 				sceneNo = 2;
 				Stage2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				gameClear->Initialize();
 			}
 
@@ -1918,6 +1952,8 @@ void GameScene::Update()
 				Tutorial1Move();
 				//Tutorial1Reset();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2002,6 +2038,8 @@ void GameScene::Update()
 				Tutorial2Move();
 				//Tutorial1Reset();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2144,6 +2182,8 @@ void GameScene::Update()
 				Tutorial3Move();
 				//Tutorial1Reset();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2228,6 +2268,13 @@ void GameScene::Update()
 		objS1->SetRotation(S1rotation);
 		objS2->SetRotation(S2rotation);
 
+
+		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+		{
+			PlayFlag = false;
+			audio->StopWave("Title.wav");
+		}
+
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 4)
 		{
 			stageMoveRight = true;
@@ -2288,30 +2335,36 @@ void GameScene::Update()
 
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE))
 		{
+			audio->PlayWave("Stage.wav", true);
 			switch (stageSelect)
 			{
 			case 0:
 				Tutorial1Reset();
+				SceneNum = 2;
 				sceneNo = 5;
 
 				break;
 			case 1:
 				Tutorial2Reset();
+				SceneNum = 3;
 				sceneNo = 6;
 
 				break;
 			case 2:
 				Tutorial3Reset();
+				SceneNum = 4;
 				sceneNo = 7;
 
 				break;
 			case 3:
 				Stage1Reset();
+				SceneNum = 5;
 				sceneNo = 1;
 
 				break;
 			case 4:
 				Stage2Reset();
+				SceneNum = 6;
 				sceneNo = 4;
 				break;
 			}
@@ -2368,6 +2421,8 @@ void GameScene::Draw()
 	{
 	case 0:
 		titleScene->Draw();
+
+
 		break;
 	case 1:
 		spriteBG->Draw();
@@ -2378,9 +2433,18 @@ void GameScene::Draw()
 		if (sceneChange == 0)
 		{
 			Stage1Reset();
+			//audio->PlayWave("GemeClear.wav");
 			gameClear->Initialize();
 			sceneChange = 1;
 		}
+
+		//音楽再生
+		if (SceneNum == 1)
+		{
+			SceneNum = 2;
+			break;
+		}
+
 		gameClear->Draw();
 		break;
 	case 3:
@@ -2390,12 +2454,25 @@ void GameScene::Draw()
 			gameOver->Initialize();
 			sceneChange = 1;
 		}
+
+		if (SceneNum == 2)
+		{
+			SceneNum = 3;
+			break;
+		}
+
 		gameOver->Draw();
 		break;
 	case 4:
 		spriteBG->Draw();
 		GuideR->Draw();
 		Guide_LRB->Draw();
+		if (SceneNum == 1)
+		{
+			audio->PlayWave("Stage.Clear");
+			SceneNum = 2;
+			break;
+		}
 		break;
 	case 5:
 		spriteBG->Draw();

@@ -294,6 +294,10 @@ private: // メンバ変数 Member variables
 	//コントローラー検知用タイマー
 	int ConTimer;
 
+	//シーン番号記録(音楽再生に使う)
+	int SceneNum = 0;
+	bool PlayFlag = false;
+
 	//Cinematic Camera Variables シネマティックカメラ変数
 	int maximumTime, currentFrame, timeRate;
 	bool beginStage = false;
