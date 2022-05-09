@@ -460,6 +460,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma endregion
 
+#pragma region PlayerInitialization
+
 	// プレイヤー初期化 Player initialization
 	objPlayerRun->SetPosition({ 0, 0, 0 });
 	objPlayerRun->SetRotation({ 0, 0, 0 });
@@ -494,6 +496,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneFight->SetRotation({ 0,-20,0 });
 	objCloneFight->SetScale({ 1,1,1 });
 
+#pragma endregion
+
+#pragma region ModelTable
 
 	// モデルテーブル Model table
 	Model* modeltable[11] = {
@@ -537,6 +542,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelYellowWall,
 		modelPlane,
 	};
+
+#pragma endregion
 
 #pragma region マップチップ生成 チュートリアル1
 	// チュートリアル 1
@@ -1467,6 +1474,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	}
 #pragma endregion
 
+#pragma region PositionRotationScale
+
 	//objFighter->SetPosition({ -10, 10, 0 });
 	objFighter->SetScale({ 3.0f,3.0f,3.0f });
 	objClone->SetScale({ 3.0f,3.0f,3.0f });
@@ -1525,6 +1534,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objS3->SetPosition({ 600.0f, 0.0f, 0.0f });
 	objS3->SetScale({ 10.0f, 10.0f, 10.0f });
 	objS3->SetRotation(S3rotation);
+
+#pragma endregion
 
 	camera->SetEye({ 0, 20, -30 });
 
