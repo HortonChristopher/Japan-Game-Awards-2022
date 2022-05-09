@@ -126,6 +126,8 @@ GameScene::~GameScene()
 	safe_delete(Mirror);
 	safe_delete(GameOverLog);
 	safe_delete(TitleLog);
+	safe_delete(StageSelectRB);
+	safe_delete(StageSelectLB);
 
 	// obj object
 	safe_delete(objSkydome);
@@ -329,6 +331,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(22, L"Resources/S2.png");
 	s2Background = Sprite::Create(22, s2BackgroundPosition);
+
+	Sprite::LoadTexture(23, L"Resources/StageSelect_RB.png");
+	StageSelectRB = Sprite::Create(23, { 1050.0f,250.0f });
+
+	Sprite::LoadTexture(24, L"Resources/StageSelect_LB.png");
+	StageSelectLB = Sprite::Create(24, { 25.0f,250.0f });
 
 #pragma endregion
 
@@ -2729,6 +2737,33 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 8:
+	
+		switch (stageSelect)
+		{
+		case 0:
+			StageSelectRB->Draw();
+			break;
+
+		case 1:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 2:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 3:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 4:
+			// StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+		}
 		break;
 	}
 
