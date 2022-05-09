@@ -252,6 +252,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempYellowTrigger2 = Object3d::Create();
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
+	objMenuSelection = Object3d::Create();
 	objT1 = Object3d::Create();
 	objT2 = Object3d::Create();
 	objT3 = Object3d::Create();
@@ -379,6 +380,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempYellowTrigger2->SetModel(modelTempTrigger);
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
+
+	objMenuSelection->SetModel(modelTempBullet);
 
 	//objFighter = Player::Create(modelFighter);
 	//objClone = Enemy::Create(modelFighter);
@@ -1481,6 +1484,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
 
+	objMenuSelection->SetScale({ 0.25f, 0.25f, 0.25f });
+
 	objTeleporterIn1->SetPosition({ -20.0f, 0.0f, -3.0f }); // -14, -9
 	objTeleporterIn1->SetScale({ 3.0f, 3.0f, 3.0f });
 	objTeleporterIn2->SetPosition({ 5.0f, 0.0f, -12.0f }); // 14, -9
@@ -1844,6 +1849,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 1;
 				beginStage = true;
 			}
 
@@ -1918,9 +1924,8 @@ void GameScene::Update()
 			if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 			{
 				enemyAlive = false;
-				Stage2Reset();
 				Stage1Move();
-				sceneNo = 4;
+				sceneNo = 2;
 				sceneChange = 0;
 			}
 
@@ -1998,6 +2003,123 @@ void GameScene::Update()
 		camera->SetEye({ -15,0,0 });
 		camera->SetTarget({ 0, 0, 0 });
 
+		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
+		{
+			if (menuSelection == 0)
+			{
+				switch (lastScene)
+				{
+				case 0:
+					break;
+				case 1:
+					Stage2Reset();
+					sceneNo = 4;
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					Stage3Reset();
+					sceneNo = 10;
+					break;
+				case 5:
+					Tutorial2Reset();
+					sceneNo = 6;
+					break;
+				case 6:
+					Tutorial3Reset();
+					sceneNo = 7;
+					break;
+				case 7:
+					Tutorial4Reset();
+					sceneNo = 9;
+					break;
+				case 8:
+					break;
+				case 9:
+					Stage1Reset();
+					sceneNo = 1;
+					break;
+				case 10:
+					Stage3Reset();
+					sceneNo = 10;
+					break;
+				}
+
+				break;
+			}
+			else if (menuSelection == 1)
+			{
+				sceneNo = 8;
+				camera->SetEye({ 0, 20, -30 });
+				menuBallRotation = { 0.0f, 0.0f, 0.0f };
+				menuSelection = 0;
+				break;
+			}
+		}
+
+		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
+		{
+			menuMoving = true;
+		}
+		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 0 && !menuMoving)
+		{
+			menuMoving = true;
+		}
+
+		if (menuMoving)
+		{
+			if (menuSelection == 0)
+			{
+				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
+				ballPosition.y -= 0.1f;
+				objMenuSelection->SetPosition(ballPosition);
+				objMenuSelection->Update();
+				currentFrame++;
+
+				if (currentFrame >= 20)
+				{
+					ballPosition = { -5.0f, -4.25f, 4.0f };
+					currentFrame = 0;
+					menuSelection = 1;
+					menuMoving = false;
+				}
+			}
+			else if (menuSelection == 1)
+			{
+				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
+				ballPosition.y += 0.1f;
+				objMenuSelection->SetPosition(ballPosition);
+				objMenuSelection->Update();
+				currentFrame++;
+
+				if (currentFrame >= 20)
+				{
+					ballPosition = { -5.0f, -2.65f, 4.0f };
+					currentFrame = 0;
+					menuSelection = 0;
+					menuMoving = false;
+				}
+			}
+		}
+
+		if (!menuMoving)
+		{
+			if (menuSelection == 0)
+			{
+				objMenuSelection->SetPosition({ -7.0f, -0.5f, 6.5f });
+			}
+			else if (menuSelection == 1)
+			{
+				objMenuSelection->SetPosition({ -7.0f, -2.5f, 6.5f });
+			}
+		}
+
+		menuBallRotation.x += 1.0f;
+		objMenuSelection->SetRotation(menuBallRotation);
+		objMenuSelection->Update();
+
 		objPlayerWin->Update();
 		gameClear->Update();
 		objSkydome->Update();
@@ -2041,6 +2163,123 @@ void GameScene::Update()
 		objPlayerLose->Update();
 		gameOver->Update();
 
+		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
+		{
+			if (menuSelection == 0)
+			{
+				switch(lastScene)
+				{
+				case 0:
+					break;
+				case 1:
+					Stage1Reset();
+					sceneNo = 1;
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					Stage2Reset();
+					sceneNo = 4;
+					break;
+				case 5:
+					Tutorial1Reset();
+					sceneNo = 5;
+					break;
+				case 6:
+					Tutorial2Reset();
+					sceneNo = 6;
+					break;
+				case 7:
+					Tutorial3Reset();
+					sceneNo = 7;
+					break;
+				case 8:
+					break;
+				case 9:
+					Tutorial4Reset();
+					sceneNo = 9;
+					break;
+				case 10:
+					Stage3Reset();
+					sceneNo = 10;
+					break;
+				}
+
+				break;
+			}
+			else if (menuSelection == 1)
+			{
+				sceneNo = 8;
+				camera->SetEye({ 0, 20, -30 });
+				menuBallRotation = { 0.0f, 0.0f, 0.0f };
+				menuSelection = 0;
+				break;
+			}
+		}
+
+		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
+		{
+			menuMoving = true;
+		}
+		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 0 && !menuMoving)
+		{
+			menuMoving = true;
+		}
+
+		if (menuMoving)
+		{
+			if (menuSelection == 0)
+			{
+				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
+				ballPosition.y -= 0.1f;
+				objMenuSelection->SetPosition(ballPosition);
+				objMenuSelection->Update();
+				currentFrame++;
+
+				if (currentFrame >= 16)
+				{
+					ballPosition = { -5.0f, -4.25f, 4.0f };
+					currentFrame = 0;
+					menuSelection = 1;
+					menuMoving = false;
+				}
+			}
+			else if (menuSelection == 1)
+			{
+				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
+				ballPosition.y += 0.1f;
+				objMenuSelection->SetPosition(ballPosition);
+				objMenuSelection->Update();
+				currentFrame++;
+
+				if (currentFrame >= 16)
+				{
+					ballPosition = { -5.0f, -2.65f, 4.0f };
+					currentFrame = 0;
+					menuSelection = 0;
+					menuMoving = false;
+				}
+			}
+		}
+
+		if (!menuMoving)
+		{
+			if (menuSelection == 0)
+			{
+				objMenuSelection->SetPosition({ -5.0f, -2.65f, 4.0f });
+			}
+			else if (menuSelection == 1)
+			{
+				objMenuSelection->SetPosition({ -5.0f, -4.25f, 4.0f });
+			}
+		}
+
+		menuBallRotation.x += 1.0f;
+		objMenuSelection->SetRotation(menuBallRotation);
+		objMenuSelection->Update();
+
 		camera->Update();
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 		if (ConTimer <= 60)
@@ -2073,7 +2312,7 @@ void GameScene::Update()
 		break;
 
 	case 4: // ステージ2
-#pragma region cese4 ステージ2
+#pragma region case4 ステージ2
 
 		if (!beginStage)
 		{
@@ -2088,6 +2327,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 4;
 				beginStage = true;
 			}
 
@@ -2231,6 +2471,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 5;
 				beginStage = true;
 			}
 
@@ -2262,16 +2503,14 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial1Move();
-				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
-				sceneNo = 6;
+				sceneNo = 2;
 				Tutorial1Move();
-				Tutorial2Reset();
 				sceneChange = 0;
 			}
 		}
@@ -2315,6 +2554,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 6;
 				beginStage = true;
 			}
 
@@ -2346,17 +2586,16 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial2Move();
-				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
-				sceneNo = 7;
+				sceneNo = 2;
 				Tutorial2Move();
-				Tutorial3Reset();
 				sceneChange = 0;
+				gameClear->Initialize();
 			}
 		}
 
@@ -2401,6 +2640,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 7;
 				beginStage = true;
 			}
 
@@ -2488,17 +2728,14 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial3Move();
-				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
-				sceneNo = 9;
+				sceneNo = 2;
 				Tutorial3Move();
-				//Stage1Reset();
-				Tutorial4Reset();
 				sceneChange = 0;
 			}
 		}
@@ -2715,6 +2952,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 9;
 				beginStage = true;
 			}
 
@@ -2786,17 +3024,14 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial4Move();
-				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
-				sceneNo = 1;
+				sceneNo = 2;
 				Tutorial4Move();
-				//Stage1Reset();
-				Stage1Reset();
 				sceneChange = 0;
 			}
 		}
@@ -2847,7 +3082,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 		
-	case 10:
+	case 10: //ステージ　３
 #pragma region case10 ステージ３
 		if (!beginStage)
 		{
@@ -2862,6 +3097,7 @@ void GameScene::Update()
 			if (currentFrame >= 100)
 			{
 				currentFrame = 0;
+				lastScene = 10;
 				beginStage = true;
 			}
 
@@ -2969,7 +3205,6 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Stage3Move();
-				//Tutorial1Reset();
 				sceneChange = 0;
 				gameOver->Initialize();
 			}
@@ -2978,8 +3213,8 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Stage3Move();
-				//Stage1Reset();
 				sceneChange = 0;
+				gameClear->Initialize();
 			}
 		}
 
@@ -3052,7 +3287,7 @@ void GameScene::Update()
 	//char msgbuf2[256];
 	//char msgbuf3[256];
 
-	sprintf_s(msgbuf, 256, "Eye Y: %f\n", eye.y);
+	sprintf_s(msgbuf, 256, "Last Scene: %d\n", lastScene);
 	//sprintf_s(msgbuf2, 256, "Player Y: %f\n", playerPosition.y);
 	//sprintf_s(msgbuf3, 256, "Player Z: %f\n", playerPosition.z);
 	OutputDebugStringA(msgbuf);
@@ -3210,9 +3445,11 @@ void GameScene::Draw()
 	case 2:
 		objPlayerWin->Draw(cmdList);
 		objSkydome->Draw();
+		objMenuSelection->Draw();
 		break;
 	case 3:
 		objPlayerLose->Draw(cmdList);
+		objMenuSelection->Draw();
 		break;
 	case 4:
 		if (FBXModelChange == 1)

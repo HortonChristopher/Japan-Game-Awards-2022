@@ -209,7 +209,7 @@ private: // メンバ変数 Member variables
 	Object3d* objTempYellowTrigger2 = nullptr;
 	Object3d* objTempBullet = nullptr;
 	Object3d* objTempBulletE = nullptr;
-
+	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;
@@ -324,9 +324,13 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 FBXplayerRotation;
 	XMFLOAT3 FBXclonePosition;
 	XMFLOAT3 FBXcloneRotation;
+	XMFLOAT3 menuBallRotation = { 0.0f, 0.0f, 0.0f };
 
 	int stage1Init = 0;
 	int FBXModelChange = 0;
+	int menuSelection = 0; // ゲームクリアとオーバー画面
+	bool menuMoving = false; // ゲームクリアとオーバー画面
+	int lastScene = 0; // ゲームクリアとオーバー画面
 
 	//コントローラー起動フラグ
 	bool ControllerFlag = false;
