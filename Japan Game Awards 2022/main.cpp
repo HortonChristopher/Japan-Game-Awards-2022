@@ -34,10 +34,8 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	}
 	// オーディオの初期化 Audio initialization
 	audio = new Audio();
-	if ( !audio->Initialize() ) {
-		assert( 0 );
-		return 1;
-	}
+	audio->Initialize();
+
 	// スプライト静的初期化 Sprite static initialization
 	if ( !Sprite::StaticInitialize( dxCommon->GetDevice(), WinApp::window_width, WinApp::window_height ) ) {
 		assert( 0 );
@@ -77,7 +75,7 @@ int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, int )
 	}
 	// 各種解放 Various releases
 	safe_delete( gameScene );
-	safe_delete( audio );
+	//safe_delete( audio );
 	//safe_delete( input );
 	safe_delete( dxCommon );
 	FbxLoader::GetInstance()->Finalize();
