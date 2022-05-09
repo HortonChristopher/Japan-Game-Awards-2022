@@ -48,7 +48,11 @@ public: // サブクラス Subclass
 
 		//バッファのサイズ
 		unsigned int bufferSize;
+
+		IXAudio2SourceVoice* pSourceVoice;
 	};
+
+	static Audio* GetInstance();
 
 
 public: // メンバ関数 Member function
@@ -67,7 +71,13 @@ public: // メンバ関数 Member function
 	void UnLoad(SoundData* soundData);
 
 	// サウンドファイルの再生 playing sound files
-	void PlayWave(const std::string& filename);
+	void PlayWave(const std::string& filename, bool Loop = false);
+
+	//サウンドファイルの停止
+	void StopWave(const std::string& filename);
+
+	//サウンドファイルの音量設定
+	void WaveVolume(const std::string& filename, float Volume);
 
 private: // メンバ変数 Member variables
 	ComPtr<IXAudio2> xAudio2;
@@ -77,5 +87,7 @@ private: // メンバ変数 Member variables
 
 	//サウンド格納ディレクトリ
 	std::string directoryPath_;
+
+	XAUDIO2_BUFFER buf{};
 };
 

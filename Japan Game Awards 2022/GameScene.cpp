@@ -126,6 +126,8 @@ GameScene::~GameScene()
 	safe_delete(Mirror);
 	safe_delete(GameOverLog);
 	safe_delete(TitleLog);
+	safe_delete(StageSelectRB);
+	safe_delete(StageSelectLB);
 
 	// obj object
 	safe_delete(objSkydome);
@@ -194,6 +196,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	//音声データのロード
 	audio->LoadWave("Alarm01.wav");
+	audio->LoadWave("GameClear.wav");
+	audio->LoadWave("GameOver.wav");
+	audio->LoadWave("Title.wav");
+	audio->LoadWave("Stage.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -242,8 +248,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// パーティクルマネージャー
 	particleMan = ParticleManager::Create(dxCommon->GetDevice(), camera);
 
-#pragma region obj制作
-
+#pragma region 3Dオブジェクト生成
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
 	objTempTrigger = Object3d::Create();
@@ -348,6 +353,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(24, L"Resources/S3.png");
 	s3Backgorund = Sprite::Create(24, s3BackgroundPosition);
+
+	Sprite::LoadTexture(25, L"Resources/StageSelect_RB.png");
+	StageSelectRB = Sprite::Create(25, { 1050.0f,250.0f });
+
+	Sprite::LoadTexture(25, L"Resources/StageSelect_LB.png");
+	StageSelectLB = Sprite::Create(25, { 25.0f,250.0f });
 
 #pragma endregion
 
@@ -1790,7 +1801,19 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_C))
 		{
-			audio->PlayWave("Alarm01.wav");
+			audio->PlayWave("Title.wav", true);
+		}
+
+		//音楽再生	
+		if (PlayFlag == false && SceneNum == 0)
+		{
+			PlayFlag = true;
+			audio->PlayWave("Title.wav", true);
+		}
+
+		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+		{
+			SceneNum = 1;
 		}
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -2151,6 +2174,9 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
+
+			audio->StopWave("GameClear.wav");
+			audio->PlayWave("Title.wav");
 			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
@@ -2159,6 +2185,9 @@ void GameScene::Update()
 		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
+
+			audio->StopWave("GameClear.wav");
+			audio->PlayWave("Title.wav");
 			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
@@ -2307,6 +2336,8 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
+			audio->StopWave("GameOver.wav");
+			audio->PlayWave("Title.wav");
 			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
@@ -2315,6 +2346,9 @@ void GameScene::Update()
 		if (IsButtonUp(ButtonKind::Button_A))
 		{
 			sceneNo = 0;
+
+			audio->StopWave("GameOver.wav");
+			audio->PlayWave("Title.wav");
 			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
@@ -2380,6 +2414,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Stage2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2388,6 +2424,8 @@ void GameScene::Update()
 				sceneNo = 2;
 				Stage2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				gameClear->Initialize();
 			}
 
@@ -2515,6 +2553,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Tutorial1Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2598,6 +2638,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Tutorial2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2740,6 +2782,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Tutorial3Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2826,6 +2870,13 @@ void GameScene::Update()
 		objS2->SetRotation(S2rotation);
 		objS3->SetRotation(S3rotation);
 
+
+		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+		{
+			PlayFlag = false;
+			audio->StopWave("Title.wav");
+		}
+
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6)
 		{
 			stageMoveRight = true;
@@ -2894,20 +2945,24 @@ void GameScene::Update()
 
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE))
 		{
+			audio->PlayWave("Stage.wav", true);
 			switch (stageSelect)
 			{
 			case 0:
 				Tutorial1Reset();
+				SceneNum = 2;
 				sceneNo = 5;
 
 				break;
 			case 1:
 				Tutorial2Reset();
+				SceneNum = 3;
 				sceneNo = 6;
 
 				break;
 			case 2:
 				Tutorial3Reset();
+				SceneNum = 4;
 				sceneNo = 7;
 
 				break;
@@ -2918,11 +2973,13 @@ void GameScene::Update()
 				break;
 			case 4:
 				Stage1Reset();
+				SceneNum = 5;
 				sceneNo = 1;
 
 				break;
 			case 5:
 				Stage2Reset();
+				SceneNum = 6;
 				sceneNo = 4;
 
 				break;
@@ -3337,9 +3394,18 @@ void GameScene::Draw()
 		if (sceneChange == 0)
 		{
 			Stage1Reset();
+			//audio->PlayWave("GemeClear.wav");
 			gameClear->Initialize();
 			sceneChange = 1;
 		}
+
+		//音楽再生
+		if (SceneNum == 1)
+		{
+			SceneNum = 2;
+			break;
+		}
+
 		gameClear->Draw();
 		break;
 	case 3:
@@ -3349,12 +3415,25 @@ void GameScene::Draw()
 			gameOver->Initialize();
 			sceneChange = 1;
 		}
+
+		if (SceneNum == 2)
+		{
+			SceneNum = 3;
+			break;
+		}
+
 		gameOver->Draw();
 		break;
 	case 4:
 		spriteBG->Draw();
 		GuideR->Draw();
 		Guide_LRB->Draw();
+		if (SceneNum == 1)
+		{
+			audio->PlayWave("Stage.Clear");
+			SceneNum = 2;
+			break;
+		}
 		break;
 	case 5:
 		spriteBG->Draw();
@@ -3826,6 +3905,33 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 8:
+	
+		switch (stageSelect)
+		{
+		case 0:
+			StageSelectRB->Draw();
+			break;
+
+		case 1:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 2:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 3:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 4:
+			// StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+		}
 		break;
 	case 9:
 		GuideR->Draw();
