@@ -357,8 +357,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(25, L"Resources/StageSelect_RB.png");
 	StageSelectRB = Sprite::Create(25, { 1050.0f,250.0f });
 
-	Sprite::LoadTexture(25, L"Resources/StageSelect_LB.png");
-	StageSelectLB = Sprite::Create(25, { 25.0f,250.0f });
+	Sprite::LoadTexture(26, L"Resources/StageSelect_LB.png");
+	StageSelectLB = Sprite::Create(26, { 25.0f,250.0f });
 
 #pragma endregion
 
@@ -2086,7 +2086,8 @@ void GameScene::Update()
 			else if (menuSelection == 1)
 			{
 				sceneNo = 8;
-				camera->SetEye({ 0, 20, -30 });
+				camera->SetEye({ (stageSelect * 100.0f), 20, -30});
+				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0});
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
 				break;
@@ -2097,7 +2098,7 @@ void GameScene::Update()
 		{
 			menuMoving = true;
 		}
-		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 0 && !menuMoving)
+		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving)
 		{
 			menuMoving = true;
 		}
@@ -2171,7 +2172,7 @@ void GameScene::Update()
 			ConTimer = 0;
 		}
 
-		if (input->TriggerKey(DIK_SPACE))
+		/*if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
 
@@ -2191,7 +2192,7 @@ void GameScene::Update()
 			gameClear->Finalize();
 			titleScene->Initialize();
 			break;
-		}
+		}*/
 #pragma endregion
 		break;
 
@@ -2252,7 +2253,8 @@ void GameScene::Update()
 			else if (menuSelection == 1)
 			{
 				sceneNo = 8;
-				camera->SetEye({ 0, 20, -30 });
+				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
 				break;
@@ -2263,7 +2265,7 @@ void GameScene::Update()
 		{
 			menuMoving = true;
 		}
-		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 0 && !menuMoving)
+		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving)
 		{
 			menuMoving = true;
 		}
@@ -2333,7 +2335,7 @@ void GameScene::Update()
 			ConTimer = 0;
 		}
 
-		if (input->TriggerKey(DIK_SPACE))
+		/*if (input->TriggerKey(DIK_SPACE))
 		{
 			sceneNo = 0;
 			audio->StopWave("GameOver.wav");
@@ -2352,7 +2354,7 @@ void GameScene::Update()
 			gameOver->Finalize();
 			titleScene->Initialize();
 			break;
-		}
+		}*/
 #pragma endregion
 		break;
 
@@ -2870,20 +2872,21 @@ void GameScene::Update()
 		objS2->SetRotation(S2rotation);
 		objS3->SetRotation(S3rotation);
 
-
 		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 		{
 			PlayFlag = false;
 			audio->StopWave("Title.wav");
 		}
 
-		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6)
+		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6 ||
+			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6)
 		{
 			stageMoveRight = true;
 			stageSelect++;
 		}
 
-		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
+		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0 ||
+			IsButtonDown(ButtonKind::Button_LB) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
 		{
 			stageMoveLeft = true;
 			stageSelect--;
@@ -2943,7 +2946,8 @@ void GameScene::Update()
 			}
 		}
 
-		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE))
+		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) ||
+			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A))
 		{
 			audio->PlayWave("Stage.wav", true);
 			switch (stageSelect)
@@ -3928,7 +3932,16 @@ void GameScene::Draw()
 			break;
 
 		case 4:
-			// StageSelectRB->Draw();
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 5:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 6:
 			StageSelectLB->Draw();
 			break;
 		}
