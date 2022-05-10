@@ -2038,6 +2038,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
+			audio->StopWave("GameClear.wav");
 			if (menuSelection == 0)
 			{
 				switch (lastScene)
@@ -2045,6 +2046,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
+					audio->PlayWave("Stage.wav");
 					Stage2Reset();
 					sceneNo = 4;
 					break;
@@ -2053,28 +2055,34 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
+					audio->PlayWave("Stage.wav");
 					Stage3Reset();
 					sceneNo = 10;
 					break;
 				case 5:
+					audio->PlayWave("Stage.wav");
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 6:
+					audio->PlayWave("Stage.wav");
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 7:
+					audio->PlayWave("Stage.wav");
 					Tutorial4Reset();
 					sceneNo = 9;
 					break;
 				case 8:
 					break;
 				case 9:
+					audio->PlayWave("Stage.wav");
 					Stage1Reset();
 					sceneNo = 1;
 					break;
 				case 10:
+					audio->PlayWave("Stage.wav");
 					Stage3Reset();
 					sceneNo = 10;
 					break;
@@ -2084,6 +2092,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
+				audio->PlayWave("Title.wav");
 				sceneNo = 8;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30});
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0});
@@ -2205,6 +2214,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
+			audio->StopWave("GameOver.wav");
 			if (menuSelection == 0)
 			{
 				switch(lastScene)
@@ -2212,6 +2222,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
+					audio->PlayWave("Stage.wav");
 					Stage1Reset();
 					sceneNo = 1;
 					break;
@@ -2220,28 +2231,34 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
+					audio->PlayWave("Stage.wav");
 					Stage2Reset();
 					sceneNo = 4;
 					break;
 				case 5:
+					audio->PlayWave("Stage.wav");
 					Tutorial1Reset();
 					sceneNo = 5;
 					break;
 				case 6:
+					audio->PlayWave("Stage.wav");
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 7:
+					audio->PlayWave("Stage.wav");
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 8:
 					break;
 				case 9:
+					audio->PlayWave("Stage.wav");
 					Tutorial4Reset();
 					sceneNo = 9;
 					break;
 				case 10:
+					audio->PlayWave("Stage.wav");
 					Stage3Reset();
 					sceneNo = 10;
 					break;
@@ -2251,6 +2268,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
+				audio->PlayWave("Title.wav");
 				sceneNo = 8;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
@@ -2562,6 +2580,8 @@ void GameScene::Update()
 			{
 				enemyAlive = false;
 				sceneNo = 2;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				Tutorial1Move();
 				sceneChange = 0;
 			}
@@ -2649,6 +2669,8 @@ void GameScene::Update()
 				sceneNo = 2;
 				Tutorial2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				gameClear->Initialize();
 			}
 		}
@@ -2792,6 +2814,8 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Tutorial3Move();
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				sceneChange = 0;
 			}
 		}
@@ -3277,6 +3301,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Stage3Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -3285,6 +3311,8 @@ void GameScene::Update()
 				sceneNo = 2;
 				Stage3Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				gameClear->Initialize();
 			}
 		}
@@ -3876,6 +3904,7 @@ void GameScene::Draw()
 	case 1:
 		GuideR->Draw();
 		Guide_LRB->Draw();
+		Order_1->Draw();
 		break;
 	case 2:
 		StageClearLog->Draw();
