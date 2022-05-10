@@ -1960,6 +1960,9 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Stage1Move();
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
+				sceneNo = 2;
 				sceneChange = 0;
 			}
 			else if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
@@ -1967,6 +1970,9 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Stage1Move();
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
+				sceneNo = 3;
 				sceneChange = 0;
 			}
 
@@ -3122,12 +3128,16 @@ void GameScene::Update()
 				sceneNo = 3;
 				Tutorial4Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
 				enemyAlive = false;
 				sceneNo = 2;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				Tutorial4Move();
 				sceneChange = 0;
 			}
