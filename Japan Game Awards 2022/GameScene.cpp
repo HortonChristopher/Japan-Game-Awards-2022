@@ -2086,6 +2086,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
+				audio->PlayWave("Title.wav");
 				sceneNo = 8;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30});
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0});
@@ -2254,6 +2255,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
+				audio->PlayWave("Title.wav");
 				sceneNo = 8;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
@@ -2565,6 +2567,8 @@ void GameScene::Update()
 			{
 				enemyAlive = false;
 				sceneNo = 2;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				Tutorial1Move();
 				sceneChange = 0;
 			}
@@ -2652,6 +2656,8 @@ void GameScene::Update()
 				sceneNo = 2;
 				Tutorial2Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				gameClear->Initialize();
 			}
 		}
@@ -2795,6 +2801,8 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Tutorial3Move();
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				sceneChange = 0;
 			}
 		}
