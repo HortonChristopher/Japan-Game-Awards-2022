@@ -1627,7 +1627,7 @@ void GameScene::Update()
 
 #pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
-	if (beginStage)
+	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3)
 	{
 		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
