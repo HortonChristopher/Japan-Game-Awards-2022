@@ -1955,19 +1955,18 @@ void GameScene::Update()
 				enemyBulletF = false;
 			}
 
-			if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
-			{
-				enemyAlive = false;
-				Stage1Move();
-				sceneNo = 2;
-				sceneChange = 0;
-			}
-
 			if (intersect(enemyBullet, playerPosition, 1.0f, 1.0f, 1.0f) && enemyBulletF == true)
 			{
 				playerAlive = false;
-				Stage1Move();
 				sceneNo = 3;
+				Stage1Move();
+				sceneChange = 0;
+			}
+			else if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
+			{
+				enemyAlive = false;
+				sceneNo = 2;
+				Stage1Move();
 				sceneChange = 0;
 			}
 
@@ -1979,13 +1978,13 @@ void GameScene::Update()
 
 			//objSkydome->Update();
 
-			/*for (auto object : objects) {
+			for (auto object : objects) {
 				object->Update();
 			}
 
 			for (auto object_2 : objects_2) {
 				object_2->Update();
-			}*/
+			}
 
 			//objGround->Update();
 
@@ -3397,7 +3396,7 @@ void GameScene::Draw()
 	case 2:
 		if (sceneChange == 0)
 		{
-			Stage1Reset();
+			//Stage1Reset();
 			//audio->PlayWave("GemeClear.wav");
 			gameClear->Initialize();
 			sceneChange = 1;
@@ -3415,7 +3414,7 @@ void GameScene::Draw()
 	case 3:
 		if (sceneChange == 0)
 		{
-			Stage1Reset();
+			//5Stage1Reset();
 			gameOver->Initialize();
 			sceneChange = 1;
 		}
@@ -4425,13 +4424,13 @@ void GameScene::Stage1Reset()
 		for (auto object : objects)
 		{
 			XMFLOAT3 objectPosition = object->GetPosition();
-			object->SetPosition({ objectPosition.x, objectPosition.y + 25.0f, objectPosition.z });
+			object->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
 			object->Update();
 		}
 		for (auto object_2 : objects_2)
 		{
 			XMFLOAT3 objectPosition = object_2->GetPosition();
-			object_2->SetPosition({ objectPosition.x, objectPosition.y + 25.0f, objectPosition.z });
+			object_2->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
 			object_2->Update();
 		}
 	}
@@ -4696,16 +4695,16 @@ void GameScene::Stage3Reset()
 
 void GameScene::Stage3Move()
 {
-	for (auto object_t4_1 : objects_t4_1) {
-		XMFLOAT3 objectPosition = object_t4_1->GetPosition();
-		object_t4_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t4_1->Update();
+	for (auto object_s3_1 : objects_s3_1) {
+		XMFLOAT3 objectPosition = object_s3_1->GetPosition();
+		object_s3_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s3_1->Update();
 	}
 
-	for (auto object_t4_2 : objects_t4_2) {
-		XMFLOAT3 objectPosition = object_t4_2->GetPosition();
-		object_t4_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t4_2->Update();
+	for (auto object_s3_2 : objects_s3_2) {
+		XMFLOAT3 objectPosition = object_s3_2->GetPosition();
+		object_s3_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_s3_2->Update();
 	}
 
 	if (!stage3YellowKabe1)
@@ -4720,7 +4719,7 @@ void GameScene::Stage3Move()
 	{
 		for (auto object_s3_y1_1 : objects_s3_y1_1) {
 			XMFLOAT3 objectPosition = object_s3_y1_1->GetPosition();
-			object_s3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 100.0f, objectPosition.z });
+			object_s3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_s3_y1_1->Update();
 		}
 	}
@@ -4737,7 +4736,7 @@ void GameScene::Stage3Move()
 	{
 		for (auto object_s3_y2_1 : objects_s3_y2_1) {
 			XMFLOAT3 objectPosition = object_s3_y2_1->GetPosition();
-			object_s3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 100.0f, objectPosition.z });
+			object_s3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_s3_y2_1->Update();
 		}
 	}
@@ -4754,7 +4753,7 @@ void GameScene::Stage3Move()
 	{
 		for (auto object_s3_y2_2 : objects_s3_y2_2) {
 			XMFLOAT3 objectPosition = object_s3_y2_2->GetPosition();
-			object_s3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 100.0f, objectPosition.z });
+			object_s3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_s3_y2_2->Update();
 		}
 	}
@@ -4771,7 +4770,7 @@ void GameScene::Stage3Move()
 	{
 		for (auto object_s3_y1_2 : objects_s3_y1_2) {
 			XMFLOAT3 objectPosition = object_s3_y1_2->GetPosition();
-			object_s3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 100.0f, objectPosition.z });
+			object_s3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_s3_y1_2->Update();
 		}
 	}
