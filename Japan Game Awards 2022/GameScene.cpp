@@ -2047,6 +2047,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
+					audio->PlayWave("Stage.wav");
 					Stage2Reset();
 					sceneNo = 4;
 					break;
@@ -2055,28 +2056,34 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
+					audio->PlayWave("Stage.wav");
 					Stage3Reset();
 					sceneNo = 10;
 					break;
 				case 5:
+					audio->PlayWave("Stage.wav");
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 6:
+					audio->PlayWave("Stage.wav");
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 7:
+					audio->PlayWave("Stage.wav");
 					Tutorial4Reset();
 					sceneNo = 9;
 					break;
 				case 8:
 					break;
 				case 9:
+					audio->PlayWave("Stage.wav");
 					Stage1Reset();
 					sceneNo = 1;
 					break;
 				case 10:
+					audio->PlayWave("Stage.wav");
 					Stage3Reset();
 					sceneNo = 10;
 					break;
@@ -2216,6 +2223,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
+					audio->PlayWave("Stage.wav");
 					Stage1Reset();
 					sceneNo = 1;
 					break;
@@ -2224,28 +2232,34 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
+					audio->PlayWave("Stage.wav");
 					Stage2Reset();
 					sceneNo = 4;
 					break;
 				case 5:
+					audio->PlayWave("Stage.wav");
 					Tutorial1Reset();
 					sceneNo = 5;
 					break;
 				case 6:
+					audio->PlayWave("Stage.wav");
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 7:
+					audio->PlayWave("Stage.wav");
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 8:
 					break;
 				case 9:
+					audio->PlayWave("Stage.wav");
 					Tutorial4Reset();
 					sceneNo = 9;
 					break;
 				case 10:
+					audio->PlayWave("Stage.wav");
 					Stage3Reset();
 					sceneNo = 10;
 					break;
