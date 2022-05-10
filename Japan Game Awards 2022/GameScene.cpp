@@ -3877,6 +3877,7 @@ void GameScene::Draw()
 	case 1:
 		GuideR->Draw();
 		Guide_LRB->Draw();
+		Order_1->Draw();
 		break;
 	case 2:
 		StageClearLog->Draw();
