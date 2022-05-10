@@ -2878,6 +2878,8 @@ void GameScene::Update()
 		objTempYellowTrigger1->Update();
 		objTempYellowTrigger2->Update();
 
+		objSkydome->Update();
+
 		camera->Update();
 #pragma endregion
 		break;
@@ -3181,6 +3183,8 @@ void GameScene::Update()
 		objCloneRun->Update();
 		objCloneStand->Update();
 
+		objSkydome->Update();
+
 		camera->Update();
 #pragma endregion
 		break;
@@ -3378,6 +3382,8 @@ void GameScene::Update()
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+
+		objSkydome->Update();
 
 		camera->Update();
 #pragma endregion
