@@ -2039,6 +2039,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
+			audio->StopWave("GameClear.wav");
 			if (menuSelection == 0)
 			{
 				switch (lastScene)
@@ -2206,6 +2207,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
+			audio->StopWave("GameOver.wav");
 			if (menuSelection == 0)
 			{
 				switch(lastScene)
@@ -3278,6 +3280,8 @@ void GameScene::Update()
 				sceneNo = 3;
 				Stage3Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav");
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -3286,6 +3290,8 @@ void GameScene::Update()
 				sceneNo = 2;
 				Stage3Move();
 				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav");
 				gameClear->Initialize();
 			}
 		}
