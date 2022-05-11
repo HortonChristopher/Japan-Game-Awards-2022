@@ -1799,16 +1799,12 @@ void GameScene::Update()
 		objSkydome->Update();
 		camera->Update();
 
-		if (input->TriggerKey(DIK_C))
-		{
-			audio->PlayWave("Title.wav", true);
-		}
-
 		//音楽再生	
 		if (PlayFlag == false && SceneNum == 0)
 		{
 			PlayFlag = true;
-			audio->PlayWave("Title.wav", true);
+			audio->PlayWave("Title.wav", Volume, true);
+			//audio->WaveVolume("Title.wav", 0.3f);
 		}
 
 		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
@@ -1961,7 +1957,7 @@ void GameScene::Update()
 				sceneNo = 3;
 				Stage1Move();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav",Volume, true);
 				sceneChange = 0;
 			}
 			else if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
@@ -1970,7 +1966,7 @@ void GameScene::Update()
 				sceneNo = 2;
 				Stage1Move();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
 			}
 
@@ -2050,7 +2046,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage2Reset();
 					sceneNo = 4;
 					break;
@@ -2059,34 +2055,34 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage3Reset();
 					sceneNo = 10;
 					break;
 				case 5:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 6:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 7:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial4Reset();
 					sceneNo = 9;
 					break;
 				case 8:
 					break;
 				case 9:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage1Reset();
 					sceneNo = 1;
 					break;
 				case 10:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage3Reset();
 					sceneNo = 10;
 					break;
@@ -2096,7 +2092,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
-				audio->PlayWave("Title.wav", true);
+				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30});
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0});
@@ -2226,7 +2222,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage1Reset();
 					sceneNo = 1;
 					break;
@@ -2235,34 +2231,34 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage2Reset();
 					sceneNo = 4;
 					break;
 				case 5:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial1Reset();
 					sceneNo = 5;
 					break;
 				case 6:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 7:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 8:
 					break;
 				case 9:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Tutorial4Reset();
 					sceneNo = 9;
 					break;
 				case 10:
-					audio->PlayWave("Stage.wav", true);
+					audio->PlayWave("Stage.wav", Volume, true);
 					Stage3Reset();
 					sceneNo = 10;
 					break;
@@ -2272,7 +2268,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
-				audio->PlayWave("Title.wav");
+				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
@@ -2438,7 +2434,7 @@ void GameScene::Update()
 				Stage2Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2448,7 +2444,7 @@ void GameScene::Update()
 				Stage2Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
 			}
 
@@ -2577,7 +2573,7 @@ void GameScene::Update()
 				Tutorial1Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2585,7 +2581,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial1Move();
 				sceneChange = 0;
 			}
@@ -2664,7 +2660,7 @@ void GameScene::Update()
 				Tutorial2Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2674,7 +2670,7 @@ void GameScene::Update()
 				Tutorial2Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
 			}
 		}
@@ -2810,7 +2806,7 @@ void GameScene::Update()
 				Tutorial3Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -2819,7 +2815,7 @@ void GameScene::Update()
 				sceneNo = 2;
 				Tutorial3Move();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
 			}
 		}
@@ -2978,7 +2974,7 @@ void GameScene::Update()
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) ||
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A))
 		{
-			audio->PlayWave("Stage.wav", true);
+			audio->PlayWave("Stage.wav", Volume, true);
 			switch (stageSelect)
 			{
 			case 0:
@@ -3127,7 +3123,7 @@ void GameScene::Update()
 				Tutorial4Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -3135,7 +3131,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial4Move();
 				sceneChange = 0;
 			}
@@ -3314,7 +3310,7 @@ void GameScene::Update()
 				Stage3Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
 			}
 			else if (enemyPosition.y <= -10.0f)
@@ -3324,7 +3320,7 @@ void GameScene::Update()
 				Stage3Move();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", true);
+				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
 			}
 		}
@@ -3475,7 +3471,7 @@ void GameScene::Draw()
 		Guide_LRB->Draw();
 		if (SceneNum == 1)
 		{
-			audio->PlayWave("Stage.Clear", true);
+			audio->PlayWave("Stage.Clear", Volume, true);
 			SceneNum = 2;
 			break;
 		}
