@@ -71,14 +71,12 @@ public: // メンバ関数 Member function
 	void UnLoad(SoundData* soundData);
 
 	// サウンドファイルの再生 playing sound files
-	void PlayWave(const std::string& filename, bool Loop = false);
+	void PlayWave(const std::string& filename, float Volume, bool Loop = false);
 
 	//サウンドファイルの停止
 	void StopWave(const std::string& filename);
 
-	//サウンドファイルの音量設定
-	void WaveVolume(const std::string& filename, float Volume);
-
+	
 private: // メンバ変数 Member variables
 	ComPtr<IXAudio2> xAudio2;
 

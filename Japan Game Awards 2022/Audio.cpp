@@ -153,7 +153,7 @@ void Audio::UnLoad(SoundData* soundData)
 
 }
 
-void Audio::PlayWave(const std::string& filename, bool Loop)
+void Audio::PlayWave(const std::string& filename, float Volume, bool Loop)
 {
 	HRESULT result;
 
@@ -180,6 +180,8 @@ void Audio::PlayWave(const std::string& filename, bool Loop)
 	{
 		buf.LoopCount = XAUDIO2_LOOP_INFINITE;
 	}
+
+	soundData.pSourceVoice->SetVolume(Volume);
 
 	// 波形データの再生 Playback of waveform data
 	result = soundData.pSourceVoice->SubmitSourceBuffer(&buf);
@@ -209,26 +211,4 @@ void Audio::StopWave(const std::string& filename)
 	soundData.pSourceVoice->SubmitSourceBuffer(&buf);
 
 }
-
-void Audio::WaveVolume(const std::string& filename, float Volume)
-{
-	std::map<std::string, SoundData>::iterator it = soundDatas.find(filename);
-
-	//未読み込みの検出
-	assert(it != soundDatas.end());
-
-	//サウンドデータの参照を取得
-	SoundData& soundData = it->second;
-
-
-	XAUDIO2_VOICE_STATE State;
-	soundData.pSourceVoice->GetState(&State);
-	if (State.BuffersQueued == 0)
-	{
-		return;
-	}
-
-	soundData.pSourceVoice->SetVolume(Volume);
-}
-
 
