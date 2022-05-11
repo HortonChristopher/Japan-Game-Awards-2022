@@ -3754,13 +3754,13 @@ void GameScene::Draw()
 
 		break;
 	case 8:
-		objT1->Draw();
+		/*objT1->Draw();
 		objT2->Draw();
 		objT3->Draw();
 		objT4->Draw();
 		objS1->Draw();
 		objS2->Draw();
-		objS3->Draw();
+		objS3->Draw();*/
 
 		break;
 	case 9:

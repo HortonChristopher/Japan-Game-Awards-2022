@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #define WINDOW_H_
-#define WINDOW_CLASS_NAME "DirectXGame"	//!< ウィンドウクラス名 Window class name
+#define WINDOW_CLASS_NAME "クローン"	//!< ウィンドウクラス名 Window class name
 
 // ウィンドウズアプリケーション Windows application
 class WinApp
