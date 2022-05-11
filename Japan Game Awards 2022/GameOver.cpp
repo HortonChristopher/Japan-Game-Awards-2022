@@ -16,7 +16,7 @@ void GameOver::Initialize()
 	//debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(2, L"Resources/GameOverBG.png")) {
+	if (!Sprite::LoadTexture(2, L"Resources/Sprite/GameOverBG.png")) {
 		assert(0);
 		return;
 	}

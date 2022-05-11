@@ -238,7 +238,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	gameOver->Initialize();
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(1, L"Resources/background.png")) {
+	if (!Sprite::LoadTexture(1, L"Resources/Sprite/background.png")) {
 		assert(0);
 		return;
 	}
@@ -278,86 +278,86 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma region Sprite テクスチャの読み込み
 	// テクスチャ5番に読み込み Load into texture # 2
-	Sprite::LoadTexture(5, L"Resources/GuideR.png");
+	Sprite::LoadTexture(5, L"Resources/Sprite/GuideR.png");
 
 	GuideR = Sprite::Create(5, { 40.0f,620.0f });
 
 	// テクスチャ6番に読み込み Load into texture # 2
-	Sprite::LoadTexture(6, L"Resources/Guide_LRB.png");
+	Sprite::LoadTexture(6, L"Resources/Sprite/Guide_LRB.png");
 
 	Guide_LRB = Sprite::Create(6, { 650.0f,620.0f });
 
 	// テクスチャ7番に読み込み Load into texture # 2
-	Sprite::LoadTexture(7, L"Resources/order1.png");
+	Sprite::LoadTexture(7, L"Resources/Sprite/order1.png");
 
 	Order_1 = Sprite::Create(7, { 0.0f,0.0f });
 
 	// テクスチャ8番に読み込み Load into texture # 2
-	Sprite::LoadTexture(8, L"Resources/order2.png");
+	Sprite::LoadTexture(8, L"Resources/Sprite/order2.png");
 
 	Order_2 = Sprite::Create(8, { 0.0f,0.0f });
 
-	Sprite::LoadTexture(9, L"Resources/press_a.png");
+	Sprite::LoadTexture(9, L"Resources/Sprite/press_a.png");
 
 	Press_A = Sprite::Create(9, { 0.0f,500.0f });
 
-	Sprite::LoadTexture(10, L"Resources/Mirror.png");
+	Sprite::LoadTexture(10, L"Resources/Sprite/Mirror.png");
 
 	Mirror = Sprite::Create(10, { 0.0f,0.0f });
 
-	Sprite::LoadTexture(11, L"Resources/GameOver.png");
+	Sprite::LoadTexture(11, L"Resources/Sprite/GameOver.png");
 
 	GameOverLog = Sprite::Create(11, { 0.0f,-10.0f });
 
-	Sprite::LoadTexture(12, L"Resources/ReStateLog.png");
+	Sprite::LoadTexture(12, L"Resources/Sprite/ReStateLog.png");
 
 	ReStateLog = Sprite::Create(12, { 0.0f,470.0f });
 
-	Sprite::LoadTexture(13, L"Resources/GameOverStageSelectLog.png");
+	Sprite::LoadTexture(13, L"Resources/Sprite/GameOverStageSelectLog.png");
 
 	GameOverStageSelectLog = Sprite::Create(13, { 0.0f,570.0f });
 
-	Sprite::LoadTexture(14, L"Resources/StageClear.png");
+	Sprite::LoadTexture(14, L"Resources/Sprite/StageClear.png");
 
 	StageClearLog = Sprite::Create(14, { 0.0f,-10.0f });
 
-	Sprite::LoadTexture(15, L"Resources/TitleLog.png");
+	Sprite::LoadTexture(15, L"Resources/Sprite/TitleLog.png");
 
 	TitleLog = Sprite::Create(15, { 0.0f,20.0f });
 
-	Sprite::LoadTexture(16, L"Resources/NextStageLog.png");
+	Sprite::LoadTexture(16, L"Resources/Sprite/NextStageLog.png");
 
 	NextStageLog = Sprite::Create(16, { -250.0f,350.0f });
 
-	Sprite::LoadTexture(17, L"Resources/StageClearStageSelectLog.png");
+	Sprite::LoadTexture(17, L"Resources/Sprite/StageClearStageSelectLog.png");
 
 	StageClearStageSelectLog = Sprite::Create(17, { -250.0f,500.0f });
 
-	Sprite::LoadTexture(18, L"Resources/T1.png");
+	Sprite::LoadTexture(18, L"Resources/Sprite/T1.png");
 	t1Background = Sprite::Create(18, t1BackgroundPosition);
 
-	Sprite::LoadTexture(19, L"Resources/T2.png");
+	Sprite::LoadTexture(19, L"Resources/Sprite/T2.png");
 	t2Background = Sprite::Create(19, t2BackgroundPosition);
 
-	Sprite::LoadTexture(20, L"Resources/T3.png");
+	Sprite::LoadTexture(20, L"Resources/Sprite/T3.png");
 	t3Background = Sprite::Create(20, t3BackgroundPosition);
 
-	Sprite::LoadTexture(23, L"Resources/T4.png");
+	Sprite::LoadTexture(23, L"Resources/Sprite/T4.png");
 	t4Background = Sprite::Create(23, t4BackgroundPosition);
 
-	Sprite::LoadTexture(21, L"Resources/S1.png");
+	Sprite::LoadTexture(21, L"Resources/Sprite/S1.png");
 	s1Background = Sprite::Create(21, s1BackgroundPosition);
 
-	Sprite::LoadTexture(22, L"Resources/S2.png");
+	Sprite::LoadTexture(22, L"Resources/Sprite/S2.png");
 	s2Background = Sprite::Create(22, s2BackgroundPosition);
 
-	Sprite::LoadTexture(24, L"Resources/S3.png");
+	Sprite::LoadTexture(24, L"Resources/Sprite/S3.png");
 	s3Backgorund = Sprite::Create(24, s3BackgroundPosition);
 
-	Sprite::LoadTexture(25, L"Resources/StageSelect_RB.png");
+	Sprite::LoadTexture(25, L"Resources/Sprite/StageSelect_RB.png");
 	StageSelectRB = Sprite::Create(25, { 1050.0f,250.0f });
 
-	Sprite::LoadTexture(26, L"Resources/StageSelect_LB.png");
+	Sprite::LoadTexture(26, L"Resources/Sprite/StageSelect_LB.png");
 	StageSelectLB = Sprite::Create(26, { 25.0f,250.0f });
 
 #pragma endregion

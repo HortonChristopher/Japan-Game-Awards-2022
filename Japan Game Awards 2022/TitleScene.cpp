@@ -20,7 +20,7 @@ void TitleScene::Initialize()
 	//debugText.Initialize(debugTextTexNumber);
 
 	// テクスチャ読み込み Texture loading
-	if (!Sprite::LoadTexture(4, L"Resources/Title.png")) {
+	if (!Sprite::LoadTexture(4, L"Resources/Sprite/Title.png")) {
 		assert(0);
 		return;
 	}
