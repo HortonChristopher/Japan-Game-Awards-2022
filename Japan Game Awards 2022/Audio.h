@@ -59,7 +59,7 @@ public: // メンバ関数 Member function
 
 
 	// 初期化 Initialization
-	void Initialize(const std::string& directoryPath = "Resources/");
+	void Initialize(const std::string& directoryPath = "Resources/Audio/");
 
 	//解放処理
 	void Finalize();

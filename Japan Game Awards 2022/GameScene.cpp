@@ -195,7 +195,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->Initialize();
 
 	//音声データのロード
-	audio->LoadWave("Alarm01.wav");
 	audio->LoadWave("GameClear.wav");
 	audio->LoadWave("GameOver.wav");
 	audio->LoadWave("Title.wav");
