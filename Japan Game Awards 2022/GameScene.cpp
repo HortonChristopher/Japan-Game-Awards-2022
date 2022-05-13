@@ -1827,16 +1827,11 @@ void GameScene::Update()
 		camera->Update();
 
 		//音楽再生	
-		if (PlayFlag == false && SceneNum == 0)
+		if (PlayFlag == false )
 		{
 			PlayFlag = true;
 			audio->PlayWave("Title.wav", Volume, true);
 			//audio->WaveVolume("Title.wav", 0.3f);
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
-		{
-			SceneNum = 1;
 		}
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -3537,12 +3532,6 @@ void GameScene::Draw()
 			sceneChange = 1;
 		}
 
-		//音楽再生
-		if (SceneNum == 1)
-		{
-			SceneNum = 2;
-			break;
-		}
 
 		gameClear->Draw();
 		break;
@@ -3554,24 +3543,12 @@ void GameScene::Draw()
 			sceneChange = 1;
 		}
 
-		if (SceneNum == 2)
-		{
-			SceneNum = 3;
-			break;
-		}
-
 		gameOver->Draw();
 		break;
 	case 4:
 		spriteBG->Draw();
 		GuideR->Draw();
 		Guide_LRB->Draw();
-		if (SceneNum == 1)
-		{
-			audio->PlayWave("Stage.Clear", Volume, true);
-			SceneNum = 2;
-			break;
-		}
 		break;
 	case 5:
 		spriteBG->Draw();
