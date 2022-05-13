@@ -161,7 +161,18 @@ private: // メンバ変数 Member variables
 
 	Sprite* StageSelectLog = nullptr;
 
+	Sprite* GuideA = nullptr;
+
+	Sprite* GuideB = nullptr;
+
+	
+
 	// ステージセレクト
+	bool t1FirstPlayFlag = true;
+	bool t2FirstPlayFlag = true;
+	bool t3FirstPlayFlag = true;
+	bool t4FirstPlayFlag = true;
+
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
 	Sprite* t3Background = nullptr;
@@ -177,6 +188,11 @@ private: // メンバ変数 Member variables
 	Sprite* s1StageSelectFrame = nullptr;
 	Sprite* s2StageSelectFrame = nullptr;
 	Sprite* s3StageSelectFrame = nullptr;
+
+	Sprite* t1NewLog = nullptr;
+	Sprite* t2NewLog = nullptr;
+	Sprite* t3NewLog = nullptr;
+	Sprite* t4NewLog = nullptr;
 
 	ParticleManager* particleMan = nullptr;
 
@@ -269,7 +285,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 SpriteStagSize = { 760,428 };
 
 	float SpriteStageSizeX = 260.0f;
-	float SpriteStageSizeY = 150.0f;
+	float SpriteStageSizeY = 180.0f;
 
 	XMFLOAT2 t1BackgroundPosition = {SpriteStageSizeX + (1280 * 0), SpriteStageSizeY };
 	XMFLOAT2 t2BackgroundPosition = { SpriteStageSizeX + (1280 * 1), SpriteStageSizeY };
@@ -286,6 +302,11 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 4)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 s2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 5)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 s3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 6)) - 20, (SpriteStageSizeY - 11) };
+
+	XMFLOAT2 t1NewLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t2NewLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t3NewLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t4NewLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 80, (SpriteStageSizeY + 60) };
 
 
 	CollisionManager* collisionManager;
