@@ -139,6 +139,7 @@ GameScene::~GameScene()
 	safe_delete(objTempYellowTrigger1);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
+	safe_delete(objStageSelect);
 
 	// obj model
 	safe_delete(modelSkydome);
@@ -147,6 +148,7 @@ GameScene::~GameScene()
 	safe_delete(modelPlane);
 	safe_delete(modelBox);
 	safe_delete(modelPyramid);
+	safe_delete(modelStageSelect);
 
 	// Fbx object
 	safe_delete(fbxobject1);
@@ -257,6 +259,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
+	objStageSelect = Object3d::Create();
 	objT1 = Object3d::Create();
 	objT2 = Object3d::Create();
 	objT3 = Object3d::Create();
@@ -334,30 +337,49 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(18, L"Resources/Sprite/T1.png");
 	t1Background = Sprite::Create(18, t1BackgroundPosition);
+	t1Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(19, L"Resources/Sprite/T2.png");
 	t2Background = Sprite::Create(19, t2BackgroundPosition);
+	t2Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(20, L"Resources/Sprite/T3.png");
 	t3Background = Sprite::Create(20, t3BackgroundPosition);
+	t3Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(23, L"Resources/Sprite/T4.png");
 	t4Background = Sprite::Create(23, t4BackgroundPosition);
+	t4Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(21, L"Resources/Sprite/S1.png");
 	s1Background = Sprite::Create(21, s1BackgroundPosition);
+	s1Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(22, L"Resources/Sprite/S2.png");
 	s2Background = Sprite::Create(22, s2BackgroundPosition);
+	s2Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(24, L"Resources/Sprite/S3.png");
-	s3Backgorund = Sprite::Create(24, s3BackgroundPosition);
+	s3Background = Sprite::Create(24, s3BackgroundPosition);
+	s3Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(25, L"Resources/Sprite/StageSelect_RB.png");
 	StageSelectRB = Sprite::Create(25, { 1050.0f,250.0f });
 
 	Sprite::LoadTexture(26, L"Resources/Sprite/StageSelect_LB.png");
 	StageSelectLB = Sprite::Create(26, { 25.0f,250.0f });
+
+	Sprite::LoadTexture(27, L"Resources/Sprite/StageSelectLog.png");
+	StageSelectLog = Sprite::Create(27, { 0.0f,0.0f });
+
+	Sprite::LoadTexture(28, L"Resources/Sprite/StageSelectFrame.png");
+	t1StageSelectFrame = Sprite::Create(28, { t1StageSelectFramePosition });
+	t2StageSelectFrame = Sprite::Create(28, { t2StageSelectFramePosition });
+	t3StageSelectFrame = Sprite::Create(28, { t3StageSelectFramePosition });
+	t4StageSelectFrame = Sprite::Create(28, { t4StageSelectFramePosition });
+	s1StageSelectFrame = Sprite::Create(28, { s1StageSelectFramePosition });
+	s2StageSelectFrame = Sprite::Create(28, { s2StageSelectFramePosition });
+	s3StageSelectFrame = Sprite::Create(28, { s3StageSelectFramePosition });
 
 #pragma endregion
 
@@ -376,6 +398,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
+	modelStageSelect = Model::CreateFromOBJ("ObjStageSelect");
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
 
@@ -392,6 +415,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBulletE->SetModel(modelTempBullet);
 
 	objMenuSelection->SetModel(modelTempBullet);
+
+	objStageSelect->SetModel(modelStageSelect);
 
 	//objFighter = Player::Create(modelFighter);
 	//objClone = Enemy::Create(modelFighter);
@@ -1523,27 +1548,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut4->SetPosition({ -8.0f, 0.0f, 0.0f }); // 8, -12
 	objTeleporterOut4->SetScale({ 3.0f, 3.0f, 3.0f });
 
-	objT1->SetPosition({ 0.0f, 0.0f, 0.0f });
-	objT1->SetRotation(T1rotation);
-	objT1->SetScale({ 10.0f, 10.0f, 10.0f });
-	objT2->SetPosition({ 100.0f, 0.0f, 0.0f });
-	objT2->SetRotation(T2rotation);
-	objT2->SetScale({ 10.0f, 10.0f, 10.0f });
-	objT3->SetPosition({ 200.0f, 0.0f, 0.0f });
-	objT3->SetRotation(T3rotation);
-	objT3->SetScale({ 10.0f, 10.0f, 10.0f });
-	objT4->SetPosition({ 300.0f, 0.0f, 0.0f });
-	objT4->SetRotation(T4rotation);
-	objT4->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS1->SetPosition({ 400.0f, 0.0f, 0.0f });
-	objS1->SetRotation(S1rotation);
-	objS1->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS2->SetPosition({ 500.0f, 0.0f, 0.0f });
-	objS2->SetRotation(S2rotation);
-	objS2->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS3->SetPosition({ 600.0f, 0.0f, 0.0f });
-	objS3->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS3->SetRotation(S3rotation);
+	objStageSelect->SetPosition({ 1,-4,0 });
+	objStageSelect->SetRotation({ 0,90,0 });
+
 
 #pragma endregion
 
@@ -1598,6 +1605,8 @@ void GameScene::Update()
 	yellowTrigger2 = objTempYellowTrigger2->GetPosition();
 	playerBullet = objTempBullet->GetPosition();
 	enemyBullet = objTempBulletE->GetPosition();
+
+
 
 	// GameSceneとの座標共有 Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
@@ -2881,20 +2890,9 @@ void GameScene::Update()
 
 	case 8: //ステージセレクト画面
 #pragma region case8 ステージセレクト画面
-		T1rotation.x += 2.0f;
-		T2rotation.x += 2.0f;
-		T3rotation.x += 2.0f;
-		T4rotation.x += 2.0f;
-		S1rotation.x += 2.0f;
-		S2rotation.x += 2.0f;
-		S3rotation.x += 2.0f;
-		objT1->SetRotation(T1rotation);
-		objT2->SetRotation(T2rotation);
-		objT3->SetRotation(T3rotation);
-		objT4->SetRotation(T4rotation);
-		objS1->SetRotation(S1rotation);
-		objS2->SetRotation(S2rotation);
-		objS3->SetRotation(S3rotation);
+
+		camera->SetEye({ 10,0,0 });
+		camera->SetTarget({ 0, 0, 0 });
 
 		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 		{
@@ -2927,13 +2925,32 @@ void GameScene::Update()
 			s1BackgroundPosition.x -= 25.6f;
 			s2BackgroundPosition.x -= 25.6f;
 			s3BackgroundPosition.x -= 25.6f;
+
+			t1StageSelectFramePosition.x -= 25.6f;
+			t2StageSelectFramePosition.x -= 25.6f;
+			t3StageSelectFramePosition.x -= 25.6f;
+			t4StageSelectFramePosition.x -= 25.6f;
+			s1StageSelectFramePosition.x -= 25.6f;
+			s2StageSelectFramePosition.x -= 25.6f;
+			s3StageSelectFramePosition.x -= 25.6f;
+
 			t1Background->SetPosition(t1BackgroundPosition);
 			t2Background->SetPosition(t2BackgroundPosition);
 			t3Background->SetPosition(t3BackgroundPosition);
 			t4Background->SetPosition(t4BackgroundPosition);
 			s1Background->SetPosition(s1BackgroundPosition);
 			s2Background->SetPosition(s2BackgroundPosition);
-			s3Backgorund->SetPosition(s3BackgroundPosition);
+			s3Background->SetPosition(s3BackgroundPosition);
+
+			t1StageSelectFrame->SetPosition(t1StageSelectFramePosition);
+			t2StageSelectFrame->SetPosition(t2StageSelectFramePosition);
+			t3StageSelectFrame->SetPosition(t3StageSelectFramePosition);
+			t4StageSelectFrame->SetPosition(t4StageSelectFramePosition);
+			s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
+			s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
+			s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
+
+
 			currentFrame++;
 
 			if (currentFrame >= 50)
@@ -2947,6 +2964,7 @@ void GameScene::Update()
 		{
 			camera->MoveVector({ -2.0f, 0.0f, 0.0f });
 			camera->Update();
+
 			t1BackgroundPosition.x += 25.6f;
 			t2BackgroundPosition.x += 25.6f;
 			t3BackgroundPosition.x += 25.6f;
@@ -2954,13 +2972,31 @@ void GameScene::Update()
 			s1BackgroundPosition.x += 25.6f;
 			s2BackgroundPosition.x += 25.6f;
 			s3BackgroundPosition.x += 25.6f;
+
+			t1StageSelectFramePosition.x += 25.6f;
+			t2StageSelectFramePosition.x += 25.6f;
+			t3StageSelectFramePosition.x += 25.6f;
+			t4StageSelectFramePosition.x += 25.6f;
+			s1StageSelectFramePosition.x += 25.6f;
+			s2StageSelectFramePosition.x += 25.6f;
+			s3StageSelectFramePosition.x += 25.6f;
+
 			t1Background->SetPosition(t1BackgroundPosition);
 			t2Background->SetPosition(t2BackgroundPosition);
 			t3Background->SetPosition(t3BackgroundPosition);
 			t4Background->SetPosition(t4BackgroundPosition);
 			s1Background->SetPosition(s1BackgroundPosition);
 			s2Background->SetPosition(s2BackgroundPosition);
-			s3Backgorund->SetPosition(s3BackgroundPosition);
+			s3Background->SetPosition(s3BackgroundPosition);
+
+			t1StageSelectFrame->SetPosition(t1StageSelectFramePosition);
+			t2StageSelectFrame->SetPosition(t2StageSelectFramePosition);
+			t3StageSelectFrame->SetPosition(t3StageSelectFramePosition);
+			t4StageSelectFrame->SetPosition(t4StageSelectFramePosition);
+			s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
+			s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
+			s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
+
 			currentFrame++;
 
 			if (currentFrame >= 50)
@@ -3019,13 +3055,7 @@ void GameScene::Update()
 			}
 		}
 
-		objT1->Update();
-		objT2->Update();
-		objT3->Update();
-		objT4->Update();
-		objS1->Update();
-		objS2->Update();
-		objS3->Update();
+		objStageSelect->Update();
 
 		objSkydome->Update();
 
@@ -3491,13 +3521,14 @@ void GameScene::Draw()
 		Guide_LRB->Draw();
 		break;
 	case 8:
+		spriteBG->Draw();
 		t1Background->Draw();
 		t2Background->Draw();
 		t3Background->Draw();
 		t4Background->Draw();
 		s1Background->Draw();
 		s2Background->Draw();
-		s3Backgorund->Draw();
+		s3Background->Draw();
 		break;
 	case 9:
 		spriteBG->Draw();
@@ -3749,13 +3780,6 @@ void GameScene::Draw()
 
 		break;
 	case 8:
-		/*objT1->Draw();
-		objT2->Draw();
-		objT3->Draw();
-		objT4->Draw();
-		objS1->Draw();
-		objS2->Draw();
-		objS3->Draw();*/
 
 		break;
 	case 9:
@@ -3946,7 +3970,16 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 8:
-	
+		// StageSelectLog->Draw();
+
+		t1StageSelectFrame->Draw();
+		t2StageSelectFrame->Draw();
+		t3StageSelectFrame->Draw();
+		t4StageSelectFrame->Draw();
+		s1StageSelectFrame->Draw();
+		s2StageSelectFrame->Draw();
+		s3StageSelectFrame->Draw();
+
 		switch (stageSelect)
 		{
 		case 0:
@@ -4078,11 +4111,7 @@ void GameScene::SceneSelectionReset()
 
 	currentFrame = 0;
 
-	T1rotation = { 0.0f, 0.0f, 0.0f };
-	T2rotation = { 0.0f, 0.0f, 0.0f };
-	T3rotation = { 0.0f, 0.0f, 0.0f };
-	S1rotation = { 0.0f, 0.0f, 0.0f };
-	S2rotation = { 0.0f, 0.0f, 0.0f };
+	
 	objT1->Update();
 	objT2->Update();
 	objT3->Update();
