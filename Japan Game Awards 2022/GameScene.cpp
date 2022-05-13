@@ -2011,6 +2011,13 @@ void GameScene::Update()
 
 			lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
 			lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Stage1Move();
+				Stage1Reset();
+				sceneNo = 1;
+			}
 		}
 
 		for (auto object : objects) {
@@ -2457,6 +2464,13 @@ void GameScene::Update()
 			}
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Stage2Move();
+				Stage2Reset();
+				sceneNo = 4;
+			}
 		}
 
 		for (auto object_s2_1 : objects_s2_1) {
@@ -2593,6 +2607,13 @@ void GameScene::Update()
 				Tutorial1Move();
 				sceneChange = 0;
 			}
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Tutorial1Move();
+				Tutorial1Reset();
+				sceneNo = 5;
+			}
 		}
 
 		for (auto object_t1_1 : objects_t1_1) {
@@ -2680,6 +2701,13 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+			}
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Tutorial2Move();
+				Tutorial2Reset();
+				sceneNo = 6;
 			}
 		}
 
@@ -2825,6 +2853,13 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+			}
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Tutorial3Move();
+				Tutorial3Reset();
+				sceneNo = 7;
 			}
 		}
 
@@ -3164,6 +3199,13 @@ void GameScene::Update()
 				Tutorial4Move();
 				sceneChange = 0;
 			}
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Tutorial4Move();
+				Tutorial4Reset();
+				sceneNo = 9;
+			}
 		}
 
 		for (auto object_t4_1 : objects_t4_1)
@@ -3351,6 +3393,13 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+			}
+
+			if (input->TriggerKey(DIK_R))
+			{
+				Stage3Move();
+				Stage3Reset();
+				sceneNo = 10;
 			}
 		}
 
@@ -4334,40 +4383,91 @@ void GameScene::Tutorial3Move()
 		object_t3_2->Update();
 	}
 
-	for (auto object_t3_y1_1 : objects_t3_y1_1) {
-		XMFLOAT3 objectPosition = object_t3_y1_1->GetPosition();
-		object_t3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t3_y1_1->Update();
+	if (tutorial3YellowKabe1)
+	{
+		for (auto object_t3_y1_1 : objects_t3_y1_1) {
+			XMFLOAT3 objectPosition = object_t3_y1_1->GetPosition();
+			object_t3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_t3_y1_1->Update();
+		}
+
+		for (auto object_t3_y2_1 : objects_t3_y2_1) {
+			XMFLOAT3 objectPosition = object_t3_y2_1->GetPosition();
+			object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_t3_y2_1->Update();
+		}
+	}
+	else
+	{
+		for (auto object_t3_y1_1 : objects_t3_y1_1) {
+			XMFLOAT3 objectPosition = object_t3_y1_1->GetPosition();
+			object_t3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_t3_y1_1->Update();
+		}
+
+		for (auto object_t3_y2_1 : objects_t3_y2_1) {
+			XMFLOAT3 objectPosition = object_t3_y2_1->GetPosition();
+			object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_t3_y2_1->Update();
+		}
 	}
 
-	for (auto object_t3_y2_1 : objects_t3_y2_1) {
-		XMFLOAT3 objectPosition = object_t3_y2_1->GetPosition();
-		object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t3_y2_1->Update();
+	if (tutorial3YellowKabe2)
+	{
+		for (auto object_t3_y1_2 : objects_t3_y1_2) {
+			XMFLOAT3 objectPosition = object_t3_y1_2->GetPosition();
+			object_t3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_t3_y1_2->Update();
+		}
+
+		for (auto object_t3_y2_2 : objects_t3_y2_2) {
+			XMFLOAT3 objectPosition = object_t3_y2_2->GetPosition();
+			object_t3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_t3_y2_2->Update();
+		}
+	}
+	else
+	{
+		for (auto object_t3_y1_2 : objects_t3_y1_2) {
+			XMFLOAT3 objectPosition = object_t3_y1_2->GetPosition();
+			object_t3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_t3_y1_2->Update();
+		}
+
+		for (auto object_t3_y2_2 : objects_t3_y2_2) {
+			XMFLOAT3 objectPosition = object_t3_y2_2->GetPosition();
+			object_t3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_t3_y2_2->Update();
+		}
 	}
 
-	for (auto object_t3_y1_2 : objects_t3_y1_2) {
-		XMFLOAT3 objectPosition = object_t3_y1_2->GetPosition();
-		object_t3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t3_y1_2->Update();
-	}
+	if (tutorial3YellowKabe3)
+	{
+		for (auto object_t3_y1_3 : objects_t3_y1_3) {
+			XMFLOAT3 objectPosition = object_t3_y1_3->GetPosition();
+			object_t3_y1_3->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_t3_y1_3->Update();
+		}
 
-	for (auto object_t3_y2_2 : objects_t3_y2_2) {
-		XMFLOAT3 objectPosition = object_t3_y2_2->GetPosition();
-		object_t3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t3_y2_2->Update();
+		for (auto object_t3_y2_3 : objects_t3_y2_3) {
+			XMFLOAT3 objectPosition = object_t3_y2_3->GetPosition();
+			object_t3_y2_3->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_t3_y2_3->Update();
+		}
 	}
+	else
+	{
+		for (auto object_t3_y1_3 : objects_t3_y1_3) {
+			XMFLOAT3 objectPosition = object_t3_y1_3->GetPosition();
+			object_t3_y1_3->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_t3_y1_3->Update();
+		}
 
-	for (auto object_t3_y1_3 : objects_t3_y1_3) {
-		XMFLOAT3 objectPosition = object_t3_y1_3->GetPosition();
-		object_t3_y1_3->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t3_y1_3->Update();
-	}
-
-	for (auto object_t3_y2_3 : objects_t3_y2_3) {
-		XMFLOAT3 objectPosition = object_t3_y2_3->GetPosition();
-		object_t3_y2_3->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_t3_y2_3->Update();
+		for (auto object_t3_y2_3 : objects_t3_y2_3) {
+			XMFLOAT3 objectPosition = object_t3_y2_3->GetPosition();
+			object_t3_y2_3->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_t3_y2_3->Update();
+		}
 	}
 }
 
@@ -4472,13 +4572,13 @@ void GameScene::Tutorial4Move()
 	{
 		for (auto object_t4_y : objects_t4_y) {
 			XMFLOAT3 objectPosition = object_t4_y->GetPosition();
-			object_t4_y->SetPosition({ objectPosition.x, objectPosition.y - 100.0f, objectPosition.z });
+			object_t4_y->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_t4_y->Update();
 		}
 
 		for (auto object_t4_y2 : objects_t4_y2) {
 			XMFLOAT3 objectPosition = object_t4_y2->GetPosition();
-			object_t4_y2->SetPosition({ objectPosition.x, objectPosition.y - 100.0f, objectPosition.z });
+			object_t4_y2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_t4_y2->Update();
 		}
 	}
@@ -4573,34 +4673,28 @@ void GameScene::Stage2Reset()
 			object_s2_2->Update();
 		}
 
-		if (!stage2YellowKabe)
-		{
-			for (auto object_s2_y : objects_s2_y) {
-				XMFLOAT3 objectPosition = object_s2_y->GetPosition();
-				object_s2_y->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
-				object_s2_y->Update();
-			}
-
-			for (auto object_s2_y2 : objects_s2_y2) {
-				XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
-				object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
-				object_s2_y2->Update();
-			}
+		for (auto object_s2_y : objects_s2_y) {
+			XMFLOAT3 objectPosition = object_s2_y->GetPosition();
+			object_s2_y->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_y->Update();
 		}
 
-		if (stage2Switch)
-		{
-			for (auto object_s2_s : objects_s2_s) {
-				XMFLOAT3 objectPosition = object_s2_s->GetPosition();
-				object_s2_s->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
-				object_s2_s->Update();
-			}
+		for (auto object_s2_y2 : objects_s2_y2) {
+			XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
+			object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_y2->Update();
+		}
 
-			for (auto object_s2_s2 : objects_s2_s2) {
-				XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
-				object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y + 100.0f, objectPosition.z });
-				object_s2_s2->Update();
-			}
+		for (auto object_s2_s : objects_s2_s) {
+			XMFLOAT3 objectPosition = object_s2_s->GetPosition();
+			object_s2_s->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_s->Update();
+		}
+
+		for (auto object_s2_s2 : objects_s2_s2) {
+			XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
+			object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_s2->Update();
 		}
 	}
 
@@ -4649,28 +4743,62 @@ void GameScene::Stage2Move()
 		object_s2_2->Update();
 	}
 
-	for (auto object_s2_y : objects_s2_y) {
-		XMFLOAT3 objectPosition = object_s2_y->GetPosition();
-		object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_s2_y->Update();
+	if (!stage2YellowKabe)
+	{
+		for (auto object_s2_y : objects_s2_y) {
+			XMFLOAT3 objectPosition = object_s2_y->GetPosition();
+			object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_y->Update();
+		}
+
+		for (auto object_s2_y2 : objects_s2_y2) {
+			XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
+			object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_y2->Update();
+		}
+	}
+	else
+	{
+		for (auto object_s2_y : objects_s2_y) {
+			XMFLOAT3 objectPosition = object_s2_y->GetPosition();
+			object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_y->Update();
+		}
+
+		for (auto object_s2_y2 : objects_s2_y2) {
+			XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
+			object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_y2->Update();
+		}
 	}
 
-	for (auto object_s2_y2 : objects_s2_y2) {
-		XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
-		object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_s2_y2->Update();
-	}
+	if (!stage2Switch)
+	{
+		for (auto object_s2_s : objects_s2_s) {
+			XMFLOAT3 objectPosition = object_s2_s->GetPosition();
+			object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_s->Update();
+		}
 
-	for (auto object_s2_s : objects_s2_s) {
-		XMFLOAT3 objectPosition = object_s2_s->GetPosition();
-		object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_s2_s->Update();
+		for (auto object_s2_s2 : objects_s2_s2) {
+			XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
+			object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_s2->Update();
+		}
 	}
+	else
+	{
+		for (auto object_s2_s : objects_s2_s) {
+			XMFLOAT3 objectPosition = object_s2_s->GetPosition();
+			object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_s->Update();
+		}
 
-	for (auto object_s2_s2 : objects_s2_s2) {
-		XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
-		object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
-		object_s2_s2->Update();
+		for (auto object_s2_s2 : objects_s2_s2) {
+			XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
+			object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_s2->Update();
+		}
 	}
 }
 
