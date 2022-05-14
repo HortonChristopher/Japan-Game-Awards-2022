@@ -400,6 +400,15 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	t4NewLog = Sprite::Create(31, { t4NewLogPosition });
 	t4NewLog->SetRotation({ -30.0f });
 
+	s1NewLog = Sprite::Create(31, { s1NewLogPosition });
+	s1NewLog->SetRotation({ -30.0f });
+
+	s2NewLog = Sprite::Create(31, { s2NewLogPosition });
+	s2NewLog->SetRotation({ -30.0f });
+
+	s3NewLog = Sprite::Create(31, { s3NewLogPosition });
+	s3NewLog->SetRotation({ -30.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -2989,6 +2998,9 @@ void GameScene::Update()
 			t2NewLogPosition.x -= 25.6f;
 			t3NewLogPosition.x -= 25.6f;
 			t4NewLogPosition.x -= 25.6f;
+			s1NewLogPosition.x -= 25.6f;
+			s2NewLogPosition.x -= 25.6f;
+			s3NewLogPosition.x -= 25.6f;
 
 			currentFrame++;
 
@@ -3024,6 +3036,9 @@ void GameScene::Update()
 			t2NewLogPosition.x += 25.6f;
 			t3NewLogPosition.x += 25.6f;
 			t4NewLogPosition.x += 25.6f;
+			s1NewLogPosition.x += 25.6f;
+			s2NewLogPosition.x += 25.6f;
+			s3NewLogPosition.x += 25.6f;
 
 			currentFrame++;
 
@@ -3067,16 +3082,19 @@ void GameScene::Update()
 			case 4:
 				Stage1Reset();
 				sceneNo = 1;
+				s1FirstPlayFlag = false;
 
 				break;
 			case 5:
 				Stage2Reset();
 				sceneNo = 4;
+				s2FirstPlayFlag = false;
 
 				break;
 			case 6:
 				Stage3Reset();
 				sceneNo = 10;
+				s2FirstPlayFlag = false;
 
 				break;
 			}
@@ -3103,6 +3121,9 @@ void GameScene::Update()
 		t2NewLog->SetPosition(t2NewLogPosition);
 		t3NewLog->SetPosition(t3NewLogPosition);
 		t4NewLog->SetPosition(t4NewLogPosition);
+		s1NewLog->SetPosition(s1NewLogPosition);
+		s2NewLog->SetPosition(s2NewLogPosition);
+		s3NewLog->SetPosition(s3NewLogPosition);
 
 		objStageSelect->Update();
 
@@ -4049,6 +4070,20 @@ void GameScene::Draw()
 			t4NewLog->Draw();
 		}
 	
+		if (s1FirstPlayFlag == true)
+		{
+			s1NewLog->Draw();
+		}
+
+		if (s2FirstPlayFlag == true)
+		{
+			s2NewLog->Draw();
+		}
+
+		if (s3FirstPlayFlag == true)
+		{
+			s3NewLog->Draw();
+		}
 
 		GuideA->Draw();
 		GuideB->Draw();

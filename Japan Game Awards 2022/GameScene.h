@@ -172,6 +172,9 @@ private: // メンバ変数 Member variables
 	bool t2FirstPlayFlag = true;
 	bool t3FirstPlayFlag = true;
 	bool t4FirstPlayFlag = true;
+	bool s1FirstPlayFlag = true;
+	bool s2FirstPlayFlag = true;
+	bool s3FirstPlayFlag = true;
 
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
@@ -193,6 +196,10 @@ private: // メンバ変数 Member variables
 	Sprite* t2NewLog = nullptr;
 	Sprite* t3NewLog = nullptr;
 	Sprite* t4NewLog = nullptr;
+	Sprite* s1NewLog = nullptr;
+	Sprite* s2NewLog = nullptr;
+	Sprite* s3NewLog = nullptr;
+
 
 	ParticleManager* particleMan = nullptr;
 
@@ -307,6 +314,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 t2NewLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 t3NewLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 t4NewLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s1NewLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s2NewLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s3NewLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 80, (SpriteStageSizeY + 60) };
 
 
 	CollisionManager* collisionManager;
