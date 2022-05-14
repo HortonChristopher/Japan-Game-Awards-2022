@@ -1947,6 +1947,7 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2012,6 +2013,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				sceneChange = 0;
+
+				s1FirstPlayFlag = false;
 			}
 			else if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 			{
@@ -2021,6 +2024,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+
+				s1FirstPlayFlag = false;
 				s1ClearFlag = true;
 			}
 
@@ -2465,8 +2470,10 @@ void GameScene::Update()
 			objFighter->Update();
 			objClone->Update();
 		}
+
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2497,6 +2504,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				s2FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2507,6 +2516,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+
+				s2FirstPlayFlag = false;
 				s2ClearFlag = true;
 			}
 
@@ -2644,6 +2655,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t1FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2653,6 +2666,8 @@ void GameScene::Update()
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial1Move();
 				sceneChange = 0;
+
+				t1FirstPlayFlag = false;
 				t1ClearFlag = true;
 			}
 
@@ -2718,6 +2733,8 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+			
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2739,6 +2756,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t2FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2749,6 +2768,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+
+				t2FirstPlayFlag = false;
 				t2ClearFlag = true;
 			}
 
@@ -2816,6 +2837,7 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2893,6 +2915,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t3FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2902,6 +2926,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+
+				t3FirstPlayFlag = false;
 				t3ClearFlag = true;
 			}
 
@@ -3101,43 +3127,36 @@ void GameScene::Update()
 			case 0:
 				Tutorial1Reset();
 				sceneNo = 5;
-				t1FirstPlayFlag = false;
 
 				break;
 			case 1:
 				Tutorial2Reset();
 				sceneNo = 6;
-				t2FirstPlayFlag = false;
 
 				break;
 			case 2:
 				Tutorial3Reset();
 				sceneNo = 7;
-				t3FirstPlayFlag = false;
 
 				break;
 			case 3:
 				Tutorial4Reset();
 				sceneNo = 9;
-				t4FirstPlayFlag = false;
 
 				break;
 			case 4:
 				Stage1Reset();
 				sceneNo = 1;
-				s1FirstPlayFlag = false;
 
 				break;
 			case 5:
 				Stage2Reset();
 				sceneNo = 4;
-				s2FirstPlayFlag = false;
 
 				break;
 			case 6:
 				Stage3Reset();
 				sceneNo = 10;
-				s3FirstPlayFlag = false;
 
 				break;
 			}
@@ -3214,6 +3233,7 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -3275,6 +3295,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t4FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -3284,6 +3306,8 @@ void GameScene::Update()
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial4Move();
 				sceneChange = 0;
+
+				t4FirstPlayFlag = false;
 				t4ClearFlag = true;
 			}
 
@@ -3470,6 +3494,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				s3FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -3480,6 +3506,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+
+				s3FirstPlayFlag = false;
 				s3ClearFlag = true;
 			}
 
