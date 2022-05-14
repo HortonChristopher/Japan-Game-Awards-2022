@@ -409,6 +409,28 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	s3NewLog = Sprite::Create(31, { s3NewLogPosition });
 	s3NewLog->SetRotation({ -30.0f });
 
+	Sprite::LoadTexture(32, L"Resources/Sprite/Clear.png");
+	t1ClearLog = Sprite::Create(32, { t1ClearLogPosition });
+	t1ClearLog->SetRotation({ -30.0f });
+
+	t2ClearLog = Sprite::Create(32, { t2ClearLogPosition });
+	t2ClearLog->SetRotation({ -30.0f });
+
+	t3ClearLog = Sprite::Create(32, { t3ClearLogPosition });
+	t3ClearLog->SetRotation({ -30.0f });
+
+	t4ClearLog = Sprite::Create(32, { t4ClearLogPosition });
+	t4ClearLog->SetRotation({ -30.0f });
+
+	s1ClearLog = Sprite::Create(32, { s1ClearLogPosition });
+	s1ClearLog->SetRotation({ -30.0f });
+
+	s2ClearLog = Sprite::Create(32, { s2ClearLogPosition });
+	s2ClearLog->SetRotation({ -30.0f });
+
+	s3ClearLog = Sprite::Create(32, { s3ClearLogPosition });
+	s3ClearLog->SetRotation({ -30.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -1999,6 +2021,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+				s1ClearFlag = true;
 			}
 
 			//UpdateInput();
@@ -2484,6 +2507,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+				s2ClearFlag = true;
 			}
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
@@ -2629,6 +2653,7 @@ void GameScene::Update()
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial1Move();
 				sceneChange = 0;
+				t1ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -2724,6 +2749,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+				t2ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -2876,6 +2902,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+				t3ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -3002,6 +3029,14 @@ void GameScene::Update()
 			s2NewLogPosition.x -= 25.6f;
 			s3NewLogPosition.x -= 25.6f;
 
+			t1ClearLogPosition.x -= 25.6f;
+			t2ClearLogPosition.x -= 25.6f;
+			t3ClearLogPosition.x -= 25.6f;
+			t4ClearLogPosition.x -= 25.6f;
+			s1ClearLogPosition.x -= 25.6f;
+			s2ClearLogPosition.x -= 25.6f;
+			s3ClearLogPosition.x -= 25.6f;
+
 			currentFrame++;
 
 			if (currentFrame >= 50)
@@ -3039,6 +3074,14 @@ void GameScene::Update()
 			s1NewLogPosition.x += 25.6f;
 			s2NewLogPosition.x += 25.6f;
 			s3NewLogPosition.x += 25.6f;
+
+			t1ClearLogPosition.x += 25.6f;
+			t2ClearLogPosition.x += 25.6f;
+			t3ClearLogPosition.x += 25.6f;
+			t4ClearLogPosition.x += 25.6f;
+			s1ClearLogPosition.x += 25.6f;
+			s2ClearLogPosition.x += 25.6f;
+			s3ClearLogPosition.x += 25.6f;
 
 			currentFrame++;
 
@@ -3094,7 +3137,7 @@ void GameScene::Update()
 			case 6:
 				Stage3Reset();
 				sceneNo = 10;
-				s2FirstPlayFlag = false;
+				s3FirstPlayFlag = false;
 
 				break;
 			}
@@ -3124,6 +3167,14 @@ void GameScene::Update()
 		s1NewLog->SetPosition(s1NewLogPosition);
 		s2NewLog->SetPosition(s2NewLogPosition);
 		s3NewLog->SetPosition(s3NewLogPosition);
+
+		t1ClearLog->SetPosition(t1ClearLogPosition);
+		t2ClearLog->SetPosition(t2ClearLogPosition);
+		t3ClearLog->SetPosition(t3ClearLogPosition);
+		t4ClearLog->SetPosition(t4ClearLogPosition);
+		s1ClearLog->SetPosition(s1ClearLogPosition);
+		s2ClearLog->SetPosition(s2ClearLogPosition);
+		s3ClearLog->SetPosition(s3ClearLogPosition);
 
 		objStageSelect->Update();
 
@@ -3233,6 +3284,7 @@ void GameScene::Update()
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial4Move();
 				sceneChange = 0;
+				t4ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -3428,6 +3480,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+				s3ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -4050,6 +4103,7 @@ void GameScene::Draw()
 		s2StageSelectFrame->Draw();
 		s3StageSelectFrame->Draw();
 
+		// NEWロゴの表示
 		if (t1FirstPlayFlag == true)
 		{
 			t1NewLog->Draw();
@@ -4083,6 +4137,42 @@ void GameScene::Draw()
 		if (s3FirstPlayFlag == true)
 		{
 			s3NewLog->Draw();
+		}
+
+		// Clearロゴの表示
+		if (t1ClearFlag == true)
+		{
+			t1ClearLog->Draw();
+		}
+
+		if (t2ClearFlag == true)
+		{
+			t2ClearLog->Draw();
+		}
+
+		if (t3ClearFlag == true)
+		{
+			t3ClearLog->Draw();
+		}
+
+		if (t4ClearFlag == true)
+		{
+			t4ClearLog->Draw();
+		}
+		
+		if (s1ClearFlag == true)
+		{
+			s1ClearLog->Draw();
+		}
+
+		if (s2ClearFlag == true)
+		{
+			s2ClearLog->Draw();
+		}
+
+		if (s3ClearFlag == true)
+		{
+			s3ClearLog->Draw();
 		}
 
 		GuideA->Draw();

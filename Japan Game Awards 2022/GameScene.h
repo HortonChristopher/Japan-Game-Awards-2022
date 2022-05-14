@@ -176,6 +176,14 @@ private: // メンバ変数 Member variables
 	bool s2FirstPlayFlag = true;
 	bool s3FirstPlayFlag = true;
 
+	bool t1ClearFlag = false;
+	bool t2ClearFlag = false;
+	bool t3ClearFlag = false;
+	bool t4ClearFlag = false;
+	bool s1ClearFlag = false;
+	bool s2ClearFlag = false;
+	bool s3ClearFlag = false;
+
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
 	Sprite* t3Background = nullptr;
@@ -199,6 +207,15 @@ private: // メンバ変数 Member variables
 	Sprite* s1NewLog = nullptr;
 	Sprite* s2NewLog = nullptr;
 	Sprite* s3NewLog = nullptr;
+
+	Sprite* t1ClearLog = nullptr;
+	Sprite* t2ClearLog = nullptr;
+	Sprite* t3ClearLog = nullptr;
+	Sprite* t4ClearLog = nullptr;
+	Sprite* s1ClearLog = nullptr;
+	Sprite* s2ClearLog = nullptr;
+	Sprite* s3ClearLog = nullptr;
+	
 
 
 	ParticleManager* particleMan = nullptr;
@@ -317,6 +334,14 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s1NewLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 s2NewLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 s3NewLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 80, (SpriteStageSizeY + 60) };
+
+	XMFLOAT2 t1ClearLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t2ClearLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t3ClearLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t4ClearLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s1ClearLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s2ClearLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s3ClearLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 150, (SpriteStageSizeY + 100) };
 
 
 	CollisionManager* collisionManager;
