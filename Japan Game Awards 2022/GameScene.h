@@ -420,6 +420,9 @@ private: // メンバ変数 Member variables
 	bool menuMoving = false; // ゲームクリアとオーバー画面
 	int lastScene = 0; // ゲームクリアとオーバー画面
 
+	int delayFrame = 0;
+	bool delay = false;
+
 	//コントローラー起動フラグ
 	bool ControllerFlag = false;
 

@@ -1863,6 +1863,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				case 2:
 					break;
@@ -1877,6 +1878,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				case 5:
 					Tutorial1Move();
@@ -1887,6 +1889,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				case 6:
 					Tutorial2Move();
@@ -1897,6 +1900,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				case 7:
 					Tutorial3Move();
@@ -1907,6 +1911,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				case 8:
 					break;
@@ -1919,6 +1924,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				case 10:
 					Stage3Move();
@@ -1929,6 +1935,7 @@ void GameScene::Update()
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
+					delay = true;
 					break;
 				}
 
@@ -3599,8 +3606,19 @@ void GameScene::Update()
 			}
 		}
 
-		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) ||
-			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A))
+		if (delay)
+		{
+			delayFrame++;
+
+			if (delayFrame >= 5)
+			{
+				delay = false;
+				delayFrame = 0;
+			}
+		}
+
+		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay||
+			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
 			audio->PlayWave("Stage.wav", Volume, true);
 			switch (stageSelect)
