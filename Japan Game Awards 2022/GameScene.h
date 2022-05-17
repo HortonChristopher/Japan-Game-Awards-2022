@@ -242,10 +242,12 @@ private: // メンバ変数 Member variables
 	FbxModel* modelPlayerStand = nullptr;
 	FbxModel* modelPlayerFight = nullptr;
 	FbxModel* modelPlayerWin = nullptr;
+	FbxModel* modelPlayerFall = nullptr;
 	FbxModel* modelPlayerLose = nullptr;
 	FbxModel* modelCloneRun = nullptr;
 	FbxModel* modelCloneStand = nullptr;
 	FbxModel* modelCloneFight = nullptr;
+	FbxModel* modelCloneFall = nullptr;
 	
 	//ステージセレクト
 	Object3d* objT1 = nullptr;
@@ -284,9 +286,11 @@ private: // メンバ変数 Member variables
 	FbxObject3d* objPlayerFight = nullptr;
 	FbxObject3d* objPlayerWin = nullptr;
 	FbxObject3d* objPlayerLose = nullptr;
+	FbxObject3d* objPlayerFall = nullptr;
 	FbxObject3d* objCloneRun = nullptr;
 	FbxObject3d* objCloneStand = nullptr;
 	FbxObject3d* objCloneFight = nullptr;
+	FbxObject3d* objCloneFall = nullptr;
 
 
 	Player* objFighter = nullptr;
@@ -426,7 +430,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 originalCamera;
 
 	//Waveのボリューム
-	const float Volume = 0.3f;
+	const float Volume = 0.2f;
 
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
