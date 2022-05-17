@@ -582,7 +582,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objPlayerFall->SetPosition({ 0,0,0 });
 	objPlayerFall->SetRotation({ 0,0,0 });
-	objPlayerFall->SetScale({ 1,1,1 });
+	objPlayerFall->SetScale({ 0.5,0.5,0.5 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -599,7 +599,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objCloneFall->SetPosition({ 0,0,0 });
 	objCloneFall->SetRotation({ 0, 0, 0 });
-	objCloneFall->SetScale({ 1,1,1 });
+	objCloneFall->SetScale({ 0.5,0.5,0.5 });
 
 #pragma endregion
 
@@ -1661,11 +1661,15 @@ void GameScene::Update()
 	objPlayerRun->SetRotation(FBXplayerRotation);
 	objPlayerStand->SetPosition(FBXplayerPosition);
 	objPlayerStand->SetRotation(FBXplayerRotation);
+	objPlayerFall->SetPosition(FBXplayerPosition);
+	objPlayerFall->SetRotation(FBXplayerRotation);
 
 	objCloneRun->SetPosition(FBXclonePosition);
 	objCloneRun->SetRotation(FBXcloneRotation);
 	objCloneStand->SetPosition(FBXclonePosition);
 	objCloneStand->SetRotation(FBXcloneRotation);
+	objCloneFall->SetPosition(FBXclonePosition);
+	objCloneFall->SetRotation(FBXcloneRotation);
 
 	playerPosition = objFighter->GetPosition();
 	playerRotation = objFighter->GetRotation();
@@ -1719,6 +1723,13 @@ void GameScene::Update()
 
 	objPlayerMarker->SetPosition(playerMarkerPosition);
 	objPlayerMarker->Update();
+
+	if (!beginStage)
+	{
+		playerMarkerRotation.y = 0.0f;
+		objPlayerMarker->SetRotation(playerMarkerRotation);
+		objPlayerMarker->Update();
+	}
 
 	if (input->TriggerKey(DIK_M))
 	{
@@ -1999,19 +2010,38 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 1;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -12,0,-12 });
-			objClone->SetPosition({ 12,0,-12 });
+			objFighter->SetPosition({ -12,30,-12 });
+			objClone->SetPosition({ 12,30,-12 });
 
-			playerPositionTemp = { -12,0,-12 };
-			clonePositionTemp = { 12,0,-12 };
+			playerPositionTemp = { -12,30,-12 };
+			clonePositionTemp = { 12,30,-12 };
 
 			objFighter->Update();
 			objClone->Update();
 		}
 		if (beginStage)
 		{
+			if (falling)
+			{
+				playerPosition.x = -12.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -12.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 12.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 12.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
 
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
@@ -2170,9 +2200,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objFighter->Update();
 		objClone->Update();
@@ -2545,13 +2577,14 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 4;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -22,0,-12 });
-			objClone->SetPosition({ 22,0,-12 });
+			objFighter->SetPosition({ -22,30,-12 });
+			objClone->SetPosition({ 22,30,-12 });
 
-			playerPositionTemp = { -22,0,-12 };
-			clonePositionTemp = { 22,0,-12 };
+			playerPositionTemp = { -22,30,-12 };
+			clonePositionTemp = { 22,30,-12 };
 
 			objFighter->Update();
 			objClone->Update();
@@ -2559,6 +2592,24 @@ void GameScene::Update()
 
 		if (beginStage)
 		{
+			if (falling)
+			{
+				playerPosition.x = -22.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -22.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 22.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 22.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
 
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
@@ -2697,9 +2748,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objTempTrigger->Update();
 		objTempTriggerE->Update();
@@ -2753,6 +2806,9 @@ void GameScene::Update()
 				enemyPosition.z = 12.0f;
 				clonePositionTemp.x = 20.0f;
 				clonePositionTemp.z = 12.0f;
+
+				objPlayerFall->SetRotation({ 0, 140, 0 });
+				objCloneFall->SetRotation({ 0, 140, 0 });
 				
 				objFighter->SetPosition(playerPositionTemp);
 				objClone->SetPosition(clonePositionTemp);
@@ -2837,9 +2893,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objSkydome->Update();
 
@@ -2865,20 +2923,38 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 6;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -20, 0,-12 });
-			objClone->SetPosition({ 20, 0, -12 });
+			objFighter->SetPosition({ -20, 30,-12 });
+			objClone->SetPosition({ 20, 30, -12 });
 
-			playerPositionTemp = { -20, 0,-12 };
-			clonePositionTemp = { 20, 0, -12 };
+			playerPositionTemp = { -20, 30,-12 };
+			clonePositionTemp = { 20, 30, -12 };
 
 			objFighter->Update();
 			objClone->Update();
 		}
 		if (beginStage)
 		{
-			
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
 
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
@@ -2962,9 +3038,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objSkydome->Update();
 
@@ -2990,19 +3068,38 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 7;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -20, 0, -12 });
-			objClone->SetPosition({ 20, 0, -12 });
+			objFighter->SetPosition({ -20, 30, -12 });
+			objClone->SetPosition({ 20, 30, -12 });
 
-			playerPositionTemp = { -20, 0, -12 };
-			clonePositionTemp = { 20, 0, -12 };
+			playerPositionTemp = { -20, 30, -12 };
+			clonePositionTemp = { 20, 30, -12 };
 
 			objFighter->Update();
 			objClone->Update();
 		}
 		if (beginStage)
 		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
 
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
@@ -3171,9 +3268,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objTempTrigger->Update();
 		objTempTriggerE->Update();
@@ -3407,19 +3506,38 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 9;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -20, 0, -12 });
-			objClone->SetPosition({ 20, 0, -12 });
+			objFighter->SetPosition({ -20, 30, -12 });
+			objClone->SetPosition({ 20, 30, -12 });
 
-			playerPositionTemp = { -20, 0, -12 };
-			clonePositionTemp = { 20, 0, -12 };
+			playerPositionTemp = { -20, 30, -12 };
+			clonePositionTemp = { 20, 30, -12 };
 
 			objFighter->Update();
 			objClone->Update();
 		}
 		if (beginStage)
 		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
 
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
@@ -3565,9 +3683,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objSkydome->Update();
 
@@ -3592,19 +3712,39 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 10;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -20, 0, -12 });
-			objClone->SetPosition({ 20, 0, -12 });
+			objFighter->SetPosition({ -20, 30, -12 });
+			objClone->SetPosition({ 20, 30, -12 });
 
-			playerPositionTemp = { -20, 0, -12 };
-			clonePositionTemp = { 20, 0, -12 };
+			playerPositionTemp = { -20, 30, -12 };
+			clonePositionTemp = { 20, 30, -12 };
 
 			objFighter->Update();
 			objClone->Update();
 		}
 		if (beginStage)
 		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -3798,9 +3938,11 @@ void GameScene::Update()
 
 		objPlayerRun->Update();
 		objPlayerStand->Update();
+		objPlayerFall->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
+		objCloneFall->Update();
 
 		objSkydome->Update();
 
@@ -3965,16 +4107,25 @@ void GameScene::Draw()
 			}
 		}
 
-		if (FBXModelChange == 1)
+		if (falling && beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
 		}
-		else if (FBXModelChange == 0)
+		else if (!falling && beginStage)
 		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
+		
 		objSkydome->Draw();
 		break;
 	case 2:
@@ -3987,15 +4138,23 @@ void GameScene::Draw()
 		objMenuSelection->Draw();
 		break;
 	case 4:
-		if (FBXModelChange == 1)
+		if (falling && beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
 		}
-		else if (FBXModelChange == 0)
+		else if (!falling && beginStage)
 		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
 
 		for (auto object_s2_1 : objects_s2_1) {
@@ -4037,7 +4196,12 @@ void GameScene::Draw()
 
 		break;
 	case 5:
-		if (beginStage)
+		if (falling && beginStage)
+		{
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
+		}
+		else if (!falling && beginStage)
 		{
 			if (FBXModelChange == 1)
 			{
@@ -4063,15 +4227,23 @@ void GameScene::Draw()
 
 		break;
 	case 6:
-		if (FBXModelChange == 1)
+		if (falling && beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
 		}
-		else if (FBXModelChange == 0)
+		else if (!falling && beginStage)
 		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
 
 		for (auto object_t2_1 : objects_t2_1)
@@ -4088,15 +4260,23 @@ void GameScene::Draw()
 
 		break;
 	case 7:
-		if (FBXModelChange == 1)
+		if (falling && beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
 		}
-		else if (FBXModelChange == 0)
+		else if (!falling && beginStage)
 		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
 
 		for (auto object_t3_1 : objects_t3_1)
@@ -4162,15 +4342,23 @@ void GameScene::Draw()
 
 		break;
 	case 9:
-		if (FBXModelChange == 1)
+		if (falling && beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
 		}
-		else if (FBXModelChange == 0)
+		else if (!falling && beginStage)
 		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
 
 		for (auto object_t4_1 : objects_t4_1)
@@ -4212,15 +4400,23 @@ void GameScene::Draw()
 		objSkydome->Draw();
 		break;
 	case 10:
-		if (FBXModelChange == 1)
+		if (falling && beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
 		}
-		else if (FBXModelChange == 0)
+		else if (!falling && beginStage)
 		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
 
 		for (auto object_s3_1 : objects_s3_1)
@@ -4658,8 +4854,10 @@ void GameScene::Tutorial2Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -20, 0,-12 });
-	objClone->SetPosition({ 20, 0, -12 });
+	objFighter->SetPosition({ -20, 30,-12 });
+	objClone->SetPosition({ 20, 30, -12 });
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -4751,8 +4949,10 @@ void GameScene::Tutorial3Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -20, 0, -12 });
-	objClone->SetPosition({ 20, 0, -12 });
+	objFighter->SetPosition({ -20, 30, -12 });
+	objClone->SetPosition({ 20, 30, -12 });
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -4916,8 +5116,8 @@ void GameScene::Tutorial4Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -20, 0, -12 });
-	objClone->SetPosition({ 20, 0, -12 });
+	objFighter->SetPosition({ -20, 30, -12 });
+	objClone->SetPosition({ 20, 30, -12 });
 
 	objTeleporterIn1->SetPosition({ -14.0f, 0.0f, -9.0f });
 	objTeleporterIn2->SetPosition({ 14.0f, 0.0f, -9.0f });
@@ -4928,6 +5128,8 @@ void GameScene::Tutorial4Reset()
 	objTeleporterOut2->SetPosition({ 14.0f, 0.0f, 6.0f });
 	objTeleporterOut3->SetPosition({ -8.0f, 0.0f, -12.0f });
 	objTeleporterOut4->SetPosition({ 8.0f, 0.0f, -12.0f });
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -5018,14 +5220,16 @@ void GameScene::Stage1Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -12,0,-12 });
-	objClone->SetPosition({ 12,0,-12 });
+	objFighter->SetPosition({ -12,30,-12 });
+	objClone->SetPosition({ 12,30,-12 });
 
 	objTempTrigger->SetPosition({ -12.0f, 0, 0 });
 	objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
 
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
 	objTempBulletE->SetScale({ 0.25f, 0.25f, 0.25f });
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -5114,8 +5318,8 @@ void GameScene::Stage2Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -22,0,-12 });
-	objClone->SetPosition({ 22,0,-12 });
+	objFighter->SetPosition({ -22,30,-12 });
+	objClone->SetPosition({ 22,30,-12 });
 
 	objFighter->SetRotation({ 0,0,0 });
 	objClone->SetRotation({ 0,0,0 });
@@ -5124,6 +5328,8 @@ void GameScene::Stage2Reset()
 	playerRotationTemp = playerRotation;
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
@@ -5259,8 +5465,8 @@ void GameScene::Stage3Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -20, 0, -12 });
-	objClone->SetPosition({ 20, 0, -12 });
+	objFighter->SetPosition({ -20, 30, -12 });
+	objClone->SetPosition({ 20, 30, -12 });
 
 	objTeleporterIn1->SetPosition({ -20.0f, 0.0f, -3.0f });
 	objTeleporterIn2->SetPosition({ 5.0f, 0.0f, -12.0f });
@@ -5271,6 +5477,8 @@ void GameScene::Stage3Reset()
 	objTeleporterOut2->SetPosition({ -17.0f, 0.0f, 6.0f });
 	objTeleporterOut3->SetPosition({ 11.0f, 0.0f, 0.0f });
 	objTeleporterOut4->SetPosition({ -8.0f, 0.0f, 0.0f });
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
