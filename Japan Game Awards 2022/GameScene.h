@@ -165,7 +165,8 @@ private: // メンバ変数 Member variables
 
 	Sprite* GuideB = nullptr;
 
-	
+	bool falling = false;
+	bool marker = true;
 
 	// ステージセレクト
 	bool t1FirstPlayFlag = true;
@@ -234,6 +235,7 @@ private: // メンバ変数 Member variables
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
 	Model* modelStageSelect = nullptr;
+	Model* modelPlayerMarker = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
@@ -256,7 +258,6 @@ private: // メンバ変数 Member variables
 	Object3d* objS2 = nullptr;
 	Object3d* objS3 = nullptr;
 
-
 	Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;
 	Object3d* objTempTriggerE = nullptr;
@@ -267,6 +268,7 @@ private: // メンバ変数 Member variables
 	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
 	Object3d* objStageSelect = nullptr;
+	Object3d* objPlayerMarker = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;
 	Object3d* objTeleporterOut1 = nullptr;
@@ -399,6 +401,8 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 FBXclonePosition;
 	XMFLOAT3 FBXcloneRotation;
 	XMFLOAT3 menuBallRotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 playerMarkerPosition;
+	XMFLOAT3 playerMarkerRotation;
 
 	int stage1Init = 0;
 	int FBXModelChange = 0;

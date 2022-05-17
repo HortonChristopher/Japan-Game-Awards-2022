@@ -260,6 +260,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
 	objStageSelect = Object3d::Create();
+	objPlayerMarker = Object3d::Create();
 	objT1 = Object3d::Create();
 	objT2 = Object3d::Create();
 	objT3 = Object3d::Create();
@@ -449,6 +450,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
 	modelStageSelect = Model::CreateFromOBJ("ObjStageSelect");
+	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
 
@@ -465,7 +467,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBulletE->SetModel(modelTempBullet);
 
 	objMenuSelection->SetModel(modelTempBullet);
-
+	objPlayerMarker->SetModel(modelPlayerMarker);
 	objStageSelect->SetModel(modelStageSelect);
 
 	//objFighter = Player::Create(modelFighter);
@@ -1580,6 +1582,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objMenuSelection->SetScale({ 0.25f, 0.25f, 0.25f });
 
+	objPlayerMarker->SetScale({ 0.5f, 0.5f, 0.5f });
+
 	objTeleporterIn1->SetPosition({ -20.0f, 0.0f, -3.0f }); // -14, -9
 	objTeleporterIn1->SetScale({ 3.0f, 3.0f, 3.0f });
 	objTeleporterIn2->SetPosition({ 5.0f, 0.0f, -12.0f }); // 14, -9
@@ -1656,7 +1660,8 @@ void GameScene::Update()
 	playerBullet = objTempBullet->GetPosition();
 	enemyBullet = objTempBulletE->GetPosition();
 
-
+	playerMarkerPosition = objPlayerMarker->GetPosition();
+	playerMarkerRotation = objPlayerMarker->GetRotation();
 
 	// GameSceneとの座標共有 Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
@@ -1664,7 +1669,7 @@ void GameScene::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
-	if (beginStage)
+	if (beginStage && !falling)
 	{
 		if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
 			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
@@ -1682,6 +1687,32 @@ void GameScene::Update()
 		FBXModelChange = 0;
 	}
 
+	if (falling)
+	{
+		if (playerPosition.y <= 0.3f || playerPositionTemp.y <= 0.3f)
+		{
+			falling = false;
+		}
+	}
+
+	playerMarkerPosition.x = playerPosition.x;
+	playerMarkerPosition.y = playerPosition.y + 8.0f;
+	playerMarkerPosition.z = playerPosition.z;
+
+	objPlayerMarker->SetPosition(playerMarkerPosition);
+	objPlayerMarker->Update();
+
+	if (input->TriggerKey(DIK_M))
+	{
+		if (marker)
+		{
+			marker = false;
+		}
+		else
+		{
+			marker = true;
+		}
+	}
 
 #pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
@@ -1772,6 +1803,10 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +1.0f, 0.0f, -0.75f });
 			}
 
+			playerMarkerRotation.y = 0.0f;
+			objPlayerMarker->SetRotation(playerMarkerRotation);
+			objPlayerMarker->Update();
+
 			if (currentCameraFrame >= 40)
 			{
 				camera->SetEye({ 0.0f, 25.0f, -30.0f });
@@ -1791,6 +1826,10 @@ void GameScene::Update()
 				currentCameraFrame++;
 				camera->MoveEyeVector({ -1.0f, 0.0f, -0.75f });
 			}
+
+			playerMarkerRotation.y = 90.0f;
+			objPlayerMarker->SetRotation(playerMarkerRotation);
+			objPlayerMarker->Update();
 
 			if (currentCameraFrame >= 40)
 			{
@@ -1812,6 +1851,10 @@ void GameScene::Update()
 				camera->MoveEyeVector({ -1.0f, 0.0f, +0.75f });
 			}
 
+			playerMarkerRotation.y = 180.0f;
+			objPlayerMarker->SetRotation(playerMarkerRotation);
+			objPlayerMarker->Update();
+
 			if (currentCameraFrame >= 40)
 			{
 				camera->SetEye({ 0.0f, 25.0f, 30.0f });
@@ -1831,6 +1874,10 @@ void GameScene::Update()
 				currentCameraFrame++;
 				camera->MoveEyeVector({ +1.0f, 0.0f, +0.75f });
 			}
+
+			playerMarkerRotation.y = 270.0f;
+			objPlayerMarker->SetRotation(playerMarkerRotation);
+			objPlayerMarker->Update();
 
 			if (currentCameraFrame >= 40)
 			{
@@ -2663,19 +2710,36 @@ void GameScene::Update()
 				currentFrame = 0;
 				lastScene = 5;
 				beginStage = true;
+				falling = true;
 			}
 
-			objFighter->SetPosition({ -20,0,12 });
-			objClone->SetPosition({ 20,0,12 });
+			objFighter->SetPosition({ -20,30,12 });
+			objClone->SetPosition({ 20,30,12 });
 
-			playerPositionTemp = { -20,0,12 };
-			clonePositionTemp = { 20,0,12 };
+			playerPositionTemp = { -20,30,12 };
+			clonePositionTemp = { 20,30,12 };
 
 			//objFighter->Update();
 			//objClone->Update();
 		}
 		if (beginStage)
 		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = 12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = 12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = 12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = 12.0f;
+				
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2713,14 +2777,14 @@ void GameScene::Update()
 				t1ClearFlag = true;
 			}
 
-			if (input->TriggerKey(DIK_R))
+			if (input->TriggerKey(DIK_R)) //リセット
 			{
 				Tutorial1Move();
 				Tutorial1Reset();
 				sceneNo = 5;
 			}
 
-			if (input->TriggerKey(DIK_T))
+			if (input->TriggerKey(DIK_T)) //タイトル
 			{
 				Tutorial1Move();
 				titleScene->Initialize();
@@ -2729,7 +2793,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			if (input->TriggerKey(DIK_L)) //レベルセレクト
 			{
 				Tutorial1Move();
 				sceneNo = 8;
@@ -3842,6 +3906,11 @@ void GameScene::Draw()
 	// 3Dオブジェクト描画前処理 3D object drawing pre-processing
 	Object3d::PreDraw(cmdList);
 
+	if (sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && marker)
+	{
+		objPlayerMarker->Draw();
+	}
+
 	switch (sceneNo)
 	{
 	case 0:
@@ -3950,15 +4019,18 @@ void GameScene::Draw()
 
 		break;
 	case 5:
-		if (FBXModelChange == 1)
+		if (beginStage)
 		{
-			objPlayerRun->Draw(cmdList);
-			objCloneRun->Draw(cmdList);
-		}
-		else if (FBXModelChange == 0)
-		{
-			objPlayerStand->Draw(cmdList);
-			objCloneStand->Draw(cmdList);
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
 		}
 
 		for (auto object_t1_1 : objects_t1_1) {
@@ -4509,8 +4581,10 @@ void GameScene::Tutorial1Reset()
 		}
 	}
 
-	objFighter->SetPosition({ -20,0,12 });
-	objClone->SetPosition({ 20,0,12 });
+	objFighter->SetPosition({ -20,30,12 });
+	objClone->SetPosition({ 20,30,12 });
+
+	falling = false;
 
 	enemyAlive = true;
 	playerAlive = true;
