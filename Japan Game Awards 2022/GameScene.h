@@ -228,7 +228,6 @@ private: // メンバ変数 Member variables
 	Model* modelTempBullet = nullptr;
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
-	Model* modelStageSelect = nullptr;
 	Model* modelPlayerMarker = nullptr;
 
 	Model* modelTESTONLY = nullptr;
@@ -262,7 +261,6 @@ private: // メンバ変数 Member variables
 	Object3d* objTempBulletE = nullptr;
 	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
-	Object3d* objStageSelect = nullptr;
 	Object3d* objPlayerMarker = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;

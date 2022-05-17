@@ -254,7 +254,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
-	objStageSelect = Object3d::Create();
 	objPlayerMarker = Object3d::Create();
 	objT1 = Object3d::Create();
 	objT2 = Object3d::Create();
@@ -439,7 +438,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
-	modelStageSelect = Model::CreateFromOBJ("ObjStageSelect");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
@@ -458,7 +456,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objMenuSelection->SetModel(modelTempBullet);
 	objPlayerMarker->SetModel(modelPlayerMarker);
-	objStageSelect->SetModel(modelStageSelect);
 
 	objFighter = Player::Create(modelTESTONLY);
 	objClone = Enemy::Create(modelTESTONLY);
