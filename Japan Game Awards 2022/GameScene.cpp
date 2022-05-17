@@ -139,16 +139,11 @@ GameScene::~GameScene()
 	safe_delete(objTempYellowTrigger1);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
-	safe_delete(objStageSelect);
 
 	// obj model
 	safe_delete(modelSkydome);
 	safe_delete(modelGround);
-	safe_delete(modelFighter);
 	safe_delete(modelPlane);
-	safe_delete(modelBox);
-	safe_delete(modelPyramid);
-	safe_delete(modelStageSelect);
 
 	// Fbx object
 	safe_delete(fbxobject1);
@@ -259,14 +254,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
-	objStageSelect = Object3d::Create();
-	objT1 = Object3d::Create();
-	objT2 = Object3d::Create();
-	objT3 = Object3d::Create();
-	objT4 = Object3d::Create();
-	objS1 = Object3d::Create();
-	objS2 = Object3d::Create();
-	objS3 = Object3d::Create();
 	objTeleporterIn1 = Object3d::Create();
 	objTeleporterIn2 = Object3d::Create();
 	objTeleporterIn3 = Object3d::Create();
@@ -436,19 +423,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 #pragma region Obj モデル読み込み
 	modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
-	modelFighter = Model::CreateFromOBJ("kabe"); //chr_sword
 	modelPlane = Model::CreateFromOBJ("yuka");
-	modelBox = Model::CreateFromOBJ("box1x1x1");
-	//modelPyramid = Model::CreateFromOBJ("pyramid1x1");
 	modelTempWall = Model::CreateFromOBJ("kabe");
-	//modelTempWall = Model::CreateFromOBJ("TEST");
-	modelTempWall2 = Model::CreateFromOBJ("kabeV2");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
-	modelStageSelect = Model::CreateFromOBJ("ObjStageSelect");
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
 
@@ -466,10 +447,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objMenuSelection->SetModel(modelTempBullet);
 
-	objStageSelect->SetModel(modelStageSelect);
-
-	//objFighter = Player::Create(modelFighter);
-	//objClone = Enemy::Create(modelFighter);
 
 	objFighter = Player::Create(modelTESTONLY);
 	objClone = Enemy::Create(modelTESTONLY);
@@ -483,13 +460,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut3->SetModel(modelTeleporterOut);
 	objTeleporterOut4->SetModel(modelTeleporterOut);
 
-	objT1->SetModel(modelTempWall2);
-	objT2->SetModel(modelTempWall2);
-	objT3->SetModel(modelTempWall2);
-	objT4->SetModel(modelTempWall2);
-	objS1->SetModel(modelTempWall2);
-	objS2->SetModel(modelTempWall2);
-	objS3->SetModel(modelTempWall2);
 
 #pragma endregion
 
@@ -1615,9 +1585,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut3->SetScale({ 3.0f, 3.0f, 3.0f });
 	objTeleporterOut4->SetPosition({ -8.0f, 0.0f, 0.0f }); // 8, -12
 	objTeleporterOut4->SetScale({ 3.0f, 3.0f, 3.0f });
-
-	objStageSelect->SetPosition({ 1,-4,0 });
-	objStageSelect->SetRotation({ 0,90,0 });
 
 
 #pragma endregion
@@ -3318,8 +3285,6 @@ void GameScene::Update()
 		s2ClearLog->SetPosition(s2ClearLogPosition);
 		s3ClearLog->SetPosition(s3ClearLogPosition);
 
-		objStageSelect->Update();
-
 		objSkydome->Update();
 
 		camera->Update();
@@ -4502,12 +4467,6 @@ void GameScene::SceneSelectionReset()
 
 	currentFrame = 0;
 
-
-	objT1->Update();
-	objT2->Update();
-	objT3->Update();
-	objS1->Update();
-	objS2->Update();
 }
 
 void GameScene::Tutorial1Reset()

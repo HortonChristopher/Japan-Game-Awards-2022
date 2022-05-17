@@ -215,29 +215,21 @@ private: // メンバ変数 Member variables
 	Sprite* s1ClearLog = nullptr;
 	Sprite* s2ClearLog = nullptr;
 	Sprite* s3ClearLog = nullptr;
-	
-
 
 	ParticleManager* particleMan = nullptr;
 
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
-	Model* modelFighter = nullptr;
 	Model* modelPlane = nullptr;
-	Model* modelBox = nullptr;
-	Model* modelPyramid = nullptr;
 	Model* modelTempWall = nullptr;
-	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
-	Model* modelStageSelect = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
-	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
 	FbxModel* modelPlayerFight = nullptr;
@@ -249,15 +241,6 @@ private: // メンバ変数 Member variables
 	FbxModel* modelCloneFight = nullptr;
 	FbxModel* modelCloneFall = nullptr;
 	
-	//ステージセレクト
-	Object3d* objT1 = nullptr;
-	Object3d* objT2 = nullptr;
-	Object3d* objT3 = nullptr;
-	Object3d* objT4 = nullptr;
-	Object3d* objS1 = nullptr;
-	Object3d* objS2 = nullptr;
-	Object3d* objS3 = nullptr;
-
 
 	Object3d* objSkydome = nullptr;
 	Object3d* objTempTrigger = nullptr;
@@ -268,7 +251,6 @@ private: // メンバ変数 Member variables
 	Object3d* objTempBulletE = nullptr;
 	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
-	Object3d* objStageSelect = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;
 	Object3d* objTeleporterOut1 = nullptr;
