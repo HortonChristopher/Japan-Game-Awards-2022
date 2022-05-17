@@ -216,19 +216,13 @@ private: // メンバ変数 Member variables
 	Sprite* s1ClearLog = nullptr;
 	Sprite* s2ClearLog = nullptr;
 	Sprite* s3ClearLog = nullptr;
-	
-
 
 	ParticleManager* particleMan = nullptr;
 
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
-	Model* modelFighter = nullptr;
 	Model* modelPlane = nullptr;
-	Model* modelBox = nullptr;
-	Model* modelPyramid = nullptr;
 	Model* modelTempWall = nullptr;
-	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
@@ -239,7 +233,6 @@ private: // メンバ変数 Member variables
 
 	Model* modelTESTONLY = nullptr;
 
-	//FbxModel *fbxmodel1 = nullptr;
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
 	FbxModel* modelPlayerFight = nullptr;
