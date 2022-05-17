@@ -153,7 +153,7 @@ void Audio::UnLoad(SoundData* soundData)
 
 }
 
-void Audio::PlayWave(const std::string& filename, float Volume, bool Loop)
+void Audio::PlayWave(const std::string& filename, const float Volume, bool Loop)
 {
 	HRESULT result;
 

@@ -71,7 +71,7 @@ public: // メンバ関数 Member function
 	void UnLoad(SoundData* soundData);
 
 	// サウンドファイルの再生 playing sound files
-	void PlayWave(const std::string& filename, float Volume, bool Loop = false);
+	void PlayWave(const std::string& filename, const float Volume, bool Loop = false);
 
 	//サウンドファイルの停止
 	void StopWave(const std::string& filename);
