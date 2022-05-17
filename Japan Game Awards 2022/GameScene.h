@@ -159,14 +159,64 @@ private: // メンバ変数 Member variables
 
 	Sprite* StageSelectLB = nullptr;
 
-	//レベルセレクト
+	Sprite* StageSelectLog = nullptr;
+
+	Sprite* GuideA = nullptr;
+
+	Sprite* GuideB = nullptr;
+
+	
+
+	// ステージセレクト
+	bool t1FirstPlayFlag = true;
+	bool t2FirstPlayFlag = true;
+	bool t3FirstPlayFlag = true;
+	bool t4FirstPlayFlag = true;
+	bool s1FirstPlayFlag = true;
+	bool s2FirstPlayFlag = true;
+	bool s3FirstPlayFlag = true;
+
+	bool t1ClearFlag = false;
+	bool t2ClearFlag = false;
+	bool t3ClearFlag = false;
+	bool t4ClearFlag = false;
+	bool s1ClearFlag = false;
+	bool s2ClearFlag = false;
+	bool s3ClearFlag = false;
+
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
 	Sprite* t3Background = nullptr;
 	Sprite* t4Background = nullptr;
 	Sprite* s1Background = nullptr;
 	Sprite* s2Background = nullptr;
-	Sprite* s3Backgorund = nullptr;
+	Sprite* s3Background = nullptr;
+
+	Sprite* t1StageSelectFrame = nullptr;
+	Sprite* t2StageSelectFrame = nullptr;
+	Sprite* t3StageSelectFrame = nullptr;
+	Sprite* t4StageSelectFrame = nullptr;
+	Sprite* s1StageSelectFrame = nullptr;
+	Sprite* s2StageSelectFrame = nullptr;
+	Sprite* s3StageSelectFrame = nullptr;
+
+	Sprite* t1NewLog = nullptr;
+	Sprite* t2NewLog = nullptr;
+	Sprite* t3NewLog = nullptr;
+	Sprite* t4NewLog = nullptr;
+	Sprite* s1NewLog = nullptr;
+	Sprite* s2NewLog = nullptr;
+	Sprite* s3NewLog = nullptr;
+
+	Sprite* t1ClearLog = nullptr;
+	Sprite* t2ClearLog = nullptr;
+	Sprite* t3ClearLog = nullptr;
+	Sprite* t4ClearLog = nullptr;
+	Sprite* s1ClearLog = nullptr;
+	Sprite* s2ClearLog = nullptr;
+	Sprite* s3ClearLog = nullptr;
+	
+
 
 	ParticleManager* particleMan = nullptr;
 
@@ -183,6 +233,7 @@ private: // メンバ変数 Member variables
 	Model* modelTempBullet = nullptr;
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
+	Model* modelStageSelect = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
@@ -215,6 +266,7 @@ private: // メンバ変数 Member variables
 	Object3d* objTempBulletE = nullptr;
 	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
+	Object3d* objStageSelect = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;
 	Object3d* objTeleporterOut1 = nullptr;
@@ -254,25 +306,43 @@ private: // メンバ変数 Member variables
 
 	float move;
 
-	//ステージセレクト
-	XMFLOAT3 T1rotation = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 T2rotation = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 T3rotation = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 T4rotation = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 S1rotation = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 S2rotation = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 S3rotation = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT2 SpriteStagSize = { 760,428 };
 
-	XMFLOAT2 t1BackgroundPosition = { 0.0f, 0.0f };
-	XMFLOAT2 t2BackgroundPosition = { 1280.0f, 0.0f };
-	XMFLOAT2 t3BackgroundPosition = { 2560.0f, 0.0f };
-	XMFLOAT2 t4BackgroundPosition = { 3840.0f, 0.0f };
-	XMFLOAT2 s1BackgroundPosition = { 5120.0f, 0.0f };
-	XMFLOAT2 s2BackgroundPosition = { 6400.0f, 0.0f };
-	XMFLOAT2 s3BackgroundPosition = { 7680.0f, 0.0f };
+	float SpriteStageSizeX = 260.0f;
+	float SpriteStageSizeY = 180.0f;
 
-	//XMFLOAT3 PlayerPosition = { 50.0f, 0.0f, 0.0f };
-	//XMFLOAT3 position = { -50.0f, 0.0f, 0.0f };
+	XMFLOAT2 t1BackgroundPosition = {SpriteStageSizeX + (1280 * 0), SpriteStageSizeY };
+	XMFLOAT2 t2BackgroundPosition = { SpriteStageSizeX + (1280 * 1), SpriteStageSizeY };
+	XMFLOAT2 t3BackgroundPosition = { SpriteStageSizeX + (1280 * 2), SpriteStageSizeY };
+	XMFLOAT2 t4BackgroundPosition = { SpriteStageSizeX + (1280 * 3), SpriteStageSizeY };
+	XMFLOAT2 s1BackgroundPosition = { SpriteStageSizeX + (1280 * 4), SpriteStageSizeY };
+	XMFLOAT2 s2BackgroundPosition = { SpriteStageSizeX + (1280 * 5), SpriteStageSizeY };
+	XMFLOAT2 s3BackgroundPosition = { SpriteStageSizeX + (1280 * 6), SpriteStageSizeY };
+
+	XMFLOAT2 t1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 0)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 t2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 1)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 t3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 2)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 t4StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 3)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 4)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 5)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 6)) - 20, (SpriteStageSizeY - 11) };
+
+	XMFLOAT2 t1NewLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t2NewLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t3NewLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t4NewLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s1NewLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s2NewLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s3NewLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 80, (SpriteStageSizeY + 60) };
+
+	XMFLOAT2 t1ClearLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t2ClearLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t3ClearLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t4ClearLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s1ClearLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s2ClearLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s3ClearLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 150, (SpriteStageSizeY + 100) };
+
 
 	CollisionManager* collisionManager;
 
@@ -343,7 +413,6 @@ private: // メンバ変数 Member variables
 	int ConTimer;
 
 	//シーン番号記録(音楽再生に使う)
-	int SceneNum = 0;
 	bool PlayFlag = false;
 
 	//Cinematic Camera Variables シネマティックカメラ変数

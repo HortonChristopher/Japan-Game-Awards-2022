@@ -139,6 +139,7 @@ GameScene::~GameScene()
 	safe_delete(objTempYellowTrigger1);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
+	safe_delete(objStageSelect);
 
 	// obj model
 	safe_delete(modelSkydome);
@@ -147,6 +148,7 @@ GameScene::~GameScene()
 	safe_delete(modelPlane);
 	safe_delete(modelBox);
 	safe_delete(modelPyramid);
+	safe_delete(modelStageSelect);
 
 	// Fbx object
 	safe_delete(fbxobject1);
@@ -257,6 +259,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
+	objStageSelect = Object3d::Create();
 	objT1 = Object3d::Create();
 	objT2 = Object3d::Create();
 	objT3 = Object3d::Create();
@@ -277,7 +280,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma region Sprite テクスチャの読み込み
 	// テクスチャ5番に読み込み Load into texture # 2
-	Sprite::LoadTexture(5, L"Resources/Sprite/GuideR.png");
+	Sprite::LoadTexture(5, L"Resources/Sprite/GuideL.png");
 
 	GuideR = Sprite::Create(5, { 40.0f,620.0f });
 
@@ -306,7 +309,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(11, L"Resources/Sprite/GameOver.png");
 
-	GameOverLog = Sprite::Create(11, { 0.0f,-10.0f });
+	GameOverLog = Sprite::Create(11, { 0.0f,0.0f });
 
 	Sprite::LoadTexture(12, L"Resources/Sprite/ReStateLog.png");
 
@@ -318,7 +321,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(14, L"Resources/Sprite/StageClear.png");
 
-	StageClearLog = Sprite::Create(14, { 0.0f,-10.0f });
+	StageClearLog = Sprite::Create(14, { 0.0f,0.0f });
 
 	Sprite::LoadTexture(15, L"Resources/Sprite/TitleLog.png");
 
@@ -334,30 +337,99 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(18, L"Resources/Sprite/T1.png");
 	t1Background = Sprite::Create(18, t1BackgroundPosition);
+	t1Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(19, L"Resources/Sprite/T2.png");
 	t2Background = Sprite::Create(19, t2BackgroundPosition);
+	t2Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(20, L"Resources/Sprite/T3.png");
 	t3Background = Sprite::Create(20, t3BackgroundPosition);
+	t3Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(23, L"Resources/Sprite/T4.png");
 	t4Background = Sprite::Create(23, t4BackgroundPosition);
+	t4Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(21, L"Resources/Sprite/S1.png");
 	s1Background = Sprite::Create(21, s1BackgroundPosition);
+	s1Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(22, L"Resources/Sprite/S2.png");
 	s2Background = Sprite::Create(22, s2BackgroundPosition);
+	s2Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(24, L"Resources/Sprite/S3.png");
-	s3Backgorund = Sprite::Create(24, s3BackgroundPosition);
+	s3Background = Sprite::Create(24, s3BackgroundPosition);
+	s3Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(25, L"Resources/Sprite/StageSelect_RB.png");
 	StageSelectRB = Sprite::Create(25, { 1050.0f,250.0f });
 
 	Sprite::LoadTexture(26, L"Resources/Sprite/StageSelect_LB.png");
 	StageSelectLB = Sprite::Create(26, { 25.0f,250.0f });
+
+	Sprite::LoadTexture(27, L"Resources/Sprite/StageSelectLog.png");
+	StageSelectLog = Sprite::Create(27, { 0.0f,0.0f });
+
+	Sprite::LoadTexture(28, L"Resources/Sprite/StageSelectFrame.png");
+	t1StageSelectFrame = Sprite::Create(28, { t1StageSelectFramePosition });
+	t2StageSelectFrame = Sprite::Create(28, { t2StageSelectFramePosition });
+	t3StageSelectFrame = Sprite::Create(28, { t3StageSelectFramePosition });
+	t4StageSelectFrame = Sprite::Create(28, { t4StageSelectFramePosition });
+	s1StageSelectFrame = Sprite::Create(28, { s1StageSelectFramePosition });
+	s2StageSelectFrame = Sprite::Create(28, { s2StageSelectFramePosition });
+	s3StageSelectFrame = Sprite::Create(28, { s3StageSelectFramePosition });
+
+	Sprite::LoadTexture(29, L"Resources/Sprite/GuideA.png");
+	GuideA = Sprite::Create(29, { 40.0f,620.0f });
+
+	Sprite::LoadTexture(30, L"Resources/Sprite/GuideB.png");
+	GuideB = Sprite::Create(30, { 760.0f,620.0f });
+
+	Sprite::LoadTexture(31, L"Resources/Sprite/New.png");
+	t1NewLog = Sprite::Create(31, { t1NewLogPosition });
+	t1NewLog->SetRotation({ -30.0f });
+
+	t2NewLog = Sprite::Create(31, { t2NewLogPosition });
+	t2NewLog->SetRotation({ -30.0f });
+
+	t3NewLog = Sprite::Create(31, { t3NewLogPosition });
+	t3NewLog->SetRotation({ -30.0f });
+
+	t4NewLog = Sprite::Create(31, { t4NewLogPosition });
+	t4NewLog->SetRotation({ -30.0f });
+
+	s1NewLog = Sprite::Create(31, { s1NewLogPosition });
+	s1NewLog->SetRotation({ -30.0f });
+
+	s2NewLog = Sprite::Create(31, { s2NewLogPosition });
+	s2NewLog->SetRotation({ -30.0f });
+
+	s3NewLog = Sprite::Create(31, { s3NewLogPosition });
+	s3NewLog->SetRotation({ -30.0f });
+
+	Sprite::LoadTexture(32, L"Resources/Sprite/Clear.png");
+	t1ClearLog = Sprite::Create(32, { t1ClearLogPosition });
+	t1ClearLog->SetRotation({ -30.0f });
+
+	t2ClearLog = Sprite::Create(32, { t2ClearLogPosition });
+	t2ClearLog->SetRotation({ -30.0f });
+
+	t3ClearLog = Sprite::Create(32, { t3ClearLogPosition });
+	t3ClearLog->SetRotation({ -30.0f });
+
+	t4ClearLog = Sprite::Create(32, { t4ClearLogPosition });
+	t4ClearLog->SetRotation({ -30.0f });
+
+	s1ClearLog = Sprite::Create(32, { s1ClearLogPosition });
+	s1ClearLog->SetRotation({ -30.0f });
+
+	s2ClearLog = Sprite::Create(32, { s2ClearLogPosition });
+	s2ClearLog->SetRotation({ -30.0f });
+
+	s3ClearLog = Sprite::Create(32, { s3ClearLogPosition });
+	s3ClearLog->SetRotation({ -30.0f });
 
 #pragma endregion
 
@@ -376,6 +448,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
+	modelStageSelect = Model::CreateFromOBJ("ObjStageSelect");
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
 
@@ -392,6 +465,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBulletE->SetModel(modelTempBullet);
 
 	objMenuSelection->SetModel(modelTempBullet);
+
+	objStageSelect->SetModel(modelStageSelect);
 
 	//objFighter = Player::Create(modelFighter);
 	//objClone = Enemy::Create(modelFighter);
@@ -1523,27 +1598,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut4->SetPosition({ -8.0f, 0.0f, 0.0f }); // 8, -12
 	objTeleporterOut4->SetScale({ 3.0f, 3.0f, 3.0f });
 
-	objT1->SetPosition({ 0.0f, 0.0f, 0.0f });
-	objT1->SetRotation(T1rotation);
-	objT1->SetScale({ 10.0f, 10.0f, 10.0f });
-	objT2->SetPosition({ 100.0f, 0.0f, 0.0f });
-	objT2->SetRotation(T2rotation);
-	objT2->SetScale({ 10.0f, 10.0f, 10.0f });
-	objT3->SetPosition({ 200.0f, 0.0f, 0.0f });
-	objT3->SetRotation(T3rotation);
-	objT3->SetScale({ 10.0f, 10.0f, 10.0f });
-	objT4->SetPosition({ 300.0f, 0.0f, 0.0f });
-	objT4->SetRotation(T4rotation);
-	objT4->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS1->SetPosition({ 400.0f, 0.0f, 0.0f });
-	objS1->SetRotation(S1rotation);
-	objS1->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS2->SetPosition({ 500.0f, 0.0f, 0.0f });
-	objS2->SetRotation(S2rotation);
-	objS2->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS3->SetPosition({ 600.0f, 0.0f, 0.0f });
-	objS3->SetScale({ 10.0f, 10.0f, 10.0f });
-	objS3->SetRotation(S3rotation);
+	objStageSelect->SetPosition({ 1,-4,0 });
+	objStageSelect->SetRotation({ 0,90,0 });
+
 
 #pragma endregion
 
@@ -1598,6 +1655,8 @@ void GameScene::Update()
 	yellowTrigger2 = objTempYellowTrigger2->GetPosition();
 	playerBullet = objTempBullet->GetPosition();
 	enemyBullet = objTempBulletE->GetPosition();
+
+
 
 	// GameSceneとの座標共有 Coordinate sharing with GameScene
 	playerPositionTemp = playerPosition;
@@ -1799,16 +1858,11 @@ void GameScene::Update()
 		camera->Update();
 
 		//音楽再生	
-		if (PlayFlag == false && SceneNum == 0)
+		if (PlayFlag == false )
 		{
 			PlayFlag = true;
 			audio->PlayWave("Title.wav", Volume, true);
 			//audio->WaveVolume("Title.wav", 0.3f);
-		}
-
-		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
-		{
-			SceneNum = 1;
 		}
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -1893,6 +1947,7 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -1956,8 +2011,10 @@ void GameScene::Update()
 				sceneNo = 3;
 				Stage1Move();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav",Volume, true);
+				audio->PlayWave("GameOver.wav", Volume, true);
 				sceneChange = 0;
+
+				s1FirstPlayFlag = false;
 			}
 			else if (intersect(playerBullet, enemyPosition, 1.0f, 1.0f, 1.0f) && playerBulletF == true)
 			{
@@ -1967,6 +2024,9 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+
+				s1FirstPlayFlag = false;
+				s1ClearFlag = true;
 			}
 
 			//UpdateInput();
@@ -2121,8 +2181,8 @@ void GameScene::Update()
 			{
 				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
-				camera->SetEye({ (stageSelect * 100.0f), 20, -30});
-				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0});
+				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
 				break;
@@ -2244,7 +2304,7 @@ void GameScene::Update()
 			audio->StopWave("GameOver.wav");
 			if (menuSelection == 0)
 			{
-				switch(lastScene)
+				switch (lastScene)
 				{
 				case 0:
 					break;
@@ -2431,8 +2491,10 @@ void GameScene::Update()
 			objFighter->Update();
 			objClone->Update();
 		}
+
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2463,6 +2525,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				s2FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2473,6 +2537,9 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+
+				s2FirstPlayFlag = false;
+				s2ClearFlag = true;
 			}
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
@@ -2630,6 +2697,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t1FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2639,6 +2708,9 @@ void GameScene::Update()
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial1Move();
 				sceneChange = 0;
+
+				t1FirstPlayFlag = false;
+				t1ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -2724,6 +2796,8 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+			
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2745,6 +2819,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t2FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2755,6 +2831,9 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+
+				t2FirstPlayFlag = false;
+				t2ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -2842,6 +2921,7 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -2919,6 +2999,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t3FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -2928,6 +3010,9 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
+
+				t3FirstPlayFlag = false;
+				t3ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -3021,20 +3106,9 @@ void GameScene::Update()
 
 	case 8: //ステージセレクト画面
 #pragma region case8 ステージセレクト画面
-		T1rotation.x += 2.0f;
-		T2rotation.x += 2.0f;
-		T3rotation.x += 2.0f;
-		T4rotation.x += 2.0f;
-		S1rotation.x += 2.0f;
-		S2rotation.x += 2.0f;
-		S3rotation.x += 2.0f;
-		objT1->SetRotation(T1rotation);
-		objT2->SetRotation(T2rotation);
-		objT3->SetRotation(T3rotation);
-		objT4->SetRotation(T4rotation);
-		objS1->SetRotation(S1rotation);
-		objS2->SetRotation(S2rotation);
-		objS3->SetRotation(S3rotation);
+
+		camera->SetEye({ -15,0,0 });
+		camera->SetTarget({ 0, 0, 0 });
 
 		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 		{
@@ -3060,6 +3134,8 @@ void GameScene::Update()
 		{
 			camera->MoveVector({ +2.0f, 0.0f, 0.0f });
 			camera->Update();
+
+
 			t1BackgroundPosition.x -= 25.6f;
 			t2BackgroundPosition.x -= 25.6f;
 			t3BackgroundPosition.x -= 25.6f;
@@ -3067,13 +3143,31 @@ void GameScene::Update()
 			s1BackgroundPosition.x -= 25.6f;
 			s2BackgroundPosition.x -= 25.6f;
 			s3BackgroundPosition.x -= 25.6f;
-			t1Background->SetPosition(t1BackgroundPosition);
-			t2Background->SetPosition(t2BackgroundPosition);
-			t3Background->SetPosition(t3BackgroundPosition);
-			t4Background->SetPosition(t4BackgroundPosition);
-			s1Background->SetPosition(s1BackgroundPosition);
-			s2Background->SetPosition(s2BackgroundPosition);
-			s3Backgorund->SetPosition(s3BackgroundPosition);
+
+			t1StageSelectFramePosition.x -= 25.6f;
+			t2StageSelectFramePosition.x -= 25.6f;
+			t3StageSelectFramePosition.x -= 25.6f;
+			t4StageSelectFramePosition.x -= 25.6f;
+			s1StageSelectFramePosition.x -= 25.6f;
+			s2StageSelectFramePosition.x -= 25.6f;
+			s3StageSelectFramePosition.x -= 25.6f;
+
+			t1NewLogPosition.x -= 25.6f;
+			t2NewLogPosition.x -= 25.6f;
+			t3NewLogPosition.x -= 25.6f;
+			t4NewLogPosition.x -= 25.6f;
+			s1NewLogPosition.x -= 25.6f;
+			s2NewLogPosition.x -= 25.6f;
+			s3NewLogPosition.x -= 25.6f;
+
+			t1ClearLogPosition.x -= 25.6f;
+			t2ClearLogPosition.x -= 25.6f;
+			t3ClearLogPosition.x -= 25.6f;
+			t4ClearLogPosition.x -= 25.6f;
+			s1ClearLogPosition.x -= 25.6f;
+			s2ClearLogPosition.x -= 25.6f;
+			s3ClearLogPosition.x -= 25.6f;
+
 			currentFrame++;
 
 			if (currentFrame >= 50)
@@ -3087,6 +3181,7 @@ void GameScene::Update()
 		{
 			camera->MoveVector({ -2.0f, 0.0f, 0.0f });
 			camera->Update();
+
 			t1BackgroundPosition.x += 25.6f;
 			t2BackgroundPosition.x += 25.6f;
 			t3BackgroundPosition.x += 25.6f;
@@ -3094,13 +3189,31 @@ void GameScene::Update()
 			s1BackgroundPosition.x += 25.6f;
 			s2BackgroundPosition.x += 25.6f;
 			s3BackgroundPosition.x += 25.6f;
-			t1Background->SetPosition(t1BackgroundPosition);
-			t2Background->SetPosition(t2BackgroundPosition);
-			t3Background->SetPosition(t3BackgroundPosition);
-			t4Background->SetPosition(t4BackgroundPosition);
-			s1Background->SetPosition(s1BackgroundPosition);
-			s2Background->SetPosition(s2BackgroundPosition);
-			s3Backgorund->SetPosition(s3BackgroundPosition);
+
+			t1StageSelectFramePosition.x += 25.6f;
+			t2StageSelectFramePosition.x += 25.6f;
+			t3StageSelectFramePosition.x += 25.6f;
+			t4StageSelectFramePosition.x += 25.6f;
+			s1StageSelectFramePosition.x += 25.6f;
+			s2StageSelectFramePosition.x += 25.6f;
+			s3StageSelectFramePosition.x += 25.6f;
+
+			t1NewLogPosition.x += 25.6f;
+			t2NewLogPosition.x += 25.6f;
+			t3NewLogPosition.x += 25.6f;
+			t4NewLogPosition.x += 25.6f;
+			s1NewLogPosition.x += 25.6f;
+			s2NewLogPosition.x += 25.6f;
+			s3NewLogPosition.x += 25.6f;
+
+			t1ClearLogPosition.x += 25.6f;
+			t2ClearLogPosition.x += 25.6f;
+			t3ClearLogPosition.x += 25.6f;
+			t4ClearLogPosition.x += 25.6f;
+			s1ClearLogPosition.x += 25.6f;
+			s2ClearLogPosition.x += 25.6f;
+			s3ClearLogPosition.x += 25.6f;
+
 			currentFrame++;
 
 			if (currentFrame >= 50)
@@ -3118,19 +3231,16 @@ void GameScene::Update()
 			{
 			case 0:
 				Tutorial1Reset();
-				SceneNum = 2;
 				sceneNo = 5;
 
 				break;
 			case 1:
 				Tutorial2Reset();
-				SceneNum = 3;
 				sceneNo = 6;
 
 				break;
 			case 2:
 				Tutorial3Reset();
-				SceneNum = 4;
 				sceneNo = 7;
 
 				break;
@@ -3141,13 +3251,11 @@ void GameScene::Update()
 				break;
 			case 4:
 				Stage1Reset();
-				SceneNum = 5;
 				sceneNo = 1;
 
 				break;
 			case 5:
 				Stage2Reset();
-				SceneNum = 6;
 				sceneNo = 4;
 
 				break;
@@ -3159,20 +3267,47 @@ void GameScene::Update()
 			}
 		}
 
-		objT1->Update();
-		objT2->Update();
-		objT3->Update();
-		objT4->Update();
-		objS1->Update();
-		objS2->Update();
-		objS3->Update();
+		// 移動後の座標をセット
+		t1Background->SetPosition(t1BackgroundPosition);
+		t2Background->SetPosition(t2BackgroundPosition);
+		t3Background->SetPosition(t3BackgroundPosition);
+		t4Background->SetPosition(t4BackgroundPosition);
+		s1Background->SetPosition(s1BackgroundPosition);
+		s2Background->SetPosition(s2BackgroundPosition);
+		s3Background->SetPosition(s3BackgroundPosition);
+
+		t1StageSelectFrame->SetPosition(t1StageSelectFramePosition);
+		t2StageSelectFrame->SetPosition(t2StageSelectFramePosition);
+		t3StageSelectFrame->SetPosition(t3StageSelectFramePosition);
+		t4StageSelectFrame->SetPosition(t4StageSelectFramePosition);
+		s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
+		s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
+		s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
+
+		t1NewLog->SetPosition(t1NewLogPosition);
+		t2NewLog->SetPosition(t2NewLogPosition);
+		t3NewLog->SetPosition(t3NewLogPosition);
+		t4NewLog->SetPosition(t4NewLogPosition);
+		s1NewLog->SetPosition(s1NewLogPosition);
+		s2NewLog->SetPosition(s2NewLogPosition);
+		s3NewLog->SetPosition(s3NewLogPosition);
+
+		t1ClearLog->SetPosition(t1ClearLogPosition);
+		t2ClearLog->SetPosition(t2ClearLogPosition);
+		t3ClearLog->SetPosition(t3ClearLogPosition);
+		t4ClearLog->SetPosition(t4ClearLogPosition);
+		s1ClearLog->SetPosition(s1ClearLogPosition);
+		s2ClearLog->SetPosition(s2ClearLogPosition);
+		s3ClearLog->SetPosition(s3ClearLogPosition);
+
+		objStageSelect->Update();
 
 		objSkydome->Update();
 
 		camera->Update();
 #pragma endregion
 		break;
-		
+
 	case 9: // チュートリアル 4
 #pragma region case9 チュートリアル4
 		if (!beginStage)
@@ -3203,6 +3338,7 @@ void GameScene::Update()
 		}
 		if (beginStage)
 		{
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -3264,6 +3400,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				t4FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -3273,6 +3411,9 @@ void GameScene::Update()
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial4Move();
 				sceneChange = 0;
+
+				t4FirstPlayFlag = false;
+				t4ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -3351,7 +3492,7 @@ void GameScene::Update()
 		camera->Update();
 #pragma endregion
 		break;
-		
+
 	case 10: //ステージ　３
 #pragma region case10 ステージ３
 		if (!beginStage)
@@ -3479,6 +3620,8 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				gameOver->Initialize();
+
+				s3FirstPlayFlag = false;
 			}
 			else if (enemyPosition.y <= -10.0f)
 			{
@@ -3489,6 +3632,9 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				gameClear->Initialize();
+
+				s3FirstPlayFlag = false;
+				s3ClearFlag = true;
 			}
 
 			if (input->TriggerKey(DIK_R))
@@ -3635,12 +3781,6 @@ void GameScene::Draw()
 			sceneChange = 1;
 		}
 
-		//音楽再生
-		if (SceneNum == 1)
-		{
-			SceneNum = 2;
-			break;
-		}
 
 		gameClear->Draw();
 		break;
@@ -3652,24 +3792,12 @@ void GameScene::Draw()
 			sceneChange = 1;
 		}
 
-		if (SceneNum == 2)
-		{
-			SceneNum = 3;
-			break;
-		}
-
 		gameOver->Draw();
 		break;
 	case 4:
 		spriteBG->Draw();
 		GuideR->Draw();
 		Guide_LRB->Draw();
-		if (SceneNum == 1)
-		{
-			audio->PlayWave("Stage.Clear", Volume, true);
-			SceneNum = 2;
-			break;
-		}
 		break;
 	case 5:
 		spriteBG->Draw();
@@ -3687,13 +3815,7 @@ void GameScene::Draw()
 		Guide_LRB->Draw();
 		break;
 	case 8:
-		t1Background->Draw();
-		t2Background->Draw();
-		t3Background->Draw();
-		t4Background->Draw();
-		s1Background->Draw();
-		s2Background->Draw();
-		s3Backgorund->Draw();
+		spriteBG->Draw();
 		break;
 	case 9:
 		spriteBG->Draw();
@@ -3945,13 +4067,8 @@ void GameScene::Draw()
 
 		break;
 	case 8:
-		/*objT1->Draw();
-		objT2->Draw();
-		objT3->Draw();
-		objT4->Draw();
-		objS1->Draw();
-		objS2->Draw();
-		objS3->Draw();*/
+
+		objSkydome->Draw();
 
 		break;
 	case 9:
@@ -3975,7 +4092,7 @@ void GameScene::Draw()
 		{
 			object_t4_2->Draw();
 		}
-		
+
 		if (tutorial4YellowKabe)
 		{
 			objTempTriggerE->Draw();
@@ -3996,7 +4113,7 @@ void GameScene::Draw()
 		objTeleporterIn2->Draw();
 		objTeleporterIn3->Draw();
 		objTeleporterIn4->Draw();
-		
+
 		objTeleporterOut1->Draw();
 		objTeleporterOut2->Draw();
 		objTeleporterOut3->Draw();
@@ -4135,6 +4252,7 @@ void GameScene::Draw()
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_2->Draw();
+
 		break;
 	case 7:
 		GuideR->Draw();
@@ -4142,7 +4260,99 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 8:
+		StageSelectLog->Draw();
+
+		t1Background->Draw();
+		t2Background->Draw();
+		t3Background->Draw();
+		t4Background->Draw();
+		s1Background->Draw();
+		s2Background->Draw();
+		s3Background->Draw();
+
+		t1StageSelectFrame->Draw();
+		t2StageSelectFrame->Draw();
+		t3StageSelectFrame->Draw();
+		t4StageSelectFrame->Draw();
+		s1StageSelectFrame->Draw();
+		s2StageSelectFrame->Draw();
+		s3StageSelectFrame->Draw();
+
+		// NEWロゴの表示
+		if (t1FirstPlayFlag == true)
+		{
+			t1NewLog->Draw();
+		}
+		
+		if (t2FirstPlayFlag == true)
+		{
+			t2NewLog->Draw();
+		}
+
+		if (t3FirstPlayFlag == true)
+		{
+			t3NewLog->Draw();
+		}
+
+		if (t4FirstPlayFlag == true)
+		{
+			t4NewLog->Draw();
+		}
 	
+		if (s1FirstPlayFlag == true)
+		{
+			s1NewLog->Draw();
+		}
+
+		if (s2FirstPlayFlag == true)
+		{
+			s2NewLog->Draw();
+		}
+
+		if (s3FirstPlayFlag == true)
+		{
+			s3NewLog->Draw();
+		}
+
+		// Clearロゴの表示
+		if (t1ClearFlag == true)
+		{
+			t1ClearLog->Draw();
+		}
+
+		if (t2ClearFlag == true)
+		{
+			t2ClearLog->Draw();
+		}
+
+		if (t3ClearFlag == true)
+		{
+			t3ClearLog->Draw();
+		}
+
+		if (t4ClearFlag == true)
+		{
+			t4ClearLog->Draw();
+		}
+		
+		if (s1ClearFlag == true)
+		{
+			s1ClearLog->Draw();
+		}
+
+		if (s2ClearFlag == true)
+		{
+			s2ClearLog->Draw();
+		}
+
+		if (s3ClearFlag == true)
+		{
+			s3ClearLog->Draw();
+		}
+
+		GuideA->Draw();
+		GuideB->Draw();
+
 		switch (stageSelect)
 		{
 		case 0:
@@ -4274,11 +4484,7 @@ void GameScene::SceneSelectionReset()
 
 	currentFrame = 0;
 
-	T1rotation = { 0.0f, 0.0f, 0.0f };
-	T2rotation = { 0.0f, 0.0f, 0.0f };
-	T3rotation = { 0.0f, 0.0f, 0.0f };
-	S1rotation = { 0.0f, 0.0f, 0.0f };
-	S2rotation = { 0.0f, 0.0f, 0.0f };
+
 	objT1->Update();
 	objT2->Update();
 	objT3->Update();
