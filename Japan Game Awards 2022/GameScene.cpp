@@ -502,9 +502,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlayerFight = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFighting");
 	modelPlayerWin = FbxLoader::GetInstance()->LoadModelFromFile("PlayerWin");
 	modelPlayerLose = FbxLoader::GetInstance()->LoadModelFromFile("PlayerLose");
+	modelPlayerFall = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFalling");
 	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
 	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
 	modelCloneFight = FbxLoader::GetInstance()->LoadModelFromFile("CloneFighting");
+	modelCloneFall = FbxLoader::GetInstance()->LoadModelFromFile("CloneFalling");
 
 #pragma endregion
 
@@ -532,6 +534,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerLose->Initialize();
 	objPlayerLose->SetModel(modelPlayerLose);
 
+	objPlayerFall = new FbxObject3d;
+	objPlayerFall->Initialize();
+	objPlayerFall->SetModel(modelPlayerFall);
+
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
 	objCloneRun->Initialize();
@@ -544,6 +550,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneFight = new FbxObject3d;
 	objCloneFight->Initialize();
 	objCloneFight->SetModel(modelCloneFight);
+
+	objCloneFall = new FbxObject3d;
+	objCloneFall->Initialize();
+	objCloneFall->SetModel(modelCloneFall);
 
 #pragma endregion
 
@@ -570,6 +580,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerLose->SetRotation({ 0,-90,0 });
 	objPlayerLose->SetScale({ 0.7,0.7,0.7 });
 
+	objPlayerFall->SetPosition({ 0,0,0 });
+	objPlayerFall->SetRotation({ 0,0,0 });
+	objPlayerFall->SetScale({ 1,1,1 });
+
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
 	objCloneRun->SetRotation({ 0, 0, 0 });
@@ -582,6 +596,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objCloneFight->SetPosition({ -4,-2,-7 });
 	objCloneFight->SetRotation({ 0,-20,0 });
 	objCloneFight->SetScale({ 1,1,1 });
+
+	objCloneFall->SetPosition({ 0,0,0 });
+	objCloneFall->SetRotation({ 0, 0, 0 });
+	objCloneFall->SetScale({ 1,1,1 });
 
 #pragma endregion
 
