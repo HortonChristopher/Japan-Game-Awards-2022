@@ -430,7 +430,7 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 originalCamera;
 
 	//Waveのボリューム
-	const float Volume = 0.2f;
+	const float Volume = 0.1f;
 
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
