@@ -426,6 +426,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	s3ClearLog = Sprite::Create(32, { s3ClearLogPosition });
 	s3ClearLog->SetRotation({ -30.0f });
 
+	Sprite::LoadTexture(33, L"Resources/Sprite/Pause1.png");
+	pause1 = Sprite::Create(33, { 720, 200 });
+
+	Sprite::LoadTexture(34, L"Resources/Sprite/Pause2.png");
+	pause2 = Sprite::Create(34, { 720, 300 });
+
+	Sprite::LoadTexture(35, L"Resources/Sprite/Pause3.png");
+	pause3 = Sprite::Create(35, { 720, 400 });
+
+	Sprite::LoadTexture(36, L"Resources/Sprite/Pause4.png");
+	pause4 = Sprite::Create(36, { 720, 200 });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -1665,7 +1677,7 @@ void GameScene::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
-	if (beginStage && !falling)
+	if (beginStage && !falling && !pause)
 	{
 		if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
 			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
@@ -1717,9 +1729,218 @@ void GameScene::Update()
 		}
 	}
 
+	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling)
+	{
+		if (!pause)
+		{
+			pause = true;
+		}
+	}
+
+	if (pause)
+	{
+		if (!pausePosition)
+		{
+			playerPausePosition = objFighter->GetPosition();
+			playerPauseRotation = objFighter->GetRotation();
+			clonePausePosition = objClone->GetPosition();
+			clonePauseRotation = objClone->GetRotation();
+			playerMarkerPausePosition = objPlayerMarker->GetPosition();
+			playerMarkerPauseRotation = objPlayerMarker->GetRotation();
+
+			pausePosition = true;
+		}
+
+		objFighter->SetPosition(playerPausePosition);
+		objFighter->SetRotation(playerPauseRotation);
+		objPlayerStand->SetPosition(playerPausePosition);
+		objPlayerStand->SetRotation(playerPauseRotation);
+		objClone->SetPosition(clonePausePosition);
+		objClone->SetRotation(clonePauseRotation);
+		objCloneStand->SetPosition(clonePausePosition);
+		objCloneStand->SetRotation(clonePauseRotation);
+
+		objPlayerMarker->SetPosition(playerMarkerPausePosition);
+		objPlayerMarker->SetRotation(playerMarkerPauseRotation);
+
+		objFighter->Update();
+		objClone->Update();
+		objPlayerMarker->Update();
+
+		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2)
+		{
+			pauseMenuSelection++;
+		}
+		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0)
+		{
+			pauseMenuSelection--;
+		}
+
+		switch (pauseMenuSelection)
+		{
+		case 0:
+			pause4->SetPosition({ 720, 200 });
+			break;
+		case 1:
+			pause4->SetPosition({ 720, 300 });
+			break;
+		case 2:
+			pause4->SetPosition({ 720, 400 });
+			break;
+		}
+
+		if (input->TriggerKey(DIK_SPACE))
+		{
+			if (pauseMenuSelection == 0)
+			{
+				pause = false;
+				pausePosition = false;
+			}
+			else if (pauseMenuSelection == 1)
+			{
+				switch (sceneNo)
+				{
+				case 0:
+					break;
+				case 1:
+					Stage1Move();
+					Stage1Reset();
+					sceneNo = 1;
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					Stage2Move();
+					Stage2Reset();
+					sceneNo = 4;
+					break;
+				case 5:
+					Tutorial1Move();
+					Tutorial1Reset();
+					sceneNo = 5;
+					break;
+				case 6:
+					Tutorial2Move();
+					Tutorial2Reset();
+					sceneNo = 6;
+					break;
+				case 7:
+					Tutorial3Move();
+					Tutorial3Reset();
+					sceneNo = 7;
+					break;
+				case 8:
+					break;
+				case 9:
+					Tutorial4Move();
+					Tutorial4Reset();
+					sceneNo = 9;
+					break;
+				case 10:
+					Stage3Move();
+					Stage3Reset();
+					sceneNo = 10;
+					break;
+				}
+
+				pause = false;
+				pausePosition = false;
+			}
+			else if (pauseMenuSelection == 2)
+			{
+				switch (sceneNo)
+				{
+				case 0:
+					break;
+				case 1:
+					Stage1Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					Stage2Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				case 5:
+					Tutorial1Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				case 6:
+					Tutorial2Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				case 7:
+					Tutorial3Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				case 8:
+					break;
+				case 9:
+					Tutorial4Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				case 10:
+					Stage3Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					break;
+				}
+
+				pause = false;
+				pausePosition = false;
+			}
+		}
+	}
+
 #pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
-	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3)
+	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3 && !pause)
 	{
 		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
@@ -2132,12 +2353,12 @@ void GameScene::Update()
 			lastIntersect = intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f);
 			lastIntersectE = intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f);
 
-			if (input->TriggerKey(DIK_R))
+			/*if (input->TriggerKey(DIK_R))
 			{
 				Stage1Move();
 				Stage1Reset();
 				sceneNo = 1;
-			}
+			}*/
 
 			if (input->TriggerKey(DIK_T))
 			{
@@ -2148,7 +2369,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			/*if (input->TriggerKey(DIK_L))
 			{
 				Stage1Move();
 				sceneNo = 8;
@@ -2158,7 +2379,7 @@ void GameScene::Update()
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
-			}
+			}*/
 		}
 
 		for (auto object : objects) {
@@ -2634,12 +2855,12 @@ void GameScene::Update()
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
 
-			if (input->TriggerKey(DIK_R))
+			/*if (input->TriggerKey(DIK_R))
 			{
 				Stage2Move();
 				Stage2Reset();
 				sceneNo = 4;
-			}
+			}*/
 
 			if (input->TriggerKey(DIK_T))
 			{
@@ -2650,7 +2871,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			/*if (input->TriggerKey(DIK_L))
 			{
 				Stage2Move();
 				sceneNo = 8;
@@ -2660,7 +2881,7 @@ void GameScene::Update()
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
-			}
+			}*/
 		}
 
 		for (auto object_s2_1 : objects_s2_1) {
@@ -2825,12 +3046,12 @@ void GameScene::Update()
 				t1ClearFlag = true;
 			}
 
-			if (input->TriggerKey(DIK_R)) //リセット
-			{
-				Tutorial1Move();
-				Tutorial1Reset();
-				sceneNo = 5;
-			}
+			//if (input->TriggerKey(DIK_R)) //リセット
+			//{
+			//	Tutorial1Move();
+			//	Tutorial1Reset();
+			//	sceneNo = 5;
+			//}
 
 			if (input->TriggerKey(DIK_T)) //タイトル
 			{
@@ -2841,17 +3062,17 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L)) //レベルセレクト
-			{
-				Tutorial1Move();
-				sceneNo = 8;
-				audio->StopWave("Stage.wav");
-				audio->PlayWave("Title.wav", Volume, true);
-				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
-				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
-				menuBallRotation = { 0.0f, 0.0f, 0.0f };
-				menuSelection = 0;
-			}
+			//if (input->TriggerKey(DIK_L)) //レベルセレクト
+			//{
+			//	Tutorial1Move();
+			//	sceneNo = 8;
+			//	audio->StopWave("Stage.wav");
+			//	audio->PlayWave("Title.wav", Volume, true);
+			//	camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+			//	camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+			//	menuBallRotation = { 0.0f, 0.0f, 0.0f };
+			//	menuSelection = 0;
+			//}
 		}
 
 		for (auto object_t1_1 : objects_t1_1) {
@@ -2968,12 +3189,12 @@ void GameScene::Update()
 				t2ClearFlag = true;
 			}
 
-			if (input->TriggerKey(DIK_R))
+			/*if (input->TriggerKey(DIK_R))
 			{
 				Tutorial2Move();
 				Tutorial2Reset();
 				sceneNo = 6;
-			}
+			}*/
 
 			if (input->TriggerKey(DIK_T))
 			{
@@ -2984,7 +3205,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			/*if (input->TriggerKey(DIK_L))
 			{
 				Tutorial2Move();
 				sceneNo = 8;
@@ -2994,7 +3215,7 @@ void GameScene::Update()
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
-			}
+			}*/
 		}
 
 		for (auto object_t2_1 : objects_t2_1)
@@ -3168,12 +3389,12 @@ void GameScene::Update()
 				t3ClearFlag = true;
 			}
 
-			if (input->TriggerKey(DIK_R))
+			/*if (input->TriggerKey(DIK_R))
 			{
 				Tutorial3Move();
 				Tutorial3Reset();
 				sceneNo = 7;
-			}
+			}*/
 
 			if (input->TriggerKey(DIK_T))
 			{
@@ -3184,7 +3405,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			/*if (input->TriggerKey(DIK_L))
 			{
 				Tutorial3Move();
 				sceneNo = 8;
@@ -3194,7 +3415,7 @@ void GameScene::Update()
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
-			}
+			}*/
 		}
 
 		for (auto object_t3_1 : objects_t3_1)
@@ -3588,12 +3809,12 @@ void GameScene::Update()
 				t4ClearFlag = true;
 			}
 
-			if (input->TriggerKey(DIK_R))
+			/*if (input->TriggerKey(DIK_R))
 			{
 				Tutorial4Move();
 				Tutorial4Reset();
 				sceneNo = 9;
-			}
+			}*/
 
 			if (input->TriggerKey(DIK_T))
 			{
@@ -3604,7 +3825,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			/*if (input->TriggerKey(DIK_L))
 			{
 				Tutorial4Move();
 				sceneNo = 8;
@@ -3614,7 +3835,7 @@ void GameScene::Update()
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
-			}
+			}*/
 		}
 
 		for (auto object_t4_1 : objects_t4_1)
@@ -3831,12 +4052,12 @@ void GameScene::Update()
 				s3ClearFlag = true;
 			}
 
-			if (input->TriggerKey(DIK_R))
+			/*if (input->TriggerKey(DIK_R))
 			{
 				Stage3Move();
 				Stage3Reset();
 				sceneNo = 10;
-			}
+			}*/
 
 			if (input->TriggerKey(DIK_T))
 			{
@@ -3847,7 +4068,7 @@ void GameScene::Update()
 				audio->PlayWave("Title.wav", Volume, true);
 			}
 
-			if (input->TriggerKey(DIK_L))
+			/*if (input->TriggerKey(DIK_L))
 			{
 				Stage3Move();
 				sceneNo = 8;
@@ -3857,7 +4078,7 @@ void GameScene::Update()
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
 				menuSelection = 0;
-			}
+			}*/
 		}
 
 		for (auto object_s3_1 : objects_s3_1)
@@ -4485,6 +4706,7 @@ void GameScene::Draw()
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_1->Draw();
+		if (pause)
 		break;
 	case 2:
 		StageClearLog->Draw();
@@ -4510,7 +4732,6 @@ void GameScene::Draw()
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_2->Draw();
-
 		break;
 	case 7:
 		GuideR->Draw();
@@ -4657,6 +4878,14 @@ void GameScene::Draw()
 		Guide_LRB->Draw();
 		Order_2->Draw();
 		break;
+	}
+
+	if (pause)
+	{
+		pause4->Draw();
+		pause1->Draw();
+		pause2->Draw();
+		pause3->Draw();
 	}
 
 	// デバッグテキストの描画 Debug text drawing

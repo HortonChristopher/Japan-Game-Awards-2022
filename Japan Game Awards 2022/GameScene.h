@@ -167,6 +167,8 @@ private: // メンバ変数 Member variables
 
 	bool falling = false;
 	bool marker = true;
+	bool pause = false;
+	bool pausePosition = false;
 
 	// ステージセレクト
 	bool t1FirstPlayFlag = true;
@@ -216,6 +218,12 @@ private: // メンバ変数 Member variables
 	Sprite* s1ClearLog = nullptr;
 	Sprite* s2ClearLog = nullptr;
 	Sprite* s3ClearLog = nullptr;
+
+	//pauseメニュー
+	Sprite* pause1 = nullptr;
+	Sprite* pause2 = nullptr;
+	Sprite* pause3 = nullptr;
+	Sprite* pause4 = nullptr;
 
 	ParticleManager* particleMan = nullptr;
 
@@ -398,9 +406,16 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 menuBallRotation = { 0.0f, 0.0f, 0.0f };
 	XMFLOAT3 playerMarkerPosition;
 	XMFLOAT3 playerMarkerRotation;
+	XMFLOAT3 playerPausePosition;
+	XMFLOAT3 playerPauseRotation;
+	XMFLOAT3 clonePausePosition;
+	XMFLOAT3 clonePauseRotation;
+	XMFLOAT3 playerMarkerPausePosition;
+	XMFLOAT3 playerMarkerPauseRotation;
 
 	int stage1Init = 0;
 	int FBXModelChange = 0;
+	int pauseMenuSelection = 0; //pause
 	int menuSelection = 0; // ゲームクリアとオーバー画面
 	bool menuMoving = false; // ゲームクリアとオーバー画面
 	int lastScene = 0; // ゲームクリアとオーバー画面
