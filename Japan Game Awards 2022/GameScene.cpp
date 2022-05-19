@@ -1729,6 +1729,7 @@ void GameScene::Update()
 		}
 	}
 
+#pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling)
 	{
 		if (!pause)
@@ -1944,6 +1945,7 @@ void GameScene::Update()
 			}
 		}
 	}
+#pragma endregion
 
 #pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
