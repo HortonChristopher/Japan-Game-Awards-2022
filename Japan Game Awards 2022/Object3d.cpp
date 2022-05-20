@@ -364,13 +364,13 @@ void Object3d::UpdateWorldMatrix()
 		//matWorld *= matWorldE;
 
 		matWorld = XMMatrixIdentity();
-		matWorld *= (matScale * matScale2);
-		//matWorld *= matScale;
-		matWorld *= (matRot * matRot2);
-		//matWorld *= matRot;
+		//matWorld *= (matScale * matScale2);
+		matWorld *= matScale;
+		///matWorld *= (matRot * matRot2);
+		matWorld *= matRot;
 		matWorld *= matBillboard;
-		matWorld *= (matTrans * matTrans2);
-		//matWorld *= matTrans;
+		//matWorld *= (matTrans * matTrans2);
+		matWorld *= matTrans;
 	} else {
 		//matWorld = XMMatrixIdentity(); // 変形をリセット
 		//matWorld *= matScale; // ワールド行列にスケーリングを反映
@@ -385,12 +385,12 @@ void Object3d::UpdateWorldMatrix()
 		//matWorld *= matWorldE;
 
 		matWorld = XMMatrixIdentity();
-		matWorld *= (matScale * matScale2);
-		//matWorld *= matScale;
-		matWorld *= (matRot * matRot2);
-		//matWorld *= matRot;
-		matWorld *= (matTrans * matTrans2);
-		//matWorld *= matTrans;
+		//matWorld *= (matScale * matScale2);
+		matWorld *= matScale;
+		//matWorld *= (matRot * matRot2);
+		matWorld *= matRot;
+		//matWorld *= (matTrans * matTrans2);
+		matWorld *= matTrans;
 	}
 
 	// 親オブジェクトがあれば If there is a parent object
