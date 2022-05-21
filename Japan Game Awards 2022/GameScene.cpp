@@ -446,11 +446,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelTempWall = Model::CreateFromOBJ("kabe");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
-	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
+	modelTempTrigger = Model::CreateFromOBJ("ButtonBase");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
+
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
 

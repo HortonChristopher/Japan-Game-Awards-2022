@@ -237,6 +237,10 @@ private: // メンバ変数 Member variables
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
 	Model* modelPlayerMarker = nullptr;
+	Model* modelButtonRed = nullptr;
+	Model* modelButtonBlue = nullptr;
+	Model* modelButtonGreen = nullptr;
+	Model* modelButtonYellow = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
