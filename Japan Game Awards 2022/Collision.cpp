@@ -130,9 +130,9 @@ bool Collision::CheckSphere2Triangle(const Sphere& sphere, const Triangle& trian
 	XMVECTOR v = p - sphere.center;
 	// 距離の二乗を求める Find the square of the distance
 	// （同じベクトル同士の内積は三平方の定理のルート内部の式と一致する）The inner product of the same vectors matches the equation inside the root of the three-square theorem
-	v = XMVector3Dot(v, v);
+	float distanceSquare = XMVector3Dot(v, v).m128_f32[0];
 	// 球と三角形の距離半径以下なら当たっていない If it is less than the radius of the distance between the sphere and the triangle, it is not registered as a hit.
-	if (v.m128_f32[0] > sphere.radius * sphere.radius) return false;
+	if (distanceSquare > sphere.radius * sphere.radius) return false;
 	// 擬似交点を計算 Calculate pseudo intersection
 	if (inter) {
 		// 三角形上の最近接点ｐを擬似交点とする Let the most recent contact p on the triangle be a pseudo intersection

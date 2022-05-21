@@ -3,6 +3,7 @@
 #include "Controller.h"
 #include "DebugText.h"
 #include "SphereCollider.h"
+#include "MeshCollider.h"
 #include "ParticleManager.h"
 #include "CollisionManager.h"
 #include "CollisionAttribute.h"
@@ -627,7 +628,7 @@ void Player::Update()
 			fallV = {};
 		}
 	}
-	//
+	// —‰ºó‘Ô
 	else if (fallV.m128_f32[1] <= 0.0f) {
 		if (CollisionManager::GetInstance()->Raycast(ray, COLLISION_ATTR_LANDSHAPE, &raycastHit, sphereCollider->GetRadius() * 2.0f)) {
 

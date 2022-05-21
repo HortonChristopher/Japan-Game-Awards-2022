@@ -444,7 +444,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelSkydome = Model::CreateFromOBJ("skydome");
 	modelGround = Model::CreateFromOBJ("ground");
 	modelPlane = Model::CreateFromOBJ("yuka");
-	modelTempWall = Model::CreateFromOBJ("kabe");
+	modelTempWall = Model::CreateFromOBJ("TempWall");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("ButtonBase");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
@@ -452,8 +452,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
 
-
-	modelTESTONLY = Model::CreateFromOBJ("TEST");
+	modelTESTONLY = Model::CreateFromOBJ("playerSphere"); // TEST
 
 #pragma endregion
 
@@ -656,9 +655,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t1_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i != 10)
 			{
-				object_t1_1->SetRotation({ 0, 180, 0 });
+				object_t1_1->SetRotation({ 180, 180, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_t1_1->SetRotation({ 180, 0, 0 });
 			}
 			objects_t1_1.push_back(object_t1_1);
 		}
@@ -684,9 +687,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t1_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t1_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t1_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i != 10)
 			{
-				object_t1_2->SetRotation({ 0, 180, 0 });
+				object_t1_2->SetRotation({ 180, 180, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_t1_2->SetRotation({ 180, 0, 0 });
 			}
 			objects_t1_2.push_back(object_t1_2);
 		}
@@ -703,12 +710,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		{
 			int modelIndex = 0;
 
-			if (i == 0 || i == 10 || j == 0 || j == 6 || i < 10 && i > 6 && j > 0 && j < 4 || i < 4 && j < 6 && j > 2 || i == 5 && j == 3)
+			if (i == 0 || i == 10 || j == 0 || j == 6 || i < 10 && i > 6 && j > 0 && j < 4 || i < 4 && j < 6 && j > 2)
 			{
 				modelIndex = 1;
 			}
 
-			if (i == 9 && j < 6 && j > 3 || i == 4 && j == 3)
+			if (i == 9 && j < 6 && j > 3)
 			{
 				continue;
 			}
@@ -716,9 +723,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t2_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t2_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			
+			if (modelIndex == 1 && i == 10)
 			{
-				object_t2_1->SetRotation({ 0, 180, 0 });
+				object_t2_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i < 10 && i > 6 && j > 0 && j < 4)
+			{
+				object_t2_1->SetRotation({ -90, 180, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t2_1->SetRotation({ 180, 180, 0 });
 			}
 			objects_t2_1.push_back(object_t2_1);
 		}
@@ -731,7 +747,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		{
 			int modelIndex = 0;
 
-			if (i == 0 || i == 10 || j == 0 || j == 6 || i < 10 && i > 6 && j > 0 && j < 4 || i < 4 && j < 6 && j > 2 || i == 5 && j == 3)
+			if (i == 0 || i == 10 || j == 0 || j == 6 || i < 10 && i > 6 && j > 0 && j < 4 || i < 4 && j < 6 && j > 2)
 			{
 				modelIndex = 1;
 			}
@@ -744,9 +760,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t2_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t2_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			
+			if (modelIndex == 1 && i == 10)
 			{
-				object_t2_2->SetRotation({ 0, 180, 0 });
+				object_t2_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i < 10 && i > 6 && j > 0 && j < 4)
+			{
+				object_t2_2->SetRotation({ 90, 0, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t2_2->SetRotation({ 180, 180, 0 });
 			}
 			objects_t2_2.push_back(object_t2_2);
 		}
@@ -772,9 +797,21 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t3_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t3_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i == 10)
 			{
-				object_t3_1->SetRotation({ 0, 180, 0 });
+				object_t3_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6)
+			{
+				object_t3_1->SetRotation({ -90, 180, 0 });
+			}
+			else if (i == 5 && j > 0 && j < 3 || i == 5 && j > 3 && j < 6 || i == 2 && j > 0 && j < 3 || i == 2 && j > 3 && j < 6)
+			{
+				object_t3_1->SetRotation({ 270, 180, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t3_1->SetRotation({ 180, 180, 0 });
 			}
 			objects_t3_1.push_back(object_t3_1);
 		}
@@ -801,9 +838,22 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t3_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t3_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i == 10)
 			{
-				object_t3_2->SetRotation({ 0, 180, 0 });
+				object_t3_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6)
+			{
+				object_t3_2->SetRotation({ 90, 0, 0 });
+			}
+			else if (i == 5 && j > 0 && j < 3 || i == 5 && j > 3 && j < 6 || i == 2 && j > 0 && j < 3 || i == 2 && j > 3 && j < 6)
+			{
+				object_t3_2->SetRotation({ 0, 270, 0 });
+
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t3_2->SetRotation({ 180, 180, 0 });
 			}
 			objects_t3_2.push_back(object_t3_2);
 		}
@@ -993,9 +1043,29 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t4_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t4_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i == 10)
 			{
-				object_t4_1->SetRotation({ 0, 180, 0 });
+				object_t4_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (i == 6 && j == 3)
+			{
+				object_t4_1->SetRotation({ 0,0,0 });
+			}
+			else if (i == 6 && j < 6 && j > 3)
+			{
+				object_t4_1->SetRotation({ 180,0,0 });
+			}
+			else if (i < 10 && i > 6 && j < 6 && j > 3)
+			{
+				object_t4_1->SetRotation({ 270, 180, 270 });
+			}
+			else if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
+			{
+				object_t4_1->SetRotation({ 270, 180, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t4_1->SetRotation({ 180, 180, 0 });
 			}
 			objects_t4_1.push_back(object_t4_1);
 		}
@@ -1021,9 +1091,25 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t4_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t4_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i == 10)
 			{
-				object_t4_2->SetRotation({ 0, 180, 0 });
+				object_t4_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (i == 6 && j < 6 && j > 3)
+			{
+				object_t4_2->SetRotation({ 180,0,0 });
+			}
+			else if (i < 10 && i > 6 && j < 6 && j > 3)
+			{
+				object_t4_2->SetRotation({ 270, 180, 270 });
+			}
+			else if (i == 6 && j == 3 || i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
+			{
+				object_t4_2->SetRotation({ 0, 270, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t4_2->SetRotation({ 180, 180, 0 });
 			}
 			objects_t4_2.push_back(object_t4_2);
 		}
@@ -1140,7 +1226,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			if (i == 2 && j == 2 || i == 5 && j == 3)
 			{
 				object->SetRotation({ -90, 0, 0 });
-				object->SetScale({ LAND_SCALE, 2.0, LAND_SCALE });
 			}
 			objects.push_back(object);
 		}
@@ -1198,7 +1283,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			if (i == 5 && j == 3)
 			{
 				object_2->SetRotation({ -90, 0, 0 });
-				object_2->SetScale({ LAND_SCALE, 2.0, LAND_SCALE });
 			}
 			objects_2.push_back(object_2);
 		}
@@ -1252,9 +1336,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_s2_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s2_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_s2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (i == 11)
+			if (modelIndex == 1 && i == 0)
 			{
-				object_s2_1->SetRotation({ 0, 180, 0 });
+				object_s2_1->SetRotation({ 180, 180, 0 });
+			}
+			else if (modelIndex == 1 && i == 11)
+			{
+				object_s2_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (i == 5 && j != 3 || i == 7 && j > 2 && j < 6)
+			{
+				object_s2_1->SetRotation({ 180, 270, 0 });
 			}
 			objects_s2_1.push_back(object_s2_1);
 		}
@@ -1295,6 +1387,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				modelIndex = 1;
 			}
 
+			/*if (i == 7 && j == 3 || i == 7 && j == 4)
+			{
+				modelIndex = 0;
+			}*/
+
 			if (i > 5 && i < 11 && j == 6)
 			{
 				continue;
@@ -1303,9 +1400,25 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_s2_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s2_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_s2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (i == 9)
+			if (modelIndex == 1 && i == 0)
 			{
-				object_s2_2->SetRotation({ 0, 180, 0 });
+				object_s2_2->SetRotation({ 180, 180, 0 });
+			}
+			else if (modelIndex == 1 && i == 11)
+			{
+				object_s2_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (i == 5 && j != 3)
+			{
+				object_s2_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (i == 6 && j == 5 || i == 7 && j == 5)
+			{
+				object_s2_2->SetRotation({ 180,180,0 });
+			}
+			else if (modelIndex == 1 && i == 7 && j > 2 && j < 6)
+			{
+				object_s2_2->SetRotation({ 180, 270, 0 });
 			}
 			objects_s2_2.push_back(object_s2_2);
 		}
@@ -1420,9 +1533,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_s3_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s3_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_s3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i == 0)
 			{
-				object_s3_1->SetRotation({ 0, 180, 0 });
+				object_s3_1->SetRotation({ 180, 180, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_s3_1->SetRotation({ 180, 0, 0 });
 			}
 			objects_s3_1.push_back(object_s3_1);
 		}
@@ -1449,9 +1566,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_s3_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s3_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_s3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1)
+			if (modelIndex == 1 && i == 0)
 			{
-				object_s3_2->SetRotation({ 0, 180, 0 });
+				object_s3_2->SetRotation({ 180, 180, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_s3_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 3 && j > 0 && j < 4)
+			{
+				object_s3_2->SetRotation({ 180, 90, 0 });
 			}
 			objects_s3_2.push_back(object_s3_2);
 		}
@@ -1572,8 +1697,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 #pragma region PositionRotationScale
 
 	//objFighter->SetPosition({ -10, 10, 0 });
-	objFighter->SetScale({ 3.0f,3.0f,3.0f });
-	objClone->SetScale({ 3.0f,3.0f,3.0f });
+	objFighter->SetScale({ 1.0f,1.0f,1.0f }); //3.0
+	//objFighter->SetCollider(new SphereCollider);
+	objClone->SetScale({ 1.0f,1.0f,1.0f });
+	//objClone->SetCollider(new SphereCollider);
 
 	objFighter->SetPosition({ -20, 0, 12 }); // -20, 12
 	objClone->SetPosition({ 20, 0, 12 }); // 20, 12
@@ -3107,6 +3234,8 @@ void GameScene::Update()
 		objSkydome->Update();
 
 		camera->Update();
+
+		collisionManager->CheckAllCollisions();
 #pragma endregion
 		break;
 
@@ -3252,6 +3381,8 @@ void GameScene::Update()
 		objSkydome->Update();
 
 		camera->Update();
+
+		collisionManager->CheckAllCollisions();
 #pragma endregion
 		break;
 
@@ -4169,16 +4300,16 @@ void GameScene::Update()
 
 #pragma region DebugLog
 	//Debug Start
-	XMFLOAT3 eye = camera->GetEye();
+	//XMFLOAT3 eye = camera->GetEye();
 
-	char msgbuf[256];
+	//char msgbuf[256];
 	//char msgbuf2[256];
 	//char msgbuf3[256];
 
-	sprintf_s(msgbuf, 256, "Last Scene: %d\n", lastScene);
+	//sprintf_s(msgbuf, 256, "Last Scene: %d\n", lastScene);
 	//sprintf_s(msgbuf2, 256, "Player Y: %f\n", playerPosition.y);
 	//sprintf_s(msgbuf3, 256, "Player Z: %f\n", playerPosition.z);
-	OutputDebugStringA(msgbuf);
+	//OutputDebugStringA(msgbuf);
 	//OutputDebugStringA(msgbuf2);
 	//OutputDebugStringA(msgbuf3);
 	//Debug End
@@ -4727,7 +4858,6 @@ void GameScene::Draw()
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_1->Draw();
-		if (pause)
 		break;
 	case 2:
 		StageClearLog->Draw();
