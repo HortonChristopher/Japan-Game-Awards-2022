@@ -255,13 +255,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
 	objPlayerMarker = Object3d::Create();
-	objT1 = Object3d::Create();
-	objT2 = Object3d::Create();
-	objT3 = Object3d::Create();
-	objT4 = Object3d::Create();
-	objS1 = Object3d::Create();
-	objS2 = Object3d::Create();
-	objS3 = Object3d::Create();
+	
+	// スイッチ
+	objButtonRed = Object3d::Create();
+	objButtonBlue = Object3d::Create();
+	objButtonGreen = Object3d::Create();
+	objButtonYellow = Object3d::Create();
+
 	objTeleporterIn1 = Object3d::Create();
 	objTeleporterIn2 = Object3d::Create();
 	objTeleporterIn3 = Object3d::Create();
@@ -451,6 +451,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
+	modelButtonRed = Model::CreateFromOBJ("ButtonRed");
+	modelButtonBlue = Model::CreateFromOBJ("ButtonBlue");
+	modelButtonGreen = Model::CreateFromOBJ("ButtonGreen");
+	modelButtonYellow = Model::CreateFromOBJ("ButtonYellow");
 
 	modelTESTONLY = Model::CreateFromOBJ("playerSphere"); // TEST
 
@@ -465,6 +469,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempYellowTrigger2->SetModel(modelTempTrigger);
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
+
+	objButtonRed->SetModel(modelButtonRed);
+	objButtonBlue->SetModel(modelButtonBlue);
+	objButtonGreen->SetModel(modelButtonGreen);
+	objButtonYellow->SetModel(modelButtonYellow);
 
 	objMenuSelection->SetModel(modelTempBullet);
 	objPlayerMarker->SetModel(modelPlayerMarker);

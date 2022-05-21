@@ -237,6 +237,8 @@ private: // メンバ変数 Member variables
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
 	Model* modelPlayerMarker = nullptr;
+
+	// スイッチ
 	Model* modelButtonRed = nullptr;
 	Model* modelButtonBlue = nullptr;
 	Model* modelButtonGreen = nullptr;
@@ -274,6 +276,12 @@ private: // メンバ変数 Member variables
 	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
 	Object3d* objPlayerMarker = nullptr;
+
+	// スイッチ
+	Object3d* objButtonRed = nullptr;
+	Object3d* objButtonBlue = nullptr;
+	Object3d* objButtonGreen = nullptr;
+	Object3d* objButtonYellow = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;
 	Object3d* objTeleporterOut1 = nullptr;
