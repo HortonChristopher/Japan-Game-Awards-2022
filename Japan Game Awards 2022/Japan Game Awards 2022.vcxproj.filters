@@ -196,9 +196,6 @@
     <None Include="Resources\shaders\Particle.hlsli">
       <Filter>シェーダ ファイル</Filter>
     </None>
-    <None Include="..\..\..\..\MT4\MT4\MT4\Resources\shaders\OBJShaderHeader.hlsli">
-      <Filter>シェーダ ファイル</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\FBXPS.hlsl">
@@ -214,12 +211,6 @@
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
-      <Filter>シェーダ ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\..\MT4\MT4\MT4\Resources\shaders\OBJPixelShader.hlsl">
-      <Filter>シェーダ ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\..\MT4\MT4\MT4\Resources\shaders\OBJVertexShader.hlsl">
       <Filter>シェーダ ファイル</Filter>
     </FxCompile>
   </ItemGroup>
