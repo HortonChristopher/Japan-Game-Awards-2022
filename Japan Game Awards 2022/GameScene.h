@@ -278,9 +278,11 @@ private: // メンバ変数 Member variables
 	Object3d* objPlayerMarker = nullptr;
 
 	// スイッチ
-	Object3d* objButtonRed = nullptr;
+	Object3d* objButtonRed1 = nullptr;
+	Object3d* objButtonRed2 = nullptr;
 	Object3d* objButtonBlue = nullptr;
-	Object3d* objButtonGreen = nullptr;
+	Object3d* objButtonGreen1 = nullptr;
+	Object3d* objButtonGreen2 = nullptr;
 	Object3d* objButtonYellow = nullptr;
 
 	Object3d* objTeleporterIn1 = nullptr;
@@ -409,6 +411,12 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 enemyTrigger;
 	XMFLOAT3 yellowTrigger1;
 	XMFLOAT3 yellowTrigger2;
+	XMFLOAT3 BlueButton;
+	XMFLOAT3 YellowButton;
+	XMFLOAT3 RedButton1;
+	XMFLOAT3 RedButton2;
+	XMFLOAT3 GreenButton1;
+	XMFLOAT3 GreenButton2;
 	XMFLOAT3 playerBullet;
 	XMFLOAT3 enemyBullet;
 	XMFLOAT3 FBXplayerPosition;
