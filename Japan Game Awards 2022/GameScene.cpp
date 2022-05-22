@@ -447,6 +447,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelGround = Model::CreateFromOBJ("ground");
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelTempWall = Model::CreateFromOBJ("TempWall");
+	modelTempWall2 = Model::CreateFromOBJ("TempWall2");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("ButtonBase");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
@@ -636,9 +637,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelTempWall,
 	};
 
-	Model* modeltable_s2[2] = {
+	Model* modeltable_s2[3] = {
 		modelPlane,
 		modelTempWall,
+		modelTempWall2,
 	};
 
 	Model* modeltable_y[1] = {
@@ -668,7 +670,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t1_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1 && i != 10)
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_t1_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
 			{
 				object_t1_1->SetRotation({ 180, 180, 0 });
 			}
@@ -700,7 +706,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t1_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t1_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t1_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 1 && i != 10)
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_t1_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
 			{
 				object_t1_2->SetRotation({ 180, 180, 0 });
 			}
@@ -737,7 +747,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			object_t2_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			
-			if (modelIndex == 1 && i == 10)
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_t2_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
 			{
 				object_t2_1->SetRotation({ 180, 0, 0 });
 			}
@@ -760,9 +774,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		{
 			int modelIndex = 0;
 
-			if (i == 0 || i == 10 || j == 0 || j == 6 || i < 10 && i > 6 && j > 0 && j < 4 || i < 4 && j < 6 && j > 2)
+			if (i == 0 || i == 10 || j == 0 || j == 6 || i < 4 && j < 6 && j > 2)
 			{
 				modelIndex = 1;
+			}
+
+			if (i < 10 && i > 7 && j == 3)
+			{
+				modelIndex = 1;
+			}
+			else if (i < 10 && i > 6 && j > 0 && j < 4)
+			{
+				modelIndex = 2;
 			}
 
 			if (i == 9 && j < 6 && j > 3)
@@ -774,13 +797,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			object_t2_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			
-			if (modelIndex == 1 && i == 10)
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_t2_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
 			{
 				object_t2_2->SetRotation({ 180, 0, 0 });
 			}
-			else if (modelIndex == 1 && i < 10 && i > 6 && j > 0 && j < 4)
+			else if (modelIndex == 2 && i < 10 && i > 6 && j > 0 && j < 4)
 			{
-				object_t2_2->SetRotation({ 90, 0, 0 });
+				//object_t2_2->SetRotation({ 90, 0, 0 });
+				object_t2_2->SetRotation({ -90, 180, 0 });
 			}
 			else if (modelIndex == 1 && i != 10)
 			{
@@ -837,10 +865,15 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		{
 			int modelIndex = 0;
 
-			if (i == 0 || i == 10 || j == 0 || j == 6 || i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6 || i == 5 && j > 0 && j < 3 || i == 5 && j > 3 && j < 6
-				|| i == 2 && j > 0 && j < 3 || i == 2 && j > 3 && j < 6)
+			if (i == 0 || i == 10 || j == 0 || j == 6)
 			{
 				modelIndex = 1;
+			}
+			
+			if (i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6 || i == 5 && j > 0 && j < 3 || i == 5 && j > 3 && j < 6
+				|| i == 2 && j > 0 && j < 3 || i == 2 && j > 3 && j < 6)
+			{
+				modelIndex = 2;
 			}
 
 			if (i == 9 && j == 3)
@@ -855,14 +888,21 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t3_2->SetRotation({ 180, 0, 0 });
 			}
-			else if (i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6)
+			/*else if (i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6)
 			{
 				object_t3_2->SetRotation({ 90, 0, 0 });
 			}
 			else if (i == 5 && j > 0 && j < 3 || i == 5 && j > 3 && j < 6 || i == 2 && j > 0 && j < 3 || i == 2 && j > 3 && j < 6)
 			{
 				object_t3_2->SetRotation({ 0, 270, 0 });
-
+			}*/
+			else if (i > 7 && i < 10 && j > 0 && j < 3 || i > 7 && i < 10 && j > 3 && j < 6)
+			{
+				object_t3_2->SetRotation({ -90, 180, 0 });
+			}
+			else if (i == 5 && j > 0 && j < 3 || i == 5 && j > 3 && j < 6 || i == 2 && j > 0 && j < 3 || i == 2 && j > 3 && j < 6)
+			{
+				object_t3_2->SetRotation({ 270, 180, 0 });
 			}
 			else if (modelIndex == 1 && i != 10)
 			{
@@ -2974,7 +3014,7 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
-			if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f))
+			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
 			{
 				stage2YellowKabe = false;
 			}
@@ -3105,8 +3145,10 @@ void GameScene::Update()
 		objCloneStand->Update();
 		objCloneFall->Update();
 
-		objTempTrigger->Update();
-		objTempTriggerE->Update();
+		//objTempTrigger->Update();
+		objButtonRed1->Update();
+		//objTempTriggerE->Update();
+		objButtonRed2->Update();
 		objTempYellowTrigger1->Update();
 
 		objSkydome->Update();
@@ -4542,8 +4584,10 @@ void GameScene::Draw()
 
 		if (stage2YellowKabe)
 		{
-			objTempTriggerE->Draw();
-			objTempTrigger->Draw();
+			//objTempTriggerE->Draw();
+			objButtonRed1->Draw();
+			//objTempTrigger->Draw();
+			objButtonRed2->Draw();
 
 			for (auto object_s2_y : objects_s2_y) {
 				object_s2_y->Draw();
@@ -4812,7 +4856,7 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe1)
 		{
-			objTempTriggerE->Draw();
+			//objTempTriggerE->Draw();
 			objButtonRed1->Draw();
 
 			for (auto object_s3_y1_1 : objects_s3_y1_1)
@@ -4823,7 +4867,7 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe2)
 		{
-			objTempTrigger->Draw();
+			//objTempTrigger->Draw();
 			objButtonBlue->Draw();
 
 			for (auto object_s3_y2_1 : objects_s3_y2_1)
@@ -4834,7 +4878,7 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe3)
 		{
-			objTempYellowTrigger1->Draw();
+			//objTempYellowTrigger1->Draw();
 			objButtonGreen1->Draw();
 
 			for (auto object_s3_y2_2 : objects_s3_y2_2)
@@ -4845,7 +4889,7 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe4)
 		{
-			objTempYellowTrigger2->Draw();
+			//objTempYellowTrigger2->Draw();
 			objButtonYellow->Draw();
 
 			for (auto object_s3_y1_2 : objects_s3_y1_2)
@@ -5726,8 +5770,10 @@ void GameScene::Stage2Reset()
 	enemyAlive = true;
 	playerAlive = true;
 
-	objTempTrigger->SetPosition({ -13.0f, 0, -12.0f });
-	objTempTriggerE->SetPosition({ 10.0f, 0, -9.0f });
+	//objTempTrigger->SetPosition({ -13.0f, 0, -12.0f });
+	objButtonRed1->SetPosition({ -13.0f, 0, -12.0f });
+	//objTempTriggerE->SetPosition({ 10.0f, 0, -9.0f });
+	objButtonRed2->SetPosition({ 10.0f, 0, -9.0f });
 	objTempYellowTrigger1->SetPosition({ -7.0f, 0, 6.0f });
 
 	camera->SetTarget({ 0, 1, 0 });

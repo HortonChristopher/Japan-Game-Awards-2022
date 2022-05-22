@@ -231,6 +231,7 @@ private: // メンバ変数 Member variables
 	Model* modelGround = nullptr;
 	Model* modelPlane = nullptr;
 	Model* modelTempWall = nullptr;
+	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
 	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
