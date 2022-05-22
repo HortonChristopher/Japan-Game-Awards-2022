@@ -244,7 +244,7 @@ private: // メンバ変数 Member variables
 	Model* modelButtonBlue = nullptr;
 	Model* modelButtonGreen = nullptr;
 	Model* modelButtonYellow = nullptr;
-	Model* modelButtonBumb = nullptr;
+	Model* modelButtonBomb = nullptr;
 	Model* modelButtonFloor = nullptr;
 
 	Model* modelTESTONLY = nullptr;
@@ -287,7 +287,8 @@ private: // メンバ変数 Member variables
 	Object3d* objButtonGreen1 = nullptr;
 	Object3d* objButtonGreen2 = nullptr;
 	Object3d* objButtonYellow = nullptr;
-	Object3d* objButtonBumb = nullptr;
+	Object3d* objButtonBomb1 = nullptr;
+	Object3d* objButtonBomb2 = nullptr;
 	Object3d* objButtonFloor = nullptr;
 
 	// ワープ
@@ -423,6 +424,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 RedButton2;
 	XMFLOAT3 GreenButton1;
 	XMFLOAT3 GreenButton2;
+	XMFLOAT3 BombButton1;
+	XMFLOAT3 BombButton2;
+	XMFLOAT3 FloorButton;
 	XMFLOAT3 playerBullet;
 	XMFLOAT3 enemyBullet;
 	XMFLOAT3 FBXplayerPosition;
