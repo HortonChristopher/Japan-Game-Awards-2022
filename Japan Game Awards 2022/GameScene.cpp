@@ -263,7 +263,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objButtonGreen1 = Object3d::Create();
 	objButtonGreen2 = Object3d::Create();
 	objButtonYellow = Object3d::Create();
+	objButtonBumb = Object3d::Create();
+	objButtonFloor = Object3d::Create();
 
+	// ワープ
 	objTeleporterIn1 = Object3d::Create();
 	objTeleporterIn2 = Object3d::Create();
 	objTeleporterIn3 = Object3d::Create();
@@ -450,13 +453,19 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("ButtonBase");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
-	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
-	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
+
+	// スイッチ
 	modelButtonRed = Model::CreateFromOBJ("ButtonRed");
 	modelButtonBlue = Model::CreateFromOBJ("ButtonBlue");
 	modelButtonGreen = Model::CreateFromOBJ("ButtonGreen");
 	modelButtonYellow = Model::CreateFromOBJ("ButtonYellow");
+	modelButtonBumb = Model::CreateFromOBJ("ButtonBumb");
+	modelButtonFloor = Model::CreateFromOBJ("ButtonFloor");
+
+	// ワープ
+	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
+	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
 
 	modelTESTONLY = Model::CreateFromOBJ("playerSphere"); // TEST
 
@@ -472,12 +481,15 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
 
+	// スイッチ
 	objButtonRed1->SetModel(modelButtonRed);
 	objButtonRed2->SetModel(modelButtonRed);
 	objButtonBlue->SetModel(modelButtonBlue);
 	objButtonGreen1->SetModel(modelButtonGreen);
 	objButtonGreen2->SetModel(modelButtonGreen);
 	objButtonYellow->SetModel(modelButtonYellow);
+	objButtonBumb->SetModel(modelButtonBumb);
+	objButtonFloor->SetModel(modelButtonFloor);
 
 	objMenuSelection->SetModel(modelTempBullet);
 	objPlayerMarker->SetModel(modelPlayerMarker);
@@ -485,6 +497,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter = Player::Create(modelTESTONLY);
 	objClone = Enemy::Create(modelTESTONLY);
 
+	// ワープ
 	objTeleporterIn1->SetModel(modelTeleporterIn);
 	objTeleporterIn2->SetModel(modelTeleporterIn);
 	objTeleporterIn3->SetModel(modelTeleporterIn);

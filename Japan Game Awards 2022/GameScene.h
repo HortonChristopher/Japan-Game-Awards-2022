@@ -243,6 +243,8 @@ private: // メンバ変数 Member variables
 	Model* modelButtonBlue = nullptr;
 	Model* modelButtonGreen = nullptr;
 	Model* modelButtonYellow = nullptr;
+	Model* modelButtonBumb = nullptr;
+	Model* modelButtonFloor = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
@@ -284,7 +286,10 @@ private: // メンバ変数 Member variables
 	Object3d* objButtonGreen1 = nullptr;
 	Object3d* objButtonGreen2 = nullptr;
 	Object3d* objButtonYellow = nullptr;
+	Object3d* objButtonBumb = nullptr;
+	Object3d* objButtonFloor = nullptr;
 
+	// ワープ
 	Object3d* objTeleporterIn1 = nullptr;
 	Object3d* objTeleporterOut1 = nullptr;
 	Object3d* objTeleporterIn2 = nullptr;
