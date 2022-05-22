@@ -2858,12 +2858,12 @@ void GameScene::Update()
 				objTempBulletE->SetPosition(enemyBullet);
 			}
 
-			if (playerBullet.x > 9.0f)
+			if (playerBullet.x > 14.0f)
 			{
 				playerBulletF = false;
 			}
 
-			if (enemyBullet.x < -9.0f)
+			if (enemyBullet.x < -14.0f)
 			{
 				enemyBulletF = false;
 			}
