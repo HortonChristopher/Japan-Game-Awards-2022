@@ -218,7 +218,7 @@ private: // メンバ変数 Member variables
 	Sprite* s1ClearLog = nullptr;
 	Sprite* s2ClearLog = nullptr;
 	Sprite* s3ClearLog = nullptr;
-
+	
 	//pauseメニュー
 	Sprite* pause1 = nullptr;
 	Sprite* pause2 = nullptr;
