@@ -4797,6 +4797,7 @@ void GameScene::Update()
 		objButtonBlue->Update();
 		objButtonGreen1->Update();
 		objButtonYellow->Update();
+		objButtonRed1->Update();
 
 		objTeleporterIn1->Update();
 		objTeleporterIn2->Update();
