@@ -448,7 +448,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlane = Model::CreateFromOBJ("yuka");
 	modelTempWall = Model::CreateFromOBJ("TempWall");
 	modelTempWall2 = Model::CreateFromOBJ("TempWall2");
-	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
+	modelYellowWall = Model::CreateFromOBJ("DoorBase"); //YellowKabe
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	//modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
 	modelTeleporterIn_1 = Model::CreateFromOBJ("Warp");
@@ -1101,11 +1101,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t3_y1_1 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t3_y1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t3_y1_1->SetRotation({ 0, 180, 0 });
+				object_t3_y1_1->SetRotation({ 0, 0, 0 });
 			}
 			objects_t3_y1_1.push_back(object_t3_y1_1);
 		}
@@ -1128,11 +1128,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t3_y2_1 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t3_y2_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t3_y2_1->SetRotation({ 0, 180, 0 });
+				object_t3_y2_1->SetRotation({ 0, 0, 0 });
 			}
 			objects_t3_y2_1.push_back(object_t3_y2_1);
 		}
@@ -1154,11 +1154,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t3_y1_2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t3_y1_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t3_y1_2->SetRotation({ 0, 180, 0 });
+				object_t3_y1_2->SetRotation({ 0, 0, 0 });
 			}
 			objects_t3_y1_2.push_back(object_t3_y1_2);
 		}
@@ -1181,11 +1181,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t3_y2_2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t3_y2_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t3_y2_2->SetRotation({ 0, 180, 0 });
+				object_t3_y2_2->SetRotation({ 0, 0, 0 });
 			}
 			objects_t3_y2_2.push_back(object_t3_y2_2);
 		}
@@ -1207,11 +1207,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t3_y1_3 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t3_y1_3->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_y1_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t3_y1_3->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t3_y1_3->SetRotation({ 0, 180, 0 });
+				object_t3_y1_3->SetRotation({ 0, 0, 0 });
 			}
 			objects_t3_y1_3.push_back(object_t3_y1_3);
 		}
@@ -1234,11 +1234,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t3_y2_3 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t3_y2_3->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t3_y2_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t3_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t3_y2_3->SetRotation({ 0, 180, 0 });
+				object_t3_y2_3->SetRotation({ 0, 0, 0 });
 			}
 			objects_t3_y2_3.push_back(object_t3_y2_3);
 		}
@@ -1429,11 +1429,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t4_y = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t4_y->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t4_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_t4_y->SetRotation({ 0, 180, 0 });
+				object_t4_y->SetRotation({ 0, 0, 0 });
 			}
 			objects_t4_y.push_back(object_t4_y);
 		}
@@ -1456,7 +1456,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t4_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t4_y2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_t4_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
@@ -1795,7 +1795,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s2_y = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_s2_y->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s2_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_s2_y.push_back(object_s2_y);
 		}
@@ -1816,7 +1816,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s2_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_s2_y2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s2_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s2_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_s2_y2.push_back(object_s2_y2);
 		}
@@ -2025,11 +2025,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s3_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
-			object_s3_y1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s3_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_s3_y1_1->SetRotation({ 0, 180, 0 });
+				object_s3_y1_1->SetRotation({ 0, 0, 0 });
 			}
 			objects_s3_y1_1.push_back(object_s3_y1_1);
 		}
@@ -2052,11 +2052,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s3_y2_1 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_s3_y2_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s3_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_s3_y2_1->SetRotation({ 0, 180, 0 });
+				object_s3_y2_1->SetRotation({ 0, 0, 0 });
 			}
 			objects_s3_y2_1.push_back(object_s3_y2_1);
 		}
@@ -2078,11 +2078,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s3_y1_2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_s3_y1_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s3_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
-				object_s3_y1_2->SetRotation({ 0, 180, 0 });
+				object_s3_y1_2->SetRotation({ 0, 0, 0 });
 			}
 			objects_s3_y1_2.push_back(object_s3_y1_2);
 		}
@@ -2105,7 +2105,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s3_y2_2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_s3_y2_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s3_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
@@ -4060,7 +4060,8 @@ void GameScene::Update()
 
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f))
 			{
-				tutorial3YellowKabe1 = false;
+				//tutorial3YellowKabe1 = false;
+				doorOpen1 = true;
 			}
 			if (intersect(enemyPosition, BlueButton, 1.0f, 1.0f, 1.0f))
 			{
@@ -4069,6 +4070,30 @@ void GameScene::Update()
 			if (intersect(playerPosition, GreenButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, GreenButton2, 1.0f, 1.0f, 1.0f))
 			{
 				tutorial3YellowKabe3 = false;
+			}
+
+			if (doorOpen1)
+			{
+				for (auto object_t3_y1_1 : objects_t3_y1_1) {
+					XMFLOAT3 objectPosition = object_t3_y1_1->GetPosition();
+					object_t3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t3_y1_1->Update();
+				}
+
+				for (auto object_t3_y2_1 : objects_t3_y2_1) {
+					XMFLOAT3 objectPosition = object_t3_y2_1->GetPosition();
+					object_t3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t3_y2_1->Update();
+				}
+
+				doorCount1++;
+
+				if (doorCount1 >= 5)
+				{
+					tutorial3YellowKabe1 = false;
+					doorCount1 = 0;
+					doorOpen1 = false;
+				}
 			}
 
 			if (!tutorial3YellowKabe1)

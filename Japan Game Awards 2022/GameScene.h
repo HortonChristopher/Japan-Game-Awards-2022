@@ -139,6 +139,18 @@ private: // メンバ変数 Member variables
 	bool pause = false;
 	bool pausePosition = false;
 
+	bool doorOpen1 = false;
+	bool doorOpen2 = false;
+	bool doorOpen3 = false;
+	bool doorOpen4 = false;
+	bool doorOpen5 = false;
+
+	int doorCount1 = 0;
+	int doorCount2 = 0;
+	int doorCount3 = 0;
+	int doorCount4 = 0;
+	int doorCount5 = 0;
+
 	// ステージセレクト
 	bool t1FirstPlayFlag = true;
 	bool t2FirstPlayFlag = true;
