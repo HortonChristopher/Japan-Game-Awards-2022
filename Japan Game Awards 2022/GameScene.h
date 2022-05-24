@@ -203,7 +203,7 @@ private: // メンバ変数 Member variables
 	Sprite* s1ClearLog = nullptr;
 	Sprite* s2ClearLog = nullptr;
 	Sprite* s3ClearLog = nullptr;
-
+	
 	//pauseメニュー
 	Sprite* pause1 = nullptr;
 	Sprite* pause2 = nullptr;
@@ -221,8 +221,8 @@ private: // メンバ変数 Member variables
 	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
 	Model* modelTempBullet = nullptr;
-	Model* modelTeleporterIn = nullptr;
-	Model* modelTeleporterOut = nullptr;
+	Model* modelTeleporterIn_1= nullptr;
+	Model* modelTeleporterOut_1 = nullptr;
 	Model* modelPlayerMarker = nullptr;
 
 	// スイッチ
@@ -290,6 +290,7 @@ private: // メンバ変数 Member variables
 	Object3d* objTeleporterIn4 = nullptr;
 	Object3d* objTeleporterOut4 = nullptr;
 #pragma endregion
+
 
 	TouchableObject* objGround = nullptr;
 
@@ -468,6 +469,10 @@ private: // メンバ変数 Member variables
 
 	//Waveのボリューム
 	const float Volume = 0.1f;
+
+	//ワープゾーンの回転スピード
+	const float WarpRotate = 3.0f;
+	const float WarpSize = 1.7f;
 
 	const int DIV_NUM = 10;
 	const float LAND_SCALE = 3.0f;
