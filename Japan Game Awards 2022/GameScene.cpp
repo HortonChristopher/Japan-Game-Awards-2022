@@ -448,8 +448,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
 	modelTempTrigger = Model::CreateFromOBJ("TempTrigger");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
-	modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
-	modelTeleporterOut = Model::CreateFromOBJ("TeleporterOut");
+	//modelTeleporterIn = Model::CreateFromOBJ("TeleporterIn");
+	modelTeleporterIn_1 = Model::CreateFromOBJ("Warp");
+	modelTeleporterOut_1 = Model::CreateFromOBJ("Warp_2");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
 
 	modelTESTONLY = Model::CreateFromOBJ("TEST");
@@ -472,14 +473,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter = Player::Create(modelTESTONLY);
 	objClone = Enemy::Create(modelTESTONLY);
 
-	objTeleporterIn1->SetModel(modelTeleporterIn);
-	objTeleporterIn2->SetModel(modelTeleporterIn);
-	objTeleporterIn3->SetModel(modelTeleporterIn);
-	objTeleporterIn4->SetModel(modelTeleporterIn);
-	objTeleporterOut1->SetModel(modelTeleporterOut);
-	objTeleporterOut2->SetModel(modelTeleporterOut);
-	objTeleporterOut3->SetModel(modelTeleporterOut);
-	objTeleporterOut4->SetModel(modelTeleporterOut);
+	objTeleporterIn1->SetModel(modelTeleporterIn_1);
+	objTeleporterIn2->SetModel(modelTeleporterIn_1);
+	objTeleporterIn3->SetModel(modelTeleporterIn_1);
+	objTeleporterIn4->SetModel(modelTeleporterIn_1);
+	objTeleporterOut1->SetModel(modelTeleporterOut_1);
+	objTeleporterOut2->SetModel(modelTeleporterOut_1);
+	objTeleporterOut3->SetModel(modelTeleporterOut_1);
+	objTeleporterOut4->SetModel(modelTeleporterOut_1);
 
 
 #pragma endregion
@@ -1592,22 +1593,43 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerMarker->SetScale({ 0.5f, 0.5f, 0.5f });
 
 	objTeleporterIn1->SetPosition({ -20.0f, 0.0f, -3.0f }); // -14, -9
-	objTeleporterIn1->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterIn1->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
 	objTeleporterIn2->SetPosition({ 5.0f, 0.0f, -12.0f }); // 14, -9
-	objTeleporterIn2->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterIn2->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn2->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+
 	objTeleporterIn3->SetPosition({ -11.0f, 0.0f, -9.0f }); // -14, 12
-	objTeleporterIn3->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterIn3->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn3->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+
 	objTeleporterIn4->SetPosition({ 5.0f, 0.0f, 0.0f }); // 14, 12
-	objTeleporterIn4->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterIn4->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn4->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+
 
 	objTeleporterOut1->SetPosition({ 11.0f, 0.0f, 12.0f }); // -14, 6
-	objTeleporterOut1->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterOut1->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
 	objTeleporterOut2->SetPosition({ -17.0f, 0.0f, 6.0f }); // 14, 6
-	objTeleporterOut2->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterOut2->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut2->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+
 	objTeleporterOut3->SetPosition({ 11.0f, 0.0f, 0.0f }); // -8 -12
-	objTeleporterOut3->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterOut3->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut3->SetRotation({ 0.0f, 0.0f, 0.0f });
+
 	objTeleporterOut4->SetPosition({ -8.0f, 0.0f, 0.0f }); // 8, -12
-	objTeleporterOut4->SetScale({ 3.0f, 3.0f, 3.0f });
+	objTeleporterOut4->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut4->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+
 
 
 #pragma endregion
@@ -3762,6 +3784,53 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
+			//ワープゾーンの回転
+			//ワープ入口
+			XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
+			teleRotationIn_1.y += WarpRotate;
+			objTeleporterIn1->SetRotation(teleRotationIn_1);
+			objTeleporterIn1->Update();
+
+			XMFLOAT3 teleRotationIn_2 = objTeleporterIn2->GetRotation();
+			teleRotationIn_2.y += WarpRotate;
+			objTeleporterIn2->SetRotation(teleRotationIn_2);
+			objTeleporterIn2->Update();
+
+			XMFLOAT3 teleRotationIn_3 = objTeleporterIn3->GetRotation();
+			teleRotationIn_3.y += WarpRotate;
+			objTeleporterIn3->SetRotation(teleRotationIn_3);
+			objTeleporterIn3->Update();
+
+			XMFLOAT3 teleRotationIn_4 = objTeleporterIn4->GetRotation();
+			teleRotationIn_4.y += WarpRotate;
+			objTeleporterIn4->SetRotation(teleRotationIn_4);
+			objTeleporterIn4->Update();
+
+
+			//ワープ出口
+			XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
+			teleRotationOut_1.y += WarpRotate;
+			objTeleporterOut1->SetRotation(teleRotationOut_1);
+			objTeleporterOut1->Update();
+
+			XMFLOAT3 teleRotationOut_2 = objTeleporterOut2->GetRotation();
+			teleRotationOut_2.y += WarpRotate;
+			objTeleporterOut2->SetRotation(teleRotationOut_2);
+			objTeleporterOut2->Update();
+
+			XMFLOAT3 teleRotationOut_3 = objTeleporterOut3->GetRotation();
+			teleRotationOut_3.y += WarpRotate;
+			objTeleporterOut3->SetRotation(teleRotationOut_3);
+			objTeleporterOut3->Update();
+
+			XMFLOAT3 teleRotationOut_4 = objTeleporterOut4->GetRotation();
+			teleRotationOut_4.y += WarpRotate;
+			objTeleporterOut4->SetRotation(teleRotationOut_4);
+			objTeleporterOut4->Update();
+
+
+
+
 			if (intersect(playerPosition, playerTrigger, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f))
 			{
 				tutorial4YellowKabe = false;
@@ -3801,6 +3870,8 @@ void GameScene::Update()
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
 			}
+
+			
 
 			if (playerPosition.y <= -10.0f)
 			{
@@ -3883,7 +3954,7 @@ void GameScene::Update()
 		objTeleporterIn2->Update();
 		objTeleporterIn3->Update();
 		objTeleporterIn4->Update();
-
+		
 		objTeleporterOut1->Update();
 		objTeleporterOut2->Update();
 		objTeleporterOut3->Update();
@@ -3968,6 +4039,51 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
+				//ワープゾーンの回転
+		//ワープ入口
+				XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
+				teleRotationIn_1.y += WarpRotate;
+				objTeleporterIn1->SetRotation(teleRotationIn_1);
+				objTeleporterIn1->Update();
+
+				XMFLOAT3 teleRotationIn_2 = objTeleporterIn2->GetRotation();
+				teleRotationIn_2.y += WarpRotate;
+				objTeleporterIn2->SetRotation(teleRotationIn_2);
+				objTeleporterIn2->Update();
+
+				XMFLOAT3 teleRotationIn_3 = objTeleporterIn3->GetRotation();
+				teleRotationIn_3.y += WarpRotate;
+				objTeleporterIn3->SetRotation(teleRotationIn_3);
+				objTeleporterIn3->Update();
+
+				XMFLOAT3 teleRotationIn_4 = objTeleporterIn4->GetRotation();
+				teleRotationIn_4.y += WarpRotate;
+				objTeleporterIn4->SetRotation(teleRotationIn_4);
+				objTeleporterIn4->Update();
+
+
+				//ワープ出口
+				XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
+				teleRotationOut_1.y += WarpRotate;
+				objTeleporterOut1->SetRotation(teleRotationOut_1);
+				objTeleporterOut1->Update();
+
+				XMFLOAT3 teleRotationOut_2 = objTeleporterOut2->GetRotation();
+				teleRotationOut_2.y += WarpRotate;
+				objTeleporterOut2->SetRotation(teleRotationOut_2);
+				objTeleporterOut2->Update();
+
+				XMFLOAT3 teleRotationOut_3 = objTeleporterOut3->GetRotation();
+				teleRotationOut_3.y += WarpRotate;
+				objTeleporterOut3->SetRotation(teleRotationOut_3);
+				objTeleporterOut3->Update();
+
+				XMFLOAT3 teleRotationOut_4 = objTeleporterOut4->GetRotation();
+				teleRotationOut_4.y += WarpRotate;
+				objTeleporterOut4->SetRotation(teleRotationOut_4);
+				objTeleporterOut4->Update();
+			
+
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
@@ -3988,6 +4104,7 @@ void GameScene::Update()
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
+			
 			if (intersect(enemyPosition, enemyTrigger, 1.0f, 1.0f, 1.0f))
 			{
 				stage3YellowKabe1 = false;
@@ -4138,11 +4255,13 @@ void GameScene::Update()
 		objTeleporterIn2->Update();
 		objTeleporterIn3->Update();
 		objTeleporterIn4->Update();
+		
 
 		objTeleporterOut1->Update();
 		objTeleporterOut2->Update();
 		objTeleporterOut3->Update();
 		objTeleporterOut4->Update();
+		
 
 		objFighter->Update();
 		objClone->Update();
@@ -5333,6 +5452,8 @@ void GameScene::Tutorial4Reset()
 	objClone->SetPosition({ 20, 30, -12 });
 
 	objTeleporterIn1->SetPosition({ -14.0f, 0.0f, -9.0f });
+	objTeleporterIn1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
 	objTeleporterIn2->SetPosition({ 14.0f, 0.0f, -9.0f });
 	objTeleporterIn3->SetPosition({ -14.0f, 0.0f, 12.0f });
 	objTeleporterIn4->SetPosition({ 14.0f, 0.0f, 12.0f });
@@ -5682,6 +5803,8 @@ void GameScene::Stage3Reset()
 	objClone->SetPosition({ 20, 30, -12 });
 
 	objTeleporterIn1->SetPosition({ -20.0f, 0.0f, -3.0f });
+	objTeleporterIn1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
 	objTeleporterIn2->SetPosition({ 5.0f, 0.0f, -12.0f });
 	objTeleporterIn3->SetPosition({ -11.0f, 0.0f, -9.0f });
 	objTeleporterIn4->SetPosition({ 5.0f, 0.0f, 0.0f });
