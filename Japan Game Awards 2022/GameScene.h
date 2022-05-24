@@ -337,6 +337,7 @@ private: // メンバ変数 Member variables
 	float SpriteStageSizeX = 260.0f;
 	float SpriteStageSizeY = 180.0f;
 
+
 	XMFLOAT2 t1BackgroundPosition = {SpriteStageSizeX + (1280 * 0), SpriteStageSizeY };
 	XMFLOAT2 t2BackgroundPosition = { SpriteStageSizeX + (1280 * 1), SpriteStageSizeY };
 	XMFLOAT2 t3BackgroundPosition = { SpriteStageSizeX + (1280 * 2), SpriteStageSizeY };
