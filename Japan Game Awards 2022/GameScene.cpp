@@ -267,6 +267,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut3 = Object3d::Create();
 	objTeleporterOut4 = Object3d::Create();
 	 
+	// 扉
+	objDoorBase = Object3d::Create();
+
 #pragma endregion
 
 #pragma region Sprite テクスチャの読み込み
@@ -460,7 +463,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelButtonBomb = Model::CreateFromOBJ("ButtonBumb");
 	modelButtonFloor = Model::CreateFromOBJ("ButtonFloor");
 
-	// ワープ
+	// 扉
+	modelDoorBase = Model::CreateFromOBJ("DoorBase");
 
 	modelTESTONLY = Model::CreateFromOBJ("playerSphere"); // TEST
 
@@ -489,6 +493,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter = Player::Create(modelTESTONLY);
 	objClone = Enemy::Create(modelTESTONLY);
 
+	// ワープ
 	objTeleporterIn1->SetModel(modelTeleporterIn_1);
 	objTeleporterIn2->SetModel(modelTeleporterIn_1);
 	objTeleporterIn3->SetModel(modelTeleporterIn_1);
@@ -498,6 +503,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut3->SetModel(modelTeleporterOut_1);
 	objTeleporterOut4->SetModel(modelTeleporterOut_1);
 
+	// 扉
+	objDoorBase->SetModel(modelDoorBase);
 
 #pragma endregion
 

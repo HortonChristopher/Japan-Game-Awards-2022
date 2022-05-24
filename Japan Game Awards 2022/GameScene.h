@@ -238,6 +238,9 @@ private: // メンバ変数 Member variables
 	Model* modelButtonBomb = nullptr;
 	Model* modelButtonFloor = nullptr;
 
+	// 扉
+	Model* modelDoorBase = nullptr;
+
 	Model* modelTESTONLY = nullptr;
 #pragma endregion
 
@@ -294,6 +297,9 @@ private: // メンバ変数 Member variables
 	Object3d* objTeleporterOut3 = nullptr;
 	Object3d* objTeleporterIn4 = nullptr;
 	Object3d* objTeleporterOut4 = nullptr;
+
+	// 扉
+	Object3d* objDoorBase = nullptr;
 #pragma endregion
 
 
