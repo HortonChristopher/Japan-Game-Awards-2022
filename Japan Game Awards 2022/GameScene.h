@@ -127,43 +127,7 @@ private: // メンバ変数 Member variables
 	// ゲームシーン用 For game scenes
 	Camera* camera = nullptr;
 
-	Sprite* spriteBG = nullptr;
-
-	Sprite* GuideR = nullptr;
-
-	Sprite* Guide_LRB = nullptr;
-
-	Sprite* Order_1 = nullptr;
-
-	Sprite* Order_2 = nullptr;
-
-	Sprite* Press_A = nullptr;
-
-	Sprite* Mirror = nullptr;
-
-	Sprite* GameOverLog = nullptr;
-
-	Sprite* ReStateLog = nullptr;
-
-	Sprite* GameOverStageSelectLog = nullptr;
-
-	Sprite* StageClearStageSelectLog = nullptr;
-
-	Sprite* StageClearLog = nullptr;
-
-	Sprite* TitleLog = nullptr;
-
-	Sprite* NextStageLog = nullptr;
-
-	Sprite* StageSelectRB = nullptr;
-
-	Sprite* StageSelectLB = nullptr;
-
-	Sprite* StageSelectLog = nullptr;
-
-	Sprite* GuideA = nullptr;
-
-	Sprite* GuideB = nullptr;
+	
 
 	bool falling = false;
 	bool marker = true;
@@ -186,6 +150,27 @@ private: // メンバ変数 Member variables
 	bool s1ClearFlag = false;
 	bool s2ClearFlag = false;
 	bool s3ClearFlag = false;
+
+#pragma region Sprite
+	Sprite* spriteBG = nullptr;
+	Sprite* GuideR = nullptr;
+	Sprite* Guide_LRB = nullptr;
+	Sprite* Order_1 = nullptr;
+	Sprite* Order_2 = nullptr;
+	Sprite* Press_A = nullptr;
+	Sprite* Mirror = nullptr;
+	Sprite* GameOverLog = nullptr;
+	Sprite* ReStateLog = nullptr;
+	Sprite* GameOverStageSelectLog = nullptr;
+	Sprite* StageClearStageSelectLog = nullptr;
+	Sprite* StageClearLog = nullptr;
+	Sprite* TitleLog = nullptr;
+	Sprite* NextStageLog = nullptr;
+	Sprite* StageSelectRB = nullptr;
+	Sprite* StageSelectLB = nullptr;
+	Sprite* StageSelectLog = nullptr;
+	Sprite* GuideA = nullptr;
+	Sprite* GuideB = nullptr;
 
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
@@ -224,9 +209,11 @@ private: // メンバ変数 Member variables
 	Sprite* pause2 = nullptr;
 	Sprite* pause3 = nullptr;
 	Sprite* pause4 = nullptr;
+#pragma endregion
 
 	ParticleManager* particleMan = nullptr;
 
+#pragma region Model
 	Model* modelSkydome = nullptr;
 	Model* modelGround = nullptr;
 	Model* modelPlane = nullptr;
@@ -247,18 +234,25 @@ private: // メンバ変数 Member variables
 	Model* modelButtonFloor = nullptr;
 
 	Model* modelTESTONLY = nullptr;
+#pragma endregion
 
+#pragma region FbxModel
+	// プレイヤー
 	FbxModel* modelPlayerRun = nullptr;
 	FbxModel* modelPlayerStand = nullptr;
 	FbxModel* modelPlayerFight = nullptr;
 	FbxModel* modelPlayerWin = nullptr;
 	FbxModel* modelPlayerFall = nullptr;
 	FbxModel* modelPlayerLose = nullptr;
+
+	// クローン
 	FbxModel* modelCloneRun = nullptr;
 	FbxModel* modelCloneStand = nullptr;
 	FbxModel* modelCloneFight = nullptr;
 	FbxModel* modelCloneFall = nullptr;
+#pragma endregion
 	
+#pragma region Object3d
 	//ステージセレクト
 	Object3d* objT1 = nullptr;
 	Object3d* objT2 = nullptr;
@@ -295,20 +289,25 @@ private: // メンバ変数 Member variables
 	Object3d* objTeleporterOut3 = nullptr;
 	Object3d* objTeleporterIn4 = nullptr;
 	Object3d* objTeleporterOut4 = nullptr;
+#pragma endregion
 
 	TouchableObject* objGround = nullptr;
 
+#pragma region FbxObject3d
+	// プレイヤー
 	FbxObject3d* objPlayerRun = nullptr;
 	FbxObject3d* objPlayerStand = nullptr;
 	FbxObject3d* objPlayerFight = nullptr;
 	FbxObject3d* objPlayerWin = nullptr;
 	FbxObject3d* objPlayerLose = nullptr;
 	FbxObject3d* objPlayerFall = nullptr;
+
+	// クローン
 	FbxObject3d* objCloneRun = nullptr;
 	FbxObject3d* objCloneStand = nullptr;
 	FbxObject3d* objCloneFight = nullptr;
 	FbxObject3d* objCloneFall = nullptr;
-
+#pragma endregion
 
 	Player* objFighter = nullptr;
 
