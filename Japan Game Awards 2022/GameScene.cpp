@@ -2301,6 +2301,7 @@ void GameScene::Update()
 	{
 		if (!pause)
 		{
+			pauseMenuSelection = 0;
 			pause = true;
 		}
 	}
