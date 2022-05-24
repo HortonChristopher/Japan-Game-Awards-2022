@@ -252,6 +252,10 @@ private: // メンバ変数 Member variables
 
 	// 扉
 	Model* modelDoorBase = nullptr;
+	Model* modelDoorRed = nullptr;
+	Model* modelDoorBlue = nullptr;
+	Model* modelDoorGreen = nullptr;
+	Model* modelDoorYellow = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 #pragma endregion
@@ -312,6 +316,10 @@ private: // メンバ変数 Member variables
 
 	// 扉
 	Object3d* objDoorBase = nullptr;
+	Object3d* objDoorRed = nullptr;
+	Object3d* objDoorBlue = nullptr;
+	Object3d* objDoorGreen = nullptr;
+	Object3d* objDoorYellow = nullptr;
 #pragma endregion
 
 

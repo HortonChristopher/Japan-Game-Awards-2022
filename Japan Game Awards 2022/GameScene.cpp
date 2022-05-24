@@ -245,7 +245,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
 	objPlayerMarker = Object3d::Create();
-	
+
 	// スイッチ
 	objButtonRed1 = Object3d::Create();
 	objButtonRed2 = Object3d::Create();
@@ -266,9 +266,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut2 = Object3d::Create();
 	objTeleporterOut3 = Object3d::Create();
 	objTeleporterOut4 = Object3d::Create();
-	 
+
 	// 扉
 	objDoorBase = Object3d::Create();
+	objDoorRed = Object3d::Create();
+	objDoorBlue = Object3d::Create();
+	objDoorGreen = Object3d::Create();
+	objDoorYellow = Object3d::Create();
 
 #pragma endregion
 
@@ -465,6 +469,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	// 扉
 	modelDoorBase = Model::CreateFromOBJ("DoorBase");
+	modelDoorRed = Model::CreateFromOBJ("DoorRed");
+	modelDoorBlue = Model::CreateFromOBJ("DoorBlue");
+	modelDoorGreen = Model::CreateFromOBJ("DoorGreen");
+	modelDoorYellow = Model::CreateFromOBJ("DoorYellow");
 
 	modelTESTONLY = Model::CreateFromOBJ("playerSphere"); // TEST
 
@@ -505,6 +513,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	// 扉
 	objDoorBase->SetModel(modelDoorBase);
+	objDoorRed->SetModel(modelDoorRed);
+	objDoorBlue->SetModel(modelDoorBlue);
+	objDoorGreen->SetModel(modelDoorGreen);
+	objDoorYellow->SetModel(modelDoorYellow);
 
 #pragma endregion
 
@@ -1331,7 +1343,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		{
 			int modelIndex = 0;
 
-			if (i == 10 || j == 0 || j == 6 || i < 10 && i > 5 && j < 6 && j > 3|| i == 3 && j == 4)
+			if (i == 10 || j == 0 || j == 6 || i < 10 && i > 5 && j < 6 && j > 3 || i == 3 && j == 4)
 			{
 				modelIndex = 1;
 			}
@@ -1874,7 +1886,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		for (int j = 0; j < 8; j++) // X
 		{
 			int modelIndex = 0;
-			
+
 			if (i == 10 || j == 0 || j == 7 || i < 10 && i > 7 && j > 1 && j < 7 || i == 7 && j > 2 || i == 5 && j == 4 || i == 4 && j == 5 || i == 3 && j == 1 || i == 3 && j == 4 || i == 6 && j != 0 && j != 7)
 			{
 				modelIndex = 1;
@@ -2713,7 +2725,7 @@ void GameScene::Update()
 		camera->Update();
 
 		//音楽再生	
-		if (PlayFlag == false )
+		if (PlayFlag == false)
 		{
 			PlayFlag = true;
 			audio->PlayWave("Title.wav", Volume, true);
@@ -2976,9 +2988,9 @@ void GameScene::Update()
 			object_2->Update();
 		}
 
-		
+
 		objButtonBomb1->Update();
-		
+
 		objButtonBomb2->Update();
 
 		objPlayerRun->Update();
@@ -3689,9 +3701,9 @@ void GameScene::Update()
 		objCloneStand->Update();
 		objCloneFall->Update();
 
-		
+
 		objButtonRed1->Update();
-		
+
 		objButtonRed2->Update();
 		objButtonFloor->Update();
 
@@ -3746,7 +3758,7 @@ void GameScene::Update()
 
 				objPlayerFall->SetRotation({ 0, 140, 0 });
 				objCloneFall->SetRotation({ 0, 140, 0 });
-				
+
 				objFighter->SetPosition(playerPositionTemp);
 				objClone->SetPosition(clonePositionTemp);
 			}
@@ -4387,7 +4399,7 @@ void GameScene::Update()
 			}
 		}
 
-		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay||
+		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay ||
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
 			audio->PlayWave("Stage.wav", Volume, true);
@@ -4700,7 +4712,7 @@ void GameScene::Update()
 		objTeleporterIn2->Update();
 		objTeleporterIn3->Update();
 		objTeleporterIn4->Update();
-		
+
 		objTeleporterOut1->Update();
 		objTeleporterOut2->Update();
 		objTeleporterOut3->Update();
@@ -4785,50 +4797,50 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
-				//ワープゾーンの回転
-				//ワープ入口
-				XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
-				teleRotationIn_1.y += WarpRotate;
-				objTeleporterIn1->SetRotation(teleRotationIn_1);
-				objTeleporterIn1->Update();
+			//ワープゾーンの回転
+			//ワープ入口
+			XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
+			teleRotationIn_1.y += WarpRotate;
+			objTeleporterIn1->SetRotation(teleRotationIn_1);
+			objTeleporterIn1->Update();
 
-				XMFLOAT3 teleRotationIn_2 = objTeleporterIn2->GetRotation();
-				teleRotationIn_2.y += WarpRotate;
-				objTeleporterIn2->SetRotation(teleRotationIn_2);
-				objTeleporterIn2->Update();
+			XMFLOAT3 teleRotationIn_2 = objTeleporterIn2->GetRotation();
+			teleRotationIn_2.y += WarpRotate;
+			objTeleporterIn2->SetRotation(teleRotationIn_2);
+			objTeleporterIn2->Update();
 
-				XMFLOAT3 teleRotationIn_3 = objTeleporterIn3->GetRotation();
-				teleRotationIn_3.y += WarpRotate;
-				objTeleporterIn3->SetRotation(teleRotationIn_3);
-				objTeleporterIn3->Update();
+			XMFLOAT3 teleRotationIn_3 = objTeleporterIn3->GetRotation();
+			teleRotationIn_3.y += WarpRotate;
+			objTeleporterIn3->SetRotation(teleRotationIn_3);
+			objTeleporterIn3->Update();
 
-				XMFLOAT3 teleRotationIn_4 = objTeleporterIn4->GetRotation();
-				teleRotationIn_4.y += WarpRotate;
-				objTeleporterIn4->SetRotation(teleRotationIn_4);
-				objTeleporterIn4->Update();
+			XMFLOAT3 teleRotationIn_4 = objTeleporterIn4->GetRotation();
+			teleRotationIn_4.y += WarpRotate;
+			objTeleporterIn4->SetRotation(teleRotationIn_4);
+			objTeleporterIn4->Update();
 
 
-				//ワープ出口
-				XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
-				teleRotationOut_1.y += WarpRotate;
-				objTeleporterOut1->SetRotation(teleRotationOut_1);
-				objTeleporterOut1->Update();
+			//ワープ出口
+			XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
+			teleRotationOut_1.y += WarpRotate;
+			objTeleporterOut1->SetRotation(teleRotationOut_1);
+			objTeleporterOut1->Update();
 
-				XMFLOAT3 teleRotationOut_2 = objTeleporterOut2->GetRotation();
-				teleRotationOut_2.y += WarpRotate;
-				objTeleporterOut2->SetRotation(teleRotationOut_2);
-				objTeleporterOut2->Update();
+			XMFLOAT3 teleRotationOut_2 = objTeleporterOut2->GetRotation();
+			teleRotationOut_2.y += WarpRotate;
+			objTeleporterOut2->SetRotation(teleRotationOut_2);
+			objTeleporterOut2->Update();
 
-				XMFLOAT3 teleRotationOut_3 = objTeleporterOut3->GetRotation();
-				teleRotationOut_3.y += WarpRotate;
-				objTeleporterOut3->SetRotation(teleRotationOut_3);
-				objTeleporterOut3->Update();
+			XMFLOAT3 teleRotationOut_3 = objTeleporterOut3->GetRotation();
+			teleRotationOut_3.y += WarpRotate;
+			objTeleporterOut3->SetRotation(teleRotationOut_3);
+			objTeleporterOut3->Update();
 
-				XMFLOAT3 teleRotationOut_4 = objTeleporterOut4->GetRotation();
-				teleRotationOut_4.y += WarpRotate;
-				objTeleporterOut4->SetRotation(teleRotationOut_4);
-				objTeleporterOut4->Update();
-			
+			XMFLOAT3 teleRotationOut_4 = objTeleporterOut4->GetRotation();
+			teleRotationOut_4.y += WarpRotate;
+			objTeleporterOut4->SetRotation(teleRotationOut_4);
+			objTeleporterOut4->Update();
+
 
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
@@ -4892,7 +4904,7 @@ void GameScene::Update()
 				}
 			}
 
-			if (intersect(playerPosition,YellowButton, 1.0f, 1.0f, 1.0f))
+			if (intersect(playerPosition, YellowButton, 1.0f, 1.0f, 1.0f))
 			{
 				stage3YellowKabe4 = false;
 			}
@@ -4992,7 +5004,7 @@ void GameScene::Update()
 		{
 			object_s3_y2_2->Update();
 		}
-		
+
 		objButtonBlue->Update();
 		objButtonGreen1->Update();
 		objButtonYellow->Update();
@@ -5002,13 +5014,13 @@ void GameScene::Update()
 		objTeleporterIn2->Update();
 		objTeleporterIn3->Update();
 		objTeleporterIn4->Update();
-		
+
 
 		objTeleporterOut1->Update();
 		objTeleporterOut2->Update();
 		objTeleporterOut3->Update();
 		objTeleporterOut4->Update();
-		
+
 
 		objFighter->Update();
 		objClone->Update();
@@ -5165,7 +5177,7 @@ void GameScene::Draw()
 			object_2->Draw();
 		}
 
-		
+
 		objButtonBomb1->Draw();
 		objButtonBomb2->Draw();
 
@@ -5200,7 +5212,7 @@ void GameScene::Draw()
 				objCloneStand->Draw(cmdList);
 			}
 		}
-		
+
 		objSkydome->Draw();
 		break;
 	case 2:
@@ -5648,7 +5660,7 @@ void GameScene::Draw()
 		{
 			t1NewLog->Draw();
 		}
-		
+
 		if (t2FirstPlayFlag == true)
 		{
 			t2NewLog->Draw();
@@ -5663,7 +5675,7 @@ void GameScene::Draw()
 		{
 			t4NewLog->Draw();
 		}
-	
+
 		if (s1FirstPlayFlag == true)
 		{
 			s1NewLog->Draw();
@@ -5699,7 +5711,7 @@ void GameScene::Draw()
 		{
 			t4ClearLog->Draw();
 		}
-		
+
 		if (s1ClearFlag == true)
 		{
 			s1ClearLog->Draw();
