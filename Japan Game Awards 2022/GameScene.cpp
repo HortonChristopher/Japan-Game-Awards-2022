@@ -434,6 +434,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(36, L"Resources/Sprite/Pause4.png");
 	pause4 = Sprite::Create(36, { 720, 200 });
 
+	Sprite::LoadTexture(37, L"Resources/Sprite/GameOverGameClearSelect.png");
+	GameOverGameClearSelectBar = Sprite::Create(37, { -250.0f,350.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -2278,7 +2281,7 @@ void GameScene::Update()
 		objPlayerMarker->Update();
 	}
 
-	if (input->TriggerKey(DIK_M))
+	if (input->TriggerKey(DIK_M) || IsButtonPush(ButtonKind::Button_LeftMenu))
 	{
 		if (marker)
 		{
@@ -2290,8 +2293,11 @@ void GameScene::Update()
 		}
 	}
 
+	//ButtonKind::Button_RightMenu = Start
+
 #pragma region ポーズ画面
-	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling)
+	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling ||
+		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling)
 	{
 		if (!pause)
 		{
@@ -2329,11 +2335,11 @@ void GameScene::Update()
 		objClone->Update();
 		objPlayerMarker->Update();
 
-		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2)
+		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
 		}
-		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0)
+		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
 		}
@@ -2351,7 +2357,7 @@ void GameScene::Update()
 			break;
 		}
 
-		if (input->TriggerKey(DIK_SPACE))
+		if (input->TriggerKey(DIK_SPACE) || IsButtonPush(ButtonKind::Button_A))
 		{
 			if (pauseMenuSelection == 0)
 			{
@@ -2870,6 +2876,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Stage1Move();
+				GameOverReset();
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
 				sceneChange = 0;
@@ -2881,6 +2888,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Stage1Move();
+				GameClearReset();
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
@@ -3066,35 +3074,15 @@ void GameScene::Update()
 		{
 			if (menuSelection == 0)
 			{
-				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
-				ballPosition.y -= 0.1f;
-				objMenuSelection->SetPosition(ballPosition);
-				objMenuSelection->Update();
-				currentFrame++;
-
-				if (currentFrame >= 20)
-				{
-					ballPosition = { -5.0f, -4.25f, 4.0f };
-					currentFrame = 0;
-					menuSelection = 1;
-					menuMoving = false;
-				}
+				GameOverGameClearSelectBar->SetPosition({ -250.0f,500.0f });
+				menuSelection = 1;
+				menuMoving = false;
 			}
 			else if (menuSelection == 1)
 			{
-				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
-				ballPosition.y += 0.1f;
-				objMenuSelection->SetPosition(ballPosition);
-				objMenuSelection->Update();
-				currentFrame++;
-
-				if (currentFrame >= 20)
-				{
-					ballPosition = { -5.0f, -2.65f, 4.0f };
-					currentFrame = 0;
-					menuSelection = 0;
-					menuMoving = false;
-				}
+				GameOverGameClearSelectBar->SetPosition({ -250.0f,350.0f });
+				menuSelection = 0;
+				menuMoving = false;
 			}
 		}
 
@@ -3242,35 +3230,15 @@ void GameScene::Update()
 		{
 			if (menuSelection == 0)
 			{
-				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
-				ballPosition.y -= 0.1f;
-				objMenuSelection->SetPosition(ballPosition);
-				objMenuSelection->Update();
-				currentFrame++;
-
-				if (currentFrame >= 16)
-				{
-					ballPosition = { -5.0f, -4.25f, 4.0f };
-					currentFrame = 0;
-					menuSelection = 1;
-					menuMoving = false;
-				}
+				GameOverGameClearSelectBar->SetPosition({ 0.0f, 570.0f });
+				menuSelection = 1;
+				menuMoving = false;
 			}
 			else if (menuSelection == 1)
 			{
-				XMFLOAT3 ballPosition = objMenuSelection->GetPosition();
-				ballPosition.y += 0.1f;
-				objMenuSelection->SetPosition(ballPosition);
-				objMenuSelection->Update();
-				currentFrame++;
-
-				if (currentFrame >= 16)
-				{
-					ballPosition = { -5.0f, -2.65f, 4.0f };
-					currentFrame = 0;
-					menuSelection = 0;
-					menuMoving = false;
-				}
+				GameOverGameClearSelectBar->SetPosition({ 0.0f, 470.0f });
+				menuSelection = 0;
+				menuMoving = false;
 			}
 		}
 
@@ -3404,6 +3372,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Stage2Move();
+				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
@@ -3416,6 +3385,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Stage2Move();
+				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
@@ -3600,6 +3570,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial1Move();
+				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
@@ -3614,6 +3585,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial1Move();
+				GameClearReset();
 				sceneChange = 0;
 
 				t1FirstPlayFlag = false;
@@ -3744,6 +3716,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial2Move();
+				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
@@ -3756,6 +3729,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Tutorial2Move();
+				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
@@ -3947,6 +3921,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial3Move();
+				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
@@ -3959,6 +3934,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Tutorial3Move();
+				GameClearReset();
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				sceneChange = 0;
@@ -4418,13 +4394,12 @@ void GameScene::Update()
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
-			
-
 			if (playerPosition.y <= -10.0f)
 			{
 				playerAlive = false;
 				sceneNo = 3;
 				Tutorial4Move();
+				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
@@ -4439,6 +4414,7 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
 				Tutorial4Move();
+				GameClearReset();
 				sceneChange = 0;
 
 				t4FirstPlayFlag = false;
@@ -4587,7 +4563,7 @@ void GameScene::Update()
 			}
 
 				//ワープゾーンの回転
-		//ワープ入口
+				//ワープ入口
 				XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
 				teleRotationIn_1.y += WarpRotate;
 				objTeleporterIn1->SetRotation(teleRotationIn_1);
@@ -4712,6 +4688,7 @@ void GameScene::Update()
 				playerAlive = false;
 				sceneNo = 3;
 				Stage3Move();
+				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameOver.wav", Volume, true);
@@ -4724,6 +4701,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				Stage3Move();
+				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("GameClear.wav", Volume, true);
@@ -4791,8 +4769,6 @@ void GameScene::Update()
 		{
 			object_s3_y2_2->Update();
 		}
-
-		
 		
 		objButtonBlue->Update();
 		objButtonGreen1->Update();
@@ -5007,11 +4983,11 @@ void GameScene::Draw()
 	case 2:
 		objPlayerWin->Draw(cmdList);
 		objSkydome->Draw();
-		objMenuSelection->Draw();
+		//objMenuSelection->Draw();
 		break;
 	case 3:
 		objPlayerLose->Draw(cmdList);
-		objMenuSelection->Draw();
+		//objMenuSelection->Draw();
 		break;
 	case 4:
 		if (falling && beginStage)
@@ -5395,11 +5371,13 @@ void GameScene::Draw()
 		break;
 	case 2:
 		StageClearLog->Draw();
+		GameOverGameClearSelectBar->Draw();
 		NextStageLog->Draw();
 		StageClearStageSelectLog->Draw();
 		break;
 	case 3:
 		GameOverLog->Draw();
+		GameOverGameClearSelectBar->Draw();
 		ReStateLog->Draw();
 		GameOverStageSelectLog->Draw();
 		break;
@@ -6477,6 +6455,20 @@ void GameScene::Stage3Move()
 			object_s3_y1_2->Update();
 		}
 	}
+}
+
+void GameScene::GameClearReset()
+{
+	GameOverGameClearSelectBar->SetPosition({ -250.0f,350.0f });
+	menuSelection = 0;
+	menuMoving = false;
+}
+
+void GameScene::GameOverReset()
+{
+	GameOverGameClearSelectBar->SetPosition({ 0.0f, 470.0f });
+	menuSelection = 0;
+	menuMoving = false;
 }
 
 void GameScene::CinematicCamera()

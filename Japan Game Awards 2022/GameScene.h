@@ -81,6 +81,9 @@ public: // メンバ関数 Member function
 	void Stage3Reset();
 	void Stage3Move();
 
+	void GameClearReset();
+	void GameOverReset();
+
 	void CinematicCamera();
 
 private: // メンバ変数 Member variables
@@ -128,6 +131,8 @@ private: // メンバ変数 Member variables
 	Camera* camera = nullptr;
 
 	
+
+	Sprite* GameOverGameClearSelectBar = nullptr;
 
 	bool falling = false;
 	bool marker = true;
