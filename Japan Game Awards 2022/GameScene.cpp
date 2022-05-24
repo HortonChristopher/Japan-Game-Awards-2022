@@ -667,13 +667,21 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelTempWall2,
 	};
 
-	Model* modeltable_y[1] = {
+	Model* modeltable_y[5] = {
 		modelYellowWall,
+		modelDoorBlue,
+		modelDoorGreen,
+		modelDoorRed,
+		modelDoorYellow,
 	};
 
-	Model* modeltable_y2[2] = {
+	Model* modeltable_y2[6] = {
 		modelYellowWall,
 		modelPlane,
+		modelDoorBlue,
+		modelDoorGreen,
+		modelDoorRed,
+		modelDoorYellow,
 	};
 
 #pragma endregion
@@ -1105,7 +1113,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 3 && i == 2)
 			{
-				int modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
@@ -1132,7 +1140,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 3 && i == 2)
 			{
-				int modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
@@ -1158,7 +1166,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 3 && i == 5)
 			{
-				int modelIndex = 0;
+				modelIndex = 1;
 			}
 			else
 			{
@@ -1185,7 +1193,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 3 && i == 5)
 			{
-				int modelIndex = 0;
+				modelIndex = 1;
 			}
 			else
 			{
@@ -1211,7 +1219,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 3 && i == 8)
 			{
-				int modelIndex = 0;
+				modelIndex = 2;
 			}
 			else
 			{
@@ -1238,7 +1246,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 3 && i == 8)
 			{
-				int modelIndex = 0;
+				modelIndex = 2;
 			}
 			else
 			{
@@ -4077,11 +4085,13 @@ void GameScene::Update()
 			}
 			if (intersect(enemyPosition, BlueButton, 1.0f, 1.0f, 1.0f))
 			{
-				tutorial3YellowKabe2 = false;
+				//tutorial3YellowKabe2 = false;
+				doorOpen2 = true;
 			}
 			if (intersect(playerPosition, GreenButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, GreenButton2, 1.0f, 1.0f, 1.0f))
 			{
-				tutorial3YellowKabe3 = false;
+				//tutorial3YellowKabe3 = false;
+				doorOpen3 = true;
 			}
 
 			if (doorOpen1)
@@ -4100,11 +4110,59 @@ void GameScene::Update()
 
 				doorCount1++;
 
-				if (doorCount1 >= 5)
+				if (doorCount1 >= 15)
 				{
 					tutorial3YellowKabe1 = false;
 					doorCount1 = 0;
 					doorOpen1 = false;
+				}
+			}
+
+			if (doorOpen2)
+			{
+				for (auto object_t3_y1_2 : objects_t3_y1_2) {
+					XMFLOAT3 objectPosition = object_t3_y1_2->GetPosition();
+					object_t3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t3_y1_2->Update();
+				}
+
+				for (auto object_t3_y2_2 : objects_t3_y2_2) {
+					XMFLOAT3 objectPosition = object_t3_y2_2->GetPosition();
+					object_t3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t3_y2_2->Update();
+				}
+
+				doorCount2++;
+
+				if (doorCount2 >= 15)
+				{
+					tutorial3YellowKabe2 = false;
+					doorCount2 = 0;
+					doorOpen2 = false;
+				}
+			}
+
+			if (doorOpen3)
+			{
+				for (auto object_t3_y1_3 : objects_t3_y1_3) {
+					XMFLOAT3 objectPosition = object_t3_y1_3->GetPosition();
+					object_t3_y1_3->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t3_y1_3->Update();
+				}
+
+				for (auto object_t3_y2_3 : objects_t3_y2_3) {
+					XMFLOAT3 objectPosition = object_t3_y2_3->GetPosition();
+					object_t3_y2_3->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t3_y2_3->Update();
+				}
+
+				doorCount3++;
+
+				if (doorCount3 >= 15)
+				{
+					tutorial3YellowKabe3 = false;
+					doorCount3 = 0;
+					doorOpen3 = false;
 				}
 			}
 
@@ -6056,6 +6114,13 @@ void GameScene::Tutorial3Reset()
 	tutorial3YellowKabe1 = true;
 	tutorial3YellowKabe2 = true;
 	tutorial3YellowKabe3 = true;
+
+	doorCount1 = 0;
+	doorOpen1 = false;
+	doorCount2 = 0;
+	doorOpen2 = false;
+	doorCount3 = 0;
+	doorOpen3 = false;
 
 	camera->SetTarget({ 0, 1, 0 });
 	camera->SetEye({ 0, 20, -30 });
