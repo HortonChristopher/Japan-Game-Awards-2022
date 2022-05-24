@@ -3086,6 +3086,69 @@ void GameScene::Update()
 					stageSelect = 6;
 					break;
 				}
+				t1BackgroundPosition = { SpriteStageSizeX + (1280 * (0 - stageSelect)), SpriteStageSizeY };
+				t2BackgroundPosition = { SpriteStageSizeX + (1280 * (1 - stageSelect)), SpriteStageSizeY };
+				t3BackgroundPosition = { SpriteStageSizeX + (1280 * (2 - stageSelect)), SpriteStageSizeY };
+				t4BackgroundPosition = { SpriteStageSizeX + (1280 * (3 - stageSelect)), SpriteStageSizeY };
+				s1BackgroundPosition = { SpriteStageSizeX + (1280 * (4 - stageSelect)), SpriteStageSizeY };
+				s2BackgroundPosition = { SpriteStageSizeX + (1280 * (5 - stageSelect)), SpriteStageSizeY };
+				s3BackgroundPosition = { SpriteStageSizeX + (1280 * (6 - stageSelect)), SpriteStageSizeY };
+
+				t1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (0 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				t2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (1 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				t3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (2 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				t4StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (3 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				s1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (4 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				s2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (5 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				s3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (6 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+
+				t1NewLogPosition = { (SpriteStageSizeX + (1280 * (0 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				t2NewLogPosition = { (SpriteStageSizeX + (1280 * (1 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				t3NewLogPosition = { (SpriteStageSizeX + (1280 * (2 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				t4NewLogPosition = { (SpriteStageSizeX + (1280 * (3 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				s1NewLogPosition = { (SpriteStageSizeX + (1280 * (4 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				s2NewLogPosition = { (SpriteStageSizeX + (1280 * (5 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				s3NewLogPosition = { (SpriteStageSizeX + (1280 * (6 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+
+				t1ClearLogPosition = { (SpriteStageSizeX + (1280 * (0 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				t2ClearLogPosition = { (SpriteStageSizeX + (1280 * (1 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				t3ClearLogPosition = { (SpriteStageSizeX + (1280 * (2 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				t4ClearLogPosition = { (SpriteStageSizeX + (1280 * (3 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				s1ClearLogPosition = { (SpriteStageSizeX + (1280 * (4 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				s2ClearLogPosition = { (SpriteStageSizeX + (1280 * (5 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				s3ClearLogPosition = { (SpriteStageSizeX + (1280 * (6 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+
+				t1Background->SetPosition(t1BackgroundPosition);
+				t2Background->SetPosition(t2BackgroundPosition);
+				t3Background->SetPosition(t3BackgroundPosition);
+				t4Background->SetPosition(t4BackgroundPosition);
+				s1Background->SetPosition(s1BackgroundPosition);
+				s2Background->SetPosition(s2BackgroundPosition);
+				s3Background->SetPosition(s3BackgroundPosition);
+
+				t1StageSelectFrame->SetPosition(t1StageSelectFramePosition);
+				t2StageSelectFrame->SetPosition(t2StageSelectFramePosition);
+				t3StageSelectFrame->SetPosition(t3StageSelectFramePosition);
+				t4StageSelectFrame->SetPosition(t4StageSelectFramePosition);
+				s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
+				s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
+				s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
+
+				t1NewLog->SetPosition(t1NewLogPosition);
+				t2NewLog->SetPosition(t2NewLogPosition);
+				t3NewLog->SetPosition(t3NewLogPosition);
+				t4NewLog->SetPosition(t4NewLogPosition);
+				s1NewLog->SetPosition(s1NewLogPosition);
+				s2NewLog->SetPosition(s2NewLogPosition);
+				s3NewLog->SetPosition(s3NewLogPosition);
+
+				t1ClearLog->SetPosition(t1ClearLogPosition);
+				t2ClearLog->SetPosition(t2ClearLogPosition);
+				t3ClearLog->SetPosition(t3ClearLogPosition);
+				t4ClearLog->SetPosition(t4ClearLogPosition);
+				s1ClearLog->SetPosition(s1ClearLogPosition);
+				s2ClearLog->SetPosition(s2ClearLogPosition);
+				s3ClearLog->SetPosition(s3ClearLogPosition);
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3274,6 +3337,69 @@ void GameScene::Update()
 					stageSelect = 6;
 					break;
 				}
+				t1BackgroundPosition = { SpriteStageSizeX + (1280 * (0 - stageSelect)), SpriteStageSizeY };
+				t2BackgroundPosition = { SpriteStageSizeX + (1280 * (1 - stageSelect)), SpriteStageSizeY };
+				t3BackgroundPosition = { SpriteStageSizeX + (1280 * (2 - stageSelect)), SpriteStageSizeY };
+				t4BackgroundPosition = { SpriteStageSizeX + (1280 * (3 - stageSelect)), SpriteStageSizeY };
+				s1BackgroundPosition = { SpriteStageSizeX + (1280 * (4 - stageSelect)), SpriteStageSizeY };
+				s2BackgroundPosition = { SpriteStageSizeX + (1280 * (5 - stageSelect)), SpriteStageSizeY };
+				s3BackgroundPosition = { SpriteStageSizeX + (1280 * (6 - stageSelect)), SpriteStageSizeY };
+
+				t1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (0 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				t2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (1 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				t3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (2 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				t4StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (3 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				s1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (4 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				s2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (5 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+				s3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * (6 - stageSelect))) - 20, (SpriteStageSizeY - 11) };
+
+				t1NewLogPosition = { (SpriteStageSizeX + (1280 * (0 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				t2NewLogPosition = { (SpriteStageSizeX + (1280 * (1 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				t3NewLogPosition = { (SpriteStageSizeX + (1280 * (2 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				t4NewLogPosition = { (SpriteStageSizeX + (1280 * (3 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				s1NewLogPosition = { (SpriteStageSizeX + (1280 * (4 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				s2NewLogPosition = { (SpriteStageSizeX + (1280 * (5 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+				s3NewLogPosition = { (SpriteStageSizeX + (1280 * (6 - stageSelect))) - 80, (SpriteStageSizeY + 60) };
+
+				t1ClearLogPosition = { (SpriteStageSizeX + (1280 * (0 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				t2ClearLogPosition = { (SpriteStageSizeX + (1280 * (1 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				t3ClearLogPosition = { (SpriteStageSizeX + (1280 * (2 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				t4ClearLogPosition = { (SpriteStageSizeX + (1280 * (3 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				s1ClearLogPosition = { (SpriteStageSizeX + (1280 * (4 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				s2ClearLogPosition = { (SpriteStageSizeX + (1280 * (5 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+				s3ClearLogPosition = { (SpriteStageSizeX + (1280 * (6 - stageSelect))) - 150, (SpriteStageSizeY + 100) };
+
+				t1Background->SetPosition(t1BackgroundPosition);
+				t2Background->SetPosition(t2BackgroundPosition);
+				t3Background->SetPosition(t3BackgroundPosition);
+				t4Background->SetPosition(t4BackgroundPosition);
+				s1Background->SetPosition(s1BackgroundPosition);
+				s2Background->SetPosition(s2BackgroundPosition);
+				s3Background->SetPosition(s3BackgroundPosition);
+
+				t1StageSelectFrame->SetPosition(t1StageSelectFramePosition);
+				t2StageSelectFrame->SetPosition(t2StageSelectFramePosition);
+				t3StageSelectFrame->SetPosition(t3StageSelectFramePosition);
+				t4StageSelectFrame->SetPosition(t4StageSelectFramePosition);
+				s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
+				s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
+				s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
+
+				t1NewLog->SetPosition(t1NewLogPosition);
+				t2NewLog->SetPosition(t2NewLogPosition);
+				t3NewLog->SetPosition(t3NewLogPosition);
+				t4NewLog->SetPosition(t4NewLogPosition);
+				s1NewLog->SetPosition(s1NewLogPosition);
+				s2NewLog->SetPosition(s2NewLogPosition);
+				s3NewLog->SetPosition(s3NewLogPosition);
+
+				t1ClearLog->SetPosition(t1ClearLogPosition);
+				t2ClearLog->SetPosition(t2ClearLogPosition);
+				t3ClearLog->SetPosition(t3ClearLogPosition);
+				t4ClearLog->SetPosition(t4ClearLogPosition);
+				s1ClearLog->SetPosition(s1ClearLogPosition);
+				s2ClearLog->SetPosition(s2ClearLogPosition);
+				s3ClearLog->SetPosition(s3ClearLogPosition);
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
