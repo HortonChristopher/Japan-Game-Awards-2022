@@ -2045,7 +2045,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s3_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
-			object_s3_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			if (modelIndex == 0)
+			{
+				object_s3_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			}
+			else
+			{
+				object_s3_y1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			}
 			object_s3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
