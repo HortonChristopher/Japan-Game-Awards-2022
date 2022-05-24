@@ -3528,7 +3528,7 @@ void GameScene::Update()
 		objButtonRed1->Update();
 		//objTempTriggerE->Update();
 		objButtonRed2->Update();
-		objTempYellowTrigger1->Update();
+		//objTempYellowTrigger1->Update();
 		objButtonFloor->Update();
 
 		objSkydome->Update();
@@ -6116,25 +6116,25 @@ void GameScene::Stage2Reset()
 
 		for (auto object_s2_y : objects_s2_y) {
 			XMFLOAT3 objectPosition = object_s2_y->GetPosition();
-			object_s2_y->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_y->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
 			object_s2_y->Update();
 		}
 
 		for (auto object_s2_y2 : objects_s2_y2) {
 			XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
-			object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_y2->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
 			object_s2_y2->Update();
 		}
 
 		for (auto object_s2_s : objects_s2_s) {
 			XMFLOAT3 objectPosition = object_s2_s->GetPosition();
-			object_s2_s->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_s->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
 			object_s2_s->Update();
 		}
 
 		for (auto object_s2_s2 : objects_s2_s2) {
 			XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
-			object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y + 150.0f, objectPosition.z });
+			object_s2_s2->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
 			object_s2_s2->Update();
 		}
 	}
@@ -6193,13 +6193,13 @@ void GameScene::Stage2Move()
 	{
 		for (auto object_s2_y : objects_s2_y) {
 			XMFLOAT3 objectPosition = object_s2_y->GetPosition();
-			object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_y->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_y->Update();
 		}
 
 		for (auto object_s2_y2 : objects_s2_y2) {
 			XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
-			object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_y2->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_y2->Update();
 		}
 	}
@@ -6207,28 +6207,28 @@ void GameScene::Stage2Move()
 	{
 		for (auto object_s2_y : objects_s2_y) {
 			XMFLOAT3 objectPosition = object_s2_y->GetPosition();
-			object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_y->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_y->Update();
 		}
 
 		for (auto object_s2_y2 : objects_s2_y2) {
 			XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
-			object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_y2->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_y2->Update();
 		}
 	}
 
-	if (!stage2Switch)
+	if (stage2Switch)
 	{
 		for (auto object_s2_s : objects_s2_s) {
 			XMFLOAT3 objectPosition = object_s2_s->GetPosition();
-			object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_s->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_s->Update();
 		}
 
 		for (auto object_s2_s2 : objects_s2_s2) {
 			XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
-			object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
+			object_s2_s2->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_s2->Update();
 		}
 	}
@@ -6236,13 +6236,13 @@ void GameScene::Stage2Move()
 	{
 		for (auto object_s2_s : objects_s2_s) {
 			XMFLOAT3 objectPosition = object_s2_s->GetPosition();
-			object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_s->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_s->Update();
 		}
 
 		for (auto object_s2_s2 : objects_s2_s2) {
 			XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
-			object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+			object_s2_s2->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
 			object_s2_s2->Update();
 		}
 	}
