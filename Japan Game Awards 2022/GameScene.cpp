@@ -3054,6 +3054,7 @@ void GameScene::Update()
 			{
 				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
+				stageSelect = lastScene;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3210,6 +3211,7 @@ void GameScene::Update()
 			{
 				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
+				stageSelect = lastScene;
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
