@@ -231,12 +231,20 @@ private: // メンバ変数 Member variables
 	Model* modelGround = nullptr;
 	Model* modelPlane = nullptr;
 	Model* modelTempWall = nullptr;
+	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
-	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
 	Model* modelTeleporterIn_1= nullptr;
 	Model* modelTeleporterOut_1 = nullptr;
 	Model* modelPlayerMarker = nullptr;
+
+	// スイッチ
+	Model* modelButtonRed = nullptr;
+	Model* modelButtonBlue = nullptr;
+	Model* modelButtonGreen = nullptr;
+	Model* modelButtonYellow = nullptr;
+	Model* modelButtonBomb = nullptr;
+	Model* modelButtonFloor = nullptr;
 
 	Model* modelTESTONLY = nullptr;
 
@@ -261,16 +269,24 @@ private: // メンバ変数 Member variables
 	Object3d* objS3 = nullptr;
 
 	Object3d* objSkydome = nullptr;
-	Object3d* objTempTrigger = nullptr;
-	Object3d* objTempTriggerE = nullptr;
-	Object3d* objTempYellowTrigger1 = nullptr;
-	Object3d* objTempYellowTrigger2 = nullptr;
 	Object3d* objTempBullet = nullptr;
 	Object3d* objTempBulletE = nullptr;
 	Object3d* objMenuSelection = nullptr;
 	Object3d* objTempWall = nullptr;
 	Object3d* objPlayerMarker = nullptr;
 
+	// スイッチ
+	Object3d* objButtonRed1 = nullptr;
+	Object3d* objButtonRed2 = nullptr;
+	Object3d* objButtonBlue = nullptr;
+	Object3d* objButtonGreen1 = nullptr;
+	Object3d* objButtonGreen2 = nullptr;
+	Object3d* objButtonYellow = nullptr;
+	Object3d* objButtonBomb1 = nullptr;
+	Object3d* objButtonBomb2 = nullptr;
+	Object3d* objButtonFloor = nullptr;
+
+	// ワープ
 	Object3d* objTeleporterIn1 = nullptr;
 	Object3d* objTeleporterOut1 = nullptr;
 	Object3d* objTeleporterIn2 = nullptr;
@@ -398,6 +414,15 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 enemyTrigger;
 	XMFLOAT3 yellowTrigger1;
 	XMFLOAT3 yellowTrigger2;
+	XMFLOAT3 BlueButton;
+	XMFLOAT3 YellowButton;
+	XMFLOAT3 RedButton1;
+	XMFLOAT3 RedButton2;
+	XMFLOAT3 GreenButton1;
+	XMFLOAT3 GreenButton2;
+	XMFLOAT3 BombButton1;
+	XMFLOAT3 BombButton2;
+	XMFLOAT3 FloorButton;
 	XMFLOAT3 playerBullet;
 	XMFLOAT3 enemyBullet;
 	XMFLOAT3 FBXplayerPosition;
