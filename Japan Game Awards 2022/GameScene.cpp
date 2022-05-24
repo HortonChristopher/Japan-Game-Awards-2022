@@ -3054,7 +3054,38 @@ void GameScene::Update()
 			{
 				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
-				stageSelect = lastScene;
+				switch (lastScene)
+				{
+				case 0:
+					break;
+				case 1:
+					stageSelect = 4;
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					stageSelect = 5;
+					break;
+				case 5:
+					stageSelect = 0;
+					break;
+				case 6:
+					stageSelect = 1;
+					break;
+				case 7:
+					stageSelect = 2;
+					break;
+				case 8:
+					break;
+				case 9:
+					stageSelect = 3;
+					break;
+				case 10:
+					stageSelect = 6;
+					break;
+				}
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3211,7 +3242,38 @@ void GameScene::Update()
 			{
 				audio->PlayWave("Title.wav", Volume, true);
 				sceneNo = 8;
-				stageSelect = lastScene;
+				switch (lastScene)
+				{
+				case 0:
+					break;
+				case 1:
+					stageSelect = 4;
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					stageSelect = 5;
+					break;
+				case 5:
+					stageSelect = 0;
+					break;
+				case 6:
+					stageSelect = 1;
+					break;
+				case 7:
+					stageSelect = 2;
+					break;
+				case 8:
+					break;
+				case 9:
+					stageSelect = 3;
+					break;
+				case 10:
+					stageSelect = 6;
+					break;
+				}
 				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 				menuBallRotation = { 0.0f, 0.0f, 0.0f };
