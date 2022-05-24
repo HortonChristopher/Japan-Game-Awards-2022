@@ -134,9 +134,6 @@ GameScene::~GameScene()
 	safe_delete(objGround);
 	safe_delete(objFighter);
 	safe_delete(objClone);
-	safe_delete(objTempTrigger);
-	safe_delete(objTempTriggerE);
-	safe_delete(objTempYellowTrigger1);
 	safe_delete(objTempBullet);
 	safe_delete(objTempBulletE);
 
@@ -247,10 +244,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 #pragma region 3Dオブジェクト生成
 	// 3Dオブジェクト生成 3D object generation
 	objSkydome = Object3d::Create();
-	objTempTrigger = Object3d::Create();
-	objTempTriggerE = Object3d::Create();
-	objTempYellowTrigger1 = Object3d::Create();
-	objTempYellowTrigger2 = Object3d::Create();
 	objTempBullet = Object3d::Create();
 	objTempBulletE = Object3d::Create();
 	objMenuSelection = Object3d::Create();
@@ -453,7 +446,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelTempWall = Model::CreateFromOBJ("TempWall");
 	modelTempWall2 = Model::CreateFromOBJ("TempWall2");
 	modelYellowWall = Model::CreateFromOBJ("YellowKabe");
-	modelTempTrigger = Model::CreateFromOBJ("ButtonBase");
 	modelTempBullet = Model::CreateFromOBJ("bullet2");
 	modelPlayerMarker = Model::CreateFromOBJ("player_cursor");
 
@@ -476,10 +468,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 #pragma region Obj オブジェクト生成とモデルとセット
 	objSkydome->SetModel(modelSkydome);
 
-	objTempTrigger->SetModel(modelTempTrigger);
-	objTempTriggerE->SetModel(modelTempTrigger);
-	objTempYellowTrigger1->SetModel(modelTempTrigger);
-	objTempYellowTrigger2->SetModel(modelTempTrigger);
 	objTempBullet->SetModel(modelTempBullet);
 	objTempBulletE->SetModel(modelTempBullet);
 
@@ -2132,11 +2120,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objFighter->SetPosition({ -20, 0, 12 }); // -20, 12
 	objClone->SetPosition({ 20, 0, 12 }); // 20, 12
 
-	objTempTrigger->SetPosition({ 14.0f, 0, 9.0f }); // -8, 6
-	objTempTriggerE->SetPosition({ 14.0f, 0, -9.0f }); // 8, 6
-	objTempYellowTrigger1->SetPosition({ 5.0f, 0, -9.0f }); // 20, -3
-	objTempYellowTrigger2->SetPosition({ 17.0f, 0, -3.0f }); // 8, -12
-
 	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
 	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
@@ -2216,10 +2199,6 @@ void GameScene::Update()
 	playerRotation = objFighter->GetRotation();
 	enemyPosition = objClone->GetPosition();
 	enemyRotation = objClone->GetRotation();
-	playerTrigger = objTempTrigger->GetPosition();
-	enemyTrigger = objTempTriggerE->GetPosition();
-	yellowTrigger1 = objTempYellowTrigger1->GetPosition();
-	yellowTrigger2 = objTempYellowTrigger2->GetPosition();
 	BlueButton = objButtonBlue->GetPosition();
 	YellowButton = objButtonYellow->GetPosition();
 	GreenButton1 = objButtonGreen1->GetPosition();
@@ -2963,9 +2942,9 @@ void GameScene::Update()
 			object_2->Update();
 		}
 
-		//objTempTrigger->Update();
+		
 		objButtonBomb1->Update();
-		//objTempTriggerE->Update();
+		
 		objButtonBomb2->Update();
 
 		objPlayerRun->Update();
@@ -3524,11 +3503,10 @@ void GameScene::Update()
 		objCloneStand->Update();
 		objCloneFall->Update();
 
-		//objTempTrigger->Update();
+		
 		objButtonRed1->Update();
-		//objTempTriggerE->Update();
+		
 		objButtonRed2->Update();
-		//objTempYellowTrigger1->Update();
 		objButtonFloor->Update();
 
 		objSkydome->Update();
@@ -4051,11 +4029,6 @@ void GameScene::Update()
 		objCloneStand->Update();
 		objCloneFall->Update();
 
-		/*objTempTrigger->Update();
-		objTempTriggerE->Update();
-		objTempYellowTrigger1->Update();
-		objTempYellowTrigger2->Update();*/
-
 		objButtonGreen1->Update();
 		objButtonGreen2->Update();
 		objButtonBlue->Update();
@@ -4456,8 +4429,6 @@ void GameScene::Update()
 			object_t4_y2->Update();
 		}
 
-		//objTempTrigger->Update();
-		//objTempTriggerE->Update();
 		objButtonRed1->Update();
 		objButtonRed2->Update();
 
@@ -4711,13 +4682,10 @@ void GameScene::Update()
 			object_s3_y2_2->Update();
 		}
 
-		//objTempTrigger->Update();
-		objButtonRed1->Update();
-		//objTempTriggerE->Update();
+		
+		
 		objButtonBlue->Update();
-		//objTempYellowTrigger1->Update();
 		objButtonGreen1->Update();
-		//objTempYellowTrigger2->Update();
 		objButtonYellow->Update();
 
 		objTeleporterIn1->Update();
@@ -4885,12 +4853,8 @@ void GameScene::Draw()
 			object_2->Draw();
 		}
 
-		//objFighter->Draw();
-		//objClone->Draw();
-
-		//objTempTrigger->Draw();
+		
 		objButtonBomb1->Draw();
-		//objTempTriggerE->Draw();
 		objButtonBomb2->Draw();
 
 		if (beginStage)
@@ -4966,9 +4930,7 @@ void GameScene::Draw()
 
 		if (stage2YellowKabe)
 		{
-			//objTempTriggerE->Draw();
 			objButtonRed1->Draw();
-			//objTempTrigger->Draw();
 			objButtonRed2->Draw();
 
 			for (auto object_s2_y : objects_s2_y) {
@@ -5108,7 +5070,6 @@ void GameScene::Draw()
 		}
 		if (tutorial3YellowKabe2)
 		{
-			//objTempYellowTrigger1->Draw();
 			objButtonBlue->Draw();
 
 			for (auto object_t3_y1_2 : objects_t3_y1_2)
@@ -5123,8 +5084,6 @@ void GameScene::Draw()
 		}
 		if (tutorial3YellowKabe3)
 		{
-			//objTempTrigger->Draw();
-			//objTempTriggerE->Draw();
 			objButtonGreen1->Draw();
 			objButtonGreen2->Draw();
 
@@ -5179,8 +5138,6 @@ void GameScene::Draw()
 
 		if (tutorial4YellowKabe)
 		{
-			//objTempTriggerE->Draw();
-			//objTempTrigger->Draw();
 			objButtonRed1->Draw();
 			objButtonRed2->Draw();
 
@@ -5239,7 +5196,6 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe1)
 		{
-			//objTempTriggerE->Draw();
 			objButtonRed1->Draw();
 
 			for (auto object_s3_y1_1 : objects_s3_y1_1)
@@ -5250,7 +5206,6 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe2)
 		{
-			//objTempTrigger->Draw();
 			objButtonBlue->Draw();
 
 			for (auto object_s3_y2_1 : objects_s3_y2_1)
@@ -5261,7 +5216,6 @@ void GameScene::Draw()
 
 		if (stage3YellowKabe3)
 		{
-			//objTempYellowTrigger1->Draw();
 			objButtonGreen1->Draw();
 
 			for (auto object_s3_y2_2 : objects_s3_y2_2)
@@ -5787,13 +5741,9 @@ void GameScene::Tutorial3Reset()
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
 
-	//objTempTrigger->SetPosition({ -8.0f, 0, 6.0f });
 	objButtonGreen1->SetPosition({ -8.0f, 0, 6.0f });
-	//objTempTriggerE->SetPosition({ 8.0f, 0, 6.0f });
 	objButtonGreen2->SetPosition({ 8.0f, 0, 6.0f });
-	//objTempYellowTrigger1->SetPosition({ 20.0f, 0, -3.0f });
 	objButtonBlue->SetPosition({ 20.0f, 0, -3.0f });
-	//objTempYellowTrigger2->SetPosition({ 8.0f, 0, -12.0f });
 	objButtonRed1->SetPosition({ 8.0f, 0, -12.0f });
 
 	cameraMove = 1;
@@ -5966,9 +5916,7 @@ void GameScene::Tutorial4Reset()
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
 
-	//objTempTrigger->SetPosition({ -14.0f, 0, 9.0f });
 	objButtonRed1->SetPosition({ -14.0f, 0, 9.0f });
-	//objTempTriggerE->SetPosition({ 14.0f, 0, 9.0f });
 	objButtonRed2->SetPosition({ 14.0f, 0, 9.0f });
 
 	cameraMove = 1;
@@ -6042,9 +5990,7 @@ void GameScene::Stage1Reset()
 	objFighter->SetPosition({ -12,30,-12 });
 	objClone->SetPosition({ 12,30,-12 });
 
-	//objTempTrigger->SetPosition({ -12.0f, 0, 0 });
 	objButtonBomb1->SetPosition({ -17.0f, 0, 0 });
-	//objTempTriggerE->SetPosition({ 12.0f, 0, 0 });
 	objButtonBomb2->SetPosition({ 17.0f, 0, 0 });
 
 	objTempBullet->SetScale({ 0.25f, 0.25f, 0.25f });
@@ -6155,11 +6101,8 @@ void GameScene::Stage2Reset()
 	enemyAlive = true;
 	playerAlive = true;
 
-	//objTempTrigger->SetPosition({ -13.0f, 0, -12.0f });
 	objButtonRed1->SetPosition({ -13.0f, 0, -12.0f });
-	//objTempTriggerE->SetPosition({ 10.0f, 0, -9.0f });
 	objButtonRed2->SetPosition({ 10.0f, 0, -9.0f });
-	//objTempYellowTrigger1->SetPosition({ -7.0f, 0, 6.0f });
 	objButtonFloor->SetPosition({ -7.0f, 0, 6.0f });
 
 	camera->SetTarget({ 0, 1, 0 });
@@ -6325,13 +6268,9 @@ void GameScene::Stage3Reset()
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
 
-	//objTempTrigger->SetPosition({ 14.0f, 0, 9.0f });
 	objButtonBlue->SetPosition({ 14.0f, 0, 9.0f });
-	//objTempTriggerE->SetPosition({ 14.0f, 0, -9.0f });
 	objButtonRed1->SetPosition({ 14.0f, 0, -9.0f });
-	//objTempYellowTrigger1->SetPosition({ 5.0f, 0, -9.0f });
 	objButtonGreen1->SetPosition({ 5.0f, 0, -9.0f });
-	//objTempYellowTrigger2->SetPosition({ 17.0f, 0, -3.0f });
 	objButtonYellow->SetPosition({ 17.0f, 0, -3.0f });
 
 	cameraMove = 1;

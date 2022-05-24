@@ -233,7 +233,6 @@ private: // メンバ変数 Member variables
 	Model* modelTempWall = nullptr;
 	Model* modelTempWall2 = nullptr;
 	Model* modelYellowWall = nullptr;
-	Model* modelTempTrigger = nullptr;
 	Model* modelTempBullet = nullptr;
 	Model* modelTeleporterIn = nullptr;
 	Model* modelTeleporterOut = nullptr;
@@ -270,10 +269,6 @@ private: // メンバ変数 Member variables
 	Object3d* objS3 = nullptr;
 
 	Object3d* objSkydome = nullptr;
-	Object3d* objTempTrigger = nullptr;
-	Object3d* objTempTriggerE = nullptr;
-	Object3d* objTempYellowTrigger1 = nullptr;
-	Object3d* objTempYellowTrigger2 = nullptr;
 	Object3d* objTempBullet = nullptr;
 	Object3d* objTempBulletE = nullptr;
 	Object3d* objMenuSelection = nullptr;
