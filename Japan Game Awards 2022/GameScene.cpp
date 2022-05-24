@@ -32,8 +32,6 @@ extern XMFLOAT3 cloneRotationTemp = { 0,0,0 };
 extern int cameraMove = 1;
 extern int prevCameraMove = 0;
 
-//extern GameOver* gameOver = new GameOver();
-//extern GameClear* gameClear = new GameClear();
 extern DirectXCommon* dxCommon;
 
 //あんじょうテスト
@@ -144,7 +142,6 @@ GameScene::~GameScene()
 
 	// Fbx object
 	safe_delete(fbxobject1);
-	//safe_delete( fbxmodel1 );
 	safe_delete(objPlayerStand);
 	safe_delete(objPlayerRun);
 	safe_delete(objPlayerFight);
