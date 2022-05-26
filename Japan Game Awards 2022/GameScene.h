@@ -82,8 +82,8 @@ public: // メンバ関数 Member function
 	void Stage1Move();
 	void Stage2Reset();
 	void Stage2Move();
-	void Stage3Reset();
-	void Stage3Move();
+	void Stage5Reset();
+	void Stage5Move();
 	void Stage6Reset();
 	void Stage6Move();
 
@@ -170,6 +170,7 @@ private: // メンバ変数 Member variables
 	bool s1FirstPlayFlag = true;
 	bool s2FirstPlayFlag = true;
 	bool s3FirstPlayFlag = true;
+	bool s4FirstPlayFlag = true;
 	bool s6FirstPlayFlag = true;
 
 	bool t1ClearFlag = false;
@@ -181,6 +182,7 @@ private: // メンバ変数 Member variables
 	bool s1ClearFlag = false;
 	bool s2ClearFlag = false;
 	bool s3ClearFlag = false;
+	bool s4ClearFlag = false;
 	bool s6ClearFlag = false;
 
 #pragma region Sprite
@@ -442,33 +444,49 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 t2BackgroundPosition = { SpriteStageSizeX + (1280 * 1), SpriteStageSizeY };
 	XMFLOAT2 t3BackgroundPosition = { SpriteStageSizeX + (1280 * 2), SpriteStageSizeY };
 	XMFLOAT2 t4BackgroundPosition = { SpriteStageSizeX + (1280 * 3), SpriteStageSizeY };
-	XMFLOAT2 s1BackgroundPosition = { SpriteStageSizeX + (1280 * 4), SpriteStageSizeY };
-	XMFLOAT2 s2BackgroundPosition = { SpriteStageSizeX + (1280 * 5), SpriteStageSizeY };
-	XMFLOAT2 s3BackgroundPosition = { SpriteStageSizeX + (1280 * 6), SpriteStageSizeY };
+	XMFLOAT2 t5BackgroundPosition = { SpriteStageSizeX + (1280 * 4), SpriteStageSizeY };
+	XMFLOAT2 s1BackgroundPosition = { SpriteStageSizeX + (1280 * 5), SpriteStageSizeY };
+	XMFLOAT2 s2BackgroundPosition = { SpriteStageSizeX + (1280 * 6), SpriteStageSizeY };
+	XMFLOAT2 s3BackgroundPosition = { SpriteStageSizeX + (1280 * 7), SpriteStageSizeY };
+	XMFLOAT2 s4BackgroundPosition = { SpriteStageSizeX + (1280 * 8), SpriteStageSizeY };
+	XMFLOAT2 s5BackgroundPosition = { SpriteStageSizeX + (1280 * 9), SpriteStageSizeY };
+	XMFLOAT2 s6BackgroundPosition = { SpriteStageSizeX + (1280 * 10), SpriteStageSizeY };
 
 	XMFLOAT2 t1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 0)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 t2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 1)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 t3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 2)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 t4StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 3)) - 20, (SpriteStageSizeY - 11) };
-	XMFLOAT2 s1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 4)) - 20, (SpriteStageSizeY - 11) };
-	XMFLOAT2 s2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 5)) - 20, (SpriteStageSizeY - 11) };
-	XMFLOAT2 s3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 6)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 t5StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 4)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 5)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 6)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s3StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 7)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s4StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 8)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s5StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 9)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s6StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 10)) - 20, (SpriteStageSizeY - 11) };
 
 	XMFLOAT2 t1NewLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 t2NewLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 t3NewLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 t4NewLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 80, (SpriteStageSizeY + 60) };
-	XMFLOAT2 s1NewLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 80, (SpriteStageSizeY + 60) };
-	XMFLOAT2 s2NewLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 80, (SpriteStageSizeY + 60) };
-	XMFLOAT2 s3NewLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 t5NewLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s1NewLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s2NewLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s3NewLogPosition = { (SpriteStageSizeX + (1280 * 7)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s4NewLogPosition = { (SpriteStageSizeX + (1280 * 8)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s5NewLogPosition = { (SpriteStageSizeX + (1280 * 9)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s6NewLogPosition = { (SpriteStageSizeX + (1280 * 10)) - 80, (SpriteStageSizeY + 60) };
 
 	XMFLOAT2 t1ClearLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 t2ClearLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 t3ClearLogPosition = { (SpriteStageSizeX + (1280 * 2)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 t4ClearLogPosition = { (SpriteStageSizeX + (1280 * 3)) - 150, (SpriteStageSizeY + 100) };
-	XMFLOAT2 s1ClearLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 150, (SpriteStageSizeY + 100) };
-	XMFLOAT2 s2ClearLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 150, (SpriteStageSizeY + 100) };
-	XMFLOAT2 s3ClearLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 t5ClearLogPosition = { (SpriteStageSizeX + (1280 * 4)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s1ClearLogPosition = { (SpriteStageSizeX + (1280 * 5)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s2ClearLogPosition = { (SpriteStageSizeX + (1280 * 6)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s3ClearLogPosition = { (SpriteStageSizeX + (1280 * 7)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s4ClearLogPosition = { (SpriteStageSizeX + (1280 * 8)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s5ClearLogPosition = { (SpriteStageSizeX + (1280 * 9)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s6ClearLogPosition = { (SpriteStageSizeX + (1280 * 10)) - 150, (SpriteStageSizeY + 100) };
 
 
 	CollisionManager* collisionManager;

@@ -349,6 +349,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	t4Background = Sprite::Create(23, t4BackgroundPosition);
 	t4Background->SetSize(SpriteStagSize);
 
+	Sprite::LoadTexture(65, L"Resources/Sprite/T5.png");
+	t5Background = Sprite::Create(65, t5BackgroundPosition);
+	t5Background->SetSize(SpriteStagSize);
+
 	Sprite::LoadTexture(21, L"Resources/Sprite/S1.png");
 	s1Background = Sprite::Create(21, s1BackgroundPosition);
 	s1Background->SetSize(SpriteStagSize);
@@ -360,6 +364,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(24, L"Resources/Sprite/S3.png");
 	s3Background = Sprite::Create(24, s3BackgroundPosition);
 	s3Background->SetSize(SpriteStagSize);
+
+	/*Sprite::LoadTexture(68, L"Resources/Sprite/S4.png");
+	s4Background = Sprite::Create(24, s4BackgroundPosition);
+	s4Background->SetSize(SpriteStagSize);*/
+
+	Sprite::LoadTexture(66, L"Resources/Sprite/S5.png");
+	s5Background = Sprite::Create(66, s5BackgroundPosition);
+	s5Background->SetSize(SpriteStagSize);
+
+	Sprite::LoadTexture(67, L"Resources/Sprite/S6.png");
+	s6Background = Sprite::Create(67, s6BackgroundPosition);
+	s6Background->SetSize(SpriteStagSize);
 
 	Sprite::LoadTexture(25, L"Resources/Sprite/StageSelect_RB.png");
 	StageSelectRB = Sprite::Create(25, { 1050.0f,250.0f });
@@ -375,9 +391,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	t2StageSelectFrame = Sprite::Create(28, { t2StageSelectFramePosition });
 	t3StageSelectFrame = Sprite::Create(28, { t3StageSelectFramePosition });
 	t4StageSelectFrame = Sprite::Create(28, { t4StageSelectFramePosition });
+	t5StageSelectFrame = Sprite::Create(28, { t5StageSelectFramePosition });
 	s1StageSelectFrame = Sprite::Create(28, { s1StageSelectFramePosition });
 	s2StageSelectFrame = Sprite::Create(28, { s2StageSelectFramePosition });
 	s3StageSelectFrame = Sprite::Create(28, { s3StageSelectFramePosition });
+	s4StageSelectFrame = Sprite::Create(28, { s4StageSelectFramePosition });
+	s5StageSelectFrame = Sprite::Create(28, { s5StageSelectFramePosition });
+	s6StageSelectFrame = Sprite::Create(28, { s6StageSelectFramePosition });
 
 	Sprite::LoadTexture(29, L"Resources/Sprite/GuideA.png");
 	GuideA = Sprite::Create(29, { 40.0f,620.0f });
@@ -398,6 +418,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	t4NewLog = Sprite::Create(31, { t4NewLogPosition });
 	t4NewLog->SetRotation({ -30.0f });
 
+	t5NewLog = Sprite::Create(31, { t5NewLogPosition });
+	t5NewLog->SetRotation({ -30.0f });
+
 	s1NewLog = Sprite::Create(31, { s1NewLogPosition });
 	s1NewLog->SetRotation({ -30.0f });
 
@@ -406,6 +429,15 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	s3NewLog = Sprite::Create(31, { s3NewLogPosition });
 	s3NewLog->SetRotation({ -30.0f });
+
+	s4NewLog = Sprite::Create(31, { s4NewLogPosition });
+	s4NewLog->SetRotation({ -30.0f });
+
+	s5NewLog = Sprite::Create(31, { s5NewLogPosition });
+	s5NewLog->SetRotation({ -30.0f });
+
+	s6NewLog = Sprite::Create(31, { s6NewLogPosition });
+	s6NewLog->SetRotation({ -30.0f });
 
 	Sprite::LoadTexture(32, L"Resources/Sprite/Clear.png");
 	t1ClearLog = Sprite::Create(32, { t1ClearLogPosition });
@@ -420,6 +452,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	t4ClearLog = Sprite::Create(32, { t4ClearLogPosition });
 	t4ClearLog->SetRotation({ -30.0f });
 
+	t5ClearLog = Sprite::Create(32, { t5ClearLogPosition });
+	t5ClearLog->SetRotation({ -30.0f });
+
 	s1ClearLog = Sprite::Create(32, { s1ClearLogPosition });
 	s1ClearLog->SetRotation({ -30.0f });
 
@@ -428,6 +463,15 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	s3ClearLog = Sprite::Create(32, { s3ClearLogPosition });
 	s3ClearLog->SetRotation({ -30.0f });
+
+	s4ClearLog = Sprite::Create(32, { s4ClearLogPosition });
+	s4ClearLog->SetRotation({ -30.0f });
+
+	s5ClearLog = Sprite::Create(32, { s5ClearLogPosition });
+	s5ClearLog->SetRotation({ -30.0f });
+
+	s6ClearLog = Sprite::Create(32, { s6ClearLogPosition });
+	s6ClearLog->SetRotation({ -30.0f });
 
 	Sprite::LoadTexture(33, L"Resources/Sprite/Pause1.png");
 	pause1 = Sprite::Create(33, { 720, 200 });
@@ -3073,8 +3117,8 @@ void GameScene::Update()
 					sceneNo = 9;
 					break;
 				case 10:
-					Stage3Move();
-					Stage3Reset();
+					Stage5Move();
+					Stage5Reset();
 					sceneNo = 10;
 					break;
 				case 11:
@@ -3176,7 +3220,7 @@ void GameScene::Update()
 					delay = true;
 					break;
 				case 10:
-					Stage3Move();
+					Stage5Move();
 					sceneNo = 8;
 					audio->StopWave("Stage.wav");
 					audio->PlayWave("Title.wav", Volume, true);
@@ -3729,7 +3773,7 @@ void GameScene::Update()
 					break;
 				case 4:
 					audio->PlayWave("Stage.wav", Volume, true);
-					Stage3Reset();
+					Stage5Reset();
 					sceneNo = 10;
 					break;
 				case 5:
@@ -3756,7 +3800,7 @@ void GameScene::Update()
 					break;
 				case 10:
 					audio->PlayWave("Stage.wav", Volume, true);
-					Stage3Reset();
+					Stage5Reset();
 					sceneNo = 10;
 					break;
 				}
@@ -4007,7 +4051,7 @@ void GameScene::Update()
 					break;
 				case 10:
 					audio->PlayWave("Stage.wav", Volume, true);
-					Stage3Reset();
+					Stage5Reset();
 					sceneNo = 10;
 					break;
 				}
@@ -5163,8 +5207,8 @@ void GameScene::Update()
 		camera->SetEye({ -15,0,0 });
 		camera->SetTarget({ 0, 0, 0 });
 
-		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6 ||
-			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6)
+		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 10 ||
+			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 10)
 		{
 			stageMoveRight = true;
 			stageSelect++;
@@ -5182,38 +5226,53 @@ void GameScene::Update()
 			camera->MoveVector({ +2.0f, 0.0f, 0.0f });
 			camera->Update();
 
-
 			t1BackgroundPosition.x -= 25.6f;
 			t2BackgroundPosition.x -= 25.6f;
 			t3BackgroundPosition.x -= 25.6f;
 			t4BackgroundPosition.x -= 25.6f;
+			t5BackgroundPosition.x -= 25.6f;
 			s1BackgroundPosition.x -= 25.6f;
 			s2BackgroundPosition.x -= 25.6f;
 			s3BackgroundPosition.x -= 25.6f;
+			s4BackgroundPosition.x -= 25.6f;
+			s5BackgroundPosition.x -= 25.6f;
+			s6BackgroundPosition.x -= 25.6f;
 
 			t1StageSelectFramePosition.x -= 25.6f;
 			t2StageSelectFramePosition.x -= 25.6f;
 			t3StageSelectFramePosition.x -= 25.6f;
 			t4StageSelectFramePosition.x -= 25.6f;
+			t5StageSelectFramePosition.x -= 25.6f;
 			s1StageSelectFramePosition.x -= 25.6f;
 			s2StageSelectFramePosition.x -= 25.6f;
 			s3StageSelectFramePosition.x -= 25.6f;
+			s4StageSelectFramePosition.x -= 25.6f;
+			s5StageSelectFramePosition.x -= 25.6f;
+			s6StageSelectFramePosition.x -= 25.6f;
 
 			t1NewLogPosition.x -= 25.6f;
 			t2NewLogPosition.x -= 25.6f;
 			t3NewLogPosition.x -= 25.6f;
 			t4NewLogPosition.x -= 25.6f;
+			t5NewLogPosition.x -= 25.6f;
 			s1NewLogPosition.x -= 25.6f;
 			s2NewLogPosition.x -= 25.6f;
 			s3NewLogPosition.x -= 25.6f;
+			s4NewLogPosition.x -= 25.6f;
+			s5NewLogPosition.x -= 25.6f;
+			s6NewLogPosition.x -= 25.6f;
 
 			t1ClearLogPosition.x -= 25.6f;
 			t2ClearLogPosition.x -= 25.6f;
 			t3ClearLogPosition.x -= 25.6f;
 			t4ClearLogPosition.x -= 25.6f;
+			t5ClearLogPosition.x -= 25.6f;
 			s1ClearLogPosition.x -= 25.6f;
 			s2ClearLogPosition.x -= 25.6f;
 			s3ClearLogPosition.x -= 25.6f;
+			s4ClearLogPosition.x -= 25.6f;
+			s5ClearLogPosition.x -= 25.6f;
+			s6ClearLogPosition.x -= 25.6f;
 
 			currentFrame++;
 
@@ -5233,33 +5292,49 @@ void GameScene::Update()
 			t2BackgroundPosition.x += 25.6f;
 			t3BackgroundPosition.x += 25.6f;
 			t4BackgroundPosition.x += 25.6f;
+			t5BackgroundPosition.x += 25.6f;
 			s1BackgroundPosition.x += 25.6f;
 			s2BackgroundPosition.x += 25.6f;
 			s3BackgroundPosition.x += 25.6f;
+			s4BackgroundPosition.x += 25.6f;
+			s5BackgroundPosition.x += 25.6f;
+			s6BackgroundPosition.x += 25.6f;
 
 			t1StageSelectFramePosition.x += 25.6f;
 			t2StageSelectFramePosition.x += 25.6f;
 			t3StageSelectFramePosition.x += 25.6f;
 			t4StageSelectFramePosition.x += 25.6f;
+			t5StageSelectFramePosition.x += 25.6f;
 			s1StageSelectFramePosition.x += 25.6f;
 			s2StageSelectFramePosition.x += 25.6f;
 			s3StageSelectFramePosition.x += 25.6f;
+			s4StageSelectFramePosition.x += 25.6f;
+			s5StageSelectFramePosition.x += 25.6f;
+			s6StageSelectFramePosition.x += 25.6f;
 
 			t1NewLogPosition.x += 25.6f;
 			t2NewLogPosition.x += 25.6f;
 			t3NewLogPosition.x += 25.6f;
 			t4NewLogPosition.x += 25.6f;
+			t5NewLogPosition.x += 25.6f;
 			s1NewLogPosition.x += 25.6f;
 			s2NewLogPosition.x += 25.6f;
 			s3NewLogPosition.x += 25.6f;
+			s4NewLogPosition.x += 25.6f;
+			s5NewLogPosition.x += 25.6f;
+			s6NewLogPosition.x += 25.6f;
 
 			t1ClearLogPosition.x += 25.6f;
 			t2ClearLogPosition.x += 25.6f;
 			t3ClearLogPosition.x += 25.6f;
 			t4ClearLogPosition.x += 25.6f;
+			t5ClearLogPosition.x += 25.6f;
 			s1ClearLogPosition.x += 25.6f;
 			s2ClearLogPosition.x += 25.6f;
 			s3ClearLogPosition.x += 25.6f;
+			s4ClearLogPosition.x += 25.6f;
+			s5ClearLogPosition.x += 25.6f;
+			s6ClearLogPosition.x += 25.6f;
 
 			currentFrame++;
 
@@ -5305,24 +5380,44 @@ void GameScene::Update()
 
 				break;
 			case 3:
-				Tutorial4Reset();
-				sceneNo = 9;
+				newTutorial4Reset();
+				sceneNo = 11;
 
 				break;
 			case 4:
+				Tutorial5Reset();
+				sceneNo = 12;
+
+				break;
+			case 5:
 				Stage1Reset();
 				sceneNo = 1;
 
 				break;
-			case 5:
+			case 6:
 				Stage2Reset();
 				sceneNo = 4;
 
 				break;
-			case 6:
-				Stage3Reset();
+			case 7:
+				Tutorial4Reset();
+				sceneNo = 9;
+
+				break;
+			case 8:
+				//Stage4Reset();
+				//sceneNo = ;
+
+				break;
+			case 9:
+				Stage5Reset();
 				sceneNo = 10;
 
+				break;
+			case 10:
+				Stage6Reset();
+				sceneNo = 13;
+				
 				break;
 			}
 		}
@@ -5332,33 +5427,49 @@ void GameScene::Update()
 		t2Background->SetPosition(t2BackgroundPosition);
 		t3Background->SetPosition(t3BackgroundPosition);
 		t4Background->SetPosition(t4BackgroundPosition);
+		t5Background->SetPosition(t5BackgroundPosition);
 		s1Background->SetPosition(s1BackgroundPosition);
 		s2Background->SetPosition(s2BackgroundPosition);
 		s3Background->SetPosition(s3BackgroundPosition);
+		//s4Background->SetPosition(s4BackgroundPosition);
+		s5Background->SetPosition(s5BackgroundPosition);
+		s6Background->SetPosition(s6BackgroundPosition);
 
 		t1StageSelectFrame->SetPosition(t1StageSelectFramePosition);
 		t2StageSelectFrame->SetPosition(t2StageSelectFramePosition);
 		t3StageSelectFrame->SetPosition(t3StageSelectFramePosition);
 		t4StageSelectFrame->SetPosition(t4StageSelectFramePosition);
+		t5StageSelectFrame->SetPosition(t5StageSelectFramePosition);
 		s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
 		s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
 		s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
+		//s4StageSelectFrame->SetPosition(s4StageSelectFramePosition);
+		s5StageSelectFrame->SetPosition(s5StageSelectFramePosition);
+		s6StageSelectFrame->SetPosition(s6StageSelectFramePosition);
 
 		t1NewLog->SetPosition(t1NewLogPosition);
 		t2NewLog->SetPosition(t2NewLogPosition);
 		t3NewLog->SetPosition(t3NewLogPosition);
 		t4NewLog->SetPosition(t4NewLogPosition);
+		t5NewLog->SetPosition(t5NewLogPosition);
 		s1NewLog->SetPosition(s1NewLogPosition);
 		s2NewLog->SetPosition(s2NewLogPosition);
 		s3NewLog->SetPosition(s3NewLogPosition);
+		//s4NewLog->SetPosition(s4NewLogPosition);
+		s5NewLog->SetPosition(s5NewLogPosition);
+		s6NewLog->SetPosition(s6NewLogPosition);
 
 		t1ClearLog->SetPosition(t1ClearLogPosition);
 		t2ClearLog->SetPosition(t2ClearLogPosition);
 		t3ClearLog->SetPosition(t3ClearLogPosition);
 		t4ClearLog->SetPosition(t4ClearLogPosition);
+		t5ClearLog->SetPosition(t5ClearLogPosition);
 		s1ClearLog->SetPosition(s1ClearLogPosition);
 		s2ClearLog->SetPosition(s2ClearLogPosition);
 		s3ClearLog->SetPosition(s3ClearLogPosition);
+		//s4ClearLog->SetPosition(s4ClearLogPosition);
+		s5ClearLog->SetPosition(s5ClearLogPosition);
+		s6ClearLog->SetPosition(s6ClearLogPosition);
 
 		objSkydome->Update();
 
@@ -5366,8 +5477,8 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 9: // ステージ5
-#pragma region case9 ステージ３
+	case 9: // ステージ 3
+#pragma region case9 ステージ５
 		if (!beginStage)
 		{
 			if (t4Time)
@@ -5624,7 +5735,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 10: //ステージ　３
+	case 10: //ステージ　5
 #pragma region case10 ステージ３
 		if (!beginStage)
 		{
@@ -5887,7 +5998,7 @@ void GameScene::Update()
 			{
 				playerAlive = false;
 				sceneNo = 3;
-				Stage3Move();
+				Stage5Move();
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
@@ -5900,7 +6011,7 @@ void GameScene::Update()
 			{
 				enemyAlive = false;
 				sceneNo = 2;
-				Stage3Move();
+				Stage5Move();
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
@@ -5911,33 +6022,14 @@ void GameScene::Update()
 				s3ClearFlag = true;
 			}
 
-			/*if (input->TriggerKey(DIK_R))
-			{
-				Stage3Move();
-				Stage3Reset();
-				sceneNo = 10;
-			}*/
-
 			if (input->TriggerKey(DIK_T))
 			{
-				Stage3Move();
+				Stage5Move();
 				titleScene->Initialize();
 				sceneNo = 0;
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("Title.wav", Volume, true);
 			}
-
-			/*if (input->TriggerKey(DIK_L))
-			{
-				Stage3Move();
-				sceneNo = 8;
-				audio->StopWave("Stage.wav");
-				audio->PlayWave("Title.wav", Volume, true);
-				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
-				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
-				menuBallRotation = { 0.0f, 0.0f, 0.0f };
-				menuSelection = 0;
-			}*/
 		}
 
 		for (auto object_s3_1 : objects_s3_1)
@@ -6356,7 +6448,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 13:
+	case 13: //ステージ ６
 #pragma region case13 ステージ６
 		if (!beginStage)
 		{
@@ -7603,17 +7695,25 @@ void GameScene::Draw()
 		t2Background->Draw();
 		t3Background->Draw();
 		t4Background->Draw();
+		t5Background->Draw();
 		s1Background->Draw();
 		s2Background->Draw();
 		s3Background->Draw();
+		//s4Background->Draw();
+		s5Background->Draw();
+		s6Background->Draw();
 
 		t1StageSelectFrame->Draw();
 		t2StageSelectFrame->Draw();
 		t3StageSelectFrame->Draw();
 		t4StageSelectFrame->Draw();
+		t5StageSelectFrame->Draw();
 		s1StageSelectFrame->Draw();
 		s2StageSelectFrame->Draw();
 		s3StageSelectFrame->Draw();
+		s4StageSelectFrame->Draw();
+		s5StageSelectFrame->Draw();
+		s6StageSelectFrame->Draw();
 
 		// NEWロゴの表示
 		if (t1FirstPlayFlag == true)
@@ -7631,9 +7731,14 @@ void GameScene::Draw()
 			t3NewLog->Draw();
 		}
 
-		if (t4FirstPlayFlag == true)
+		if (at4FirstPlayFlag == true)
 		{
 			t4NewLog->Draw();
+		}
+
+		if (t5FirstPlayFlag == true)
+		{
+			t5NewLog->Draw();
 		}
 
 		if (s1FirstPlayFlag == true)
@@ -7649,6 +7754,21 @@ void GameScene::Draw()
 		if (s3FirstPlayFlag == true)
 		{
 			s3NewLog->Draw();
+		}
+
+		if (s4FirstPlayFlag == true)
+		{
+			s4NewLog->Draw();
+		}
+
+		if (t4FirstPlayFlag == true)
+		{
+			s5NewLog->Draw();
+		}
+
+		if (s6FirstPlayFlag == true)
+		{
+			s6NewLog->Draw();
 		}
 
 		// Clearロゴの表示
@@ -7667,9 +7787,14 @@ void GameScene::Draw()
 			t3ClearLog->Draw();
 		}
 
-		if (t4ClearFlag == true)
+		if (at4ClearFlag == true)
 		{
 			t4ClearLog->Draw();
+		}
+
+		if (t5ClearFlag == true)
+		{
+			t5ClearLog->Draw();
 		}
 
 		if (s1ClearFlag == true)
@@ -7685,6 +7810,21 @@ void GameScene::Draw()
 		if (s3ClearFlag == true)
 		{
 			s3ClearLog->Draw();
+		}
+
+		if (s4ClearFlag == true)
+		{
+			s4ClearLog->Draw();
+		}
+
+		if (t4ClearFlag == true)
+		{
+			s5ClearLog->Draw();
+		}
+
+		if (s6ClearFlag == true)
+		{
+			s6ClearLog->Draw();
 		}
 
 		GuideA->Draw();
@@ -7722,6 +7862,26 @@ void GameScene::Draw()
 			break;
 
 		case 6:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 7:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 8:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 9:
+			StageSelectRB->Draw();
+			StageSelectLB->Draw();
+			break;
+
+		case 10:
 			StageSelectLB->Draw();
 			break;
 		}
@@ -8713,7 +8873,7 @@ void GameScene::Stage2Move()
 	}
 }
 
-void GameScene::Stage3Reset()
+void GameScene::Stage5Reset()
 {
 	if (!thirdTime)
 	{
@@ -8803,7 +8963,7 @@ void GameScene::Stage3Reset()
 	beginStage = false;
 }
 
-void GameScene::Stage3Move()
+void GameScene::Stage5Move()
 {
 	for (auto object_s3_1 : objects_s3_1) {
 		XMFLOAT3 objectPosition = object_s3_1->GetPosition();
