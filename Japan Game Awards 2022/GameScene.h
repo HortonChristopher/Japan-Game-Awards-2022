@@ -250,33 +250,49 @@ private: // メンバ変数 Member variables
 	Sprite* t2Background = nullptr;
 	Sprite* t3Background = nullptr;
 	Sprite* t4Background = nullptr;
+	Sprite* t5Background = nullptr;
 	Sprite* s1Background = nullptr;
 	Sprite* s2Background = nullptr;
 	Sprite* s3Background = nullptr;
+	Sprite* s4Background = nullptr;
+	Sprite* s5Background = nullptr;
+	Sprite* s6Background = nullptr;
 
 	Sprite* t1StageSelectFrame = nullptr;
 	Sprite* t2StageSelectFrame = nullptr;
 	Sprite* t3StageSelectFrame = nullptr;
 	Sprite* t4StageSelectFrame = nullptr;
+	Sprite* t5StageSelectFrame = nullptr;
 	Sprite* s1StageSelectFrame = nullptr;
 	Sprite* s2StageSelectFrame = nullptr;
 	Sprite* s3StageSelectFrame = nullptr;
+	Sprite* s4StageSelectFrame = nullptr;
+	Sprite* s5StageSelectFrame = nullptr;
+	Sprite* s6StageSelectFrame = nullptr;
 
 	Sprite* t1NewLog = nullptr;
 	Sprite* t2NewLog = nullptr;
 	Sprite* t3NewLog = nullptr;
 	Sprite* t4NewLog = nullptr;
+	Sprite* t5NewLog = nullptr;
 	Sprite* s1NewLog = nullptr;
 	Sprite* s2NewLog = nullptr;
 	Sprite* s3NewLog = nullptr;
+	Sprite* s4NewLog = nullptr;
+	Sprite* s5NewLog = nullptr;
+	Sprite* s6NewLog = nullptr;
 
 	Sprite* t1ClearLog = nullptr;
 	Sprite* t2ClearLog = nullptr;
 	Sprite* t3ClearLog = nullptr;
 	Sprite* t4ClearLog = nullptr;
+	Sprite* t5ClearLog = nullptr;
 	Sprite* s1ClearLog = nullptr;
 	Sprite* s2ClearLog = nullptr;
 	Sprite* s3ClearLog = nullptr;
+	Sprite* s4ClearLog = nullptr;
+	Sprite* s5ClearLog = nullptr;
+	Sprite* s6ClearLog = nullptr;
 	
 	//pauseメニュー
 	Sprite* pause1 = nullptr;

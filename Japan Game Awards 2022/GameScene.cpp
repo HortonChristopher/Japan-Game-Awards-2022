@@ -19,7 +19,7 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 12; //タイトル Title
+extern int sceneNo = 0; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
 
@@ -1909,7 +1909,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (i == 5 && j == 3)
 			{
-				modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
@@ -1930,7 +1930,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (i == 5 && j == 3)
 			{
-				modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
@@ -2163,7 +2163,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 5 && i == 3)
 			{
-				int modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
@@ -2173,7 +2173,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t4_y = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t4_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			if (modelIndex == 3)
 			{
 				object_t4_y->SetRotation({ 0, 0, 0 });
 			}
@@ -2190,7 +2190,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 5 && i == 3)
 			{
-				int modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
@@ -2200,9 +2200,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			TouchableObject* object_t4_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t4_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_t4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			if (modelIndex == 3)
 			{
-				object_t4_y2->SetRotation({ 0, 180, 0 });
+				object_t4_y2->SetRotation({ 0, 0, 0 });
 			}
 			objects_t4_y2.push_back(object_t4_y2);
 		}
@@ -2356,7 +2356,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 2 && i == 3)
 			{
-				modelIndex = 0;
+				modelIndex = 4;
 			}
 			else if (j == 2 && i == 4)
 			{
@@ -2368,7 +2368,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_s3_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
-			if (modelIndex == 0)
+			if (modelIndex == 4)
 			{
 				object_s3_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			}
@@ -2394,17 +2394,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 6 && i == 3)
 			{
-				modelIndex = 0;
+				modelIndex = 2;
 			}
 			else
 			{
 				continue;
 			}
 
-			TouchableObject* object_s3_y2_1 = TouchableObject::Create(modeltable_y[modelIndex]);
+			TouchableObject* object_s3_y2_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s3_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			if (modelIndex == 2)
 			{
 				object_s3_y2_1->SetRotation({ 0, 0, 0 });
 			}
@@ -2420,17 +2420,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 1 && i == 8)
 			{
-				int modelIndex = 0;
+				modelIndex = 5;
 			}
 			else
 			{
 				continue;
 			}
 
-			TouchableObject* object_s3_y1_2 = TouchableObject::Create(modeltable_y[modelIndex]);
+			TouchableObject* object_s3_y1_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s3_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			if (modelIndex == 5)
 			{
 				object_s3_y1_2->SetRotation({ 0, 0, 0 });
 			}
@@ -2447,17 +2447,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (j == 1 && i == 6)
 			{
-				modelIndex = 0;
+				modelIndex = 3;
 			}
 			else
 			{
 				continue;
 			}
 
-			TouchableObject* object_s3_y2_2 = TouchableObject::Create(modeltable_y[modelIndex]);
+			TouchableObject* object_s3_y2_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s3_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
 			object_s3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			if (modelIndex == 3)
 			{
 				object_s3_y2_2->SetRotation({ 0, 180, 0 });
 			}
@@ -4264,11 +4264,61 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
 			{
-				stage2YellowKabe = false;
+				//stage2YellowKabe = false;
+				doorOpen1 = true;
 			}
 			if (intersect(playerPosition, FloorButton, 1.0f, 1.0f, 1.0f) && lastYellowIntersct1 == false)
 			{
-				stage2Switch = true;
+				//stage2Switch = true;
+				doorOpen2 = true;
+			}
+
+			if (doorOpen1)
+			{
+				for (auto object_s2_y : objects_s2_y) {
+					XMFLOAT3 objectPosition = object_s2_y->GetPosition();
+					object_s2_y->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s2_y->Update();
+				}
+
+				for (auto object_s2_y2 : objects_s2_y2) {
+					XMFLOAT3 objectPosition = object_s2_y2->GetPosition();
+					object_s2_y2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s2_y2->Update();
+				}
+
+				doorCount1++;
+
+				if (doorCount1 >= 15)
+				{
+					stage2YellowKabe = false;
+					doorCount1 = 0;
+					doorOpen1 = false;
+				}
+			}
+
+			if (doorOpen2)
+			{
+				for (auto object_s2_s : objects_s2_s) {
+					XMFLOAT3 objectPosition = object_s2_s->GetPosition();
+					object_s2_s->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s2_s->Update();
+				}
+
+				for (auto object_s2_s2 : objects_s2_s2) {
+					XMFLOAT3 objectPosition = object_s2_s2->GetPosition();
+					object_s2_s2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s2_s2->Update();
+				}
+
+				doorCount2++;
+
+				if (doorCount2 >= 15)
+				{
+					stage2Switch = true;
+					doorCount2 = 0;
+					doorOpen2 = false;
+				}
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -4301,13 +4351,6 @@ void GameScene::Update()
 
 			lastYellowIntersct1 = intersect(playerPosition, yellowTrigger1, 1.0f, 1.0f, 1.0f);
 
-			/*if (input->TriggerKey(DIK_R))
-			{
-				Stage2Move();
-				Stage2Reset();
-				sceneNo = 4;
-			}*/
-
 			if (input->TriggerKey(DIK_T))
 			{
 				Stage2Move();
@@ -4316,18 +4359,6 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("Title.wav", Volume, true);
 			}
-
-			/*if (input->TriggerKey(DIK_L))
-			{
-				Stage2Move();
-				sceneNo = 8;
-				audio->StopWave("Stage.wav");
-				audio->PlayWave("Title.wav", Volume, true);
-				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
-				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
-				menuBallRotation = { 0.0f, 0.0f, 0.0f };
-				menuSelection = 0;
-			}*/
 		}
 
 		for (auto object_s2_1 : objects_s2_1) {
@@ -5132,12 +5163,6 @@ void GameScene::Update()
 		camera->SetEye({ -15,0,0 });
 		camera->SetTarget({ 0, 0, 0 });
 
-		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
-		{
-			PlayFlag = false;
-			audio->StopWave("Title.wav");
-		}
-
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6 ||
 			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 6)
 		{
@@ -5259,6 +5284,8 @@ void GameScene::Update()
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay ||
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
+			PlayFlag = false;
+			audio->StopWave("Title.wav");
 			audio->PlayWave("Stage.wav", Volume, true);
 			switch (stageSelect)
 			{
@@ -5423,7 +5450,6 @@ void GameScene::Update()
 			objTeleporterIn4->SetRotation(teleRotationIn_4);
 			objTeleporterIn4->Update();
 
-
 			//ワープ出口
 			XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
 			teleRotationOut_1.y += WarpRotate;
@@ -5448,7 +5474,32 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
 			{
-				tutorial4YellowKabe = false;
+				//tutorial4YellowKabe = false;
+				doorOpen1 = true;
+			}
+
+			if (doorOpen1)
+			{
+				for (auto object_t4_y : objects_t4_y) {
+					XMFLOAT3 objectPosition = object_t4_y->GetPosition();
+					object_t4_y->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t4_y->Update();
+				}
+
+				for (auto object_t4_y2 : objects_t4_y2) {
+					XMFLOAT3 objectPosition = object_t4_y2->GetPosition();
+					object_t4_y2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t4_y2->Update();
+				}
+
+				doorCount1++;
+
+				if (doorCount1 >= 15)
+				{
+					tutorial4YellowKabe = false;
+					doorCount1 = 0;
+					doorOpen1 = false;
+				}
 			}
 
 			if (!tutorial4YellowKabe)
@@ -5513,13 +5564,6 @@ void GameScene::Update()
 				t4ClearFlag = true;
 			}
 
-			/*if (input->TriggerKey(DIK_R))
-			{
-				Tutorial4Move();
-				Tutorial4Reset();
-				sceneNo = 9;
-			}*/
-
 			if (input->TriggerKey(DIK_T))
 			{
 				Tutorial4Move();
@@ -5528,18 +5572,6 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("Title.wav", Volume, true);
 			}
-
-			/*if (input->TriggerKey(DIK_L))
-			{
-				Tutorial4Move();
-				sceneNo = 8;
-				audio->StopWave("Stage.wav");
-				audio->PlayWave("Title.wav", Volume, true);
-				camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
-				camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
-				menuBallRotation = { 0.0f, 0.0f, 0.0f };
-				menuSelection = 0;
-			}*/
 		}
 
 		for (auto object_t4_1 : objects_t4_1)
@@ -5721,7 +5753,26 @@ void GameScene::Update()
 
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f))
 			{
-				stage3YellowKabe1 = false;
+				//stage3YellowKabe1 = false;
+				doorOpen1 = true;
+			}
+
+			if (doorOpen1)
+			{
+				for (auto object_s3_y1_1 : objects_s3_y1_1) {
+					XMFLOAT3 objectPosition = object_s3_y1_1->GetPosition();
+					object_s3_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s3_y1_1->Update();
+				}
+
+				doorCount1++;
+
+				if (doorCount1 >= 15)
+				{
+					stage3YellowKabe1 = false;
+					doorCount1 = 0;
+					doorOpen1 = false;
+				}
 			}
 
 			if (!stage3YellowKabe1)
@@ -5735,7 +5786,26 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, BlueButton, 1.0f, 1.0f, 1.0f))
 			{
-				stage3YellowKabe2 = false;
+				//stage3YellowKabe2 = false;
+				doorOpen2 = true;
+			}
+
+			if (doorOpen2)
+			{
+				for (auto object_s3_y2_1 : objects_s3_y2_1) {
+					XMFLOAT3 objectPosition = object_s3_y2_1->GetPosition();
+					object_s3_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s3_y2_1->Update();
+				}
+
+				doorCount2++;
+
+				if (doorCount2 >= 15)
+				{
+					stage3YellowKabe2 = false;
+					doorCount2 = 0;
+					doorOpen2 = false;
+				}
 			}
 
 			if (!stage3YellowKabe2)
@@ -5749,7 +5819,26 @@ void GameScene::Update()
 
 			if (intersect(enemyPosition, GreenButton1, 1.0f, 1.0f, 1.0f))
 			{
-				stage3YellowKabe3 = false;
+				//stage3YellowKabe3 = false;
+				doorOpen3 = true;
+			}
+
+			if (doorOpen3)
+			{
+				for (auto object_s3_y2_2 : objects_s3_y2_2) {
+					XMFLOAT3 objectPosition = object_s3_y2_2->GetPosition();
+					object_s3_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s3_y2_2->Update();
+				}
+
+				doorCount3++;
+
+				if (doorCount3 >= 15)
+				{
+					stage3YellowKabe3 = false;
+					doorCount3 = 0;
+					doorOpen3 = false;
+				}
 			}
 
 			if (!stage3YellowKabe3)
@@ -5763,7 +5852,26 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, YellowButton, 1.0f, 1.0f, 1.0f))
 			{
-				stage3YellowKabe4 = false;
+				//stage3YellowKabe4 = false;
+				doorOpen4 = true;
+			}
+
+			if (doorOpen4)
+			{
+				for (auto object_s3_y1_2 : objects_s3_y1_2) {
+					XMFLOAT3 objectPosition = object_s3_y1_2->GetPosition();
+					object_s3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s3_y1_2->Update();
+				}
+
+				doorCount4++;
+
+				if (doorCount4 >= 15)
+				{
+					stage3YellowKabe4 = false;
+					doorCount4 = 0;
+					doorOpen4 = false;
+				}
 			}
 
 			if (!stage3YellowKabe4)
@@ -7347,9 +7455,12 @@ void GameScene::Draw()
 		Press_A->Draw();
 		break;
 	case 1:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_1->Draw();
+		if (beginStage && !falling)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_1->Draw();
+		}
 		break;
 	case 2:
 		StageClearLog->Draw();
@@ -7364,9 +7475,12 @@ void GameScene::Draw()
 		GameOverStageSelectLog->Draw();
 		break;
 	case 4:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_2->Draw();
+		if (beginStage && !falling)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_2->Draw();
+		}
 		break;
 	case 5:
 		if (!Tutorial && !falling && beginStage)
@@ -7613,14 +7727,20 @@ void GameScene::Draw()
 		}
 		break;
 	case 9:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_2->Draw();
+		if (beginStage && !falling)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_2->Draw();
+		}
 		break;
 	case 10:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_2->Draw();
+		if (beginStage && !falling)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_2->Draw();
+		}
 		break;
 	case 11:
 		if (!Tutorial && !falling && beginStage)
@@ -7689,9 +7809,12 @@ void GameScene::Draw()
 		}
 		break;
 	case  13:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_2->Draw();
+		if (beginStage && !falling)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_2->Draw();
+		}
 		break;
 	}
 
