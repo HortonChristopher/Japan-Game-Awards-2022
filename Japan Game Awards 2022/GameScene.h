@@ -200,6 +200,14 @@ private: // メンバ変数 Member variables
 	Sprite* T1Chat4 = nullptr;
 	Sprite* T1Chat5 = nullptr;
 
+	// チュートリアル2
+	Sprite* T2Chat1 = nullptr;
+	Sprite* T2Chat2 = nullptr;
+	Sprite* T2Chat3 = nullptr;
+	Sprite* T2Chat4 = nullptr;
+	Sprite* T2Chat5 = nullptr;
+	Sprite* T2Chat6 = nullptr;
+
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
 	Sprite* t3Background = nullptr;

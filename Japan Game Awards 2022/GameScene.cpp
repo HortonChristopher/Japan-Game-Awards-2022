@@ -447,6 +447,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(38, L"Resources/Sprite/SpeechBubble.png");
 	SpeechBubble = Sprite::Create(38, { 0.0f, 360.0f });
 
+	// チュートリアル1
 	Sprite::LoadTexture(39, L"Resources/Sprite/Tutorial_1/T1Chat1.png");
 	T1Chat1 = Sprite::Create(39, { 0.0f, 360.0f });
 
@@ -461,6 +462,25 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(43, L"Resources/Sprite/Tutorial_1/T1Chat5.png");
 	T1Chat5 = Sprite::Create(43, { 0.0f, 360.0f });
+
+	// チュートリアル2
+	Sprite::LoadTexture(44, L"Resources/Sprite/Tutorial_2/T2Chat1.png");
+	T2Chat1 = Sprite::Create(44, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(45, L"Resources/Sprite/Tutorial_2/T2Chat2.png");
+	T2Chat2 = Sprite::Create(45, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(46, L"Resources/Sprite/Tutorial_2/T2Chat3.png");
+	T2Chat3 = Sprite::Create(46, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(47, L"Resources/Sprite/Tutorial_2/T2Chat4.png");
+	T2Chat4 = Sprite::Create(47, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(48, L"Resources/Sprite/Tutorial_2/T2Chat5.png");
+	T2Chat5 = Sprite::Create(48, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(49, L"Resources/Sprite/Tutorial_2/T2Chat6.png");
+	T2Chat6 = Sprite::Create(49, { 0.0f, 360.0f });
 
 #pragma endregion
 
@@ -5732,6 +5752,13 @@ void GameScene::Draw()
 		// チュートリアル
 		TutorialBG->Draw();
 		SpeechBubble->Draw();
+		T2Chat1->Draw();
+		T2Chat2->Draw();
+		T2Chat3->Draw();
+		T2Chat4->Draw();
+		T2Chat5->Draw();
+		T2Chat6->Draw();
+
 		break;
 	case 7:
 		GuideR->Draw();
