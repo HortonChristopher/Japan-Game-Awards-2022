@@ -501,6 +501,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(55, L"Resources/Sprite/Tutorial_3/T3Chat6.png");
 	T3Chat6 = Sprite::Create(55, { 0.0f, 360.0f });
 
+	// チュートリアル4
+	Sprite::LoadTexture(56, L"Resources/Sprite/Tutorial_4/T4Chat1.png");
+	T4Chat1 = Sprite::Create(56, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(57, L"Resources/Sprite/Tutorial_4/T4Chat2.png");
+	T4Chat2 = Sprite::Create(57, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(58, L"Resources/Sprite/Tutorial_4/T4Chat3.png");
+	T4Chat3 = Sprite::Create(58, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(59, L"Resources/Sprite/Tutorial_4/T4Chat4.png");
+	T4Chat4 = Sprite::Create(59, { 0.0f, 360.0f });
 
 #pragma endregion
 
