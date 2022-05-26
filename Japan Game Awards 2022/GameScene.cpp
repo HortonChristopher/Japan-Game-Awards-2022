@@ -19,7 +19,7 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 0; //タイトル Title
+extern int sceneNo = 13; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
 
@@ -667,12 +667,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 		modelTempWall2,
 	};
 
-	Model* modeltable_y[5] = {
+	Model* modeltable_y[6] = {
 		modelYellowWall,
 		modelDoorBlue,
 		modelDoorGreen,
 		modelDoorRed,
 		modelDoorYellow,
+		modelPlane,
 	};
 
 	Model* modeltable_y2[6] = {
@@ -1268,14 +1269,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma region マップチップ生成 チュートリアル4
 
-	// チュートリアル 4
-	for (int i = 0; i < 11; i++) // Y
+	//チュートリアル４
+	for (int i = 0; i < 12; i++) // Y
 	{
 		for (int j = 0; j < 7; j++) // X
 		{
 			int modelIndex = 0;
 
-			if (i == 10 || j == 0 || j == 6 || i < 10 && i > 2 && j > 0 && j < 3 || i == 6 || i == 3 && j != 5 || i < 10 && i > 6 && j < 6 && j > 3)
+			if (i == 11 || j == 0 || j == 6)
 			{
 				modelIndex = 1;
 			}
@@ -1285,204 +1286,210 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				modelIndex = 2;
 			}
 
-			if (i == 5 && j == 5)
-			{
-				continue;
-			}
-
-			TouchableObject* object_t4_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
-			if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
-			{
-				object_t4_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE * 1.5f });
-			}
-			else
-			{
-				object_t4_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			}
-			object_t4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			TouchableObject* object_at4_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_at4_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_at4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
-				object_t4_1->SetRotation({ 180, 0, 0 });
+				object_at4_1->SetRotation({ 180, 0, 0 });
 			}
-			else if (modelIndex == 1 && i == 10)
+			else if (modelIndex == 1 && i == 11)
 			{
-				object_t4_1->SetRotation({ 180, 0, 0 });
+				object_at4_1->SetRotation({ 180, 0, 0 });
 			}
 			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
 			{
-				object_t4_1->SetRotation({ 180, 180, 0 });
+				object_at4_1->SetRotation({ 180, 180, 0 });
 			}
-			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			if (modelIndex == 1 && i == 11 && j == 0 || modelIndex == 1 && i == 11 && j == 6)
 			{
-				object_t4_1->SetRotation({ 180, 90, 0 });
+				object_at4_1->SetRotation({ 180, 90, 0 });
 			}
 			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
 			{
-				object_t4_1->SetRotation({ 180, 90, 0 });
+				object_at4_1->SetRotation({ 180, 90, 0 });
 			}
-			else if (i == 6 && j == 3)
-			{
-				object_t4_1->SetRotation({ 180,0,0 });
-			}
-			else if (i == 6 && j < 6 && j > 3)
-			{
-				object_t4_1->SetRotation({ 180,0,0 });
-			}
-			else if (i < 10 && i > 6 && j < 6 && j > 3)
-			{
-				object_t4_1->SetRotation({ 180, 90, 0 });
-			}
-			else if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
-			{
-				object_t4_1->SetRotation({ 270, 180, 0 });
-			}
-			else if (modelIndex == 1 && i != 10)
-			{
-				object_t4_1->SetRotation({ 180, 180, 0 });
-			}
-			objects_t4_1.push_back(object_t4_1);
+			objects_at4_1.push_back(object_at4_1);
 		}
 	}
 
 	//敵 Enemy
-	for (int i = 0; i < 11; i++) // Y
+	for (int i = 0; i < 12; i++) // Y
 	{
 		for (int j = 0; j < 7; j++) // X
 		{
 			int modelIndex = 0;
 
-			if (i == 10 || j == 0 || j == 6 || i < 10 && i > 5 && j < 6 && j > 3 || i == 3 && j == 4)
+			if (i == 11 || i == 5 && j != 0 && j != 6 || j == 0 || j == 6)
 			{
 				modelIndex = 1;
 			}
 
-			if (i == 0 || i < 10 && i > 2 && j > 0 && j < 3 || i == 3 && j != 4 && j != 5 && j != 6 && j != 0 || i == 6 && j == 3)
+			if (i == 0 || i == 6 && j != 0 && j != 6)
 			{
 				modelIndex = 2;
 			}
 
-			if (i == 5 && j == 5)
+			if (i == 10 && j == 5)
 			{
 				continue;
 			}
 
-			TouchableObject* object_t4_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
-			if (i < 10 && i > 3 && j > 0 && j < 3 || i < 10 && i > 6 && j < 6 && j > 3 || i == 3 && j == 4 || i == 3 && j == 0)
+			TouchableObject* object_at4_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_at4_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_at4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0 || modelIndex == 2 && i == 6 && j != 0 && j != 6)
 			{
-				object_t4_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE * 1.5f });
+				object_at4_2->SetRotation({ 180, 0, 0 });
 			}
-			else if (i == 3 && j != 5 && j != 6 && j != 4 && j != 0)
+			else if (modelIndex == 1 && i == 11 || modelIndex == 1 && i == 5 && j != 0 && j != 6)
 			{
-				object_t4_2->SetScale({ LAND_SCALE * 1.5f, LAND_SCALE, LAND_SCALE });
-			}
-			else
-			{
-				object_t4_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			}
-			object_t4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 2 && i == 0)
-			{
-				object_t4_2->SetRotation({ 180, 0, 0 });
-			}
-			else if (modelIndex == 1 && i == 10)
-			{
-				object_t4_2->SetRotation({ 180, 0, 0 });
+				object_at4_2->SetRotation({ 180, 0, 0 });
 			}
 			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
 			{
-				object_t4_2->SetRotation({ 180, 180, 0 });
+				object_at4_2->SetRotation({ 180, 180, 0 });
 			}
-			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			if (modelIndex == 1 && i == 11 && j == 0 || modelIndex == 1 && i == 11 && j == 6)
 			{
-				object_t4_2->SetRotation({ 180, 90, 0 });
+				object_at4_2->SetRotation({ 180, 90, 0 });
 			}
 			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
 			{
-				object_t4_2->SetRotation({ 180, 90, 0 });
+				object_at4_2->SetRotation({ 180, 90, 0 });
 			}
-			else if (i == 6 && j < 6 && j > 3)
-			{
-				object_t4_2->SetRotation({ 180,0,0 });
-			}
-			else if (i < 10 && i > 6 && j < 6 && j > 3)
-			{
-				object_t4_2->SetRotation({ 270, 270, 270 });
-			}
-			else if (i == 6 && j == 3)
-			{
-				object_t4_2->SetRotation({ 180,0,0 });
-			}
-			else if (i == 3 && j > 0 && j < 4)
-			{
-				object_t4_2->SetRotation({ 180, 270, 270 });
-			}
-			else if (i == 3 && j == 4)
-			{
-				object_t4_2->SetRotation({ 270, 180, 0 });
-			}
-			else if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
-			{
-				object_t4_2->SetRotation({ 270, 180, 90 });
-			}
-			else if (modelIndex == 1 && i != 10)
-			{
-				object_t4_2->SetRotation({ 180, 180, 0 });
-			}
-			objects_t4_2.push_back(object_t4_2);
+			objects_at4_2.push_back(object_at4_2);
 		}
 	}
+#pragma endregion
 
-	//黄色ブロック
-	for (int i = 0; i < 11; i++) // Y
+#pragma region マップチップ生成 チュートリアル5
+
+	//チュートリアル４
+	for (int i = 0; i < 12; i++) // Y
 	{
 		for (int j = 0; j < 7; j++) // X
 		{
 			int modelIndex = 0;
 
-			if (j == 5 && i == 3)
+			if (i == 11 || j == 0 || j == 6)
 			{
-				int modelIndex = 0;
-			}
-			else
-			{
-				continue;
+				modelIndex = 1;
 			}
 
-			TouchableObject* object_t4_y = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t4_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			if (i == 0)
 			{
-				object_t4_y->SetRotation({ 0, 0, 0 });
+				modelIndex = 2;
 			}
-			objects_t4_y.push_back(object_t4_y);
+
+			TouchableObject* object_t5_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_t5_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_t5_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0)
+			{
+				object_t5_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 11)
+			{
+				object_t5_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
+			{
+				object_t5_1->SetRotation({ 180, 180, 0 });
+			}
+			if (modelIndex == 1 && i == 11 && j == 0 || modelIndex == 1 && i == 11 && j == 6)
+			{
+				object_t5_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
+			{
+				object_t5_1->SetRotation({ 180, 90, 0 });
+			}
+			objects_t5_1.push_back(object_t5_1);
 		}
 	}
 
 	//敵 Enemy
-	for (int i = 0; i < 11; i++) // Y
+	for (int i = 0; i < 12; i++) // Y
 	{
 		for (int j = 0; j < 7; j++) // X
 		{
 			int modelIndex = 0;
 
-			if (j == 5 && i == 3)
+			if (i == 11 || j == 0 || j == 6)
 			{
-				int modelIndex = 0;
+				modelIndex = 1;
+			}
+
+			if (i == 0)
+			{
+				modelIndex = 2;
+			}
+
+			if (i > 3 && i < 7 && j != 0 && j != 6)
+			{
+				continue;
+			}
+
+			TouchableObject* object_t5_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_t5_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_t5_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0)
+			{
+				object_t5_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 11)
+			{
+				object_t5_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
+			{
+				object_t5_2->SetRotation({ 180, 180, 0 });
+			}
+			if (modelIndex == 1 && i == 11 && j == 0 || modelIndex == 1 && i == 11 && j == 6)
+			{
+				object_t5_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
+			{
+				object_t5_2->SetRotation({ 180, 90, 0 });
+			}
+			objects_t5_2.push_back(object_t5_2);
+		}
+	}
+
+	//スイッチ switch
+	for (int i = 0; i < 12; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i > 3 && i <= 6 && j != 0 && j != 6)
+			{
+				modelIndex = 1;
+			}
+			else if (i == 7)
+			{
+				modelIndex = 2;
 			}
 			else
 			{
 				continue;
 			}
 
-			TouchableObject* object_t4_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
-			object_t4_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 0)
+			TouchableObject* object_t5_s2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_t5_s2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_t5_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2)
 			{
-				object_t4_y2->SetRotation({ 0, 180, 0 });
+				object_t5_s2->SetRotation({ 180, 0, 0 });
 			}
-			objects_t4_y2.push_back(object_t4_y2);
+			else if (modelIndex == 1)
+			{
+				object_t5_s2->SetRotation({ 180, 0, 0 });
+			}
+			objects_t5_s2.push_back(object_t5_s2);
 		}
 	}
 #pragma endregion
@@ -1886,9 +1893,230 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 #pragma endregion
 
-#pragma region マップチップ生成 ステージ３
+#pragma region マップチップ生成 新しいステージ3
 
-	// ステージ３
+	// チュートリアル 4
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i == 10 || j == 0 || j == 6 || i < 10 && i > 2 && j > 0 && j < 3 || i == 6 || i == 3 && j != 5 || i < 10 && i > 6 && j < 6 && j > 3)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 0)
+			{
+				modelIndex = 2;
+			}
+
+			if (i == 5 && j == 5)
+			{
+				continue;
+			}
+
+			TouchableObject* object_t4_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
+			{
+				object_t4_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE * 1.5f });
+			}
+			else
+			{
+				object_t4_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			}
+			object_t4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0)
+			{
+				object_t4_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_t4_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
+			{
+				object_t4_1->SetRotation({ 180, 180, 0 });
+			}
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_t4_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
+			{
+				object_t4_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (i == 6 && j == 3)
+			{
+				object_t4_1->SetRotation({ 180,0,0 });
+			}
+			else if (i == 6 && j < 6 && j > 3)
+			{
+				object_t4_1->SetRotation({ 180,0,0 });
+			}
+			else if (i < 10 && i > 6 && j < 6 && j > 3)
+			{
+				object_t4_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
+			{
+				object_t4_1->SetRotation({ 270, 180, 0 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t4_1->SetRotation({ 180, 180, 0 });
+			}
+			objects_t4_1.push_back(object_t4_1);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i == 10 || j == 0 || j == 6 || i < 10 && i > 5 && j < 6 && j > 3 || i == 3 && j == 4)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 0 || i < 10 && i > 2 && j > 0 && j < 3 || i == 3 && j != 4 && j != 5 && j != 6 && j != 0 || i == 6 && j == 3)
+			{
+				modelIndex = 2;
+			}
+
+			if (i == 5 && j == 5)
+			{
+				continue;
+			}
+
+			TouchableObject* object_t4_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			if (i < 10 && i > 3 && j > 0 && j < 3 || i < 10 && i > 6 && j < 6 && j > 3 || i == 3 && j == 4 || i == 3 && j == 0)
+			{
+				object_t4_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE * 1.5f });
+			}
+			else if (i == 3 && j != 5 && j != 6 && j != 4 && j != 0)
+			{
+				object_t4_2->SetScale({ LAND_SCALE * 1.5f, LAND_SCALE, LAND_SCALE });
+			}
+			else
+			{
+				object_t4_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			}
+			object_t4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0)
+			{
+				object_t4_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_t4_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
+			{
+				object_t4_2->SetRotation({ 180, 180, 0 });
+			}
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_t4_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
+			{
+				object_t4_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (i == 6 && j < 6 && j > 3)
+			{
+				object_t4_2->SetRotation({ 180,0,0 });
+			}
+			else if (i < 10 && i > 6 && j < 6 && j > 3)
+			{
+				object_t4_2->SetRotation({ 270, 270, 270 });
+			}
+			else if (i == 6 && j == 3)
+			{
+				object_t4_2->SetRotation({ 180,0,0 });
+			}
+			else if (i == 3 && j > 0 && j < 4)
+			{
+				object_t4_2->SetRotation({ 180, 270, 270 });
+			}
+			else if (i == 3 && j == 4)
+			{
+				object_t4_2->SetRotation({ 270, 180, 0 });
+			}
+			else if (i == 3 && j != 5 && j != 6 || i < 10 && i > 2 && j > 0 && j < 3)
+			{
+				object_t4_2->SetRotation({ 270, 180, 90 });
+			}
+			else if (modelIndex == 1 && i != 10)
+			{
+				object_t4_2->SetRotation({ 180, 180, 0 });
+			}
+			objects_t4_2.push_back(object_t4_2);
+		}
+	}
+
+	//黄色ブロック
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 5 && i == 3)
+			{
+				int modelIndex = 0;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_t4_y = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_t4_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_t4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 0)
+			{
+				object_t4_y->SetRotation({ 0, 0, 0 });
+			}
+			objects_t4_y.push_back(object_t4_y);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 5 && i == 3)
+			{
+				int modelIndex = 0;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_t4_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_t4_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_t4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 0)
+			{
+				object_t4_y2->SetRotation({ 0, 180, 0 });
+			}
+			objects_t4_y2.push_back(object_t4_y2);
+		}
+	}
+#pragma endregion
+
+#pragma region マップチップ生成 ステージ5
+
+	// ステージ6
 	for (int i = 0; i < 11; i++) // Y
 	{
 		for (int j = 0; j < 8; j++) // X
@@ -2143,6 +2371,308 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	}
 #pragma endregion
 
+#pragma region マップチップ生成 ステージ6
+
+	//ステージ　６
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i == 10 || j == 0 || j == 6 || i == 1 && j == 1 || i == 3 && j == 1 || i == 4 && j == 2 || i > 1 && i < 4 && j == 3 || i > 6 && i < 9 && j == 2 || i == 7 && j == 5)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 0 || i > 0 && i < 5 && j == 4 || i == 6 && j > 1 && j < 6 || i > 6 && i < 9 && j == 3 || i == 9 && j > 2 && j < 5)
+			{
+				modelIndex = 2;
+			}
+
+			if (i == 9 && j == 5)
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_s6_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_s6_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0)
+			{
+				object_s6_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_s6_1->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
+			{
+				object_s6_1->SetRotation({ 180, 180, 0 });
+			}
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_s6_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
+			{
+				object_s6_1->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 1 && i == 1 && j == 1 || i == 3 && j == 1 || i == 4 && j == 2 || i > 1 && i < 4 && j == 3 || i > 0 && i < 5 && j == 4 || i == 6 && j > 1 && j < 6
+				|| i > 6 && i < 9 && j == 2 || i > 6 && i < 9 && j == 3 || i == 7 && j == 5 || i == 9 && j > 2 && j < 5)
+			{
+				object_s6_1->SetRotation({ 180, 90, 0 });
+			}
+			objects_s6_1.push_back(object_s6_1);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (i == 10 || j == 0 || j == 6 || i > 0 && i < 3 && j == 4 || i == 4 && j > 1 && j < 5 || i > 5 && i < 10 && j == 5 || i == 9 && j > 0 && j < 3 || i == 8 && j == 1)
+			{
+				modelIndex = 1;
+			}
+
+			if (i == 0 || i == 1 && j == 1 || i == 3 && j == 1 || i == 4 && j == 2 || i > 0 && i < 3 && j == 3 || i > 5 && i < 10 && j == 4 ||
+				i == 7 && j == 3 || i == 6 && j == 2)
+			{
+				modelIndex = 2;
+			}
+
+			if (i == 9 && j == 3 || i == 6 && j == 1 || i == 5 && j == 2 || i == 3 && j == 4)
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
+			object_s6_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_s6_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2 && i == 0)
+			{
+				object_s6_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && i == 10)
+			{
+				object_s6_2->SetRotation({ 180, 0, 0 });
+			}
+			else if (modelIndex == 1 && j == 0 || modelIndex == 1 && j == 6)
+			{
+				object_s6_2->SetRotation({ 180, 180, 0 });
+			}
+			if (modelIndex == 1 && i == 10 && j == 0 || modelIndex == 1 && i == 10 && j == 6)
+			{
+				object_s6_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 0 && j == 0 || modelIndex == 2 && i == 0 && j == 6)
+			{
+				object_s6_2->SetRotation({ 180, 90, 0 });
+			}
+			else if (modelIndex == 2 && i == 1 && j == 1 || i == 3 && j == 1 || i == 4 && j == 2 || i > 0 && i < 3 && j == 3 || i > 0 && i < 3 && j == 4 || i == 4 && j > 1 && j < 5
+				|| i > 5 && i < 10 && j == 5 || i > 5 && i < 10 && j == 4 || i == 7 && j == 3 || i == 6 && j == 2 || i == 9 && j > 0 && j < 3 || i == 8 && j == 1)
+			{
+				object_s6_2->SetRotation({ 180, 90, 0 });
+			}
+			objects_s6_2.push_back(object_s6_2);
+		}
+	}
+
+	//黄色ブロック
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 2 && i == 1)
+			{
+				modelIndex = 3;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y1_1 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_s6_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 3)
+			{
+				object_s6_y1_1->SetRotation({ 0, 180, 0 });
+			}
+			objects_s6_y1_1.push_back(object_s6_y1_1);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 2 && i == 3)
+			{
+				modelIndex = 3;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y2_1 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_s6_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 3)
+			{
+				object_s6_y2_1->SetRotation({ 0, 180, 0 });
+			}
+			objects_s6_y2_1.push_back(object_s6_y2_1);
+		}
+	}
+
+	//黄色ブロック
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 4 && i == 5)
+			{
+				modelIndex = 2;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y1_2 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_s6_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2)
+			{
+				object_s6_y1_2->SetRotation({ 0, -90, 0 });
+			}
+			objects_s6_y1_2.push_back(object_s6_y1_2);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 4 && i == 5)
+			{
+				modelIndex = 2;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y2_2 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_s6_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 2)
+			{
+				object_s6_y2_2->SetRotation({ 0, 90, 0 });
+			}
+			objects_s6_y2_2.push_back(object_s6_y2_2);
+		}
+	}
+
+	//黄色ブロック
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 1 && i == 6)
+			{
+				modelIndex = 1;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y1_3 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y1_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
+			object_s6_y1_3->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 1)
+			{
+				object_s6_y1_3->SetRotation({ 0, 0, 0 });
+			}
+			objects_s6_y1_3.push_back(object_s6_y1_3);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 2 && i == 5)
+			{
+				modelIndex = 5;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y2_3 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y2_3->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s6_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 5)
+			{
+				object_s6_y2_3->SetRotation({ 0, 0, 0 });
+			}
+			objects_s6_y2_3.push_back(object_s6_y2_3);
+		}
+	}
+
+	//敵 Enemy
+	for (int i = 0; i < 11; i++) // Y
+	{
+		for (int j = 0; j < 7; j++) // X
+		{
+			int modelIndex = 0;
+
+			if (j == 1 && i == 6)
+			{
+				modelIndex = 5;
+			}
+			else
+			{
+				continue;
+			}
+
+			TouchableObject* object_s6_y2_4 = TouchableObject::Create(modeltable_y[modelIndex]);
+			object_s6_y2_4->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
+			object_s6_y2_4->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -15.0f, (i - DIV_NUM / 2) * LAND_SCALE });
+			if (modelIndex == 5)
+			{
+				object_s6_y2_4->SetRotation({ 0, 0, 0 });
+			}
+			objects_s6_y2_4.push_back(object_s6_y2_4);
+		}
+	}
+
+#pragma endregion
+
 #pragma region PositionRotationScale
 
 	//objFighter->SetPosition({ -10, 10, 0 });
@@ -2151,8 +2681,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objClone->SetScale({ 1.0f,1.0f,1.0f });
 	//objClone->SetCollider(new SphereCollider);
 
-	objFighter->SetPosition({ -20, 0, 12 }); // -20, 12
-	objClone->SetPosition({ 20, 0, 12 }); // 20, 12
+	objFighter->SetPosition({ -20, 30, -9 }); // -20, 12
+	objClone->SetPosition({ 20, 30, -9 }); // 20, 12
 
 	objTempBullet->SetPosition({ -6.0f, 1.0f, 0 });
 	objTempBulletE->SetPosition({ 6.0f, 1.0f, 0 });
@@ -2163,36 +2693,31 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objPlayerMarker->SetScale({ 0.5f, 0.5f, 0.5f });
 
-	objTeleporterIn1->SetPosition({ -20.0f, 0.0f, -3.0f }); // -14, -9
+	objTeleporterIn1->SetPosition({ -14.0f, 0.0f, -12.0f }); // 8, -3
 	objTeleporterIn1->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterIn1->SetRotation({ 0.0f, 0.0f, 0.0f });
 
-	objTeleporterIn2->SetPosition({ 5.0f, 0.0f, -12.0f }); // 14, -9
+	objTeleporterIn2->SetPosition({ -17.0f, 0.0f, 12.0f }); // 5, -12
 	objTeleporterIn2->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterIn2->SetRotation({ 0.0f, 0.0f, 0.0f });
 
-
-	objTeleporterIn3->SetPosition({ -11.0f, 0.0f, -9.0f }); // -14, 12
+	objTeleporterIn3->SetPosition({ 14.0f, 0.0f, -6.0f }); // -11, -9
 	objTeleporterIn3->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterIn3->SetRotation({ 0.0f, 0.0f, 0.0f });
-
 
 	objTeleporterIn4->SetPosition({ 5.0f, 0.0f, 0.0f }); // 14, 12
 	objTeleporterIn4->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterIn4->SetRotation({ 0.0f, 0.0f, 0.0f });
 
-
-
-	objTeleporterOut1->SetPosition({ 11.0f, 0.0f, 12.0f }); // -14, 6
+	objTeleporterOut1->SetPosition({ -20.0f, 0.0f, -3.0f }); // 20, 6
 	objTeleporterOut1->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterOut1->SetRotation({ 0.0f, 0.0f, 0.0f });
 
-	objTeleporterOut2->SetPosition({ -17.0f, 0.0f, 6.0f }); // 14, 6
+	objTeleporterOut2->SetPosition({ -11.0f, 0.0f, 6.0f }); // -17, 6
 	objTeleporterOut2->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterOut2->SetRotation({ 0.0f, 0.0f, 0.0f });
 
-
-	objTeleporterOut3->SetPosition({ 11.0f, 0.0f, 0.0f }); // -8 -12
+	objTeleporterOut3->SetPosition({ 20.0f, 0.0f, -3.0f }); // 11, 0
 	objTeleporterOut3->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterOut3->SetRotation({ 0.0f, 0.0f, 0.0f });
 
@@ -2200,15 +2725,18 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objTeleporterOut4->SetScale({ WarpSize, WarpSize, WarpSize });
 	objTeleporterOut4->SetRotation({ 0.0f, 0.0f, 0.0f });
 
-
-
+	objButtonRed1->SetPosition({ -17, 0, -6});
+	objButtonRed2->SetPosition({ 17, 0, -12 });
+	objButtonGreen1->SetPosition({ -14, 0, -3 });
+	objButtonGreen2->SetPosition({ 14, 0, 3 });
+	objButtonBlue->SetPosition({ 8, 0, -12 });
 
 #pragma endregion
 
 	camera->SetEye({ 0, 20, -30 });
 
 	camera->SetTarget({ 0, 1, 0 });
-	//camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f }); //debug
+	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f }); //debug
 
 	originalCamera = camera->GetEye();
 
@@ -2446,6 +2974,21 @@ void GameScene::Update()
 					Stage3Reset();
 					sceneNo = 10;
 					break;
+				case 11:
+					newTutorial4Move();
+					newTutorial4Reset();
+					sceneNo = 11;
+					break;
+				case 12:
+					Tutorial5Move();
+					Tutorial5Reset();
+					sceneNo = 12;
+					break;
+				case 13:
+					Stage6Move();
+					Stage6Reset();
+					sceneNo = 13;
+					break;
 				}
 
 				pause = false;
@@ -2531,6 +3074,39 @@ void GameScene::Update()
 					break;
 				case 10:
 					Stage3Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					delay = true;
+					break;
+				case 11:
+					newTutorial4Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					delay = true;
+					break;
+				case 12:
+					Tutorial5Move();
+					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
+					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					menuBallRotation = { 0.0f, 0.0f, 0.0f };
+					menuSelection = 0;
+					delay = true;
+					break;
+				case 13:
+					Stage6Move();
 					sceneNo = 8;
 					audio->StopWave("Stage.wav");
 					audio->PlayWave("Title.wav", Volume, true);
@@ -3894,7 +4470,7 @@ void GameScene::Update()
 				falling = true;
 			}
 
-			objFighter->SetPosition({ -20, 30,-12 });
+			objFighter->SetPosition({ -20, 30, -12 });
 			objClone->SetPosition({ 20, 30, -12 });
 
 			playerPositionTemp = { -20, 30,-12 };
@@ -4547,8 +5123,8 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 9: // チュートリアル 4
-#pragma region case9 チュートリアル4
+	case 9: // ステージ5
+#pragma region case9 ステージ３
 		if (!beginStage)
 		{
 			if (t4Time)
@@ -5103,6 +5679,619 @@ void GameScene::Update()
 		camera->Update();
 #pragma endregion
 		break;
+
+	case 11: //チュートリアル４
+#pragma region case11 チュートリアル４
+		if (!beginStage)
+		{
+			if (at4Time)
+			{
+				at4Time = false;
+			}
+			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
+			camera->Update();
+			currentFrame++;
+
+			if (currentFrame >= 100)
+			{
+				currentFrame = 0;
+				lastScene = 5;
+				beginStage = true;
+				falling = true;
+			}
+
+			objFighter->SetPosition({ -20, 30, -12 });
+			objClone->SetPosition({ 20, 30, -12 });
+
+			playerPositionTemp = { -20, 30, -12 };
+			clonePositionTemp = { 20, 30, -12 };
+		}
+		if (beginStage)
+		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
+
+			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+			if (ConTimer <= 60)
+			{
+				ConTimer += 1;
+			}
+
+			if (ConTimer == 60)
+			{
+				//InitInput();
+				ConTimer = 0;
+			}
+
+			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
+			{
+				objClone->SetPosition(objTeleporterOut1->GetPosition());
+			}
+
+			if (playerPosition.y <= -10.0f)
+			{
+				playerAlive = false;
+				sceneNo = 3;
+				newTutorial4Move();
+				GameOverReset();
+				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav", Volume, true);
+				gameOver->Initialize();
+
+				at4FirstPlayFlag = false;
+			}
+			else if (enemyPosition.y <= -10.0f)
+			{
+				enemyAlive = false;
+				sceneNo = 2;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav", Volume, true);
+				newTutorial4Move();
+				GameClearReset();
+				sceneChange = 0;
+
+				at4FirstPlayFlag = false;
+				at4ClearFlag = true;
+			}
+		}
+
+		for (auto object_at4_1 : objects_at4_1) {
+			object_at4_1->Update();
+		}
+
+		for (auto object_at4_2 : objects_at4_2) {
+			object_at4_2->Update();
+		}
+
+		XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
+		teleRotationIn_1.y += WarpRotate;
+		objTeleporterIn1->SetRotation(teleRotationIn_1);
+
+		XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
+		teleRotationOut_1.y += WarpRotate;
+		objTeleporterOut1->SetRotation(teleRotationOut_1);
+
+		objFighter->Update();
+		objClone->Update();
+
+		objPlayerRun->Update();
+		objPlayerStand->Update();
+		objPlayerFall->Update();
+
+		objCloneRun->Update();
+		objCloneStand->Update();
+		objCloneFall->Update();
+
+		objTeleporterIn1->Update();
+		objTeleporterOut1->Update();
+
+		objSkydome->Update();
+
+		camera->Update();
+
+		collisionManager->CheckAllCollisions();
+#pragma endregion
+		break;
+	
+	case 12:
+#pragma region case12 チュートリアル5
+		if (!beginStage)
+		{
+			if (t5Time)
+			{
+				t5Time = false;
+			}
+			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
+			camera->Update();
+			currentFrame++;
+
+			if (currentFrame >= 100)
+			{
+				currentFrame = 0;
+				lastScene = 5;
+				beginStage = true;
+				falling = true;
+			}
+
+			objFighter->SetPosition({ -20, 30, -12 });
+			objClone->SetPosition({ 20, 30, -12 });
+
+			playerPositionTemp = { -20, 30, -12 };
+			clonePositionTemp = { 20, 30, -12 };
+		}
+		if (beginStage)
+		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
+
+			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+			if (ConTimer <= 60)
+			{
+				ConTimer += 1;
+			}
+
+			if (ConTimer == 60)
+			{
+				//InitInput();
+				ConTimer = 0;
+			}
+
+			if (intersect(playerPosition, FloorButton, 1.0f, 1.0f, 1.0f))
+			{
+				tutorial5Switch = true;
+			}
+
+			if (tutorial5Switch)
+			{
+				for (auto object_t5_s2 : objects_t5_s2) {
+					XMFLOAT3 objectPosition = object_t5_s2->GetPosition();
+					object_t5_s2->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
+					object_t5_s2->Update();
+				}
+			}
+
+			if (playerPosition.y <= -10.0f)
+			{
+				playerAlive = false;
+				sceneNo = 3;
+				Tutorial5Move();
+				GameOverReset();
+				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav", Volume, true);
+				gameOver->Initialize();
+
+				t5FirstPlayFlag = false;
+			}
+			else if (enemyPosition.y <= -10.0f)
+			{
+				enemyAlive = false;
+				sceneNo = 2;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav", Volume, true);
+				Tutorial5Move();
+				GameClearReset();
+				sceneChange = 0;
+
+				t5FirstPlayFlag = false;
+				t5ClearFlag = true;
+			}
+		}
+
+		for (auto object_t5_1 : objects_t5_1) {
+			object_t5_1->Update();
+		}
+
+		for (auto object_t5_2 : objects_t5_2) {
+			object_t5_2->Update();
+		}
+
+		for (auto object_t5_s2 : objects_t5_s2) {
+			object_t5_s2->Update();
+		}
+
+		objFighter->Update();
+		objClone->Update();
+
+		objPlayerRun->Update();
+		objPlayerStand->Update();
+		objPlayerFall->Update();
+
+		objCloneRun->Update();
+		objCloneStand->Update();
+		objCloneFall->Update();
+
+		objButtonFloor->Update();
+
+		objSkydome->Update();
+
+		camera->Update();
+
+		collisionManager->CheckAllCollisions();
+#pragma endregion
+		break;
+
+	case 13:
+#pragma region case13 ステージ６
+		if (!beginStage)
+		{
+			if (sixthTime)
+			{
+				sixthTime = false;
+			}
+			camera->MoveEyeVector({ -1.0f, -1.0f, -1.0f });
+			camera->Update();
+			currentFrame++;
+
+			if (currentFrame >= 100)
+			{
+				currentFrame = 0;
+				lastScene = 5;
+				beginStage = true;
+				falling = true;
+			}
+
+			objFighter->SetPosition({ -20, 30, -9 });
+			objClone->SetPosition({ 20, 30, -9 });
+
+			playerPositionTemp = { -20, 30, -9 };
+			clonePositionTemp = { 20, 30, -9 };
+		}
+		if (beginStage)
+		{
+			if (falling)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -9.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -9.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -9.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -9.0f;
+
+				objPlayerFall->SetRotation({ 0, 320, 0 });
+				objCloneFall->SetRotation({ 0, 320, 0 });
+
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+			}
+
+			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
+			if (ConTimer <= 60)
+			{
+				ConTimer += 1;
+			}
+
+			if (ConTimer == 60)
+			{
+				//InitInput();
+				ConTimer = 0;
+			}
+
+			//ワープ入口
+			XMFLOAT3 teleRotationIn_1 = objTeleporterIn1->GetRotation();
+			teleRotationIn_1.y += WarpRotate;
+			objTeleporterIn1->SetRotation(teleRotationIn_1);
+			objTeleporterIn1->Update();
+
+			XMFLOAT3 teleRotationIn_2 = objTeleporterIn2->GetRotation();
+			teleRotationIn_2.y += WarpRotate;
+			objTeleporterIn2->SetRotation(teleRotationIn_2);
+			objTeleporterIn2->Update();
+
+			XMFLOAT3 teleRotationIn_3 = objTeleporterIn3->GetRotation();
+			teleRotationIn_3.y += WarpRotate;
+			objTeleporterIn3->SetRotation(teleRotationIn_3);
+			objTeleporterIn3->Update();
+
+			//ワープ出口
+			XMFLOAT3 teleRotationOut_1 = objTeleporterOut1->GetRotation();
+			teleRotationOut_1.y += WarpRotate;
+			objTeleporterOut1->SetRotation(teleRotationOut_1);
+			objTeleporterOut1->Update();
+
+			XMFLOAT3 teleRotationOut_2 = objTeleporterOut2->GetRotation();
+			teleRotationOut_2.y += WarpRotate;
+			objTeleporterOut2->SetRotation(teleRotationOut_2);
+			objTeleporterOut2->Update();
+
+			XMFLOAT3 teleRotationOut_3 = objTeleporterOut3->GetRotation();
+			teleRotationOut_3.y += WarpRotate;
+			objTeleporterOut3->SetRotation(teleRotationOut_3);
+			objTeleporterOut3->Update();
+
+			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
+			{
+				objFighter->SetPosition(objTeleporterOut3->GetPosition());
+			}
+
+			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
+			{
+				objClone->SetPosition(objTeleporterOut1->GetPosition());
+			}
+
+			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
+			{
+				objClone->SetPosition(objTeleporterOut2->GetPosition());
+			}
+
+			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
+			{
+				//stage6YellowKabe1 = false;
+				doorOpen1 = true;
+			}
+
+			if (intersect(playerPosition, GreenButton2, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, GreenButton1, 1.0f, 1.0f, 1.0f))
+			{
+				//stage6YellowKabe2 = false;
+				doorOpen2 = true;
+			}
+
+			if (intersect(playerPosition, BlueButton, 1.0f, 1.0f, 1.0f))
+			{
+				//stage6YellowKabe3 = false;
+				doorOpen3 = true;
+			}
+
+			if (doorOpen1)
+			{
+				for (auto object_s6_y1_1 : objects_s6_y1_1) {
+					XMFLOAT3 objectPosition = object_s6_y1_1->GetPosition();
+					object_s6_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s6_y1_1->Update();
+				}
+
+				for (auto object_s6_y2_1 : objects_s6_y2_1) {
+					XMFLOAT3 objectPosition = object_s6_y2_1->GetPosition();
+					object_s6_y2_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s6_y2_1->Update();
+				}
+
+				doorCount1++;
+
+				if (doorCount1 >= 15)
+				{
+					stage6YellowKabe1 = false;
+					doorCount1 = 0;
+					doorOpen1 = false;
+				}
+			}
+
+			if (doorOpen2)
+			{
+				for (auto object_s6_y1_2 : objects_s6_y1_2) {
+					XMFLOAT3 objectPosition = object_s6_y1_2->GetPosition();
+					object_s6_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s6_y1_2->Update();
+				}
+
+				for (auto object_s6_y2_2 : objects_s6_y2_2) {
+					XMFLOAT3 objectPosition = object_s6_y2_2->GetPosition();
+					object_s6_y2_2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s6_y2_2->Update();
+				}
+
+				doorCount2++;
+
+				if (doorCount2 >= 15)
+				{
+					stage6YellowKabe2 = false;
+					doorCount2 = 0;
+					doorOpen2 = false;
+				}
+			}
+
+			if (doorOpen3)
+			{
+				for (auto object_s6_y1_3 : objects_s6_y1_3) {
+					XMFLOAT3 objectPosition = object_s6_y1_3->GetPosition();
+					object_s6_y1_3->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s6_y1_3->Update();
+				}
+
+				for (auto object_s6_y2_3 : objects_s6_y2_3) {
+					XMFLOAT3 objectPosition = object_s6_y2_3->GetPosition();
+					object_s6_y2_3->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s6_y2_3->Update();
+				}
+
+				for (auto object_s6_y2_4 : objects_s6_y2_4) {
+					XMFLOAT3 objectPosition = object_s6_y2_4->GetPosition();
+					object_s6_y2_4->SetPosition({ objectPosition.x, objectPosition.y + 1.0f, objectPosition.z });
+					object_s6_y2_4->Update();
+				}
+
+				doorCount3++;
+
+				if (doorCount3 >= 15)
+				{
+					stage6YellowKabe3 = false;
+					doorCount3 = 0;
+					doorOpen3 = false;
+				}
+			}
+
+			if (!stage6YellowKabe1)
+			{
+				for (auto object_s6_y1_1 : objects_s6_y1_1) {
+					XMFLOAT3 objectPosition = object_s6_y1_1->GetPosition();
+					object_s6_y1_1->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s6_y1_1->Update();
+				}
+
+				for (auto object_s6_y2_1 : objects_s6_y2_1) {
+					XMFLOAT3 objectPosition = object_s6_y2_1->GetPosition();
+					object_s6_y2_1->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s6_y2_1->Update();
+				}
+			}
+
+			if (!stage6YellowKabe2)
+			{
+				for (auto object_s6_y1_2 : objects_s6_y1_2) {
+					XMFLOAT3 objectPosition = object_s6_y1_2->GetPosition();
+					object_s6_y1_2->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s6_y1_2->Update();
+				}
+
+				for (auto object_s6_y2_2 : objects_s6_y2_2) {
+					XMFLOAT3 objectPosition = object_s6_y2_2->GetPosition();
+					object_s6_y2_2->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s6_y2_2->Update();
+				}
+			}
+
+			if (!stage6YellowKabe3)
+			{
+				for (auto object_s6_y1_3 : objects_s6_y1_3) {
+					XMFLOAT3 objectPosition = object_s6_y1_3->GetPosition();
+					object_s6_y1_3->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s6_y1_3->Update();
+				}
+
+				for (auto object_s6_y2_3 : objects_s6_y2_3) {
+					XMFLOAT3 objectPosition = object_s6_y2_3->GetPosition();
+					object_s6_y2_3->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s6_y2_3->Update();
+				}
+
+				for (auto object_s6_y2_4 : objects_s6_y2_4) {
+					XMFLOAT3 objectPosition = object_s6_y2_4->GetPosition();
+					object_s6_y2_4->SetPosition({ objectPosition.x, 0, objectPosition.z });
+					object_s6_y2_4->Update();
+				}
+			}
+
+			if (playerPosition.y <= -10.0f)
+			{
+				playerAlive = false;
+				sceneNo = 3;
+				Stage6Move();
+				GameOverReset();
+				sceneChange = 0;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameOver.wav", Volume, true);
+				gameOver->Initialize();
+
+				t5FirstPlayFlag = false;
+			}
+			else if (enemyPosition.y <= -10.0f)
+			{
+				enemyAlive = false;
+				sceneNo = 2;
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("GameClear.wav", Volume, true);
+				Stage6Move();
+				GameClearReset();
+				sceneChange = 0;
+
+				t5FirstPlayFlag = false;
+				t5ClearFlag = true;
+			}
+		}
+
+		for (auto object_s6_1 : objects_s6_1) {
+			object_s6_1->Update();
+		}
+
+		for (auto object_s6_2 : objects_s6_2) {
+			object_s6_2->Update();
+		}
+
+		for (auto object_s6_y1_1 : objects_s6_y1_1) {
+			object_s6_y1_1->Update();
+		}
+
+		for (auto object_s6_y2_1 : objects_s6_y2_1) {
+			object_s6_y2_1->Update();
+		}
+
+		for (auto object_s6_y1_2 : objects_s6_y1_2) {
+			object_s6_y1_2->Update();
+		}
+
+		for (auto object_s6_y2_2 : objects_s6_y2_2) {
+			object_s6_y2_2->Update();
+		}
+
+		for (auto object_s6_y1_3 : objects_s6_y1_3) {
+			object_s6_y1_3->Update();
+		}
+
+		for (auto object_s6_y2_3 : objects_s6_y2_3) {
+			object_s6_y2_3->Update();
+		}
+
+		for (auto object_s6_y2_4 : objects_s6_y2_4) {
+			object_s6_y2_4->Update();
+		}
+
+		objFighter->Update();
+		objClone->Update();
+
+		objPlayerRun->Update();
+		objPlayerStand->Update();
+		objPlayerFall->Update();
+
+		objCloneRun->Update();
+		objCloneStand->Update();
+		objCloneFall->Update();
+
+		objButtonRed1->Update();
+		objButtonRed2->Update();
+		objButtonGreen1->Update();
+		objButtonGreen2->Update();
+		objButtonBlue->Update();
+
+		objTeleporterIn1->Update();
+		objTeleporterOut1->Update();
+		objTeleporterIn2->Update();
+		objTeleporterOut2->Update();
+		objTeleporterIn3->Update();
+		objTeleporterOut3->Update();
+
+		objSkydome->Update();
+
+		camera->Update();
+
+		collisionManager->CheckAllCollisions();
+#pragma endregion
+		break;
 	}
 
 #pragma endregion
@@ -5201,6 +6390,21 @@ void GameScene::Draw()
 		Guide_LRB->Draw();
 		break;
 	case 10:
+		spriteBG->Draw();
+		GuideR->Draw();
+		Guide_LRB->Draw();
+		break;
+	case 11:
+		spriteBG->Draw();
+		GuideR->Draw();
+		Guide_LRB->Draw();
+		break;
+	case 12:
+		spriteBG->Draw();
+		GuideR->Draw();
+		Guide_LRB->Draw();
+		break;
+	case 13:
 		spriteBG->Draw();
 		GuideR->Draw();
 		Guide_LRB->Draw();
@@ -5636,6 +6840,166 @@ void GameScene::Draw()
 
 		objSkydome->Draw();
 		break;
+	case 11:
+		if (falling && beginStage)
+		{
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
+		}
+		else if (!falling && beginStage)
+		{
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
+		}
+
+		for (auto object_at4_1 : objects_at4_1) {
+			object_at4_1->Draw();
+		}
+
+		for (auto object_at4_2 : objects_at4_2) {
+			object_at4_2->Draw();
+		}
+
+		objTeleporterIn1->Draw();
+		objTeleporterOut1->Draw();
+
+		objSkydome->Draw();
+
+		break;
+	case 12:
+		if (falling && beginStage)
+		{
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
+		}
+		else if (!falling && beginStage)
+		{
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
+		}
+
+		for (auto object_t5_1 : objects_t5_1) {
+			object_t5_1->Draw();
+		}
+
+		for (auto object_t5_2 : objects_t5_2) {
+			object_t5_2->Draw();
+		}
+
+		if (!tutorial5Switch)
+		{
+			objButtonFloor->Draw();
+
+			for (auto object_t5_s2 : objects_t5_s2) {
+				object_t5_s2->Draw();
+			}
+		}
+
+		objSkydome->Draw();
+
+		break;
+	case 13:
+		if (falling && beginStage)
+		{
+			objPlayerFall->Draw(cmdList);
+			objCloneFall->Draw(cmdList);
+		}
+		else if (!falling && beginStage)
+		{
+			if (FBXModelChange == 1)
+			{
+				objPlayerRun->Draw(cmdList);
+				objCloneRun->Draw(cmdList);
+			}
+			else if (FBXModelChange == 0)
+			{
+				objPlayerStand->Draw(cmdList);
+				objCloneStand->Draw(cmdList);
+			}
+		}
+
+		for (auto object_s6_1 : objects_s6_1) {
+			object_s6_1->Draw();
+		}
+
+		for (auto object_s6_2 : objects_s6_2) {
+			object_s6_2->Draw();
+		}
+
+		if (stage6YellowKabe1)
+		{
+			objButtonRed1->Draw();
+			objButtonRed2->Draw();
+
+			for (auto object_s6_y1_1 : objects_s6_y1_1) {
+				object_s6_y1_1->Draw();
+			}
+
+			for (auto object_s6_y2_1 : objects_s6_y2_1) {
+				object_s6_y2_1->Draw();
+			}
+		}
+
+		if (stage6YellowKabe2)
+		{
+			objButtonGreen1->Draw();
+			objButtonGreen2->Draw();
+
+			for (auto object_s6_y1_2 : objects_s6_y1_2) {
+				object_s6_y1_2->Draw();
+			}
+
+			for (auto object_s6_y2_2 : objects_s6_y2_2) {
+				object_s6_y2_2->Draw();
+			}
+		}
+
+		if (stage6YellowKabe3)
+		{
+			objButtonBlue->Draw();
+
+			for (auto object_s6_y1_3 : objects_s6_y1_3) {
+				object_s6_y1_3->Draw();
+			}
+
+			for (auto object_s6_y2_3 : objects_s6_y2_3) {
+				object_s6_y2_3->Draw();
+			}
+		}
+
+		if (!stage6YellowKabe3 || doorOpen3)
+		{
+			for (auto object_s6_y2_4 : objects_s6_y2_4) {
+				object_s6_y2_4->Draw();
+			}
+		}
+
+		objTeleporterIn1->Draw();
+		objTeleporterOut1->Draw();
+		objTeleporterIn2->Draw();
+		objTeleporterOut2->Draw();
+		objTeleporterIn3->Draw();
+		objTeleporterOut3->Draw();
+
+		objSkydome->Draw();
+
+		break;
 	}
 
 	// パーティクルの描画 Drawing particles
@@ -5837,6 +7201,21 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 10:
+		GuideR->Draw();
+		Guide_LRB->Draw();
+		Order_2->Draw();
+		break;
+	case 11:
+		GuideR->Draw();
+		Guide_LRB->Draw();
+		Order_2->Draw();
+		break;
+	case 12:
+		GuideR->Draw();
+		Guide_LRB->Draw();
+		Order_2->Draw();
+		break;
+	case  13:
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_2->Draw();
@@ -6249,6 +7628,148 @@ void GameScene::Tutorial3Move()
 			object_t3_y2_3->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
 			object_t3_y2_3->Update();
 		}
+	}
+}
+
+void GameScene::newTutorial4Reset()
+{
+	if (!at4Time)
+	{
+		for (auto object_at4_1 : objects_at4_1) {
+			XMFLOAT3 objectPosition = object_at4_1->GetPosition();
+			object_at4_1->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
+			object_at4_1->Update();
+		}
+
+		for (auto object_at4_2 : objects_at4_2) {
+			XMFLOAT3 objectPosition = object_at4_2->GetPosition();
+			object_at4_2->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
+			object_at4_2->Update();
+		}
+	}
+
+	objFighter->SetPosition({ -20,30,-12 });
+	objClone->SetPosition({ 20,30,-12 });
+
+	falling = false;
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	playerBulletF = false;
+	enemyBulletF = false;
+
+	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 20, -30 });
+	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+
+	objTeleporterIn1->SetPosition({ 8.0f, 0.0f, -3.0f });
+	objTeleporterIn1->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objTeleporterOut1->SetPosition({ 20.0f, 0.0f, 6.0f });
+	objTeleporterOut1->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objFighter->SetRotation({ 0,0,0 });
+	objClone->SetRotation({ 0,0,0 });
+
+	playerRotationTemp = { 0,0,0 };
+	cloneRotationTemp = { 0,0,0 };
+
+	cameraMove = 1;
+	cameraChange = false;
+
+	beginStage = false;
+}
+
+void GameScene::newTutorial4Move()
+{
+	for (auto object_at4_1 : objects_at4_1) {
+		XMFLOAT3 objectPosition = object_at4_1->GetPosition();
+		object_at4_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_at4_1->Update();
+	}
+
+	for (auto object_at4_2 : objects_at4_2) {
+		XMFLOAT3 objectPosition = object_at4_2->GetPosition();
+		object_at4_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_at4_2->Update();
+	}
+}
+
+void GameScene::Tutorial5Reset()
+{
+	if (!t5Time)
+	{
+		for (auto object_t5_1 : objects_t5_1) {
+			XMFLOAT3 objectPosition = object_t5_1->GetPosition();
+			object_t5_1->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
+			object_t5_1->Update();
+		}
+
+		for (auto object_t5_2 : objects_t5_2) {
+			XMFLOAT3 objectPosition = object_t5_2->GetPosition();
+			object_t5_2->SetPosition({ objectPosition.x, objectPosition.y + 50.0f, objectPosition.z });
+			object_t5_2->Update();
+		}
+
+		for (auto object_t5_s2 : objects_t5_s2) {
+			XMFLOAT3 objectPosition = object_t5_s2->GetPosition();
+			object_t5_s2->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_t5_s2->Update();
+		}
+	}
+
+	objFighter->SetPosition({ -20,30,-12 });
+	objClone->SetPosition({ 20,30,-12 });
+
+	falling = false;
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	playerBulletF = false;
+	enemyBulletF = false;
+
+	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 20, -30 });
+	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+
+	objFighter->SetRotation({ 0,0,0 });
+	objClone->SetRotation({ 0,0,0 });
+
+	objButtonFloor->SetPosition({ -14.0f, 0.0f, 15.0f });
+
+	playerRotationTemp = { 0,0,0 };
+	cloneRotationTemp = { 0,0,0 };
+
+	tutorial5Switch = false;
+
+	cameraMove = 1;
+	cameraChange = false;
+
+	beginStage = false;
+}
+
+void GameScene::Tutorial5Move()
+{
+	for (auto object_t5_1 : objects_t5_1) {
+		XMFLOAT3 objectPosition = object_t5_1->GetPosition();
+		object_t5_1->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_t5_1->Update();
+	}
+
+	for (auto object_t5_2 : objects_t5_2) {
+		XMFLOAT3 objectPosition = object_t5_2->GetPosition();
+		object_t5_2->SetPosition({ objectPosition.x, objectPosition.y - 50.0f, objectPosition.z });
+		object_t5_2->Update();
+	}
+
+	for (auto object_t5_s2 : objects_t5_s2) {
+		XMFLOAT3 objectPosition = object_t5_s2->GetPosition();
+		object_t5_s2->SetPosition({ objectPosition.x, -150.0f, objectPosition.z });
+		object_t5_s2->Update();
 	}
 }
 
@@ -6761,6 +8282,191 @@ void GameScene::Stage3Move()
 			object_s3_y1_2->SetPosition({ objectPosition.x, objectPosition.y - 150.0f, objectPosition.z });
 			object_s3_y1_2->Update();
 		}
+	}
+}
+
+void GameScene::Stage6Reset()
+{
+	if (!sixthTime)
+	{
+		for (auto object_s6_1 : objects_s6_1) {
+			XMFLOAT3 objectPosition = object_s6_1->GetPosition();
+			object_s6_1->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_1->Update();
+		}
+
+		for (auto object_s6_2 : objects_s6_2) {
+			XMFLOAT3 objectPosition = object_s6_2->GetPosition();
+			object_s6_2->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_2->Update();
+		}
+
+		for (auto object_s6_y1_1 : objects_s6_y1_1) {
+			XMFLOAT3 objectPosition = object_s6_y1_1->GetPosition();
+			object_s6_y1_1->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_y1_1->Update();
+		}
+
+		for (auto object_s6_y2_1 : objects_s6_y2_1) {
+			XMFLOAT3 objectPosition = object_s6_y2_1->GetPosition();
+			object_s6_y2_1->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_y2_1->Update();
+		}
+
+		for (auto object_s6_y1_2 : objects_s6_y1_2) {
+			XMFLOAT3 objectPosition = object_s6_y1_2->GetPosition();
+			object_s6_y1_2->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_y1_2->Update();
+		}
+
+		for (auto object_s6_y2_2 : objects_s6_y2_2) {
+			XMFLOAT3 objectPosition = object_s6_y2_2->GetPosition();
+			object_s6_y2_2->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_y2_2->Update();
+		}
+
+		for (auto object_s6_y1_3 : objects_s6_y1_3) {
+			XMFLOAT3 objectPosition = object_s6_y1_3->GetPosition();
+			object_s6_y1_3->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_y1_3->Update();
+		}
+
+		for (auto object_s6_y2_3 : objects_s6_y2_3) {
+			XMFLOAT3 objectPosition = object_s6_y2_3->GetPosition();
+			object_s6_y2_3->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s6_y2_3->Update();
+		}
+
+		for (auto object_s6_y2_4 : objects_s6_y2_4) {
+			XMFLOAT3 objectPosition = object_s6_y2_4->GetPosition();
+			object_s6_y2_4->SetPosition({ objectPosition.x, -15.0f, objectPosition.z });
+			object_s6_y2_4->Update();
+		}
+	}
+
+	objFighter->SetPosition({ -20,30,-9 });
+	objClone->SetPosition({ 20,30,-9 });
+
+	falling = false;
+
+	enemyAlive = true;
+	playerAlive = true;
+
+	playerBulletF = false;
+	enemyBulletF = false;
+
+	camera->SetTarget({ 0, 1, 0 });
+	camera->SetEye({ 0, 20, -30 });
+	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
+
+	objFighter->SetRotation({ 0,0,0 });
+	objClone->SetRotation({ 0,0,0 });
+
+	objTeleporterIn1->SetPosition({ -14.0f, 0.0f, -12.0f }); // 8, -3
+	objTeleporterIn1->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objTeleporterIn2->SetPosition({ -17.0f, 0.0f, 12.0f }); // 5, -12
+	objTeleporterIn2->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn2->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objTeleporterIn3->SetPosition({ 14.0f, 0.0f, -6.0f }); // -11, -9
+	objTeleporterIn3->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterIn3->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objTeleporterOut1->SetPosition({ -20.0f, 0.0f, -3.0f }); // 20, 6
+	objTeleporterOut1->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut1->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objTeleporterOut2->SetPosition({ -11.0f, 0.0f, 6.0f }); // -17, 6
+	objTeleporterOut2->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut2->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objTeleporterOut3->SetPosition({ 20.0f, 0.0f, -3.0f }); // 11, 0
+	objTeleporterOut3->SetScale({ WarpSize, WarpSize, WarpSize });
+	objTeleporterOut3->SetRotation({ 0.0f, 0.0f, 0.0f });
+
+	objButtonRed1->SetPosition({ -17, 0, -6 });
+	objButtonRed2->SetPosition({ 17, 0, -12 });
+	objButtonGreen1->SetPosition({ -14, 0, -3 });
+	objButtonGreen2->SetPosition({ 14, 0, 3 });
+	objButtonBlue->SetPosition({ 8, 0, -12 });
+
+	playerRotationTemp = { 0,0,0 };
+	cloneRotationTemp = { 0,0,0 };
+
+	stage6YellowKabe1 = true;
+	stage6YellowKabe2 = true;
+	stage6YellowKabe3 = true;
+
+	doorOpen1 = false;
+	doorOpen2 = false;
+	doorOpen3 = false;
+
+	doorCount1 = 0;
+	doorCount2 = 0;
+	doorCount3 = 0;
+
+	cameraMove = 1;
+	cameraChange = false;
+
+	beginStage = false;
+}
+
+void GameScene::Stage6Move()
+{
+	for (auto object_s6_1 : objects_s6_1) {
+		XMFLOAT3 objectPosition = object_s6_1->GetPosition();
+		object_s6_1->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_1->Update();
+	}
+
+	for (auto object_s6_2 : objects_s6_2) {
+		XMFLOAT3 objectPosition = object_s6_2->GetPosition();
+		object_s6_2->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_2->Update();
+	}
+
+	for (auto object_s6_y1_1 : objects_s6_y1_1) {
+		XMFLOAT3 objectPosition = object_s6_y1_1->GetPosition();
+		object_s6_y1_1->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y1_1->Update();
+	}
+
+	for (auto object_s6_y2_1 : objects_s6_y2_1) {
+		XMFLOAT3 objectPosition = object_s6_y2_1->GetPosition();
+		object_s6_y2_1->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y2_1->Update();
+	}
+
+	for (auto object_s6_y1_2 : objects_s6_y1_2) {
+		XMFLOAT3 objectPosition = object_s6_y1_2->GetPosition();
+		object_s6_y1_2->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y1_2->Update();
+	}
+
+	for (auto object_s6_y2_2 : objects_s6_y2_2) {
+		XMFLOAT3 objectPosition = object_s6_y2_2->GetPosition();
+		object_s6_y2_2->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y2_2->Update();
+	}
+
+	for (auto object_s6_y1_3 : objects_s6_y1_3) {
+		XMFLOAT3 objectPosition = object_s6_y1_3->GetPosition();
+		object_s6_y1_3->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y1_3->Update();
+	}
+
+	for (auto object_s6_y2_3 : objects_s6_y2_3) {
+		XMFLOAT3 objectPosition = object_s6_y2_3->GetPosition();
+		object_s6_y2_3->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y2_3->Update();
+	}
+
+	for (auto object_s6_y2_4 : objects_s6_y2_4) {
+		XMFLOAT3 objectPosition = object_s6_y2_4->GetPosition();
+		object_s6_y2_4->SetPosition({ objectPosition.x, -100.0f, objectPosition.z });
+		object_s6_y2_4->Update();
 	}
 }
 

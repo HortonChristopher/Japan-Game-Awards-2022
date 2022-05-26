@@ -72,6 +72,10 @@ public: // メンバ関数 Member function
 	void Tutorial2Move();
 	void Tutorial3Reset();
 	void Tutorial3Move();
+	void newTutorial4Reset();
+	void newTutorial4Move();
+	void Tutorial5Reset();
+	void Tutorial5Move();
 	void Tutorial4Reset();
 	void Tutorial4Move();
 	void Stage1Reset();
@@ -80,6 +84,8 @@ public: // メンバ関数 Member function
 	void Stage2Move();
 	void Stage3Reset();
 	void Stage3Move();
+	void Stage6Reset();
+	void Stage6Move();
 
 	void GameClearReset();
 	void GameOverReset();
@@ -101,12 +107,16 @@ private: // メンバ変数 Member variables
 	bool tutorial3YellowKabe2 = true;
 	bool tutorial3YellowKabe3 = true;
 	bool tutorial4YellowKabe = true;
+	bool tutorial5Switch = false;
 	bool stage2YellowKabe = true;
 	bool stage2Switch = false;
 	bool stage3YellowKabe1 = true;
 	bool stage3YellowKabe2 = true;
 	bool stage3YellowKabe3 = true;
 	bool stage3YellowKabe4 = true;
+	bool stage6YellowKabe1 = true;
+	bool stage6YellowKabe2 = true;
+	bool stage6YellowKabe3 = true;
 
 	bool stageMoveRight = false;
 	bool stageMoveLeft = false;
@@ -115,10 +125,13 @@ private: // メンバ変数 Member variables
 	bool t1Time = true;
 	bool t2Time = true;
 	bool t3Time = true;
+	bool at4Time = true;
+	bool t5Time = true;
 	bool t4Time = true;
 	bool firstTime = true;
 	bool secondTime = true;
 	bool thirdTime = true;
+	bool sixthTime = true;
 
 	bool temp = true;
 
@@ -129,8 +142,6 @@ private: // メンバ変数 Member variables
 
 	// ゲームシーン用 For game scenes
 	Camera* camera = nullptr;
-
-	
 
 	Sprite* GameOverGameClearSelectBar = nullptr;
 
@@ -155,18 +166,24 @@ private: // メンバ変数 Member variables
 	bool t1FirstPlayFlag = true;
 	bool t2FirstPlayFlag = true;
 	bool t3FirstPlayFlag = true;
+	bool at4FirstPlayFlag = true;
+	bool t5FirstPlayFlag = true;
 	bool t4FirstPlayFlag = true;
 	bool s1FirstPlayFlag = true;
 	bool s2FirstPlayFlag = true;
 	bool s3FirstPlayFlag = true;
+	bool s6FirstPlayFlag = true;
 
 	bool t1ClearFlag = false;
 	bool t2ClearFlag = false;
 	bool t3ClearFlag = false;
+	bool at4ClearFlag = false;
+	bool t5ClearFlag = false;
 	bool t4ClearFlag = false;
 	bool s1ClearFlag = false;
 	bool s2ClearFlag = false;
 	bool s3ClearFlag = false;
+	bool s6ClearFlag = false;
 
 #pragma region Sprite
 	Sprite* spriteBG = nullptr;
@@ -411,10 +428,11 @@ private: // メンバ変数 Member variables
 	std::vector<Object3d*> objects_t3_y2_1; //チュートリアル　３
 	std::vector<Object3d*> objects_t3_y2_2; //チュートリアル　３
 	std::vector<Object3d*> objects_t3_y2_3; //チュートリアル　３
-	std::vector<Object3d*> objects_t4_1; //チュートリアル　4
-	std::vector<Object3d*> objects_t4_2; //チュートリアル　4
-	std::vector<Object3d*> objects_t4_y; //チュートリアル　4
-	std::vector<Object3d*> objects_t4_y2; //チュートリアル　4
+	std::vector<Object3d*> objects_at4_1; //チュートリアル　４
+	std::vector<Object3d*> objects_at4_2; //チュートリアル　４
+	std::vector<Object3d*> objects_t5_1; //チュートリアル　5
+	std::vector<Object3d*> objects_t5_2; //チュートリアル　5
+	std::vector<Object3d*> objects_t5_s2; //チュートリアル　5
 	std::vector<Object3d*> objects; //ステージ　１
 	std::vector<Object3d*> objects_2; //ステージ　１
 	std::vector<Object3d*> objects_s2_1; //ステージ　２
@@ -423,12 +441,25 @@ private: // メンバ変数 Member variables
 	std::vector<Object3d*> objects_s2_y2; //ステージ　２
 	std::vector<Object3d*> objects_s2_s; //ステージ　２
 	std::vector<Object3d*> objects_s2_s2; //ステージ　２
-	std::vector<Object3d*> objects_s3_1; //ステージ　3
-	std::vector<Object3d*> objects_s3_2; //ステージ　3
-	std::vector<Object3d*> objects_s3_y1_1; //ステージ　3
-	std::vector<Object3d*> objects_s3_y1_2; //ステージ　3
-	std::vector<Object3d*> objects_s3_y2_1; //ステージ　3
-	std::vector<Object3d*> objects_s3_y2_2; //ステージ　3
+	std::vector<Object3d*> objects_t4_1; //新しいステージ3
+	std::vector<Object3d*> objects_t4_2; //新しいステージ３
+	std::vector<Object3d*> objects_t4_y; //新しいステージ３
+	std::vector<Object3d*> objects_t4_y2; //新しいステージ３
+	std::vector<Object3d*> objects_s3_1; //ステージ　5
+	std::vector<Object3d*> objects_s3_2; //ステージ　5
+	std::vector<Object3d*> objects_s3_y1_1; //ステージ　5
+	std::vector<Object3d*> objects_s3_y1_2; //ステージ　5
+	std::vector<Object3d*> objects_s3_y2_1; //ステージ　5
+	std::vector<Object3d*> objects_s3_y2_2; //ステージ　5
+	std::vector<Object3d*> objects_s6_1; //ステージ　６
+	std::vector<Object3d*> objects_s6_2; //ステージ　６
+	std::vector<Object3d*> objects_s6_y1_1; //ステージ　６
+	std::vector<Object3d*> objects_s6_y2_1; //ステージ　６
+	std::vector<Object3d*> objects_s6_y1_2; //ステージ　６
+	std::vector<Object3d*> objects_s6_y2_2; //ステージ　６
+	std::vector<Object3d*> objects_s6_y1_3; //ステージ　６
+	std::vector<Object3d*> objects_s6_y2_3; //ステージ　６
+	std::vector<Object3d*> objects_s6_y2_4; //ステージ　６
 	std::vector<Object3d*> objects_Wall;
 
 	TitleScene* titleScene = nullptr;
