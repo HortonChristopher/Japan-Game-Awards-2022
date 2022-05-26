@@ -514,6 +514,22 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(59, L"Resources/Sprite/Tutorial_4/T4Chat4.png");
 	T4Chat4 = Sprite::Create(59, { 0.0f, 360.0f });
 
+	// チュートリアル5
+	Sprite::LoadTexture(60, L"Resources/Sprite/Tutorial_5/T5Chat1.png");
+	T5Chat1 = Sprite::Create(60, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(61, L"Resources/Sprite/Tutorial_5/T5Chat2.png");
+	T5Chat2 = Sprite::Create(61, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(62, L"Resources/Sprite/Tutorial_5/T5Chat3.png");
+	T5Chat3 = Sprite::Create(62, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(63, L"Resources/Sprite/Tutorial_5/T5Chat4.png");
+	T5Chat4 = Sprite::Create(63, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(64, L"Resources/Sprite/Tutorial_5/T5Chat5.png");
+	T5Chat5 = Sprite::Create(64, { 0.0f, 360.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
