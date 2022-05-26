@@ -143,8 +143,6 @@ private: // メンバ変数 Member variables
 	// ゲームシーン用 For game scenes
 	Camera* camera = nullptr;
 
-	Sprite* GameOverGameClearSelectBar = nullptr;
-
 	bool falling = false;
 	bool marker = true;
 	bool pause = false;
@@ -211,6 +209,8 @@ private: // メンバ変数 Member variables
 	Sprite* SpeechBubble = nullptr;
 
 	// チュートリアル1
+	bool Tutorial = false;
+	int TutorialNo = 0;
 	Sprite* T1Chat1 = nullptr;
 	Sprite* T1Chat2 = nullptr;
 	Sprite* T1Chat3 = nullptr;

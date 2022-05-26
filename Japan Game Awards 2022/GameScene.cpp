@@ -19,7 +19,7 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 13; //タイトル Title
+extern int sceneNo = 0; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
 
@@ -2830,7 +2830,7 @@ void GameScene::Update()
 	clonePositionTemp = enemyPosition;
 	cloneRotationTemp = enemyRotation;
 
-	if (beginStage && !falling && !pause)
+	if (beginStage && !falling && !pause && !Tutorial)
 	{
 		if (input->PushKey(DIK_A) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_W)
 			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
@@ -2853,12 +2853,20 @@ void GameScene::Update()
 		if (playerPosition.y <= 0.3f || playerPositionTemp.y <= 0.3f)
 		{
 			falling = false;
+			if (TutorialNo == 0)
+			{
+				TutorialNo = 1;
+				Tutorial = true;
+			}
 		}
 	}
 
-	playerMarkerPosition.x = playerPosition.x;
-	playerMarkerPosition.y = playerPosition.y + 8.0f;
-	playerMarkerPosition.z = playerPosition.z;
+	if (!Tutorial)
+	{
+		playerMarkerPosition.x = playerPosition.x;
+		playerMarkerPosition.y = playerPosition.y + 8.0f;
+		playerMarkerPosition.z = playerPosition.z;
+	}
 
 	objPlayerMarker->SetPosition(playerMarkerPosition);
 	objPlayerMarker->Update();
@@ -4381,6 +4389,49 @@ void GameScene::Update()
 				objClone->SetPosition(clonePositionTemp);
 			}
 
+			if (Tutorial)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = 12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = 12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = 12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = 12.0f;
+
+				objPlayerStand->SetRotation({ 0, 140, 0 });
+				objCloneStand->SetRotation({ 0, -140, 0 });
+
+				playerMarkerPosition = { -20.0f, 0.0f, 12.0f };
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+
+				if (delay)
+				{
+					delayFrame++;
+
+					if (delayFrame >= 5)
+					{
+						delayFrame = 0;
+						delay = false;
+					}
+				}
+
+				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+				{
+					if (TutorialNo >= 5)
+					{
+						Tutorial = false;
+					}
+					else
+					{
+						TutorialNo++;
+					}
+				}
+			}
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -4420,13 +4471,6 @@ void GameScene::Update()
 				t1ClearFlag = true;
 			}
 
-			//if (input->TriggerKey(DIK_R)) //リセット
-			//{
-			//	Tutorial1Move();
-			//	Tutorial1Reset();
-			//	sceneNo = 5;
-			//}
-
 			if (input->TriggerKey(DIK_T)) //タイトル
 			{
 				Tutorial1Move();
@@ -4435,18 +4479,6 @@ void GameScene::Update()
 				audio->StopWave("Stage.wav");
 				audio->PlayWave("Title.wav", Volume, true);
 			}
-
-			//if (input->TriggerKey(DIK_L)) //レベルセレクト
-			//{
-			//	Tutorial1Move();
-			//	sceneNo = 8;
-			//	audio->StopWave("Stage.wav");
-			//	audio->PlayWave("Title.wav", Volume, true);
-			//	camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
-			//	camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
-			//	menuBallRotation = { 0.0f, 0.0f, 0.0f };
-			//	menuSelection = 0;
-			//}
 		}
 
 		for (auto object_t1_1 : objects_t1_1) {
@@ -6598,7 +6630,10 @@ void GameScene::Draw()
 		objSkydome->Draw();
 
 		// チュートリアル
-		objPlayerTalk->Draw(cmdList);
+		if (Tutorial)
+		{
+			objPlayerTalk->Draw(cmdList);
+		}
 
 		break;
 	case 6:
@@ -7074,18 +7109,39 @@ void GameScene::Draw()
 		Order_2->Draw();
 		break;
 	case 5:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_2->Draw();
+		if (!Tutorial && !falling && beginStage)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_2->Draw();
+		}
 
 		// チュートリアル
-		TutorialBG->Draw();
-		SpeechBubble->Draw();
-		T1Chat1->Draw();
-		T1Chat2->Draw();
-		T1Chat3->Draw();
-		T1Chat4->Draw();
-		T1Chat5->Draw();
+		if (Tutorial)
+		{
+			TutorialBG->Draw();
+			SpeechBubble->Draw();
+			switch (TutorialNo)
+			{
+			case 0:
+				break;
+			case 1:
+				T1Chat1->Draw();
+				break;
+			case 2:
+				T1Chat2->Draw();
+				break;
+			case 3:
+				T1Chat3->Draw();
+				break;
+			case 4:
+				T1Chat4->Draw();
+				break;
+			case 5:
+				T1Chat5->Draw();
+				break;
+			}
+		}
 
 		break;
 	case 6:
@@ -7394,6 +7450,7 @@ void GameScene::Tutorial1Reset()
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
 
+	TutorialNo = 0;
 	cameraMove = 1;
 	cameraChange = false;
 
