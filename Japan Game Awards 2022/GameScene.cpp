@@ -19,7 +19,7 @@
 #include <vector>
 
 using namespace DirectX;
-extern int sceneNo = 0; //タイトル Title
+extern int sceneNo = 12; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
 
@@ -6149,7 +6149,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					if (TutorialNo >= 4)
+					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
 					}
@@ -7672,17 +7672,19 @@ void GameScene::Draw()
 			case 0:
 				break;
 			case 1:
-				T4Chat1->Draw();
+				T5Chat1->Draw();
 				break;
 			case 2:
-				T4Chat2->Draw();
+				T5Chat2->Draw();
 				break;
 			case 3:
-				T4Chat3->Draw();
+				T5Chat3->Draw();
 				break;
 			case 4:
-				T4Chat4->Draw();
+				T5Chat4->Draw();
 				break;
+			case 5:
+				T5Chat5->Draw();
 			}
 		}
 		break;
