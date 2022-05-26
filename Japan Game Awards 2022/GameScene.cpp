@@ -5443,7 +5443,7 @@ void GameScene::Update()
 		s1StageSelectFrame->SetPosition(s1StageSelectFramePosition);
 		s2StageSelectFrame->SetPosition(s2StageSelectFramePosition);
 		s3StageSelectFrame->SetPosition(s3StageSelectFramePosition);
-		//s4StageSelectFrame->SetPosition(s4StageSelectFramePosition);
+		s4StageSelectFrame->SetPosition(s4StageSelectFramePosition);
 		s5StageSelectFrame->SetPosition(s5StageSelectFramePosition);
 		s6StageSelectFrame->SetPosition(s6StageSelectFramePosition);
 
@@ -5455,7 +5455,7 @@ void GameScene::Update()
 		s1NewLog->SetPosition(s1NewLogPosition);
 		s2NewLog->SetPosition(s2NewLogPosition);
 		s3NewLog->SetPosition(s3NewLogPosition);
-		//s4NewLog->SetPosition(s4NewLogPosition);
+		s4NewLog->SetPosition(s4NewLogPosition);
 		s5NewLog->SetPosition(s5NewLogPosition);
 		s6NewLog->SetPosition(s6NewLogPosition);
 
@@ -5467,7 +5467,7 @@ void GameScene::Update()
 		s1ClearLog->SetPosition(s1ClearLogPosition);
 		s2ClearLog->SetPosition(s2ClearLogPosition);
 		s3ClearLog->SetPosition(s3ClearLogPosition);
-		//s4ClearLog->SetPosition(s4ClearLogPosition);
+		s4ClearLog->SetPosition(s4ClearLogPosition);
 		s5ClearLog->SetPosition(s5ClearLogPosition);
 		s6ClearLog->SetPosition(s6ClearLogPosition);
 

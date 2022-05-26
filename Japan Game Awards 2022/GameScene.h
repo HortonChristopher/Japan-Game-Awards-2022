@@ -488,7 +488,6 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s5ClearLogPosition = { (SpriteStageSizeX + (1280 * 9)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 s6ClearLogPosition = { (SpriteStageSizeX + (1280 * 10)) - 150, (SpriteStageSizeY + 100) };
 
-
 	CollisionManager* collisionManager;
 
 	//マップチップ mapchip
