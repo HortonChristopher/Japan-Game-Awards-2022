@@ -482,6 +482,26 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(49, L"Resources/Sprite/Tutorial_2/T2Chat6.png");
 	T2Chat6 = Sprite::Create(49, { 0.0f, 360.0f });
 
+	// チュートリアル3
+	Sprite::LoadTexture(50, L"Resources/Sprite/Tutorial_3/T3Chat1.png");
+	T3Chat1 = Sprite::Create(50, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(51, L"Resources/Sprite/Tutorial_3/T3Chat2.png");
+	T3Chat2 = Sprite::Create(51, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(52, L"Resources/Sprite/Tutorial_3/T3Chat3.png");
+	T3Chat3 = Sprite::Create(52, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(53, L"Resources/Sprite/Tutorial_3/T3Chat4.png");
+	T3Chat4 = Sprite::Create(53, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(54, L"Resources/Sprite/Tutorial_3/T3Chat5.png");
+	T3Chat5 = Sprite::Create(54, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(55, L"Resources/Sprite/Tutorial_3/T3Chat6.png");
+	T3Chat6 = Sprite::Create(55, { 0.0f, 360.0f });
+
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -7257,6 +7277,13 @@ void GameScene::Draw()
 		// チュートリアル
 		TutorialBG->Draw();
 		SpeechBubble->Draw();
+		T3Chat1->Draw();
+		T3Chat2->Draw();
+		T3Chat3->Draw();
+		T3Chat4->Draw();
+		T3Chat5->Draw();
+		T3Chat6->Draw();
+
 		break;
 	case 8:
 		StageSelectLog->Draw();
