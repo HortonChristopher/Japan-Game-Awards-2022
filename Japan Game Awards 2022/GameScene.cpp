@@ -2873,7 +2873,7 @@ void GameScene::Update()
 		if (playerPosition.y <= 0.3f || playerPositionTemp.y <= 0.3f)
 		{
 			falling = false;
-			if (TutorialNo == 0)
+			if (TutorialNo == 0 && sceneNo != 0 && sceneNo != 1 && sceneNo != 2 && sceneNo != 3 && sceneNo != 4 && sceneNo != 8 && sceneNo != 9 && sceneNo != 10 && sceneNo != 13)
 			{
 				TutorialNo = 1;
 				Tutorial = true;
@@ -2913,8 +2913,8 @@ void GameScene::Update()
 	//ButtonKind::Button_RightMenu = Start
 
 #pragma region ポーズ画面
-	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling ||
-		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling)
+	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
+		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
 	{
 		if (!pause)
 		{
@@ -4580,6 +4580,49 @@ void GameScene::Update()
 				objClone->SetPosition(clonePositionTemp);
 			}
 
+			if (Tutorial)
+			{
+				playerPosition.x = -20.0f;
+				playerPosition.z = -12.0f;
+				playerPositionTemp.x = -20.0f;
+				playerPositionTemp.z = -12.0f;
+
+				enemyPosition.x = 20.0f;
+				enemyPosition.z = -12.0f;
+				clonePositionTemp.x = 20.0f;
+				clonePositionTemp.z = -12.0f;
+
+				objPlayerStand->SetRotation({ 0, 320, 0 });
+				objCloneStand->SetRotation({ 0, -320, 0 });
+
+				playerMarkerPosition = { -20.0f, 0.0f, -12.0f };
+				objFighter->SetPosition(playerPositionTemp);
+				objClone->SetPosition(clonePositionTemp);
+
+				if (delay)
+				{
+					delayFrame++;
+
+					if (delayFrame >= 5)
+					{
+						delayFrame = 0;
+						delay = false;
+					}
+				}
+
+				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+				{
+					if (TutorialNo >= 6)
+					{
+						Tutorial = false;
+					}
+					else
+					{
+						TutorialNo++;
+					}
+				}
+			}
+
 			//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
 			if (ConTimer <= 60)
 			{
@@ -5762,7 +5805,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 11: //チュートリアル４
+	case 11: //チュートリアル　４
 #pragma region case11 チュートリアル４
 		if (!beginStage)
 		{
@@ -5892,7 +5935,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 	
-	case 12:
+	case 12: //チュートリアル　５
 #pragma region case12 チュートリアル5
 		if (!beginStage)
 		{
@@ -6689,7 +6732,10 @@ void GameScene::Draw()
 		objSkydome->Draw();
 
 		// チュートリアル
-		objPlayerTalk->Draw(cmdList);
+		if (Tutorial)
+		{
+			objPlayerTalk->Draw(cmdList);
+		}
 
 		break;
 	case 7:
@@ -7165,19 +7211,42 @@ void GameScene::Draw()
 
 		break;
 	case 6:
-		GuideR->Draw();
-		Guide_LRB->Draw();
-		Order_2->Draw();
-
+		if (!Tutorial && !falling && beginStage)
+		{
+			GuideR->Draw();
+			Guide_LRB->Draw();
+			Order_2->Draw();
+		}
+		
 		// チュートリアル
-		TutorialBG->Draw();
-		SpeechBubble->Draw();
-		T2Chat1->Draw();
-		T2Chat2->Draw();
-		T2Chat3->Draw();
-		T2Chat4->Draw();
-		T2Chat5->Draw();
-		T2Chat6->Draw();
+		if (Tutorial)
+		{
+			TutorialBG->Draw();
+			SpeechBubble->Draw();
+			switch (TutorialNo)
+			{
+			case 0:
+				break;
+			case 1:
+				T2Chat1->Draw();
+				break;
+			case 2:
+				T2Chat2->Draw();
+				break;
+			case 3:
+				T2Chat3->Draw();
+				break;
+			case 4:
+				T2Chat4->Draw();
+				break;
+			case 5:
+				T2Chat5->Draw();
+				break;
+			case 6:
+				T2Chat6->Draw();
+				break;
+			}
+		}
 
 		break;
 	case 7:
@@ -7537,6 +7606,7 @@ void GameScene::Tutorial2Reset()
 	playerRotationTemp = { 0,0,0 };
 	cloneRotationTemp = { 0,0,0 };
 
+	TutorialNo = 0;
 	cameraMove = 1;
 	cameraChange = false;
 
