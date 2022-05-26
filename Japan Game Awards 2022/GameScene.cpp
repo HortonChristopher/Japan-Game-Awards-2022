@@ -121,7 +121,7 @@ GameScene::~GameScene()
 	safe_delete(Guide_LRB);
 	safe_delete(Order_1);
 	safe_delete(Order_2);
-	safe_delete(Mirror);
+	safe_delete(TutorialBG);
 	safe_delete(GameOverLog);
 	safe_delete(TitleLog);
 	safe_delete(StageSelectRB);
@@ -303,7 +303,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(10, L"Resources/Sprite/Mirror.png");
 
-	Mirror = Sprite::Create(10, { 0.0f,0.0f });
+	TutorialBG = Sprite::Create(10, { 0.0f,0.0f });
 
 	Sprite::LoadTexture(11, L"Resources/Sprite/GameOver.png");
 
@@ -444,6 +444,24 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	Sprite::LoadTexture(37, L"Resources/Sprite/GameOverGameClearSelect.png");
 	GameOverGameClearSelectBar = Sprite::Create(37, { -250.0f,350.0f });
 
+	Sprite::LoadTexture(38, L"Resources/Sprite/SpeechBubble.png");
+	SpeechBubble = Sprite::Create(38, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(39, L"Resources/Sprite/Tutorial_1/T1Chat1.png");
+	T1Chat1 = Sprite::Create(39, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(40, L"Resources/Sprite/Tutorial_1/T1Chat2.png");
+	T1Chat2 = Sprite::Create(40, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(41, L"Resources/Sprite/Tutorial_1/T1Chat3.png");
+	T1Chat3 = Sprite::Create(41, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(42, L"Resources/Sprite/Tutorial_1/T1Chat4.png");
+	T1Chat4 = Sprite::Create(42, { 0.0f, 360.0f });
+
+	Sprite::LoadTexture(43, L"Resources/Sprite/Tutorial_1/T1Chat5.png");
+	T1Chat5 = Sprite::Create(43, { 0.0f, 360.0f });
+
 #pragma endregion
 
 #pragma region Obj モデル読み込み
@@ -528,6 +546,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlayerWin = FbxLoader::GetInstance()->LoadModelFromFile("PlayerWin");
 	modelPlayerLose = FbxLoader::GetInstance()->LoadModelFromFile("PlayerLose");
 	modelPlayerFall = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFalling");
+	modelPlayerTalk = FbxLoader::GetInstance()->LoadModelFromFile("PlayerTalking");
+
 	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
 	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
 	modelCloneFight = FbxLoader::GetInstance()->LoadModelFromFile("CloneFighting");
@@ -562,6 +582,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerFall = new FbxObject3d;
 	objPlayerFall->Initialize();
 	objPlayerFall->SetModel(modelPlayerFall);
+
+	objPlayerTalk = new FbxObject3d;
+	objPlayerTalk->Initialize();
+	objPlayerTalk->SetModel(modelPlayerTalk);
 
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
@@ -608,6 +632,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerFall->SetPosition({ 0,0,0 });
 	objPlayerFall->SetRotation({ 0,0,0 });
 	objPlayerFall->SetScale({ 0.5,0.5,0.5 });
+
+	objPlayerTalk->SetPosition({ -11,4,-25 });
+	objPlayerTalk->SetRotation({ -30,120,40 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -3860,6 +3887,7 @@ void GameScene::Update()
 		objPlayerRun->Update();
 		objPlayerStand->Update();
 		objPlayerFall->Update();
+		objPlayerTalk->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
@@ -4009,6 +4037,7 @@ void GameScene::Update()
 		objPlayerRun->Update();
 		objPlayerStand->Update();
 		objPlayerFall->Update();
+		objPlayerTalk->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
@@ -4318,6 +4347,7 @@ void GameScene::Update()
 		objPlayerRun->Update();
 		objPlayerStand->Update();
 		objPlayerFall->Update();
+		objPlayerTalk->Update();
 
 		objCloneRun->Update();
 		objCloneStand->Update();
@@ -5147,8 +5177,6 @@ void GameScene::Draw()
 		break;
 	case 1:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 2:
 		if (sceneChange == 0)
@@ -5158,7 +5186,6 @@ void GameScene::Draw()
 			gameClear->Initialize();
 			sceneChange = 1;
 		}
-
 
 		gameClear->Draw();
 		break;
@@ -5174,36 +5201,24 @@ void GameScene::Draw()
 		break;
 	case 4:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 5:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 6:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 7:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 8:
 		spriteBG->Draw();
 		break;
 	case 9:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 10:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	}
 
@@ -5378,6 +5393,9 @@ void GameScene::Draw()
 
 		objSkydome->Draw();
 
+		// チュートリアル
+		objPlayerTalk->Draw(cmdList);
+
 		break;
 	case 6:
 		if (falling && beginStage)
@@ -5410,6 +5428,9 @@ void GameScene::Draw()
 		}
 
 		objSkydome->Draw();
+
+		// チュートリアル
+		objPlayerTalk->Draw(cmdList);
 
 		break;
 	case 7:
@@ -5489,6 +5510,9 @@ void GameScene::Draw()
 
 		objSkydome->Draw();
 
+		// チュートリアル
+		objPlayerTalk->Draw(cmdList);
+
 		break;
 	case 8:
 
@@ -5552,6 +5576,7 @@ void GameScene::Draw()
 		objTeleporterOut4->Draw();
 
 		objSkydome->Draw();
+
 		break;
 	case 10:
 		if (falling && beginStage)
@@ -5659,8 +5684,6 @@ void GameScene::Draw()
 	switch (sceneNo)
 	{
 	case 0:
-
-		// Mirror->Draw();
 		TitleLog->Draw();
 		Press_A->Draw();
 		break;
@@ -5690,16 +5713,34 @@ void GameScene::Draw()
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_2->Draw();
+
+		// チュートリアル
+		TutorialBG->Draw();
+		SpeechBubble->Draw();
+		T1Chat1->Draw();
+		T1Chat2->Draw();
+		T1Chat3->Draw();
+		T1Chat4->Draw();
+		T1Chat5->Draw();
+
 		break;
 	case 6:
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_2->Draw();
+
+		// チュートリアル
+		TutorialBG->Draw();
+		SpeechBubble->Draw();
 		break;
 	case 7:
 		GuideR->Draw();
 		Guide_LRB->Draw();
 		Order_2->Draw();
+
+		// チュートリアル
+		TutorialBG->Draw();
+		SpeechBubble->Draw();
 		break;
 	case 8:
 		StageSelectLog->Draw();
