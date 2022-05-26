@@ -192,7 +192,6 @@ private: // メンバ変数 Member variables
 	Sprite* Order_1 = nullptr;
 	Sprite* Order_2 = nullptr;
 	Sprite* Press_A = nullptr;
-	Sprite* Mirror = nullptr;
 	Sprite* GameOverLog = nullptr;
 	Sprite* ReStateLog = nullptr;
 	Sprite* GameOverStageSelectLog = nullptr;
@@ -205,6 +204,18 @@ private: // メンバ変数 Member variables
 	Sprite* StageSelectLog = nullptr;
 	Sprite* GuideA = nullptr;
 	Sprite* GuideB = nullptr;
+	Sprite* GameOverGameClearSelectBar = nullptr;
+
+	// チュートリアル
+	Sprite* TutorialBG = nullptr;
+	Sprite* SpeechBubble = nullptr;
+
+	// チュートリアル1
+	Sprite* T1Chat1 = nullptr;
+	Sprite* T1Chat2 = nullptr;
+	Sprite* T1Chat3 = nullptr;
+	Sprite* T1Chat4 = nullptr;
+	Sprite* T1Chat5 = nullptr;
 
 	Sprite* t1Background = nullptr;
 	Sprite* t2Background = nullptr;
@@ -285,6 +296,7 @@ private: // メンバ変数 Member variables
 	FbxModel* modelPlayerWin = nullptr;
 	FbxModel* modelPlayerFall = nullptr;
 	FbxModel* modelPlayerLose = nullptr;
+	FbxModel* modelPlayerTalk = nullptr;
 
 	// クローン
 	FbxModel* modelCloneRun = nullptr;
@@ -350,6 +362,7 @@ private: // メンバ変数 Member variables
 	FbxObject3d* objPlayerWin = nullptr;
 	FbxObject3d* objPlayerLose = nullptr;
 	FbxObject3d* objPlayerFall = nullptr;
+	FbxObject3d* objPlayerTalk = nullptr;
 
 	// クローン
 	FbxObject3d* objCloneRun = nullptr;
