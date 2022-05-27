@@ -3136,8 +3136,8 @@ void GameScene::Update()
 			}
 			else if (pauseMenuSelection == 2)
 			{
-				audio->StopWave("Stage.wav");
-				audio->PlayWave("Title.wav", Volume, true);
+				/*audio->StopWave("Stage.wav");
+				audio->PlayWave("Title.wav", Volume, true);*/
 				switch (sceneNo)
 				{
 				case 0:
@@ -3145,6 +3145,8 @@ void GameScene::Update()
 				case 1:
 					Stage1Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0   });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3158,6 +3160,8 @@ void GameScene::Update()
 				case 4:
 					Stage2Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3167,6 +3171,8 @@ void GameScene::Update()
 				case 5:
 					Tutorial1Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3176,6 +3182,8 @@ void GameScene::Update()
 				case 6:
 					Tutorial2Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3185,6 +3193,8 @@ void GameScene::Update()
 				case 7:
 					Tutorial3Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3196,6 +3206,8 @@ void GameScene::Update()
 				case 9:
 					Tutorial4Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3238,6 +3250,8 @@ void GameScene::Update()
 				case 13:
 					Stage6Move();
 					sceneNo = 8;
+					audio->StopWave("Stage.wav");
+					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -3245,7 +3259,6 @@ void GameScene::Update()
 					delay = true;
 					break;
 				}
-				audio->PlayWave("Title.wav", Volume, true);
 				pause = false;
 				pausePosition = false;
 			}
@@ -5198,8 +5211,8 @@ void GameScene::Update()
 		camera->SetEye({ -15,0,0 });
 		camera->SetTarget({ 0, 0, 0 });
 
-
-		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 10 ||
+			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 10)
 		{
 			stageMoveRight = true;
 			stageSelect++;
