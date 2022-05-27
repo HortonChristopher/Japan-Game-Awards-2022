@@ -122,6 +122,9 @@ private: // メンバ変数 Member variables
 
 	bool temp = true;
 
+	//音楽用
+	bool once = true;
+
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
@@ -167,6 +170,9 @@ private: // メンバ変数 Member variables
 	bool s1ClearFlag = false;
 	bool s2ClearFlag = false;
 	bool s3ClearFlag = false;
+
+	//スイッチSEフラグ
+	bool SwitchFlag = false;
 
 #pragma region Sprite
 	Sprite* spriteBG = nullptr;

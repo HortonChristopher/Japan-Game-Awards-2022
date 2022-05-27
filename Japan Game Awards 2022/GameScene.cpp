@@ -190,6 +190,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("GameOver.wav");
 	audio->LoadWave("Title.wav");
 	audio->LoadWave("Stage.wav");
+	audio->LoadWave("Switch.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -2453,6 +2454,8 @@ void GameScene::Update()
 			}
 			else if (pauseMenuSelection == 2)
 			{
+				audio->StopWave("Stage.wav");
+				audio->PlayWave("Title.wav", Volume, true);
 				switch (sceneNo)
 				{
 				case 0:
@@ -2460,10 +2463,8 @@ void GameScene::Update()
 				case 1:
 					Stage1Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
-					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
+					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0   });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
 					menuSelection = 0;
 					delay = true;
@@ -2475,8 +2476,6 @@ void GameScene::Update()
 				case 4:
 					Stage2Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -2486,8 +2485,6 @@ void GameScene::Update()
 				case 5:
 					Tutorial1Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -2497,8 +2494,6 @@ void GameScene::Update()
 				case 6:
 					Tutorial2Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -2508,8 +2503,6 @@ void GameScene::Update()
 				case 7:
 					Tutorial3Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -2521,8 +2514,6 @@ void GameScene::Update()
 				case 9:
 					Tutorial4Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -2532,8 +2523,6 @@ void GameScene::Update()
 				case 10:
 					Stage3Move();
 					sceneNo = 8;
-					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -2541,7 +2530,7 @@ void GameScene::Update()
 					delay = true;
 					break;
 				}
-
+				audio->PlayWave("Title.wav", Volume, true);
 				pause = false;
 				pausePosition = false;
 			}
@@ -3730,6 +3719,7 @@ void GameScene::Update()
 
 	case 5: // チュートリアル 1
 #pragma region case5 チュートリアル1
+
 		if (!beginStage)
 		{
 			if (t1Time)
@@ -4085,20 +4075,29 @@ void GameScene::Update()
 				ConTimer = 0;
 			}
 
-			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f))
+			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f) && doorOpen1 == false)
 			{
 				//tutorial3YellowKabe1 = false;
+				SwitchFlag = true;
 				doorOpen1 = true;
 			}
 			if (intersect(enemyPosition, BlueButton, 1.0f, 1.0f, 1.0f))
 			{
 				//tutorial3YellowKabe2 = false;
+				SwitchFlag = true;
 				doorOpen2 = true;
 			}
 			if (intersect(playerPosition, GreenButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, GreenButton2, 1.0f, 1.0f, 1.0f))
 			{
 				//tutorial3YellowKabe3 = false;
+				SwitchFlag = true;
 				doorOpen3 = true;
+			}
+
+			if (SwitchFlag == true && doorOpen1 == true)
+			{
+				audio->PlayWave("Switch.wav", Volume, false);
+				SwitchFlag = false;
 			}
 
 			if (doorOpen1)
@@ -4340,6 +4339,7 @@ void GameScene::Update()
 		camera->SetEye({ -15,0,0 });
 		camera->SetTarget({ 0, 0, 0 });
 
+
 		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 		{
 			PlayFlag = false;
@@ -4467,6 +4467,7 @@ void GameScene::Update()
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay ||
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
+			audio->StopWave("Title.wav");
 			audio->PlayWave("Stage.wav", Volume, true);
 			switch (stageSelect)
 			{
