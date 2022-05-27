@@ -2592,7 +2592,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s5_y1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s5_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -15, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 1)
 			{
 				object_s5_y1_1->SetRotation({ 0, 0, 0 });
@@ -8072,7 +8072,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 14: //ステージ 4
+	case 14: // ステージ 4
 #pragma region case14 ステージ4
 		if (!beginStage)
 		{
@@ -8369,7 +8369,7 @@ void GameScene::Update()
 			{
 				for (auto object_s5_y1_1 : objects_s5_y1_1) {
 					XMFLOAT3 objectPosition = object_s5_y1_1->GetPosition();
-					object_s5_y1_1->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_s5_y1_1->SetPosition({ objectPosition.x, objectPosition.y + 1.0f, objectPosition.z });
 					object_s5_y1_1->Update();
 				}
 
@@ -8387,7 +8387,7 @@ void GameScene::Update()
 			{
 				for (auto object_s5_y1_1 : objects_s5_y1_1) {
 					XMFLOAT3 objectPosition = object_s5_y1_1->GetPosition();
-					object_s5_y1_1->SetPosition({ objectPosition.x, -100, objectPosition.z });
+					object_s5_y1_1->SetPosition({ objectPosition.x, 0, objectPosition.z });
 					object_s5_y1_1->Update();
 				}
 			}
@@ -10074,7 +10074,7 @@ void GameScene::Draw()
 			objButtonFloor->Draw();
 		}
 
-		if (doorOpen2 || !stage5Switch)
+		if (doorOpen2 || stage5Switch)
 		{
 			for (auto object_s5_y1_1 : objects_s5_y1_1)
 			{
@@ -11854,7 +11854,7 @@ void GameScene::Stage5Reset()
 
 		for (auto object_s5_y1_1 : objects_s5_y1_1) {
 			XMFLOAT3 objectPosition = object_s5_y1_1->GetPosition();
-			object_s5_y1_1->SetPosition({ objectPosition.x, 0.0f, objectPosition.z });
+			object_s5_y1_1->SetPosition({ objectPosition.x, -15.0f, objectPosition.z });
 			object_s5_y1_1->Update();
 		}
 
