@@ -3584,12 +3584,14 @@ void GameScene::Update()
 			if (intersect(playerPosition, BombButton1, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 			{
 				playerBulletF = true;
+				SwitchFlag1 = true;
 			}
 
 			if (intersect(enemyPosition, BombButton2, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
 			{
 				enemyBulletF = true;
 			}
+
 
 			if (playerBulletF)
 			{
@@ -4949,27 +4951,35 @@ void GameScene::Update()
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f) && doorOpen1 == false)
 			{
 				//tutorial3YellowKabe1 = false;
-				SwitchFlag = true;
+				if (SwitchFlag1 == false)
+				{
+					SwitchFlag1 = true;
+					audio->PlayWave("Switch.wav", Volume, false);
+				}
 				doorOpen1 = true;
 			}
 			if (intersect(enemyPosition, BlueButton, 1.0f, 1.0f, 1.0f))
 			{
 				//tutorial3YellowKabe2 = false;
-				SwitchFlag = true;
+				if (SwitchFlag2 == false)
+				{
+					SwitchFlag2 = true;
+					audio->PlayWave("Switch.wav", Volume, false);
+				}
 				doorOpen2 = true;
 			}
 			if (intersect(playerPosition, GreenButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, GreenButton2, 1.0f, 1.0f, 1.0f))
 			{
 				//tutorial3YellowKabe3 = false;
-				SwitchFlag = true;
+				if (SwitchFlag3 == false)
+				{
+					SwitchFlag3 = true;
+					audio->PlayWave("Switch.wav", Volume, false);
+				}
 				doorOpen3 = true;
 			}
 
-			if (SwitchFlag == true && doorOpen1 == true)
-			{
-				audio->PlayWave("Switch.wav", Volume, false);
-				SwitchFlag = false;
-			}
+			
 
 			if (doorOpen1)
 			{
@@ -5590,6 +5600,11 @@ void GameScene::Update()
 			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
 			{
 				//tutorial4YellowKabe = false;
+				if (SwitchFlag1 == false)
+				{
+					SwitchFlag1 = true;
+					audio->PlayWave("Switch.wav", Volume, false);
+				}
 				doorOpen1 = true;
 			}
 
@@ -6379,6 +6394,11 @@ void GameScene::Update()
 			if (intersect(playerPosition, FloorButton, 1.0f, 1.0f, 1.0f))
 			{
 				//tutorial5Switch = true;
+				if (SwitchFlag1 == false)
+				{
+					SwitchFlag1 = true;
+					audio->PlayWave("Switch.wav", Volume, false);
+				}
 				doorOpen1 = true;
 			}
 
@@ -8289,6 +8309,10 @@ void GameScene::Tutorial3Reset()
 	doorCount3 = 0;
 	doorOpen3 = false;
 
+	SwitchFlag1 = false;
+	SwitchFlag2 = false;
+	SwitchFlag3 = false;
+
 	camera->SetTarget({ 0, 1, 0 });
 	camera->SetEye({ 0, 20, -30 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
@@ -8515,6 +8539,8 @@ void GameScene::Tutorial5Reset()
 	playerBulletF = false;
 	enemyBulletF = false;
 
+	SwitchFlag1 = false;
+
 	camera->SetTarget({ 0, 1, 0 });
 	camera->SetEye({ 0, 20, -30 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
@@ -8711,6 +8737,9 @@ void GameScene::Stage1Reset()
 	playerBulletF = false;
 	enemyBulletF = false;
 
+	SwitchFlag1 = false;
+	SwitchFlag2 = false;
+
 	camera->SetTarget({ 0, 1, 0 });
 	camera->SetEye({ 0, 20, -30 });
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
@@ -8821,6 +8850,10 @@ void GameScene::Stage2Reset()
 
 	stage2YellowKabe = true;
 	stage2Switch = false;
+
+	SwitchFlag1 = false;
+	SwitchFlag2 = false;
+
 
 	beginStage = false;
 }
