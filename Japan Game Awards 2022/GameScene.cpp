@@ -1606,11 +1606,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			if (i > 3 && i <= 6 && j != 0 && j != 6)
 			{
-				modelIndex = 1;
+				modelIndex = 0;
 			}
 			else if (i == 7)
 			{
-				modelIndex = 2;
+				modelIndex = 0;
 			}
 			else
 			{
@@ -1618,16 +1618,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			}
 
 			TouchableObject* object_t5_s2 = TouchableObject::Create(modeltable_s2[modelIndex]);
-			object_t5_s2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
+			object_t5_s2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			object_t5_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
-			if (modelIndex == 2)
-			{
-				object_t5_s2->SetRotation({ 180, 0, 0 });
-			}
-			else if (modelIndex == 1)
-			{
-				object_t5_s2->SetRotation({ 180, 0, 0 });
-			}
 			objects_t5_s2.push_back(object_t5_s2);
 		}
 	}
@@ -6374,7 +6366,26 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, FloorButton, 1.0f, 1.0f, 1.0f))
 			{
-				tutorial5Switch = true;
+				//tutorial5Switch = true;
+				doorOpen1 = true;
+			}
+
+			if (doorOpen1)
+			{
+				for (auto object_t5_s2 : objects_t5_s2) {
+					XMFLOAT3 objectPosition = object_t5_s2->GetPosition();
+					object_t5_s2->SetPosition({ objectPosition.x, objectPosition.y - 0.25f, objectPosition.z });
+					object_t5_s2->Update();
+				}
+
+				doorCount1++;
+
+				if (doorCount1 >= 15)
+				{
+					tutorial5Switch = true;
+					doorCount1 = 0;
+					doorOpen1 = false;
+				}
 			}
 
 			if (tutorial5Switch)
@@ -8506,6 +8517,8 @@ void GameScene::Tutorial5Reset()
 
 	tutorial5Switch = false;
 
+	doorOpen1 = false;
+	doorCount1 = 0;
 	TutorialNo = 0;
 	cameraMove = 1;
 	cameraChange = false;
