@@ -3245,7 +3245,6 @@ void GameScene::Update()
 					delay = true;
 					break;
 				}
-				audio->PlayWave("Title.wav", Volume, true);
 				pause = false;
 				pausePosition = false;
 			}
@@ -5199,7 +5198,7 @@ void GameScene::Update()
 		camera->SetTarget({ 0, 0, 0 });
 
 
-		if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
+		if (input->TriggerKey(DIK_D) || IsButtonDown(ButtonKind::Button_A))
 		{
 			stageMoveRight = true;
 			stageSelect++;
