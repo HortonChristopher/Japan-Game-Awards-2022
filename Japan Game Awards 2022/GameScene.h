@@ -72,20 +72,28 @@ public: // メンバ関数 Member function
 	void Tutorial2Move();
 	void Tutorial3Reset();
 	void Tutorial3Move();
-	void newTutorial4Reset();
-	void newTutorial4Move();
-	void Tutorial5Reset();
-	void Tutorial5Move();
 	void Tutorial4Reset();
 	void Tutorial4Move();
+	void Tutorial5Reset();
+	void Tutorial5Move();
 	void Stage1Reset();
 	void Stage1Move();
 	void Stage2Reset();
 	void Stage2Move();
+	void Stage3Reset();
+	void Stage3Move();
+	void Stage4Reset();
+	void Stage4Move();
 	void Stage5Reset();
 	void Stage5Move();
 	void Stage6Reset();
 	void Stage6Move();
+	void Stage7Reset();
+	void Stage7Move();
+	void Stage8Reset();
+	void Stage8Move();
+	void Stage9Reset();
+	void Stage9Move();
 
 	void GameClearReset();
 	void GameOverReset();
@@ -114,9 +122,23 @@ private: // メンバ変数 Member variables
 	bool stage3YellowKabe2 = true;
 	bool stage3YellowKabe3 = true;
 	bool stage3YellowKabe4 = true;
+	bool stage4Switch = false;
+	bool stage4YellowKabe = true;
+	bool stage5Switch = false;
+	bool stage5YellowKabe1 = true;
+	bool stage5YellowKabe2 = true;
+	bool stage5YellowKabe3 = true;
+	bool stage5YellowKabe4 = true;
+	bool newstage6YellowKabe1 = true;
+	bool newstage6YellowKabe2 = true;
+	bool newStage6switch = false;
 	bool stage6YellowKabe1 = true;
 	bool stage6YellowKabe2 = true;
 	bool stage6YellowKabe3 = true;
+	bool stage9YellowKabe1 = true;
+	bool stage9YellowKabe2 = true;
+	bool stage9YellowKabe3 = true;
+	bool stage9YellowKabe4 = true;
 
 	bool stageMoveRight = false;
 	bool stageMoveLeft = false;
@@ -131,7 +153,12 @@ private: // メンバ変数 Member variables
 	bool firstTime = true;
 	bool secondTime = true;
 	bool thirdTime = true;
+	bool fourthTime = true;
+	bool fifthTime = true;
 	bool sixthTime = true;
+	bool seventhTime = true;
+	bool eigthTime = true;
+	bool ninthTime = true;
 
 	bool temp = true;
 
@@ -167,26 +194,32 @@ private: // メンバ変数 Member variables
 	bool t1FirstPlayFlag = true;
 	bool t2FirstPlayFlag = true;
 	bool t3FirstPlayFlag = true;
-	bool at4FirstPlayFlag = true;
-	bool t5FirstPlayFlag = true;
 	bool t4FirstPlayFlag = true;
+	bool t5FirstPlayFlag = true;
 	bool s1FirstPlayFlag = true;
 	bool s2FirstPlayFlag = true;
 	bool s3FirstPlayFlag = true;
 	bool s4FirstPlayFlag = true;
+	bool s5FirstPlayFlag = true;
 	bool s6FirstPlayFlag = true;
+	bool s7FirstPlayFlag = true;
+	bool s8FirstPlayFlag = true;
+	bool s9FirstPlayFlag = true;
 
 	bool t1ClearFlag = false;
 	bool t2ClearFlag = false;
 	bool t3ClearFlag = false;
-	bool at4ClearFlag = false;
-	bool t5ClearFlag = false;
 	bool t4ClearFlag = false;
+	bool t5ClearFlag = false;
 	bool s1ClearFlag = false;
 	bool s2ClearFlag = false;
 	bool s3ClearFlag = false;
 	bool s4ClearFlag = false;
+	bool s5ClearFlag = false;
 	bool s6ClearFlag = false;
+	bool s7ClearFlag = false;
+	bool s8ClearFlag = false;
+	bool s9ClearFlag = false;
 
 	//スイッチSEフラグ
 	bool SwitchFlag1 = false;
@@ -267,6 +300,9 @@ private: // メンバ変数 Member variables
 	Sprite* s4Background = nullptr;
 	Sprite* s5Background = nullptr;
 	Sprite* s6Background = nullptr;
+	Sprite* s7Background = nullptr;
+	Sprite* s8Background = nullptr;
+	Sprite* s9Background = nullptr;
 
 	Sprite* t1StageSelectFrame = nullptr;
 	Sprite* t2StageSelectFrame = nullptr;
@@ -279,6 +315,9 @@ private: // メンバ変数 Member variables
 	Sprite* s4StageSelectFrame = nullptr;
 	Sprite* s5StageSelectFrame = nullptr;
 	Sprite* s6StageSelectFrame = nullptr;
+	Sprite* s7StageSelectFrame = nullptr;
+	Sprite* s8StageSelectFrame = nullptr;
+	Sprite* s9StageSelectFrame = nullptr;
 
 	Sprite* t1NewLog = nullptr;
 	Sprite* t2NewLog = nullptr;
@@ -291,6 +330,9 @@ private: // メンバ変数 Member variables
 	Sprite* s4NewLog = nullptr;
 	Sprite* s5NewLog = nullptr;
 	Sprite* s6NewLog = nullptr;
+	Sprite* s7NewLog = nullptr;
+	Sprite* s8NewLog = nullptr;
+	Sprite* s9NewLog = nullptr;
 
 	Sprite* t1ClearLog = nullptr;
 	Sprite* t2ClearLog = nullptr;
@@ -303,6 +345,9 @@ private: // メンバ変数 Member variables
 	Sprite* s4ClearLog = nullptr;
 	Sprite* s5ClearLog = nullptr;
 	Sprite* s6ClearLog = nullptr;
+	Sprite* s7ClearLog = nullptr;
+	Sprite* s8ClearLog = nullptr;
+	Sprite* s9ClearLog = nullptr;
 	
 	//pauseメニュー
 	Sprite* pause1 = nullptr;
@@ -381,9 +426,11 @@ private: // メンバ変数 Member variables
 	Object3d* objButtonRed1 = nullptr;
 	Object3d* objButtonRed2 = nullptr;
 	Object3d* objButtonBlue = nullptr;
+	Object3d* objButtonBlue2 = nullptr;
 	Object3d* objButtonGreen1 = nullptr;
 	Object3d* objButtonGreen2 = nullptr;
 	Object3d* objButtonYellow = nullptr;
+	Object3d* objButtonYellow2 = nullptr;
 	Object3d* objButtonBomb1 = nullptr;
 	Object3d* objButtonBomb2 = nullptr;
 	Object3d* objButtonFloor = nullptr;
@@ -397,6 +444,8 @@ private: // メンバ変数 Member variables
 	Object3d* objTeleporterOut3 = nullptr;
 	Object3d* objTeleporterIn4 = nullptr;
 	Object3d* objTeleporterOut4 = nullptr;
+	Object3d* objTeleporterIn5 = nullptr;
+	Object3d* objTeleporterOut5 = nullptr;
 
 	// 扉
 	Object3d* objDoorBase = nullptr;
@@ -459,6 +508,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s4BackgroundPosition = { SpriteStageSizeX + (1280 * 8), SpriteStageSizeY };
 	XMFLOAT2 s5BackgroundPosition = { SpriteStageSizeX + (1280 * 9), SpriteStageSizeY };
 	XMFLOAT2 s6BackgroundPosition = { SpriteStageSizeX + (1280 * 10), SpriteStageSizeY };
+	XMFLOAT2 s7BackgroundPosition = { SpriteStageSizeX + (1280 * 11), SpriteStageSizeY };
+	XMFLOAT2 s8BackgroundPosition = { SpriteStageSizeX + (1280 * 12), SpriteStageSizeY };
+	XMFLOAT2 s9BackgroundPosition = { SpriteStageSizeX + (1280 * 13), SpriteStageSizeY };
 
 	XMFLOAT2 t1StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 0)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 t2StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 1)) - 20, (SpriteStageSizeY - 11) };
@@ -471,6 +523,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s4StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 8)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 s5StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 9)) - 20, (SpriteStageSizeY - 11) };
 	XMFLOAT2 s6StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 10)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s7StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 11)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s8StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 12)) - 20, (SpriteStageSizeY - 11) };
+	XMFLOAT2 s9StageSelectFramePosition = { (SpriteStageSizeX + (1280 * 13)) - 20, (SpriteStageSizeY - 11) };
 
 	XMFLOAT2 t1NewLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 t2NewLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 80, (SpriteStageSizeY + 60) };
@@ -483,6 +538,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s4NewLogPosition = { (SpriteStageSizeX + (1280 * 8)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 s5NewLogPosition = { (SpriteStageSizeX + (1280 * 9)) - 80, (SpriteStageSizeY + 60) };
 	XMFLOAT2 s6NewLogPosition = { (SpriteStageSizeX + (1280 * 10)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s7NewLogPosition = { (SpriteStageSizeX + (1280 * 11)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s8NewLogPosition = { (SpriteStageSizeX + (1280 * 12)) - 80, (SpriteStageSizeY + 60) };
+	XMFLOAT2 s9NewLogPosition = { (SpriteStageSizeX + (1280 * 13)) - 80, (SpriteStageSizeY + 60) };
 
 	XMFLOAT2 t1ClearLogPosition = { (SpriteStageSizeX + (1280 * 0)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 t2ClearLogPosition = { (SpriteStageSizeX + (1280 * 1)) - 150, (SpriteStageSizeY + 100) };
@@ -495,6 +553,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT2 s4ClearLogPosition = { (SpriteStageSizeX + (1280 * 8)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 s5ClearLogPosition = { (SpriteStageSizeX + (1280 * 9)) - 150, (SpriteStageSizeY + 100) };
 	XMFLOAT2 s6ClearLogPosition = { (SpriteStageSizeX + (1280 * 10)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s7ClearLogPosition = { (SpriteStageSizeX + (1280 * 11)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s8ClearLogPosition = { (SpriteStageSizeX + (1280 * 12)) - 150, (SpriteStageSizeY + 100) };
+	XMFLOAT2 s9ClearLogPosition = { (SpriteStageSizeX + (1280 * 13)) - 150, (SpriteStageSizeY + 100) };
 
 	CollisionManager* collisionManager;
 
@@ -516,33 +577,55 @@ private: // メンバ変数 Member variables
 	std::vector<Object3d*> objects_t5_1; //チュートリアル　5
 	std::vector<Object3d*> objects_t5_2; //チュートリアル　5
 	std::vector<Object3d*> objects_t5_s2; //チュートリアル　5
-	std::vector<Object3d*> objects; //ステージ　１
-	std::vector<Object3d*> objects_2; //ステージ　１
-	std::vector<Object3d*> objects_s2_1; //ステージ　２
-	std::vector<Object3d*> objects_s2_2; //ステージ　２
-	std::vector<Object3d*> objects_s2_y; //ステージ　２
-	std::vector<Object3d*> objects_s2_y2; //ステージ　２
-	std::vector<Object3d*> objects_s2_s; //ステージ　２
-	std::vector<Object3d*> objects_s2_s2; //ステージ　２
-	std::vector<Object3d*> objects_t4_1; //新しいステージ3
-	std::vector<Object3d*> objects_t4_2; //新しいステージ３
-	std::vector<Object3d*> objects_t4_y; //新しいステージ３
-	std::vector<Object3d*> objects_t4_y2; //新しいステージ３
-	std::vector<Object3d*> objects_s3_1; //ステージ　5
-	std::vector<Object3d*> objects_s3_2; //ステージ　5
-	std::vector<Object3d*> objects_s3_y1_1; //ステージ　5
-	std::vector<Object3d*> objects_s3_y1_2; //ステージ　5
-	std::vector<Object3d*> objects_s3_y2_1; //ステージ　5
-	std::vector<Object3d*> objects_s3_y2_2; //ステージ　5
-	std::vector<Object3d*> objects_s6_1; //ステージ　６
-	std::vector<Object3d*> objects_s6_2; //ステージ　６
-	std::vector<Object3d*> objects_s6_y1_1; //ステージ　６
-	std::vector<Object3d*> objects_s6_y2_1; //ステージ　６
-	std::vector<Object3d*> objects_s6_y1_2; //ステージ　６
-	std::vector<Object3d*> objects_s6_y2_2; //ステージ　６
-	std::vector<Object3d*> objects_s6_y1_3; //ステージ　６
-	std::vector<Object3d*> objects_s6_y2_3; //ステージ　６
-	std::vector<Object3d*> objects_s6_y2_4; //ステージ　６
+	std::vector<Object3d*> objects; //ステージ　3
+	std::vector<Object3d*> objects_2; //ステージ　3
+	std::vector<Object3d*> objects_s2_1; //ステージ　1
+	std::vector<Object3d*> objects_s2_2; //ステージ　1
+	std::vector<Object3d*> objects_s2_y; //ステージ　1
+	std::vector<Object3d*> objects_s2_y2; //ステージ　1
+	std::vector<Object3d*> objects_s2_s; //ステージ　1
+	std::vector<Object3d*> objects_s2_s2; //ステージ　1
+	std::vector<Object3d*> objects_t4_1; //新しいステージ2
+	std::vector<Object3d*> objects_t4_2; //新しいステージ2
+	std::vector<Object3d*> objects_t4_y; //新しいステージ2
+	std::vector<Object3d*> objects_t4_y2; //新しいステージ2
+	std::vector<Object3d*> objects_s4_1; //ステージ　４
+	std::vector<Object3d*> objects_s4_2; //ステージ　４
+	std::vector<Object3d*> objects_s4_y; //ステージ　４
+	std::vector<Object3d*> objects_s4_y2; //ステージ　４
+	std::vector<Object3d*> objects_s5_1; //新しいステージ５
+	std::vector<Object3d*> objects_s5_2; //新しいステージ５
+	std::vector<Object3d*> objects_s5_y1_1; //新しいステージ５
+	std::vector<Object3d*> objects_s5_y2_1; //新しいステージ５
+	std::vector<Object3d*> objects_s5_y1_2; //新しいステージ５
+	std::vector<Object3d*> objects_s5_y2_2; //新しいステージ５
+	std::vector<Object3d*> objects_s5_y2_3; //新しいステージ５
+	std::vector<Object3d*> objects_as6_1; //新しいステージ６
+	std::vector<Object3d*> objects_as6_2; //新しいステージ６
+	std::vector<Object3d*> objects_as6_y1_1; //新しいステージ６
+	std::vector<Object3d*> objects_as6_y2_1; //新しいステージ６
+	std::vector<Object3d*> objects_as6_y1_2; //新しいステージ６
+	std::vector<Object3d*> objects_s3_1; //ステージ　7
+	std::vector<Object3d*> objects_s3_2; //ステージ　7
+	std::vector<Object3d*> objects_s3_y1_1; //ステージ　7
+	std::vector<Object3d*> objects_s3_y1_2; //ステージ　7
+	std::vector<Object3d*> objects_s3_y2_1; //ステージ　7
+	std::vector<Object3d*> objects_s3_y2_2; //ステージ　7
+	std::vector<Object3d*> objects_s6_1; //ステージ　8
+	std::vector<Object3d*> objects_s6_2; //ステージ　8
+	std::vector<Object3d*> objects_s6_y1_1; //ステージ　8
+	std::vector<Object3d*> objects_s6_y2_1; //ステージ　8
+	std::vector<Object3d*> objects_s6_y1_2; //ステージ　8
+	std::vector<Object3d*> objects_s6_y2_2; //ステージ　8
+	std::vector<Object3d*> objects_s6_y1_3; //ステージ　8
+	std::vector<Object3d*> objects_s6_y2_3; //ステージ　8
+	std::vector<Object3d*> objects_s6_y2_4; //ステージ　8
+	std::vector<Object3d*> objects_s9_1; //ステージ９
+	std::vector<Object3d*> objects_s9_2; //ステージ９
+	std::vector<Object3d*> objects_s9_y1_1; //ステージ９
+	std::vector<Object3d*> objects_s9_y2_1; //ステージ９
+	std::vector<Object3d*> objects_s9_y1_2; //ステージ９
+	std::vector<Object3d*> objects_s9_y2_2; //ステージ９
 	std::vector<Object3d*> objects_Wall;
 
 	TitleScene* titleScene = nullptr;
@@ -559,7 +642,9 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 yellowTrigger1;
 	XMFLOAT3 yellowTrigger2;
 	XMFLOAT3 BlueButton;
+	XMFLOAT3 BlueButton2;
 	XMFLOAT3 YellowButton;
+	XMFLOAT3 YellowButton2;
 	XMFLOAT3 RedButton1;
 	XMFLOAT3 RedButton2;
 	XMFLOAT3 GreenButton1;
