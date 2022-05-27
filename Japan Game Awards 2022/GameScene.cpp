@@ -10537,7 +10537,7 @@ void GameScene::Draw()
 			s4NewLog->Draw();
 		}
 
-		if (t5FirstPlayFlag == true)
+		if (t4FirstPlayFlag == true)
 		{
 			s5NewLog->Draw();
 		}
