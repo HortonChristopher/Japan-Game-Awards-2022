@@ -6204,7 +6204,6 @@ void GameScene::Update()
 
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f) && doorOpen1 == false)
 			{
-				//tutorial3YellowKabe1 = false;
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
@@ -6214,7 +6213,6 @@ void GameScene::Update()
 			}
 			if (intersect(enemyPosition, BlueButton, 1.0f, 1.0f, 1.0f))
 			{
-				//tutorial3YellowKabe2 = false;
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
@@ -6224,7 +6222,6 @@ void GameScene::Update()
 			}
 			if (intersect(playerPosition, GreenButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, GreenButton2, 1.0f, 1.0f, 1.0f))
 			{
-				//tutorial3YellowKabe3 = false;
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
@@ -6232,8 +6229,6 @@ void GameScene::Update()
 				}
 				doorOpen3 = true;
 			}
-
-			
 
 			if (doorOpen1)
 			{
@@ -12049,6 +12044,12 @@ void GameScene::Stage5Reset()
 	stage5YellowKabe3 = true;
 	stage5YellowKabe4 = true;
 	stage5Switch = false;
+
+	objButtonRed1->SetPosition({ 11, 0, -3 });
+	objButtonGreen1->SetPosition({ -20, 0, 12 });
+	objButtonBlue->SetPosition({ -8, 0, -12 });
+	objButtonYellow->SetPosition({ -17, 0, 3 });
+	objButtonFloor->SetPosition({ 8, 0, -12 });
 
 	SwitchFlag1 = false;
 	SwitchFlag2 = false;
