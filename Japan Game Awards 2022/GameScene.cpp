@@ -3909,7 +3909,7 @@ void GameScene::Update()
 
 	if (playFlag == 1)
 	{
-		audio->PlayWave("Walk.wav", Volume, false);
+		//audio->PlayWave("Walk.wav", Volume, false);
 	}
 
 #pragma region ポーズ画面
@@ -4719,11 +4719,13 @@ void GameScene::Update()
 			{
 				playerBulletF = true;
 				SwitchFlag1 = true;
+				audio->PlayWave("Switch.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, BombButton2, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
 			{
 				enemyBulletF = true;
+				audio->PlayWave("Switch.wav", Volume, false);
 			}
 
 
@@ -8872,6 +8874,7 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, BombButton1, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 			{
+				audio->PlayWave("Switch.wav", Volume, false);
 				playerBulletF = true;
 			}
 
@@ -9152,6 +9155,8 @@ void GameScene::Update()
 				intersect(playerPosition, YellowButton, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, YellowButton2, 1.0f, 1.0f, 1.0f))
 			{
 				//audio->PlayWave("Switch.wav", Volume, false);
+				audio->PlayWave("Switch.wav", Volume, false);
+				SwitchFlag4 = true;
 				doorOpen4 = true;
 			}
 
