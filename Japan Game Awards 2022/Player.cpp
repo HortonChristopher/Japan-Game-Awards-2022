@@ -12,6 +12,7 @@ using namespace DirectX;
 
 extern int cameraMove;
 extern int prevCameraMove;
+extern int playFlag;
 
 Player* Player::Create(Model* model)
 {
@@ -108,6 +109,7 @@ void Player::Update()
 
 			else if (input->PushKey(DIK_W))
 			{
+				playFlag = 1;
 				position.z += Speed;
 				rotation.y = 0.0f;
 			}
@@ -117,6 +119,10 @@ void Player::Update()
 				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
+		}
+		else
+		{
+			playFlag = 0;
 		}
 
 		//コントローラー旋回と移動処理

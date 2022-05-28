@@ -22,6 +22,7 @@ using namespace DirectX;
 extern int sceneNo = 0; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
+extern int playFlag = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
 extern XMFLOAT3 playerRotationTemp = { 0,0,0 };
@@ -3904,6 +3905,11 @@ void GameScene::Update()
 	}
 
 	//ButtonKind::Button_RightMenu = Start
+
+	if (playFlag == 1)
+	{
+		audio->PlayWave("Decision.wav", Volume, false);
+	}
 
 #pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
