@@ -3907,7 +3907,7 @@ void GameScene::Update()
 
 	//ButtonKind::Button_RightMenu = Start
 
-	if (beginStage && !Tutorial && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8)
+	if (beginStage && !Tutorial && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && !falling && !pause)
 	{
 		if (test2 >= 20 || playFlag == 0)
 		{
