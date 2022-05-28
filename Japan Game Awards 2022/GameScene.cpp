@@ -22,6 +22,7 @@ using namespace DirectX;
 extern int sceneNo = 0; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
+extern int playFlag = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
 extern XMFLOAT3 playerRotationTemp = { 0,0,0 };
