@@ -22,6 +22,7 @@ using namespace DirectX;
 extern int sceneNo = 0; //タイトル Title
 extern int stageSelect = 0; //ステージセレクト
 extern int sceneChange = 0;
+extern int playFlag = 0;
 
 extern XMFLOAT3 playerPositionTemp = { 0,0,0 };
 extern XMFLOAT3 playerRotationTemp = { 0,0,0 };
@@ -194,6 +195,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("Decision.wav");
 	audio->LoadWave("Esc.wav");
 	audio->LoadWave("Warp.wav");
+	audio->LoadWave("Walk.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -3904,6 +3906,38 @@ void GameScene::Update()
 	}
 
 	//ButtonKind::Button_RightMenu = Start
+
+#pragma region 歩く音 walking sound
+	if (beginStage && !Tutorial && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && !falling && !pause)
+	{
+		if (test2 >= 20 || playFlag == 0)
+		{
+			if (test3)
+			{
+				audio->StopWave("Walk.wav");
+			}
+			test2 = 0;
+			test1 = false;
+		}
+
+		if (playFlag == 1)
+		{
+			if (test1 == false)
+			{
+				audio->PlayWave("Walk.wav", Volume * 50.0f, false);
+				test3 = true;
+				test1 = true;
+			}
+
+			test2++;
+		}
+	}
+
+	if (sceneNo == 2 && test3 == true || sceneNo == 3 && test3 == true || pause && test3 == true)
+	{
+		audio->StopWave("Walk.wav");
+	}
+#pragma endregion
 
 #pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
