@@ -4708,6 +4708,7 @@ void GameScene::Update()
 				enemyBulletF = true;
 			}
 
+
 			if (playerBulletF)
 			{
 				playerBullet.x += 1.0f;
