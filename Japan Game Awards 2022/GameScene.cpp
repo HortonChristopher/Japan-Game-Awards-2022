@@ -5211,7 +5211,7 @@ void GameScene::Update()
 #pragma endregion
 		break;
 
-	case 3: // ゲームオーバー画面
+	case 3: // ゲームオーバー画面 
 #pragma region case3 ゲームオーバー画面
 		camera->SetEye({ -15,0,0 });
 		camera->SetTarget({ 0, 0, 0 });
