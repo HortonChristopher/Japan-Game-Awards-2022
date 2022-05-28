@@ -191,6 +191,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("Title.wav");
 	audio->LoadWave("Stage.wav");
 	audio->LoadWave("Switch.wav");
+	audio->LoadWave("Decision.wav");
+	audio->LoadWave("Esc.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -3906,6 +3908,11 @@ void GameScene::Update()
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
 		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
 	{
+		if (pause == false)
+		{
+			audio->PlayWave("Esc.wav", Volume, false);
+		}
+
 		if (!pause)
 		{
 			pauseMenuSelection = 0;
@@ -3967,6 +3974,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) || IsButtonPush(ButtonKind::Button_A))
 		{
+			audio->PlayWave("Decision.wav", Volume, false);
 			if (pauseMenuSelection == 0)
 			{
 				pause = false;
@@ -4605,6 +4613,7 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 			}*/
 
+			audio->PlayWave("Decision.wav", Volume, false);
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
@@ -4624,6 +4633,7 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 			}*/
 
+			audio->PlayWave("Decision.wav", Volume, false);
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
@@ -4837,6 +4847,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
+			audio->PlayWave("Decision.wav", Volume, false);
 			audio->StopWave("GameClear.wav");
 			if (menuSelection == 0)
 			{
@@ -5180,6 +5191,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
+			audio->PlayWave("Decision.wav", Volume, false);
 			audio->StopWave("GameOver.wav");
 			if (menuSelection == 0)
 			{
@@ -5852,6 +5864,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
+					audio->PlayWave("Decision.wav", Volume, false);
 					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
@@ -6014,6 +6027,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
+					audio->PlayWave("Decision.wav", Volume, false);
 					if (TutorialNo >= 6)
 					{
 						Tutorial = false;
@@ -6179,6 +6193,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
+					audio->PlayWave("Decision.wav", Volume, false);
 					if (TutorialNo >= 6)
 					{
 						Tutorial = false;
@@ -6619,6 +6634,7 @@ void GameScene::Update()
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
 			PlayFlag = false;
+			audio->PlayWave("Decision.wav", Volume, false);
 			audio->StopWave("Title.wav");
 			audio->PlayWave("Stage.wav", Volume, true);
 			switch (stageSelect)
@@ -7464,6 +7480,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
+					audio->PlayWave("Decision.wav", Volume, false);
 					if (TutorialNo >= 4)
 					{
 						Tutorial = false;
@@ -7638,6 +7655,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
+					audio->PlayWave("Decision.wav", Volume, false);
 					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
