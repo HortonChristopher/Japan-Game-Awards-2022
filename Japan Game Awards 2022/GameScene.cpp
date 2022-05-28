@@ -3907,22 +3907,29 @@ void GameScene::Update()
 
 	//ButtonKind::Button_RightMenu = Start
 
-	if (test2 >= 10)
+	if (beginStage && !Tutorial && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8)
 	{
-		audio->StopWave("Walk.wav");
-		test2 = 0;
-		test1 = false;
-	}
-
-	if (playFlag == 1)
-	{
-		if (test1 == false)
+		if (test2 >= 20 || playFlag == 0)
 		{
-			audio->PlayWave("Walk.wav", Volume * 10.0f, false);
-			test1 = true;
+			if (test3)
+			{
+				audio->StopWave("Walk.wav");
+			}
+			test2 = 0;
+			test1 = false;
 		}
 
-		test2++;
+		if (playFlag == 1)
+		{
+			if (test1 == false)
+			{
+				audio->PlayWave("Walk.wav", Volume * 50.0f, false);
+				test3 = true;
+				test1 = true;
+			}
+
+			test2++;
+		}
 	}
 
 #pragma region ポーズ画面

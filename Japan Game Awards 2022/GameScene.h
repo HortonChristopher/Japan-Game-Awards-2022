@@ -174,6 +174,7 @@ private: // メンバ変数 Member variables
 	Camera* camera = nullptr;
 
 	bool test1 = false;
+	bool test3 = false;
 
 	int test2 = 0;
 

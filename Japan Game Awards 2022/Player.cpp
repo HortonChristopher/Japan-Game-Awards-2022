@@ -109,7 +109,6 @@ void Player::Update()
 
 			else if (input->PushKey(DIK_W))
 			{
-				playFlag = 1;
 				position.z += Speed;
 				rotation.y = 0.0f;
 			}
@@ -119,6 +118,8 @@ void Player::Update()
 				position.z -= Speed;
 				rotation.y = 180.0f;
 			}
+
+			playFlag = 1;
 		}
 		else
 		{
@@ -239,6 +240,12 @@ void Player::Update()
 				position.x -= Speed;
 				rotation.y = 270.0f;
 			}
+
+			playFlag = 1;
+		}
+		else
+		{
+			playFlag = 0;
 		}
 
 		//コントローラー旋回と移動処理
@@ -355,6 +362,12 @@ void Player::Update()
 				position.z += Speed;
 				rotation.y = 0.0f;
 			}
+
+			playFlag = 1;
+		}
+		else
+		{
+			playFlag = 0;
 		}
 
 		//コントローラー旋回と移動処理
@@ -471,6 +484,12 @@ void Player::Update()
 				position.x += Speed;
 				rotation.y = 90.0f;
 			}
+
+			playFlag = 1;
+		}
+		else
+		{
+			playFlag = 0;
 		}
 
 		//コントローラー旋回と移動処理
