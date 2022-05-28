@@ -225,6 +225,8 @@ private: // メンバ変数 Member variables
 	bool SwitchFlag1 = false;
 	bool SwitchFlag2 = false;
 	bool SwitchFlag3 = false;
+	bool SwitchFlag4 = false;
+	bool SwitchFlag5 = false;
 
 #pragma region Sprite
 	Sprite* spriteBG = nullptr;
