@@ -3907,9 +3907,22 @@ void GameScene::Update()
 
 	//ButtonKind::Button_RightMenu = Start
 
+	if (test2 >= 10)
+	{
+		audio->StopWave("Walk.wav");
+		test2 = 0;
+		test1 = false;
+	}
+
 	if (playFlag == 1)
 	{
-		audio->PlayWave("Walk.wav", Volume, false);
+		if (test1 == false)
+		{
+			audio->PlayWave("Walk.wav", Volume * 10.0f, false);
+			test1 = true;
+		}
+
+		test2++;
 	}
 
 #pragma region ポーズ画面

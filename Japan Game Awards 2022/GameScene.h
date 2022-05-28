@@ -173,6 +173,10 @@ private: // メンバ変数 Member variables
 	// ゲームシーン用 For game scenes
 	Camera* camera = nullptr;
 
+	bool test1 = false;
+
+	int test2 = 0;
+
 	bool falling = false;
 	bool marker = true;
 	bool pause = false;
