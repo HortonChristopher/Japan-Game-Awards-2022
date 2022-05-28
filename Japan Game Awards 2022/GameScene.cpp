@@ -193,6 +193,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("Switch.wav");
 	audio->LoadWave("Decision.wav");
 	audio->LoadWave("Esc.wav");
+	audio->LoadWave("Warp.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -6938,21 +6939,25 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(playerPosition, objTeleporterIn3->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -7143,21 +7148,25 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut3->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f))
@@ -7507,6 +7516,7 @@ void GameScene::Update()
 			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -7873,16 +7883,19 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
+				audio->PlayWave("Warp.wav", Volume, false);
 			}
 
 			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
@@ -9131,6 +9144,7 @@ void GameScene::Update()
 			if (intersect(enemyPosition, YellowButton, 1.0f, 1.0f, 1.0f) && intersect(playerPosition, YellowButton2, 1.0f, 1.0f, 1.0f) ||
 				intersect(playerPosition, YellowButton, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, YellowButton2, 1.0f, 1.0f, 1.0f))
 			{
+				//audio->PlayWave("Switch.wav", Volume, false);
 				doorOpen4 = true;
 			}
 
@@ -9163,51 +9177,61 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objFighter->SetPosition(objTeleporterOut2->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objClone->SetPosition(objTeleporterOut3->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objFighter->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn5->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+				audio->PlayWave("Warp.wav", Volume, false);
 				objFighter->SetPosition(objTeleporterOut5->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn5->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
+
 				objClone->SetPosition(objTeleporterOut5->GetPosition());
 			}
 
