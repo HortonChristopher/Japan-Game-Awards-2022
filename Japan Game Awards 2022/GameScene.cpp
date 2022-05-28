@@ -195,6 +195,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("Decision.wav");
 	audio->LoadWave("Esc.wav");
 	audio->LoadWave("Warp.wav");
+	audio->LoadWave("Walk.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -3908,7 +3909,7 @@ void GameScene::Update()
 
 	if (playFlag == 1)
 	{
-		audio->PlayWave("Decision.wav", Volume, false);
+		audio->PlayWave("Walk.wav", Volume, false);
 	}
 
 #pragma region ポーズ画面
