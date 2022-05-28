@@ -10652,7 +10652,7 @@ void GameScene::Draw()
 			s4NewLog->Draw();
 		}
 
-		if (t5FirstPlayFlag == true)
+		if (s5FirstPlayFlag == true)
 		{
 			s5NewLog->Draw();
 		}
@@ -10723,7 +10723,7 @@ void GameScene::Draw()
 			s4ClearLog->Draw();
 		}
 
-		if (t4ClearFlag == true)
+		if (s5ClearFlag == true)
 		{
 			s5ClearLog->Draw();
 		}
