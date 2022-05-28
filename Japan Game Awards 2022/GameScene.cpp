@@ -3932,6 +3932,11 @@ void GameScene::Update()
 		}
 	}
 
+	if (sceneNo == 2 && test3 == true || sceneNo == 3 && test3 == true || pause && test3 == true)
+	{
+		audio->StopWave("Walk.wav");
+	}
+
 #pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
 		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
