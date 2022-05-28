@@ -222,7 +222,9 @@ private: // メンバ変数 Member variables
 	bool s9ClearFlag = false;
 
 	//スイッチSEフラグ
-	bool SwitchFlag = false;
+	bool SwitchFlag1 = false;
+	bool SwitchFlag2 = false;
+	bool SwitchFlag3 = false;
 
 #pragma region Sprite
 	Sprite* spriteBG = nullptr;
