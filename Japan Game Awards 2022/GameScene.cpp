@@ -199,6 +199,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("OpenDoor.wav");
 	audio->LoadWave("MoveCursor.wav");
 	audio->LoadWave("StageSelection.wav");
+	audio->LoadWave("StageRotation.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -4447,6 +4448,7 @@ void GameScene::Update()
 	{
 		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
+			audio->PlayWave("StageRotation.wav", Volume, false);
 			if (input->TriggerKey(DIK_Q))
 			{
 				if (cameraMove == 4)
