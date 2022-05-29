@@ -9211,8 +9211,12 @@ void GameScene::Update()
 			if (intersect(enemyPosition, YellowButton, 1.0f, 1.0f, 1.0f) && intersect(playerPosition, YellowButton2, 1.0f, 1.0f, 1.0f) ||
 				intersect(playerPosition, YellowButton, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, YellowButton2, 1.0f, 1.0f, 1.0f))
 			{
-				//audio->PlayWave("Switch.wav", Volume, false);
-				//audio->PlayWave("OpenDoor.wav", Volume, false);
+				if (SwitchFlag4 == false)
+				{
+					SwitchFlag4 = true;
+					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
+				}
 				doorOpen4 = true;
 			}
 
@@ -12836,6 +12840,7 @@ void GameScene::Stage9Reset()
 	SwitchFlag1 = false;
 	SwitchFlag2 = false;
 	SwitchFlag3 = false;
+	SwitchFlag4 = false;
 
 	beginStage = false;
 }
