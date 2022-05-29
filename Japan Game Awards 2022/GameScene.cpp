@@ -4002,10 +4002,12 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
+			audio->PlayWave("MoveCursor.wav", Volume, false);
 		}
 		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
+			audio->PlayWave("MoveCursor.wav", Volume, false);
 		}
 
 		switch (pauseMenuSelection)
@@ -6517,7 +6519,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13 ||
 			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13)
 		{
-			//audio->PlayWave("StageSelection", Volume, false);
+			audio->PlayWave("StageSelection.wav", Volume, false);
 			stageMoveRight = true;
 			stageSelect++;
 		}
@@ -6525,7 +6527,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0 ||
 			IsButtonDown(ButtonKind::Button_LB) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
 		{
-			//audio->PlayWave("StageSelection", Volume, false);
+			audio->PlayWave("StageSelection.wav", Volume, false);
 			stageMoveLeft = true;
 			stageSelect--;
 		}
