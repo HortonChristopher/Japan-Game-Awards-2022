@@ -197,6 +197,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("Warp.wav");
 	audio->LoadWave("Walk.wav");
 	audio->LoadWave("OpenDoor.wav");
+	audio->LoadWave("MoveCursor.wav");
+	audio->LoadWave("StageSelection.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -5159,10 +5161,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
+			audio->PlayWave("MoveCursor", Volume, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving && lastScene != 17 || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving && lastScene != 17)
 		{
+			audio->PlayWave("MoveCursor", Volume, false);
 			menuMoving = true;
 		}
 
@@ -5503,10 +5507,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
+			audio->PlayWave("MoveCursor", Volume, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving)
 		{
+			audio->PlayWave("MoveCursor", Volume, false);
 			menuMoving = true;
 		}
 
@@ -6500,6 +6506,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13 ||
 			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13)
 		{
+			//audio->PlayWave("StageSelection", Volume, false);
 			stageMoveRight = true;
 			stageSelect++;
 		}
@@ -6507,6 +6514,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0 ||
 			IsButtonDown(ButtonKind::Button_LB) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
 		{
+			//audio->PlayWave("StageSelection", Volume, false);
 			stageMoveLeft = true;
 			stageSelect--;
 		}
