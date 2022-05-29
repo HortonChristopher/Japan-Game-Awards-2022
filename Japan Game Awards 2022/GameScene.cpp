@@ -303,12 +303,12 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// テクスチャ7番に読み込み Load into texture # 2
 	Sprite::LoadTexture(7, L"Resources/Sprite/order1.png");
 
-	Order_1 = Sprite::Create(7, { 0.0f,0.0f });
+	Order_1 = Sprite::Create(7, { 0.0f,10.0f });
 
 	// テクスチャ8番に読み込み Load into texture # 2
 	Sprite::LoadTexture(8, L"Resources/Sprite/order2.png");
 
-	Order_2 = Sprite::Create(8, { 0.0f,0.0f });
+	Order_2 = Sprite::Create(8, { 0.0f,10.0f });
 
 	Sprite::LoadTexture(9, L"Resources/Sprite/press_a.png");
 
@@ -520,16 +520,16 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	s9ClearLog->SetRotation({ -30.0f });
 
 	Sprite::LoadTexture(33, L"Resources/Sprite/Pause1.png");
-	pause1 = Sprite::Create(33, { 720, 200 });
+	pause1 = Sprite::Create(33, { 820, 200 });
 
 	Sprite::LoadTexture(34, L"Resources/Sprite/Pause2.png");
-	pause2 = Sprite::Create(34, { 720, 300 });
+	pause2 = Sprite::Create(34, { 770, 300 });
 
 	Sprite::LoadTexture(35, L"Resources/Sprite/Pause3.png");
 	pause3 = Sprite::Create(35, { 720, 400 });
 
 	Sprite::LoadTexture(36, L"Resources/Sprite/Pause4.png");
-	pause4 = Sprite::Create(36, { 720, 200 });
+	pause4 = Sprite::Create(36, { 550, 200 });
 
 	Sprite::LoadTexture(37, L"Resources/Sprite/GameOverGameClearSelect.png");
 	GameOverGameClearSelectBar = Sprite::Create(37, { -250.0f,350.0f });
@@ -619,6 +619,17 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	Sprite::LoadTexture(64, L"Resources/Sprite/Tutorial_5/T5Chat5.png");
 	T5Chat5 = Sprite::Create(64, { 0.0f, 360.0f });
+
+	// GuideState
+	Sprite::LoadTexture(72, L"Resources/Sprite/GuideState.png");
+	GuideState = Sprite::Create(72, { 0.0f, 0.0f });
+
+	// ポーズ画面背景
+	Sprite::LoadTexture(73, L"Resources/Sprite/PauseBG.png");
+	PauseBG = Sprite::Create(73, { 0.0f, 0.0f });
+
+	Sprite::LoadTexture(74, L"Resources/Sprite/PauseLog.png");
+	PauseLog = Sprite::Create(74, { 0.0f, 0.0f });
 
 #pragma endregion
 
@@ -4000,13 +4011,13 @@ void GameScene::Update()
 		switch (pauseMenuSelection)
 		{
 		case 0:
-			pause4->SetPosition({ 720, 200 });
+			pause4->SetPosition({ 670, 200 });
 			break;
 		case 1:
-			pause4->SetPosition({ 720, 300 });
+			pause4->SetPosition({ 670, 300 });
 			break;
 		case 2:
-			pause4->SetPosition({ 720, 400 });
+			pause4->SetPosition({ 670, 400 });
 			break;
 		}
 
@@ -9499,8 +9510,6 @@ void GameScene::Draw()
 		break;
 	case 1:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 2:
 		if (sceneChange == 0)
@@ -9525,71 +9534,45 @@ void GameScene::Draw()
 		break;
 	case 4:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 5:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 6:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 7:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 8:
 		spriteBG->Draw();
 		break;
 	case 9:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 10:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 11:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 12:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 13:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 14:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 15:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 16:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	case 17:
 		spriteBG->Draw();
-		GuideR->Draw();
-		Guide_LRB->Draw();
 		break;
 	}
 
@@ -10547,6 +10530,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_1->Draw();
 		}
 		break;
@@ -10570,6 +10554,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -10578,6 +10563,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 
@@ -10614,6 +10600,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		
@@ -10653,6 +10640,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 
@@ -10941,6 +10929,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -10949,6 +10938,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -10957,6 +10947,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 
@@ -10989,6 +10980,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 
@@ -11023,6 +11015,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -11031,6 +11024,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -11039,6 +11033,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -11047,6 +11042,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_1->Draw();
 		}
 		break;
@@ -11055,6 +11051,7 @@ void GameScene::Draw()
 		{
 			GuideR->Draw();
 			Guide_LRB->Draw();
+			GuideState->Draw();
 			Order_2->Draw();
 		}
 		break;
@@ -11062,6 +11059,8 @@ void GameScene::Draw()
 
 	if (pause)
 	{
+		PauseBG->Draw();
+		PauseLog->Draw();
 		pause4->Draw();
 		pause1->Draw();
 		pause2->Draw();

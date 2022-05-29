@@ -253,6 +253,8 @@ private: // メンバ変数 Member variables
 	Sprite* GuideA = nullptr;
 	Sprite* GuideB = nullptr;
 	Sprite* GameOverGameClearSelectBar = nullptr;
+	Sprite* GuideState = nullptr;
+	Sprite* PauseBG = nullptr;
 
 	// チュートリアル
 	Sprite* TutorialBG = nullptr;
@@ -361,6 +363,7 @@ private: // メンバ変数 Member variables
 	Sprite* pause2 = nullptr;
 	Sprite* pause3 = nullptr;
 	Sprite* pause4 = nullptr;
+	Sprite* PauseLog = nullptr;
 #pragma endregion
 
 	ParticleManager* particleMan = nullptr;
