@@ -196,6 +196,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	audio->LoadWave("Esc.wav");
 	audio->LoadWave("Warp.wav");
 	audio->LoadWave("Walk.wav");
+	audio->LoadWave("OpenDoor.wav");
 
 	//// カメラ生成 Camera generation
 	camera = new Camera(WinApp::window_width, WinApp::window_height);
@@ -5647,6 +5648,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -6258,6 +6260,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -6267,6 +6270,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -6276,6 +6280,7 @@ void GameScene::Update()
 				{
 					SwitchFlag3 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen3 = true;
 			}
@@ -6927,6 +6932,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7209,6 +7215,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7246,6 +7253,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -7283,6 +7291,7 @@ void GameScene::Update()
 				{
 					SwitchFlag3 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen3 = true;
 			}
@@ -7320,6 +7329,7 @@ void GameScene::Update()
 				{
 					SwitchFlag4 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen4 = true;
 			}
@@ -7938,6 +7948,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7948,6 +7959,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -7958,6 +7970,7 @@ void GameScene::Update()
 				{
 					SwitchFlag3 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8255,6 +8268,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8292,6 +8306,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					//audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8459,6 +8474,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8496,6 +8512,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					//audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8533,6 +8550,7 @@ void GameScene::Update()
 				{
 					SwitchFlag3 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8570,6 +8588,7 @@ void GameScene::Update()
 				{
 					SwitchFlag4 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen4 = true;
 			}
@@ -8607,6 +8626,7 @@ void GameScene::Update()
 				{
 					SwitchFlag5 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen5 = true;
 			}
@@ -8792,6 +8812,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8829,6 +8850,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -9068,6 +9090,7 @@ void GameScene::Update()
 				{
 					SwitchFlag1 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen1 = true;
 			}
@@ -9106,6 +9129,7 @@ void GameScene::Update()
 				{
 					SwitchFlag2 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen2 = true;
 			}
@@ -9144,6 +9168,7 @@ void GameScene::Update()
 				{
 					SwitchFlag3 = true;
 					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("OpenDoor.wav", Volume, false);
 				}
 				doorOpen3 = true;
 			}
@@ -9179,6 +9204,7 @@ void GameScene::Update()
 				intersect(playerPosition, YellowButton, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, YellowButton2, 1.0f, 1.0f, 1.0f))
 			{
 				//audio->PlayWave("Switch.wav", Volume, false);
+				//audio->PlayWave("OpenDoor.wav", Volume, false);
 				doorOpen4 = true;
 			}
 
