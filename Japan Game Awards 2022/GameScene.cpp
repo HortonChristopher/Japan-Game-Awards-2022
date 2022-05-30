@@ -5046,6 +5046,19 @@ void GameScene::Update()
 					break;
 				case 16:
 					audio->PlayWave("Stage.wav", Volume_Stage, true);
+					Tutorial1Move();
+					Tutorial2Move();
+					Tutorial3Move();
+					Tutorial4Move();
+					Tutorial5Move();
+					Stage1Move();
+					Stage2Move();
+					Stage3Move();
+					Stage4Move();
+					Stage5Move();
+					Stage6Move();
+					Stage8Move();
+					Stage9Move();
 					Stage7Reset();
 					sceneNo = 10;
 					break;
@@ -5362,6 +5375,19 @@ void GameScene::Update()
 					break;
 				case 10:
 					audio->PlayWave("Stage.wav", Volume_Stage, true);
+					Tutorial1Move();
+					Tutorial2Move();
+					Tutorial3Move();
+					Tutorial4Move();
+					Tutorial5Move();
+					Stage1Move();
+					Stage2Move();
+					Stage3Move();
+					Stage4Move();
+					Stage5Move();
+					Stage6Move();
+					Stage8Move();
+					Stage9Move();
 					Stage7Reset();
 					sceneNo = 10;
 					break;
