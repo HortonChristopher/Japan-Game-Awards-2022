@@ -721,6 +721,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	modelPlayerLose = FbxLoader::GetInstance()->LoadModelFromFile("PlayerLose");
 	modelPlayerFall = FbxLoader::GetInstance()->LoadModelFromFile("PlayerFalling");
 	modelPlayerTalk = FbxLoader::GetInstance()->LoadModelFromFile("PlayerTalking");
+	modelPlayerThinking = FbxLoader::GetInstance()->LoadModelFromFile("PlayerThinking");
 
 	modelCloneRun = FbxLoader::GetInstance()->LoadModelFromFile("CloneRunning");
 	modelCloneStand = FbxLoader::GetInstance()->LoadModelFromFile("CloneStanding");
@@ -760,6 +761,10 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerTalk = new FbxObject3d;
 	objPlayerTalk->Initialize();
 	objPlayerTalk->SetModel(modelPlayerTalk);
+
+	objPlayerThinking = new FbxObject3d;
+	objPlayerThinking->Initialize();
+	objPlayerThinking->SetModel(modelPlayerThinking);
 
 	// クローン関連 Clone related
 	objCloneRun = new FbxObject3d;
@@ -809,6 +814,9 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 	objPlayerTalk->SetPosition({ -11,4,-25 });
 	objPlayerTalk->SetRotation({ -30,120,40 });
+
+	objPlayerThinking->SetPosition({ 0,0,0 });
+	objPlayerThinking->SetRotation({ 0,0,0 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });

@@ -407,6 +407,7 @@ private: // メンバ変数 Member variables
 	FbxModel* modelPlayerFall = nullptr;
 	FbxModel* modelPlayerLose = nullptr;
 	FbxModel* modelPlayerTalk = nullptr;
+	FbxModel* modelPlayerThinking = nullptr;
 
 	// クローン
 	FbxModel* modelCloneRun = nullptr;
@@ -477,6 +478,7 @@ private: // メンバ変数 Member variables
 	FbxObject3d* objPlayerLose = nullptr;
 	FbxObject3d* objPlayerFall = nullptr;
 	FbxObject3d* objPlayerTalk = nullptr;
+	FbxObject3d* objPlayerThinking = nullptr;
 
 	// クローン
 	FbxObject3d* objCloneRun = nullptr;
