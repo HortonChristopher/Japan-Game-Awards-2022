@@ -3947,7 +3947,7 @@ void GameScene::Update()
 		{
 			if (test1 == false)
 			{
-				audio->PlayWave("Walk.wav", Volume * 50.0f, false);
+				audio->PlayWave("Walk.wav", Volume_Walk, false);
 				test3 = true;
 				test1 = true;
 			}
@@ -3968,7 +3968,7 @@ void GameScene::Update()
 	{
 		if (pause == false)
 		{
-			audio->PlayWave("Esc.wav", Volume, false);
+			audio->PlayWave("Esc.wav", Volume_Esc, false);
 		}
 
 		if (!pause)
@@ -4013,12 +4013,12 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 		}
 		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 		}
 
 		switch (pauseMenuSelection)
@@ -4036,7 +4036,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) || IsButtonPush(ButtonKind::Button_A))
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			if (pauseMenuSelection == 0)
 			{
 				pause = false;
@@ -4157,7 +4157,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 7;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0   });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4174,7 +4174,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 5;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4187,7 +4187,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 0;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4200,7 +4200,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 1;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4213,7 +4213,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 2;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4228,7 +4228,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 6;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4241,7 +4241,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 11;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4254,7 +4254,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 3;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4267,7 +4267,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 4;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4280,7 +4280,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 12;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4293,7 +4293,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 8;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4306,7 +4306,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 9;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4319,7 +4319,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 10;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4332,7 +4332,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 13;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4476,7 +4476,7 @@ void GameScene::Update()
 	{
 		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
-			audio->PlayWave("StageRotation.wav", Volume, false);
+			audio->PlayWave("StageRotation.wav", Volume_StageRotation, false);
 			if (input->TriggerKey(DIK_Q))
 			{
 				if (cameraMove == 4)
@@ -4665,8 +4665,7 @@ void GameScene::Update()
 		if (PlayFlag == false)
 		{
 			PlayFlag = true;
-			audio->PlayWave("Title.wav", Volume, true);
-			//audio->WaveVolume("Title.wav", 0.3f);
+			audio->PlayWave("Title.wav", Volume_Title, true);
 		}
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -4694,7 +4693,7 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 			}*/
 
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
@@ -4714,7 +4713,7 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 			}*/
 
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
@@ -4839,7 +4838,7 @@ void GameScene::Update()
 				Stage3Move();
 				GameOverReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				sceneChange = 0;
 
 				s3FirstPlayFlag = false;
@@ -4851,7 +4850,7 @@ void GameScene::Update()
 				Stage3Move();
 				GameClearReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				sceneChange = 0;
 
 				s3FirstPlayFlag = false;
@@ -4928,7 +4927,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("GameClear.wav");
 			if (menuSelection == 0)
 			{
@@ -5018,7 +5017,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
-				audio->PlayWave("Title.wav", Volume, true);
+				audio->PlayWave("Title.wav", Volume_Title, true);
 				sceneNo = 8;
 				switch (lastScene)
 				{
@@ -5204,12 +5203,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving && lastScene != 17 || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving && lastScene != 17)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 
@@ -5274,7 +5273,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("GameOver.wav");
 			if (menuSelection == 0)
 			{
@@ -5364,7 +5363,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
-				audio->PlayWave("Title.wav", Volume, true);
+				audio->PlayWave("Title.wav", Volume_Title, true);
 				sceneNo = 8;
 				switch (lastScene)
 				{
@@ -5550,12 +5549,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 
@@ -5604,26 +5603,7 @@ void GameScene::Update()
 			ConTimer = 0;
 		}
 
-		/*if (input->TriggerKey(DIK_SPACE))
-		{
-			sceneNo = 0;
-			audio->StopWave("GameOver.wav");
-			audio->PlayWave("Title.wav");
-			gameOver->Finalize();
-			titleScene->Initialize();
-			break;
-		}
-
-		if (IsButtonUp(ButtonKind::Button_A))
-		{
-			sceneNo = 0;
-
-			audio->StopWave("GameOver.wav");
-			audio->PlayWave("Title.wav");
-			gameOver->Finalize();
-			titleScene->Initialize();
-			break;
-		}*/
+		
 #pragma endregion
 		break;
 
@@ -5696,8 +5676,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -5706,7 +5686,7 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen2 = true;
 			}
@@ -5767,7 +5747,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s1FirstPlayFlag = false;
@@ -5780,7 +5760,7 @@ void GameScene::Update()
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				gameClear->Initialize();
 
 				s1FirstPlayFlag = false;
@@ -5950,7 +5930,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
@@ -5982,7 +5962,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t1FirstPlayFlag = false;
@@ -5992,7 +5972,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Tutorial1Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -6113,7 +6093,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 6)
 					{
 						Tutorial = false;
@@ -6145,7 +6125,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t2FirstPlayFlag = false;
@@ -6158,7 +6138,7 @@ void GameScene::Update()
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				gameClear->Initialize();
 
 				t2FirstPlayFlag = false;
@@ -6279,7 +6259,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 6)
 					{
 						Tutorial = false;
@@ -6308,8 +6288,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -6318,8 +6298,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -6328,8 +6308,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -6457,7 +6437,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t3FirstPlayFlag = false;
@@ -6469,7 +6449,7 @@ void GameScene::Update()
 				Tutorial3Move();
 				GameClearReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				sceneChange = 0;
 
 				t3FirstPlayFlag = false;
@@ -6549,7 +6529,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13 ||
 			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13)
 		{
-			audio->PlayWave("StageSelection.wav", Volume, false);
+			audio->PlayWave("StageSelection.wav", Volume_StageSelection, false);
 			stageMoveRight = true;
 			stageSelect++;
 		}
@@ -6557,7 +6537,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0 ||
 			IsButtonDown(ButtonKind::Button_LB) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
 		{
-			audio->PlayWave("StageSelection.wav", Volume, false);
+			audio->PlayWave("StageSelection.wav", Volume_StageSelection, false);
 			stageMoveLeft = true;
 			stageSelect--;
 		}
@@ -6725,7 +6705,7 @@ void GameScene::Update()
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
 			PlayFlag = false;
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("Title.wav");
 			audio->PlayWave("Stage.wav", Volume, true);
 			switch (stageSelect)
@@ -6982,8 +6962,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7030,25 +7010,25 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(playerPosition, objTeleporterIn3->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -7059,7 +7039,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s2FirstPlayFlag = false;
@@ -7069,7 +7049,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage2Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -7239,25 +7219,25 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut3->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f))
@@ -7265,8 +7245,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7303,8 +7283,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -7341,8 +7321,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -7379,8 +7359,8 @@ void GameScene::Update()
 				if (SwitchFlag4 == false)
 				{
 					SwitchFlag4 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen4 = true;
 			}
@@ -7420,7 +7400,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s7FirstPlayFlag = false;
@@ -7433,7 +7413,7 @@ void GameScene::Update()
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				gameClear->Initialize();
 
 				s7FirstPlayFlag = false;
@@ -7584,7 +7564,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 4)
 					{
 						Tutorial = false;
@@ -7611,7 +7591,7 @@ void GameScene::Update()
 			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -7622,7 +7602,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t4FirstPlayFlag = false;
@@ -7632,7 +7612,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Tutorial4Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -7760,7 +7740,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
@@ -7790,7 +7770,7 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7830,7 +7810,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t5FirstPlayFlag = false;
@@ -7840,7 +7820,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Tutorial5Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -7978,19 +7958,19 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
@@ -7998,8 +7978,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8009,8 +7989,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8020,8 +8000,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8163,7 +8143,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s8FirstPlayFlag = false;
@@ -8173,7 +8153,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage8Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -8318,8 +8298,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8356,8 +8336,7 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					//audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8397,7 +8376,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s4FirstPlayFlag = false;
@@ -8407,7 +8386,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage4Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -8524,8 +8503,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8562,8 +8541,7 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					//audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8600,8 +8578,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8638,8 +8616,8 @@ void GameScene::Update()
 				if (SwitchFlag4 == false)
 				{
 					SwitchFlag4 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen4 = true;
 			}
@@ -8676,8 +8654,8 @@ void GameScene::Update()
 				if (SwitchFlag5 == false)
 				{
 					SwitchFlag5 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen5 = true;
 			}
@@ -8717,7 +8695,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s5FirstPlayFlag = false;
@@ -8727,7 +8705,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage5Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -8862,8 +8840,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8900,8 +8878,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8938,7 +8916,7 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8999,7 +8977,7 @@ void GameScene::Update()
 				Stage6Move();
 				GameClearReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				sceneChange = 0;
 
 				s6FirstPlayFlag = false;
@@ -9014,7 +8992,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s6FirstPlayFlag = false;
@@ -9140,8 +9118,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -9179,8 +9157,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -9218,8 +9196,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -9257,8 +9235,8 @@ void GameScene::Update()
 				if (SwitchFlag4 == false)
 				{
 					SwitchFlag4 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen4 = true;
 			}
@@ -9292,55 +9270,55 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut2->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut3->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn5->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut5->GetPosition());
 			}
 
@@ -9411,7 +9389,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s9FirstPlayFlag = false;
@@ -9421,7 +9399,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage9Move();
 				GameClearReset();
 				sceneChange = 0;

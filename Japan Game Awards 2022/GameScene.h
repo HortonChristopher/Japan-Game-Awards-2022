@@ -713,6 +713,18 @@ private: // メンバ変数 Member variables
 
 	//Waveのボリューム
 	const float Volume = 0.1f;
+	const float Volume_Title = 0.1f;
+	const float Volume_Decision = 0.1f;
+	const float Volume_Esc = 0.1f;
+	const float Volume_GameClear = 0.1f;
+	const float Volume_GameOver = 0.1f;
+	const float Volume_MoveCursor = 0.1f;
+	const float Volume_OpenDoor = 0.1f;
+	const float Volume_StageRotation = 0.1f;
+	const float Volume_StageSelection = 0.1f;
+	const float Volume_Switch = 0.1f;
+	const float Volume_Walk = 0.1f;
+	const float Volume_Warp = 0.1f;
 
 	//ワープゾーンの回転スピード
 	const float WarpRotate = 3.0f;
