@@ -723,7 +723,7 @@ private: // メンバ変数 Member variables
 	const float Volume_StageRotation = 0.1f;
 	const float Volume_StageSelection = 0.1f;
 	const float Volume_Switch = 0.1f;
-	const float Volume_Walk = 0.1f;
+	const float Volume_Walk = 0.5f;
 	const float Volume_Warp = 0.1f;
 
 	//ワープゾーンの回転スピード

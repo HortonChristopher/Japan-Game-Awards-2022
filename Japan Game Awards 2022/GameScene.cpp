@@ -3964,7 +3964,7 @@ void GameScene::Update()
 
 #pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
-		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
+		IsButtonDown(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
 	{
 		if (pause == false)
 		{
@@ -4010,12 +4010,12 @@ void GameScene::Update()
 		objClone->Update();
 		objPlayerMarker->Update();
 
-		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
+		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonDown(ButtonKind::DownButton) && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
 			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 		}
-		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
+		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonDown(ButtonKind::UpButton) && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
 			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
@@ -4511,6 +4511,7 @@ void GameScene::Update()
 
 		if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
 		{
+			audio->PlayWave("StageRotation.wav", Volume_StageRotation, false);
 			if (IsButtonDown(ButtonKind::Button_LB))
 			{
 				if (cameraMove == 4)
