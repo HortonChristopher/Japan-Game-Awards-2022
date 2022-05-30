@@ -815,8 +815,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerTalk->SetPosition({ -11,4,-25 });
 	objPlayerTalk->SetRotation({ -30,120,40 });
 
-	objPlayerThinking->SetPosition({ 0,0,0 });
-	objPlayerThinking->SetRotation({ 0,0,0 });
+	objPlayerThinking->SetPosition({ -8,4,-20 });
+	objPlayerThinking->SetRotation({ -35,180,0 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
@@ -4466,6 +4466,7 @@ void GameScene::Update()
 				pausePosition = false;
 			}
 		}
+		objPlayerThinking->Update();
 	}
 #pragma endregion
 
@@ -9623,6 +9624,11 @@ void GameScene::Draw()
 	if (sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && marker)
 	{
 		objPlayerMarker->Draw();
+	}
+
+	if (pause)
+	{
+		objPlayerThinking->Draw(cmdList);
 	}
 
 	switch (sceneNo)
