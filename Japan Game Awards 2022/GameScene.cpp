@@ -3975,6 +3975,8 @@ void GameScene::Update()
 		{
 			pauseMenuSelection = 0;
 			pause = true;
+			pauseCameraMove = cameraMove;
+			camera->SetEye({ 0.0f, 25.0f, -30.0f });
 		}
 	}
 
@@ -4039,6 +4041,23 @@ void GameScene::Update()
 			{
 				pause = false;
 				pausePosition = false;
+				cameraMove = pauseCameraMove;
+				if (cameraMove == 1)
+				{
+					camera->SetEye({ 0.0f, 25.0f, -30.0f });
+				}
+				else if (cameraMove == 2)
+				{
+					camera->SetEye({ -40.0f, 25.0f, 0.0f });
+				}
+				else if (cameraMove == 3)
+				{
+					camera->SetEye({ 0.0f, 25.0f, 30.0f });
+				}
+				else if (cameraMove == 4)
+				{
+					camera->SetEye({ 40.0f, 25.0f, 0.0f });
+				}
 			}
 			else if (pauseMenuSelection == 1)
 			{
