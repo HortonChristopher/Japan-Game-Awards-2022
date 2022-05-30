@@ -4010,12 +4010,12 @@ void GameScene::Update()
 		objClone->Update();
 		objPlayerMarker->Update();
 
-		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonDown(ButtonKind::DownButton) && pauseMenuSelection < 2)
+		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
 			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 		}
-		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonDown(ButtonKind::UpButton) && pauseMenuSelection > 0)
+		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
 			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
@@ -4791,12 +4791,15 @@ void GameScene::Update()
 			if (intersect(playerPosition, BombButton1, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 			{
 				playerBulletF = true;
+				audio->PlayWave("Switch.wav", Volume_Switch, false);
 				SwitchFlag1 = true;
 			}
 
 			if (intersect(enemyPosition, BombButton2, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
 			{
 				enemyBulletF = true;
+				audio->PlayWave("Switch.wav", Volume_Switch, false);
+				SwitchFlag2 = true;
 			}
 
 
@@ -4937,7 +4940,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage4Reset();
 					sceneNo = 14;
 					break;
@@ -4946,69 +4949,69 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage2Reset();
 					sceneNo = 9;
 					break;
 				case 5:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 6:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 7:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial4Reset();
 					sceneNo = 11;
 					break;
 				case 8:
 					break;
 				case 9:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage3Reset();
 					sceneNo = 1;
 					break;
 				case 10:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage8Reset();
 					sceneNo = 13;
 					break;
 				case 11:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial5Reset();
 					sceneNo = 12;
 					break;
 				case 12:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage1Reset();
 					sceneNo = 4;
 					break;
 				case 13:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage9Reset();
 					sceneNo = 17;
 					break;
 				case 14:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage5Reset();
 					sceneNo = 15;
 					break;
 				case 15:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage6Reset();
 					sceneNo = 16;
 					break;
 				case 16:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage7Reset();
 					sceneNo = 10;
 					break;
 				case 17:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage9Reset();
 					sceneNo = 17;
 					break;
@@ -5283,7 +5286,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage3Reset();
 					sceneNo = 1;
 					break;
@@ -5292,69 +5295,69 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage1Reset();
 					sceneNo = 4;
 					break;
 				case 5:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial1Reset();
 					sceneNo = 5;
 					break;
 				case 6:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 7:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 8:
 					break;
 				case 9:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage2Reset();
 					sceneNo = 9;
 					break;
 				case 10:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage7Reset();
 					sceneNo = 10;
 					break;
 				case 11:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial4Reset();
 					sceneNo = 11;
 					break;
 				case 12:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial5Reset();
 					sceneNo = 12;
 					break;
 				case 13:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage8Reset();
 					sceneNo = 13;
 					break;
 				case 14:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage4Reset();
 					sceneNo = 14;
 					break;
 				case 15:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage5Reset();
 					sceneNo = 15;
 					break;
 				case 16:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage6Reset();
 					sceneNo = 16;
 					break;
 				case 17:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage9Reset();
 					sceneNo = 17;
 					break;
@@ -6708,7 +6711,7 @@ void GameScene::Update()
 			PlayFlag = false;
 			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("Title.wav");
-			audio->PlayWave("Stage.wav", Volume, true);
+			audio->PlayWave("Stage.wav", Volume_Stage, true);
 			switch (stageSelect)
 			{
 			case 0:
@@ -8951,7 +8954,9 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, BombButton1, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 			{
-				playerBulletF = true;
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					SwitchFlag4 = true;
+					playerBulletF = true;
 			}
 
 			if (playerBullet.x > 14.0f)
@@ -12316,6 +12321,8 @@ void GameScene::Stage6Reset()
 
 	SwitchFlag1 = false;
 	SwitchFlag2 = false;
+	SwitchFlag3 = false;
+	SwitchFlag4 = false;
 
 	beginStage = false;
 }
