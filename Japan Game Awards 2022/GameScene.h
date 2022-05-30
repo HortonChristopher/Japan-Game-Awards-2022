@@ -688,6 +688,8 @@ private: // メンバ変数 Member variables
 	int menuSelection = 0; // ゲームクリアとオーバー画面
 	bool menuMoving = false; // ゲームクリアとオーバー画面
 	int lastScene = 0; // ゲームクリアとオーバー画面
+	int why = 0;
+	int why2 = 0;
 
 	int delayFrame = 0;
 	bool delay = false;

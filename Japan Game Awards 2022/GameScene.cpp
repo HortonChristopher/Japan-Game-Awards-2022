@@ -32,6 +32,7 @@ extern XMFLOAT3 cloneRotationTemp = { 0,0,0 };
 
 extern int cameraMove = 1;
 extern int prevCameraMove = 0;
+extern int isStageGoing = 0;
 
 extern DirectXCommon* dxCommon;
 
@@ -3876,7 +3877,7 @@ void GameScene::Update()
 			FBXModelChange = 1;
 		}
 		else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W)
-			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+			|| !IsButtonPush(ButtonKind::LeftButton) && !IsButtonPush(ButtonKind::RightButton) && !IsButtonPush(ButtonKind::DownButton) && !IsButtonPush(ButtonKind::UpButton))
 		{
 			FBXModelChange = 0;
 		}
@@ -3916,7 +3917,7 @@ void GameScene::Update()
 		objPlayerMarker->Update();
 	}
 
-	if (input->TriggerKey(DIK_M) || IsButtonPush(ButtonKind::Button_LeftMenu))
+	if (input->TriggerKey(DIK_M) || IsButtonDown(ButtonKind::Button_LeftMenu))
 	{
 		if (marker)
 		{
@@ -3962,6 +3963,41 @@ void GameScene::Update()
 	}
 #pragma endregion
 
+	if (pause)
+	{
+		isStageGoing = 1;
+	}
+	else
+	{
+		isStageGoing = 0;
+	}
+
+#pragma region PauseMenu Buttons
+
+	if (IsButtonDown(ButtonKind::DownButton))
+	{
+		why = 1;
+	}
+	else if (IsButtonDown(ButtonKind::UpButton))
+	{
+		why = 2;
+	}
+	else
+	{
+		why = 0;
+	}
+
+	if (IsButtonDown(ButtonKind::Button_X))
+	{
+		why2 = 1;
+	}
+	else
+	{
+		why2 = 0;
+	}
+
+#pragma endregion
+
 #pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
 		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
@@ -3984,6 +4020,8 @@ void GameScene::Update()
 	{
 		if (!pausePosition)
 		{
+			InitInput();
+
 			playerPausePosition = objFighter->GetPosition();
 			playerPauseRotation = objFighter->GetRotation();
 			clonePausePosition = objClone->GetPosition();
@@ -4010,12 +4048,12 @@ void GameScene::Update()
 		objClone->Update();
 		objPlayerMarker->Update();
 
-		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
+		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || why == 1 && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
 			audio->PlayWave("MoveCursor.wav", Volume, false);
 		}
-		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
+		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || why == 2 && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
 			audio->PlayWave("MoveCursor.wav", Volume, false);
@@ -4472,7 +4510,7 @@ void GameScene::Update()
 
 #pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
-	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3 && !pause)
+	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3 && !pause && !Tutorial && !falling)
 	{
 		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
@@ -4698,10 +4736,10 @@ void GameScene::Update()
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
+			delay = true;
 			break;
 		}
-
-		if (IsButtonDown(ButtonKind::Button_A))
+		else if (IsButtonPush(ButtonKind::Button_A))
 		{
 			/*if (!t1Time)
 			{
@@ -4718,6 +4756,7 @@ void GameScene::Update()
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
+			delay = true;
 			break;
 		}
 #pragma endregion
@@ -6543,8 +6582,15 @@ void GameScene::Update()
 	case 8: //ステージセレクト画面
 #pragma region case8 ステージセレクト画面
 
-		camera->SetEye({ -15,0,0 });
-		camera->SetTarget({ 0, 0, 0 });
+		camera->SetEye({ -15,10,0 });
+		camera->SetTarget({ 0, 10, 0 });
+
+		if (input->TriggerKey(DIK_BACKSPACE) && delay == false && stageMoveRight == false && stageMoveLeft == false || why2 == 1 && delay == false && stageMoveRight == false && stageMoveLeft == false)
+		{
+			audio->PlayWave("Decision.wav", Volume, false);
+			sceneNo = 0;
+			titleScene->Initialize();
+		}
 
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13 ||
 			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13)
@@ -6724,7 +6770,7 @@ void GameScene::Update()
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay ||
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
-			PlayFlag = false;
+			//PlayFlag = false;
 			audio->PlayWave("Decision.wav", Volume, false);
 			audio->StopWave("Title.wav");
 			audio->PlayWave("Stage.wav", Volume, true);
@@ -9505,12 +9551,13 @@ void GameScene::Update()
 #pragma region DebugLog
 	//Debug Start
 	//XMFLOAT3 eye = camera->GetEye();
+	//int push = IsButtonPush(ButtonKind::Button_B);
 
 	//char msgbuf[256];
 	//char msgbuf2[256];
 	//char msgbuf3[256];
 
-	//sprintf_s(msgbuf, 256, "Last Scene: %d\n", lastScene);
+	//sprintf_s(msgbuf, 256, "Last Scene: %d\n", push);
 	//sprintf_s(msgbuf2, 256, "Player Y: %f\n", playerPosition.y);
 	//sprintf_s(msgbuf3, 256, "Player Z: %f\n", playerPosition.z);
 	//OutputDebugStringA(msgbuf);
