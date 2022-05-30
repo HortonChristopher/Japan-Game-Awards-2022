@@ -6571,7 +6571,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_BACKSPACE) && delay == false && stageMoveRight == false && stageMoveLeft == false || why2 == 1 && delay == false && stageMoveRight == false && stageMoveLeft == false)
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			sceneNo = 0;
 			titleScene->Initialize();
 		}
