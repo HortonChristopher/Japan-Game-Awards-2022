@@ -816,7 +816,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	objPlayerTalk->SetRotation({ -30,120,40 });
 
 	objPlayerThinking->SetPosition({ -8,4,-20 });
-	objPlayerThinking->SetRotation({ -35,180,0 });
+	objPlayerThinking->SetRotation({ -36,180,0 });
 
 	// クローン初期化 Clone initialization
 	objCloneRun->SetPosition({ 0, 0, 0 });
