@@ -144,21 +144,21 @@ private: // メンバ変数 Member variables
 	bool stageMoveLeft = false;
 
 	//初めプレイですか？
-	bool t1Time = true;
-	bool t2Time = true;
-	bool t3Time = true;
-	bool at4Time = true;
-	bool t5Time = true;
-	bool t4Time = true;
-	bool firstTime = true;
-	bool secondTime = true;
-	bool thirdTime = true;
-	bool fourthTime = true;
-	bool fifthTime = true;
-	bool sixthTime = true;
-	bool seventhTime = true;
-	bool eigthTime = true;
-	bool ninthTime = true;
+	bool t1Time = false;
+	bool t2Time = false;
+	bool t3Time = false;
+	bool at4Time = false;
+	bool t5Time = false;
+	bool t4Time = false;
+	bool firstTime = false;
+	bool secondTime = false;
+	bool thirdTime = false;
+	bool fourthTime = false;
+	bool fifthTime = false;
+	bool sixthTime = false;
+	bool seventhTime = false;
+	bool eigthTime = false;
+	bool ninthTime = false;
 
 	bool temp = true;
 
