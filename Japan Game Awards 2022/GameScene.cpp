@@ -5176,12 +5176,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving && lastScene != 17 || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving && lastScene != 17)
 		{
-			audio->PlayWave("MoveCursor", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume, false);
 			menuMoving = true;
 		}
 
@@ -5522,12 +5522,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume, false);
 			menuMoving = true;
 		}
 
