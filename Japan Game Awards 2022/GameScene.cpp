@@ -32,6 +32,7 @@ extern XMFLOAT3 cloneRotationTemp = { 0,0,0 };
 
 extern int cameraMove = 1;
 extern int prevCameraMove = 0;
+extern int isStageGoing = 0;
 
 extern DirectXCommon* dxCommon;
 
@@ -923,7 +924,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t1_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t1_1->SetRotation({ 180, 0, 0 });
@@ -983,7 +984,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t1_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t1_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t1_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t1_2->SetRotation({ 180, 0, 0 });
@@ -1047,7 +1048,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t2_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t2_1->SetRotation({ 180, 0, 0 });
@@ -1120,7 +1121,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t2_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t2_2->SetRotation({ 180, 0, 0 });
@@ -1188,7 +1189,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t3_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t3_1->SetRotation({ 180, 0, 0 });
@@ -1269,7 +1270,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t3_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t3_2->SetRotation({ 180, 0, 0 });
@@ -1332,7 +1333,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t3_y1_1 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t3_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_t3_y1_1->SetRotation({ 0, 0, 0 });
@@ -1359,7 +1360,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t3_y2_1 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t3_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_t3_y2_1->SetRotation({ 0, 0, 0 });
@@ -1385,7 +1386,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t3_y1_2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t3_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_t3_y1_2->SetRotation({ 0, 0, 0 });
@@ -1412,7 +1413,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t3_y2_2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t3_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_t3_y2_2->SetRotation({ 0, 0, 0 });
@@ -1438,7 +1439,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t3_y1_3 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t3_y1_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t3_y1_3->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_y1_3->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_t3_y1_3->SetRotation({ 0, 0, 0 });
@@ -1465,7 +1466,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t3_y2_3 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t3_y2_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t3_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t3_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_t3_y2_3->SetRotation({ 0, 0, 0 });
@@ -1497,7 +1498,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_at4_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_at4_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_at4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_at4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_at4_1->SetRotation({ 180, 0, 0 });
@@ -1546,7 +1547,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_at4_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_at4_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_at4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_at4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0 || modelIndex == 2 && i == 6 && j != 0 && j != 6)
 			{
 				object_at4_2->SetRotation({ 180, 0, 0 });
@@ -1593,7 +1594,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t5_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t5_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_t5_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t5_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t5_1->SetRotation({ 180, 0, 0 });
@@ -1642,7 +1643,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t5_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t5_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_t5_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t5_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t5_2->SetRotation({ 180, 0, 0 });
@@ -1689,7 +1690,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t5_s2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_t5_s2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_t5_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t5_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_t5_s2.push_back(object_t5_s2);
 		}
 	}
@@ -1743,7 +1744,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object = TouchableObject::Create(modeltable[modelIndex]);
 			object->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 10 && i == 9 && j == 0 || modelIndex == 10 && i == 9 && j == 5)
 			{
 				object->SetRotation({ 180, 90, 0 });
@@ -1816,7 +1817,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_2 = TouchableObject::Create(modeltable_2[modelIndex]);
 			object_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 10 && i == 9 && j == 0 || modelIndex == 10 && i == 9 && j == 5)
 			{
 				object_2->SetRotation({ 180, 90, 0 });
@@ -1892,7 +1893,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s2_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s2_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s2_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s2_1->SetRotation({ 180, 0, 0 });
@@ -1975,7 +1976,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_s2_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_s2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s2_2->SetRotation({ 180, 0, 0 });
@@ -2024,7 +2025,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s2_y = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s2_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s2_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s2_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_s2_y.push_back(object_s2_y);
 		}
 	}
@@ -2045,7 +2046,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s2_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s2_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s2_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s2_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_s2_y2.push_back(object_s2_y2);
 		}
 	}
@@ -2066,7 +2067,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s2_s = TouchableObject::Create(modeltable[modelIndex]);
 			object_s2_s->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s2_s->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s2_s->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 7, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_s2_s.push_back(object_s2_s);
 		}
 	}
@@ -2087,7 +2088,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s2_s2 = TouchableObject::Create(modeltable[modelIndex]);
 			object_s2_s2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s2_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s2_s2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 7, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			objects_s2_s2.push_back(object_s2_s2);
 		}
 	}
@@ -2207,7 +2208,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_t4_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_t4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_t4_2->SetRotation({ 180, 0, 0 });
@@ -2278,7 +2279,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t4_y = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t4_y->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_t4_y->SetRotation({ 0, 0, 0 });
@@ -2305,7 +2306,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_t4_y2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_t4_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_t4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_t4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_t4_y2->SetRotation({ 0, 0, 0 });
@@ -2341,7 +2342,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s4_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s4_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s4_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s4_1->SetRotation({ 180, 0, 0 });
@@ -2394,7 +2395,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s4_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s4_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s4_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s4_2->SetRotation({ 180, 0, 0 });
@@ -2441,7 +2442,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s4_y = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s4_y->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -15, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s4_y->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 1)
 			{
 				object_s4_y->SetRotation({ 0, 0, 0 });
@@ -2468,7 +2469,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s4_y2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s4_y2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s4_y2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_s4_y2->SetRotation({ 0, 0, 0 });
@@ -2505,7 +2506,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s5_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s5_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s5_1->SetRotation({ 180, 0, 0 });
@@ -2569,7 +2570,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_s5_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_s5_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s5_2->SetRotation({ 180, 0, 0 });
@@ -2620,7 +2621,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s5_y1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s5_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 1)
 			{
 				object_s5_y1_1->SetRotation({ 0, 0, 0 });
@@ -2647,7 +2648,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_y2_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s5_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s5_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_s5_y2_1->SetRotation({ 0, 0, 0 });
@@ -2674,7 +2675,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_y1_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s5_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s5_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 4)
 			{
 				object_s5_y1_2->SetRotation({ 0, 0, 0 });
@@ -2701,7 +2702,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_y2_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s5_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s5_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_s5_y2_2->SetRotation({ 0, 0, 0 });
@@ -2728,7 +2729,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s5_y2_3 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s5_y2_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s5_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s5_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 5)
 			{
 				object_s5_y2_3->SetRotation({ 0, 90, 0 });
@@ -2765,7 +2766,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_as6_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_as6_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_as6_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_as6_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_as6_1->SetRotation({ 180, 0, 0 });
@@ -2813,7 +2814,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_as6_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_as6_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_as6_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_as6_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_as6_2->SetRotation({ 180, 0, 0 });
@@ -2860,7 +2861,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_as6_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_as6_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_as6_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_as6_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_as6_y1_1->SetRotation({ 0, 0, 0 });
@@ -2887,7 +2888,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_as6_y2_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_as6_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_as6_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_as6_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_as6_y2_1->SetRotation({ 0, 0, 0 });
@@ -2914,7 +2915,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_as6_y1_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_as6_y1_2->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_as6_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -15, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_as6_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 1)
 			{
 				object_as6_y1_2->SetRotation({ 0, 0, 0 });
@@ -2958,7 +2959,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_s3_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_s3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s3_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s3_1->SetRotation({ 180, 0, 0 });
@@ -3026,7 +3027,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_s3_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_s3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s3_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s3_2->SetRotation({ 180, 0, 0 });
@@ -3092,7 +3093,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_s3_y1_1->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
 			}
-			object_s3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s3_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 0)
 			{
 				object_s3_y1_1->SetRotation({ 0, 0, 0 });
@@ -3119,7 +3120,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s3_y2_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s3_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s3_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_s3_y2_1->SetRotation({ 0, 0, 0 });
@@ -3145,7 +3146,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s3_y1_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s3_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s3_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 5)
 			{
 				object_s3_y1_2->SetRotation({ 0, 0, 0 });
@@ -3172,7 +3173,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s3_y2_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s3_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s3_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_s3_y2_2->SetRotation({ 0, 180, 0 });
@@ -3208,7 +3209,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_1 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s6_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s6_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s6_1->SetRotation({ 180, 0, 0 });
@@ -3263,7 +3264,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_2 = TouchableObject::Create(modeltable_s2[modelIndex]);
 			object_s6_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s6_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s6_2->SetRotation({ 180, 0, 0 });
@@ -3311,7 +3312,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y1_1 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s6_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_s6_y1_1->SetRotation({ 0, 180, 0 });
@@ -3338,7 +3339,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y2_1 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s6_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_s6_y2_1->SetRotation({ 0, 180, 0 });
@@ -3365,7 +3366,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y1_2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s6_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_s6_y1_2->SetRotation({ 0, -90, 0 });
@@ -3392,7 +3393,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y2_2 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s6_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_s6_y2_2->SetRotation({ 0, 90, 0 });
@@ -3419,7 +3420,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y1_3 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y1_3->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s6_y1_3->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y1_3->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 1)
 			{
 				object_s6_y1_3->SetRotation({ 0, 0, 0 });
@@ -3446,7 +3447,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y2_3 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y2_3->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s6_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y2_3->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 5)
 			{
 				object_s6_y2_3->SetRotation({ 0, 0, 0 });
@@ -3473,7 +3474,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s6_y2_4 = TouchableObject::Create(modeltable_y[modelIndex]);
 			object_s6_y2_4->SetScale({ LAND_SCALE, LAND_SCALE, LAND_SCALE });
-			object_s6_y2_4->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -15.0f, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s6_y2_4->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100.0f, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 5)
 			{
 				object_s6_y2_4->SetRotation({ 0, 0, 0 });
@@ -3519,7 +3520,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 				object_s9_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
 			//object_s9_1->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
-			object_s9_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s9_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s9_1->SetRotation({ 180, 0, 0 });
@@ -3578,7 +3579,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 			{
 				object_s9_2->SetScale({ LAND_SCALE, LAND_SCALE * 1.5f, LAND_SCALE });
 			}
-			object_s9_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s9_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2 && i == 0)
 			{
 				object_s9_2->SetRotation({ 180, 0, 0 });
@@ -3629,7 +3630,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s9_y1_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s9_y1_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s9_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s9_y1_1->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 3)
 			{
 				object_s9_y1_1->SetRotation({ 0, 0, 0 });
@@ -3656,7 +3657,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s9_y2_1 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s9_y2_1->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s9_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s9_y2_1->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 2)
 			{
 				object_s9_y2_1->SetRotation({ 0, 0, 0 });
@@ -3683,7 +3684,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s9_y1_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s9_y1_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s9_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s9_y1_2->SetPosition({ (j - DIV_NUM / 2) * LAND_SCALE - LAND_SCALE * 1 - 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 5)
 			{
 				object_s9_y1_2->SetRotation({ 0, 0, 0 });
@@ -3710,7 +3711,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 
 			TouchableObject* object_s9_y2_2 = TouchableObject::Create(modeltable_y2[modelIndex]);
 			object_s9_y2_2->SetScale({ LAND_SCALE * 0.5f, LAND_SCALE * 0.66f, LAND_SCALE * 0.5f });
-			object_s9_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, 0, (i - DIV_NUM / 2) * LAND_SCALE });
+			object_s9_y2_2->SetPosition({ (j - DIV_NUM / 2) * 0.5f * LAND_SCALE * (-2) + LAND_SCALE + 5, -100, (i - DIV_NUM / 2) * LAND_SCALE });
 			if (modelIndex == 4)
 			{
 				object_s9_y2_2->SetRotation({ 0, 0, 0 });
@@ -3876,7 +3877,7 @@ void GameScene::Update()
 			FBXModelChange = 1;
 		}
 		else if (!input->PushKey(DIK_A) && !input->PushKey(DIK_S) && !input->PushKey(DIK_D) && !input->PushKey(DIK_W)
-			|| IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::DownButton) || IsButtonPush(ButtonKind::UpButton))
+			|| !IsButtonPush(ButtonKind::LeftButton) && !IsButtonPush(ButtonKind::RightButton) && !IsButtonPush(ButtonKind::DownButton) && !IsButtonPush(ButtonKind::UpButton))
 		{
 			FBXModelChange = 0;
 		}
@@ -3916,7 +3917,7 @@ void GameScene::Update()
 		objPlayerMarker->Update();
 	}
 
-	if (input->TriggerKey(DIK_M) || IsButtonPush(ButtonKind::Button_LeftMenu))
+	if (input->TriggerKey(DIK_M) || IsButtonDown(ButtonKind::Button_LeftMenu))
 	{
 		if (marker)
 		{
@@ -3947,7 +3948,7 @@ void GameScene::Update()
 		{
 			if (test1 == false)
 			{
-				audio->PlayWave("Walk.wav", Volume * 50.0f, false);
+				audio->PlayWave("Walk.wav", Volume_Walk, false);
 				test3 = true;
 				test1 = true;
 			}
@@ -3962,13 +3963,48 @@ void GameScene::Update()
 	}
 #pragma endregion
 
+	if (pause)
+	{
+		isStageGoing = 1;
+	}
+	else
+	{
+		isStageGoing = 0;
+	}
+
+#pragma region PauseMenu Buttons
+
+	if (IsButtonDown(ButtonKind::DownButton))
+	{
+		why = 1;
+	}
+	else if (IsButtonDown(ButtonKind::UpButton))
+	{
+		why = 2;
+	}
+	else
+	{
+		why = 0;
+	}
+
+	if (IsButtonDown(ButtonKind::Button_X))
+	{
+		why2 = 1;
+	}
+	else
+	{
+		why2 = 0;
+	}
+
+#pragma endregion
+
 #pragma region ポーズ画面
 	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
-		IsButtonPush(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
+		IsButtonDown(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
 	{
 		if (pause == false)
 		{
-			audio->PlayWave("Esc.wav", Volume, false);
+			audio->PlayWave("Esc.wav", Volume_Esc, false);
 		}
 
 		if (!pause)
@@ -3984,6 +4020,8 @@ void GameScene::Update()
 	{
 		if (!pausePosition)
 		{
+			InitInput();
+
 			playerPausePosition = objFighter->GetPosition();
 			playerPauseRotation = objFighter->GetRotation();
 			clonePausePosition = objClone->GetPosition();
@@ -4010,15 +4048,15 @@ void GameScene::Update()
 		objClone->Update();
 		objPlayerMarker->Update();
 
-		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || IsButtonPush(ButtonKind::DownButton) && pauseMenuSelection < 2)
+		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || why == 1 && pauseMenuSelection < 2)
 		{
 			pauseMenuSelection++;
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 		}
-		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || IsButtonPush(ButtonKind::UpButton) && pauseMenuSelection > 0)
+		else if (input->TriggerKey(DIK_W) && pauseMenuSelection > 0 || why == 2 && pauseMenuSelection > 0)
 		{
 			pauseMenuSelection--;
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 		}
 
 		switch (pauseMenuSelection)
@@ -4036,7 +4074,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) || IsButtonPush(ButtonKind::Button_A))
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			if (pauseMenuSelection == 0)
 			{
 				pause = false;
@@ -4157,7 +4195,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 7;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0   });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4174,7 +4212,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 5;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4187,7 +4225,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 0;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4200,7 +4238,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 1;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4213,7 +4251,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 2;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4228,7 +4266,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 6;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4241,7 +4279,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 11;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4254,7 +4292,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 3;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4267,7 +4305,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 4;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4280,7 +4318,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 12;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4293,7 +4331,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 8;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4306,7 +4344,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 9;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4319,7 +4357,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 10;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4332,7 +4370,7 @@ void GameScene::Update()
 					sceneNo = 8;
 					stageSelect = 13;
 					audio->StopWave("Stage.wav");
-					audio->PlayWave("Title.wav", Volume, true);
+					audio->PlayWave("Title.wav", Volume_Title, true);
 					camera->SetEye({ (stageSelect * 100.0f), 20, -30 });
 					camera->SetTarget({ (stageSelect * 100.0f), 1.0f, 0 });
 					menuBallRotation = { 0.0f, 0.0f, 0.0f };
@@ -4472,11 +4510,11 @@ void GameScene::Update()
 
 #pragma region カメラ回転 Camera Rotation
 	// Camera Movement カメラ動く
-	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3 && !pause)
+	if (beginStage && sceneNo != 8 && sceneNo != 2 && sceneNo != 0 && sceneNo != 3 && !pause && !Tutorial && !falling)
 	{
 		if (input->TriggerKey(DIK_Q) && cameraChange == false || input->TriggerKey(DIK_E) && cameraChange == false)
 		{
-			audio->PlayWave("StageRotation.wav", Volume, false);
+			audio->PlayWave("StageRotation.wav", Volume_StageRotation, false);
 			if (input->TriggerKey(DIK_Q))
 			{
 				if (cameraMove == 4)
@@ -4509,8 +4547,9 @@ void GameScene::Update()
 			}
 		}
 
-		if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
+		else if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
 		{
+			audio->PlayWave("StageRotation.wav", Volume_StageRotation, false);
 			if (IsButtonDown(ButtonKind::Button_LB))
 			{
 				if (cameraMove == 4)
@@ -4665,8 +4704,7 @@ void GameScene::Update()
 		if (PlayFlag == false)
 		{
 			PlayFlag = true;
-			audio->PlayWave("Title.wav", Volume, true);
-			//audio->WaveVolume("Title.wav", 0.3f);
+			audio->PlayWave("Title.wav", Volume_Title, true);
 		}
 
 		//コントローラーが接続されていなかったら60フレーム毎にコントローラーをさがす
@@ -4694,14 +4732,14 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 			}*/
 
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
+			delay = true;
 			break;
 		}
-
-		if (IsButtonDown(ButtonKind::Button_A))
+		else if (IsButtonPush(ButtonKind::Button_A))
 		{
 			/*if (!t1Time)
 			{
@@ -4714,10 +4752,11 @@ void GameScene::Update()
 				camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 			}*/
 
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			SceneSelectionReset();
 			sceneNo = 8;
 			titleScene->Finalize();
+			delay = true;
 			break;
 		}
 #pragma endregion
@@ -4791,12 +4830,15 @@ void GameScene::Update()
 			if (intersect(playerPosition, BombButton1, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 			{
 				playerBulletF = true;
+				audio->PlayWave("Switch.wav", Volume_Switch, false);
 				SwitchFlag1 = true;
 			}
 
 			if (intersect(enemyPosition, BombButton2, 1.0f, 1.0f, 1.0f) && lastIntersectE == false)
 			{
 				enemyBulletF = true;
+				audio->PlayWave("Switch.wav", Volume_Switch, false);
+				SwitchFlag2 = true;
 			}
 
 
@@ -4839,7 +4881,7 @@ void GameScene::Update()
 				Stage3Move();
 				GameOverReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				sceneChange = 0;
 
 				s3FirstPlayFlag = false;
@@ -4851,7 +4893,7 @@ void GameScene::Update()
 				Stage3Move();
 				GameClearReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				sceneChange = 0;
 
 				s3FirstPlayFlag = false;
@@ -4928,7 +4970,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("GameClear.wav");
 			if (menuSelection == 0)
 			{
@@ -4937,7 +4979,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage4Reset();
 					sceneNo = 14;
 					break;
@@ -4946,69 +4988,82 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage2Reset();
 					sceneNo = 9;
 					break;
 				case 5:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 6:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 7:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial4Reset();
 					sceneNo = 11;
 					break;
 				case 8:
 					break;
 				case 9:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage3Reset();
 					sceneNo = 1;
 					break;
 				case 10:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage8Reset();
 					sceneNo = 13;
 					break;
 				case 11:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial5Reset();
 					sceneNo = 12;
 					break;
 				case 12:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage1Reset();
 					sceneNo = 4;
 					break;
 				case 13:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage9Reset();
 					sceneNo = 17;
 					break;
 				case 14:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage5Reset();
 					sceneNo = 15;
 					break;
 				case 15:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage6Reset();
 					sceneNo = 16;
 					break;
 				case 16:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
+					Tutorial1Move();
+					Tutorial2Move();
+					Tutorial3Move();
+					Tutorial4Move();
+					Tutorial5Move();
+					Stage1Move();
+					Stage2Move();
+					Stage3Move();
+					Stage4Move();
+					Stage5Move();
+					Stage6Move();
+					Stage8Move();
+					Stage9Move();
 					Stage7Reset();
 					sceneNo = 10;
 					break;
 				case 17:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage9Reset();
 					sceneNo = 17;
 					break;
@@ -5018,7 +5073,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
-				audio->PlayWave("Title.wav", Volume, true);
+				audio->PlayWave("Title.wav", Volume_Title, true);
 				sceneNo = 8;
 				switch (lastScene)
 				{
@@ -5204,12 +5259,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving && lastScene != 17 || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving && lastScene != 17)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 
@@ -5274,7 +5329,7 @@ void GameScene::Update()
 
 		if (input->TriggerKey(DIK_SPACE) && !menuMoving || IsButtonDown(ButtonKind::Button_A) && !menuMoving)
 		{
-			audio->PlayWave("Decision.wav", Volume, false);
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("GameOver.wav");
 			if (menuSelection == 0)
 			{
@@ -5283,7 +5338,7 @@ void GameScene::Update()
 				case 0:
 					break;
 				case 1:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage3Reset();
 					sceneNo = 1;
 					break;
@@ -5292,69 +5347,82 @@ void GameScene::Update()
 				case 3:
 					break;
 				case 4:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage1Reset();
 					sceneNo = 4;
 					break;
 				case 5:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial1Reset();
 					sceneNo = 5;
 					break;
 				case 6:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial2Reset();
 					sceneNo = 6;
 					break;
 				case 7:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial3Reset();
 					sceneNo = 7;
 					break;
 				case 8:
 					break;
 				case 9:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage2Reset();
 					sceneNo = 9;
 					break;
 				case 10:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
+					Tutorial1Move();
+					Tutorial2Move();
+					Tutorial3Move();
+					Tutorial4Move();
+					Tutorial5Move();
+					Stage1Move();
+					Stage2Move();
+					Stage3Move();
+					Stage4Move();
+					Stage5Move();
+					Stage6Move();
+					Stage8Move();
+					Stage9Move();
 					Stage7Reset();
 					sceneNo = 10;
 					break;
 				case 11:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial4Reset();
 					sceneNo = 11;
 					break;
 				case 12:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Tutorial5Reset();
 					sceneNo = 12;
 					break;
 				case 13:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage8Reset();
 					sceneNo = 13;
 					break;
 				case 14:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage4Reset();
 					sceneNo = 14;
 					break;
 				case 15:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage5Reset();
 					sceneNo = 15;
 					break;
 				case 16:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage6Reset();
 					sceneNo = 16;
 					break;
 				case 17:
-					audio->PlayWave("Stage.wav", Volume, true);
+					audio->PlayWave("Stage.wav", Volume_Stage, true);
 					Stage9Reset();
 					sceneNo = 17;
 					break;
@@ -5364,7 +5432,7 @@ void GameScene::Update()
 			}
 			else if (menuSelection == 1)
 			{
-				audio->PlayWave("Title.wav", Volume, true);
+				audio->PlayWave("Title.wav", Volume_Title, true);
 				sceneNo = 8;
 				switch (lastScene)
 				{
@@ -5550,12 +5618,12 @@ void GameScene::Update()
 
 		if (input->PushKey(DIK_S) && menuSelection == 0 && !menuMoving || IsButtonDown(ButtonKind::DownButton) && menuSelection == 0 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 		else if (input->PushKey(DIK_W) && menuSelection == 1 && !menuMoving || IsButtonDown(ButtonKind::UpButton) && menuSelection == 1 && !menuMoving)
 		{
-			audio->PlayWave("MoveCursor.wav", Volume, false);
+			audio->PlayWave("MoveCursor.wav", Volume_MoveCursor, false);
 			menuMoving = true;
 		}
 
@@ -5604,26 +5672,7 @@ void GameScene::Update()
 			ConTimer = 0;
 		}
 
-		/*if (input->TriggerKey(DIK_SPACE))
-		{
-			sceneNo = 0;
-			audio->StopWave("GameOver.wav");
-			audio->PlayWave("Title.wav");
-			gameOver->Finalize();
-			titleScene->Initialize();
-			break;
-		}
-
-		if (IsButtonUp(ButtonKind::Button_A))
-		{
-			sceneNo = 0;
-
-			audio->StopWave("GameOver.wav");
-			audio->PlayWave("Title.wav");
-			gameOver->Finalize();
-			titleScene->Initialize();
-			break;
-		}*/
+		
 #pragma endregion
 		break;
 
@@ -5696,8 +5745,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -5706,7 +5755,7 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen2 = true;
 			}
@@ -5767,7 +5816,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s1FirstPlayFlag = false;
@@ -5780,7 +5829,7 @@ void GameScene::Update()
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				gameClear->Initialize();
 
 				s1FirstPlayFlag = false;
@@ -5950,7 +5999,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
@@ -5982,7 +6031,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t1FirstPlayFlag = false;
@@ -5992,7 +6041,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Tutorial1Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -6113,7 +6162,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 6)
 					{
 						Tutorial = false;
@@ -6145,7 +6194,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t2FirstPlayFlag = false;
@@ -6158,7 +6207,7 @@ void GameScene::Update()
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				gameClear->Initialize();
 
 				t2FirstPlayFlag = false;
@@ -6279,7 +6328,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 6)
 					{
 						Tutorial = false;
@@ -6308,8 +6357,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -6318,8 +6367,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -6328,8 +6377,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -6457,7 +6506,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t3FirstPlayFlag = false;
@@ -6469,7 +6518,7 @@ void GameScene::Update()
 				Tutorial3Move();
 				GameClearReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				sceneChange = 0;
 
 				t3FirstPlayFlag = false;
@@ -6543,13 +6592,20 @@ void GameScene::Update()
 	case 8: //ステージセレクト画面
 #pragma region case8 ステージセレクト画面
 
-		camera->SetEye({ -15,0,0 });
-		camera->SetTarget({ 0, 0, 0 });
+		camera->SetEye({ -15,10,0 });
+		camera->SetTarget({ 0, 10, 0 });
+
+		if (input->TriggerKey(DIK_BACKSPACE) && delay == false && stageMoveRight == false && stageMoveLeft == false || why2 == 1 && delay == false && stageMoveRight == false && stageMoveLeft == false)
+		{
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
+			sceneNo = 0;
+			titleScene->Initialize();
+		}
 
 		if (input->TriggerKey(DIK_D) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13 ||
 			IsButtonDown(ButtonKind::Button_RB) && stageMoveRight == false && stageMoveLeft == false && stageSelect < 13)
 		{
-			audio->PlayWave("StageSelection.wav", Volume, false);
+			audio->PlayWave("StageSelection.wav", Volume_StageSelection, false);
 			stageMoveRight = true;
 			stageSelect++;
 		}
@@ -6557,7 +6613,7 @@ void GameScene::Update()
 		if (input->TriggerKey(DIK_A) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0 ||
 			IsButtonDown(ButtonKind::Button_LB) && stageMoveRight == false && stageMoveLeft == false && stageSelect > 0)
 		{
-			audio->PlayWave("StageSelection.wav", Volume, false);
+			audio->PlayWave("StageSelection.wav", Volume_StageSelection, false);
 			stageMoveLeft = true;
 			stageSelect--;
 		}
@@ -6724,10 +6780,10 @@ void GameScene::Update()
 		if (stageMoveLeft == false && stageMoveRight == false && input->TriggerKey(DIK_SPACE) && !delay ||
 			stageMoveLeft == false && stageMoveRight == false && IsButtonDown(ButtonKind::Button_A) && !delay)
 		{
-			PlayFlag = false;
-			audio->PlayWave("Decision.wav", Volume, false);
+			//PlayFlag = false;
+			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			audio->StopWave("Title.wav");
-			audio->PlayWave("Stage.wav", Volume, true);
+			audio->PlayWave("Stage.wav", Volume_Stage, true);
 			switch (stageSelect)
 			{
 			case 0:
@@ -6786,6 +6842,19 @@ void GameScene::Update()
 				
 				break;
 			case 11:
+				Tutorial1Move();
+				Tutorial2Move();
+				Tutorial3Move();
+				Tutorial4Move();
+				Tutorial5Move();
+				Stage1Move();
+				Stage2Move();
+				Stage3Move();
+				Stage4Move();
+				Stage5Move();
+				Stage6Move();
+				Stage8Move();
+				Stage9Move();
 				Stage7Reset();
 				sceneNo = 10;
 
@@ -6982,8 +7051,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7030,25 +7099,25 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(playerPosition, objTeleporterIn3->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 3.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -7059,7 +7128,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s2FirstPlayFlag = false;
@@ -7069,7 +7138,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage2Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -7239,25 +7308,25 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut3->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, RedButton1, 1.0f, 1.0f, 1.0f))
@@ -7265,8 +7334,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7303,8 +7372,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -7341,8 +7410,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -7379,8 +7448,8 @@ void GameScene::Update()
 				if (SwitchFlag4 == false)
 				{
 					SwitchFlag4 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen4 = true;
 			}
@@ -7420,7 +7489,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s7FirstPlayFlag = false;
@@ -7433,7 +7502,7 @@ void GameScene::Update()
 				GameClearReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				gameClear->Initialize();
 
 				s7FirstPlayFlag = false;
@@ -7584,7 +7653,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 4)
 					{
 						Tutorial = false;
@@ -7611,7 +7680,7 @@ void GameScene::Update()
 			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (playerPosition.y <= -10.0f)
@@ -7622,7 +7691,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t4FirstPlayFlag = false;
@@ -7632,7 +7701,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Tutorial4Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -7760,7 +7829,7 @@ void GameScene::Update()
 
 				if (input->TriggerKey(DIK_SPACE) || IsButtonDown(ButtonKind::Button_A))
 				{
-					audio->PlayWave("Decision.wav", Volume, false);
+					audio->PlayWave("Decision.wav", Volume_Decision, false);
 					if (TutorialNo >= 5)
 					{
 						Tutorial = false;
@@ -7790,7 +7859,7 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen1 = true;
 			}
@@ -7830,7 +7899,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				t5FirstPlayFlag = false;
@@ -7840,7 +7909,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Tutorial5Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -7978,19 +8047,19 @@ void GameScene::Update()
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 			}
 
 			if (intersect(playerPosition, RedButton1, 1.0f, 1.0f, 1.0f) && intersect(enemyPosition, RedButton2, 1.0f, 1.0f, 1.0f))
@@ -7998,8 +8067,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8009,8 +8078,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8020,8 +8089,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8163,7 +8232,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s8FirstPlayFlag = false;
@@ -8173,7 +8242,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage8Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -8318,8 +8387,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8356,8 +8425,7 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					//audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8397,7 +8465,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s4FirstPlayFlag = false;
@@ -8407,7 +8475,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage4Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -8524,8 +8592,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8562,8 +8630,7 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					//audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8600,8 +8667,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8638,8 +8705,8 @@ void GameScene::Update()
 				if (SwitchFlag4 == false)
 				{
 					SwitchFlag4 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen4 = true;
 			}
@@ -8676,8 +8743,8 @@ void GameScene::Update()
 				if (SwitchFlag5 == false)
 				{
 					SwitchFlag5 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen5 = true;
 			}
@@ -8717,7 +8784,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s5FirstPlayFlag = false;
@@ -8727,7 +8794,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage5Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -8862,8 +8929,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -8900,8 +8967,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -8938,7 +9005,7 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
 				}
 				doorOpen3 = true;
 			}
@@ -8972,7 +9039,9 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, BombButton1, 1.0f, 1.0f, 1.0f) && lastIntersect == false)
 			{
-				playerBulletF = true;
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					SwitchFlag4 = true;
+					playerBulletF = true;
 			}
 
 			if (playerBullet.x > 14.0f)
@@ -8999,7 +9068,7 @@ void GameScene::Update()
 				Stage6Move();
 				GameClearReset();
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				sceneChange = 0;
 
 				s6FirstPlayFlag = false;
@@ -9014,7 +9083,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s6FirstPlayFlag = false;
@@ -9140,8 +9209,8 @@ void GameScene::Update()
 				if (SwitchFlag1 == false)
 				{
 					SwitchFlag1 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen1 = true;
 			}
@@ -9179,8 +9248,8 @@ void GameScene::Update()
 				if (SwitchFlag2 == false)
 				{
 					SwitchFlag2 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen2 = true;
 			}
@@ -9218,8 +9287,8 @@ void GameScene::Update()
 				if (SwitchFlag3 == false)
 				{
 					SwitchFlag3 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen3 = true;
 			}
@@ -9257,8 +9326,8 @@ void GameScene::Update()
 				if (SwitchFlag4 == false)
 				{
 					SwitchFlag4 = true;
-					audio->PlayWave("Switch.wav", Volume, false);
-					audio->PlayWave("OpenDoor.wav", Volume, false);
+					audio->PlayWave("Switch.wav", Volume_Switch, false);
+					audio->PlayWave("OpenDoor.wav", Volume_OpenDoor, false);
 				}
 				doorOpen4 = true;
 			}
@@ -9292,55 +9361,55 @@ void GameScene::Update()
 
 			if (intersect(playerPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut1->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn1->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut1->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut2->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn2->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut2->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut3->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn3->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut3->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
 			if (intersect(enemyPosition, objTeleporterIn4->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objClone->SetPosition(objTeleporterOut4->GetPosition());
 			}
 
 			if (intersect(playerPosition, objTeleporterIn5->GetPosition(), 1.0f, 1.0f, 1.0f))
 			{
-				audio->PlayWave("Warp.wav", Volume, false);
+				audio->PlayWave("Warp.wav", Volume_Warp, false);
 				objFighter->SetPosition(objTeleporterOut5->GetPosition());
 			}
 
@@ -9411,7 +9480,7 @@ void GameScene::Update()
 				GameOverReset();
 				sceneChange = 0;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameOver.wav", Volume, true);
+				audio->PlayWave("GameOver.wav", Volume_GameOver, true);
 				gameOver->Initialize();
 
 				s9FirstPlayFlag = false;
@@ -9421,7 +9490,7 @@ void GameScene::Update()
 				enemyAlive = false;
 				sceneNo = 2;
 				audio->StopWave("Stage.wav");
-				audio->PlayWave("GameClear.wav", Volume, true);
+				audio->PlayWave("GameClear.wav", Volume_GameClear, true);
 				Stage9Move();
 				GameClearReset();
 				sceneChange = 0;
@@ -9505,12 +9574,13 @@ void GameScene::Update()
 #pragma region DebugLog
 	//Debug Start
 	//XMFLOAT3 eye = camera->GetEye();
+	//int push = IsButtonPush(ButtonKind::Button_B);
 
 	//char msgbuf[256];
 	//char msgbuf2[256];
 	//char msgbuf3[256];
 
-	//sprintf_s(msgbuf, 256, "Last Scene: %d\n", lastScene);
+	//sprintf_s(msgbuf, 256, "Last Scene: %d\n", push);
 	//sprintf_s(msgbuf2, 256, "Player Y: %f\n", playerPosition.y);
 	//sprintf_s(msgbuf3, 256, "Player Z: %f\n", playerPosition.z);
 	//OutputDebugStringA(msgbuf);
@@ -12337,6 +12407,8 @@ void GameScene::Stage6Reset()
 
 	SwitchFlag1 = false;
 	SwitchFlag2 = false;
+	SwitchFlag3 = false;
+	SwitchFlag4 = false;
 
 	beginStage = false;
 }
