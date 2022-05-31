@@ -690,6 +690,8 @@ private: // メンバ変数 Member variables
 	int lastScene = 0; // ゲームクリアとオーバー画面
 	int why = 0;
 	int why2 = 0;
+	int why3 = 0;
+	int why4 = 0;
 
 	int delayFrame = 0;
 	bool delay = false;

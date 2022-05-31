@@ -218,7 +218,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	FbxObject3d::CreateGraphicsPipeline();
 
 	//コントローラー初期化
-	InitInput();
+	//InitInput();
 
 	// デバッグテキスト用テクスチャ読み込み Import texture for debug text
 	if (!Sprite::LoadTexture(debugTextTexNumber, L"Resources/debugfont.png")) {
@@ -3987,7 +3987,7 @@ void GameScene::Update()
 		why = 0;
 	}
 
-	if (IsButtonDown(ButtonKind::Button_X))
+	if (IsButtonDown(ButtonKind::Button_B))
 	{
 		why2 = 1;
 	}
@@ -3996,11 +3996,29 @@ void GameScene::Update()
 		why2 = 0;
 	}
 
+	if (IsButtonDown(ButtonKind::Button_LB))
+	{
+		why3 = 1;
+	}
+	else
+	{
+		why3 = 0;
+	}
+
+	if (IsButtonDown(ButtonKind::Button_RB))
+	{
+		why4 = 1;
+	}
+	else
+	{
+		why4 = 0;
+	}
+
 #pragma endregion
 
 #pragma region ポーズ画面
-	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial ||
-		IsButtonDown(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial)
+	if (input->TriggerKey(DIK_ESCAPE) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial && !cameraChange ||
+		IsButtonDown(ButtonKind::Button_RightMenu) && sceneNo != 0 && sceneNo != 2 && sceneNo != 3 && sceneNo != 8 && beginStage && !falling && !Tutorial && !cameraChange)
 	{
 		if (pause == false)
 		{
@@ -4547,10 +4565,10 @@ void GameScene::Update()
 			}
 		}
 
-		else if (IsButtonDown(ButtonKind::Button_LB) && cameraChange == false || IsButtonDown(ButtonKind::Button_RB) && cameraChange == false)
+		else if (why3 && cameraChange == false || why4 && cameraChange == false)
 		{
 			audio->PlayWave("StageRotation.wav", Volume_StageRotation, false);
-			if (IsButtonDown(ButtonKind::Button_LB))
+			if (why3)
 			{
 				if (cameraMove == 4)
 				{
@@ -4565,7 +4583,7 @@ void GameScene::Update()
 					cameraMove++;
 				}
 			}
-			else if (IsButtonDown(ButtonKind::Button_RB))
+			else if (why4)
 			{
 				if (cameraMove == 1)
 				{
@@ -9571,21 +9589,23 @@ void GameScene::Update()
 
 #pragma endregion
 
+	//UpdateInput();
+
 #pragma region DebugLog
 	//Debug Start
 	//XMFLOAT3 eye = camera->GetEye();
 	//int push = IsButtonPush(ButtonKind::Button_B);
 
-	//char msgbuf[256];
-	//char msgbuf2[256];
-	//char msgbuf3[256];
+	char msgbuf[256];
+	char msgbuf2[256];
+	char msgbuf3[256];
 
-	//sprintf_s(msgbuf, 256, "Last Scene: %d\n", push);
-	//sprintf_s(msgbuf2, 256, "Player Y: %f\n", playerPosition.y);
-	//sprintf_s(msgbuf3, 256, "Player Z: %f\n", playerPosition.z);
-	//OutputDebugStringA(msgbuf);
-	//OutputDebugStringA(msgbuf2);
-	//OutputDebugStringA(msgbuf3);
+	sprintf_s(msgbuf, 256, "B: %d\n", why2);
+	sprintf_s(msgbuf2, 256, "LB: %d\n", why3);
+	sprintf_s(msgbuf3, 256, "RB: %d\n", why4);
+	OutputDebugStringA(msgbuf);
+	OutputDebugStringA(msgbuf2);
+	OutputDebugStringA(msgbuf3);
 	//Debug End
 #pragma endregion
 
