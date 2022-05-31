@@ -16,7 +16,7 @@ static LPDIRECTINPUT8 g_InputInterface;							//!< DIRECTINPUT8のポインタ
 static LPDIRECTINPUTDEVICE8 g_GamePadDevice;					//!< DIRECTINPUTDEVICE8のポインタ
 static ButtonState g_ButtonStates[ButtonKind::ButtonKindMax];
 
-WinApp* win = nullptr;
+//WinApp* win = nullptr;
 
 // 入力インターフェースの作成 Creating an input interface
 bool CreateInputInterface();
