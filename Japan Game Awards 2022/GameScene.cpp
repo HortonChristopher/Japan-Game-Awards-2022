@@ -4772,6 +4772,8 @@ void GameScene::Update()
 
 			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			SceneSelectionReset();
+			ReleaseInput();
+			InitInput();
 			sceneNo = 8;
 			titleScene->Finalize();
 			delay = true;
@@ -6613,7 +6615,8 @@ void GameScene::Update()
 		camera->SetEye({ -15,10,0 });
 		camera->SetTarget({ 0, 10, 0 });
 
-		if (input->TriggerKey(DIK_BACKSPACE) && delay == false && stageMoveRight == false && stageMoveLeft == false || why2 == 1 && delay == false && stageMoveRight == false && stageMoveLeft == false)
+		if (input->TriggerKey(DIK_BACKSPACE) && delay == false && stageMoveRight == false && stageMoveLeft == false 
+			|| why2 == 1 && delay == false && stageMoveRight == false && stageMoveLeft == false)
 		{
 			audio->PlayWave("Decision.wav", Volume_Decision, false);
 			sceneNo = 0;
