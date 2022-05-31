@@ -681,6 +681,8 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 clonePauseRotation;
 	XMFLOAT3 playerMarkerPausePosition;
 	XMFLOAT3 playerMarkerPauseRotation;
+	XMFLOAT3 playerBulletPausePosition;
+	XMFLOAT3 cloneBulletPausePosition;
 
 	int stage1Init = 0;
 	int FBXModelChange = 0;

@@ -4046,6 +4046,8 @@ void GameScene::Update()
 			clonePauseRotation = objClone->GetRotation();
 			playerMarkerPausePosition = objPlayerMarker->GetPosition();
 			playerMarkerPauseRotation = objPlayerMarker->GetRotation();
+			playerBulletPausePosition = objTempBullet->GetPosition();
+			cloneBulletPausePosition = objTempBulletE->GetPosition();
 
 			pausePosition = true;
 		}
@@ -4058,6 +4060,8 @@ void GameScene::Update()
 		objClone->SetRotation(clonePauseRotation);
 		objCloneStand->SetPosition(clonePausePosition);
 		objCloneStand->SetRotation(clonePauseRotation);
+		objTempBullet->SetPosition(playerBulletPausePosition);
+		objTempBulletE->SetPosition(cloneBulletPausePosition);
 
 		objPlayerMarker->SetPosition(playerMarkerPausePosition);
 		objPlayerMarker->SetRotation(playerMarkerPauseRotation);
@@ -4065,6 +4069,8 @@ void GameScene::Update()
 		objFighter->Update();
 		objClone->Update();
 		objPlayerMarker->Update();
+		objTempBullet->Update();
+		objTempBulletE->Update();
 
 		if (input->TriggerKey(DIK_S) && pauseMenuSelection < 2 || why == 1 && pauseMenuSelection < 2)
 		{
@@ -4862,7 +4868,7 @@ void GameScene::Update()
 			}
 
 
-			if (playerBulletF)
+			if (playerBulletF && !pause)
 			{
 				playerBullet.x += 1.0f;
 				objTempBullet->SetPosition(playerBullet);
@@ -4873,7 +4879,7 @@ void GameScene::Update()
 				objTempBullet->SetPosition(playerBullet);
 			}
 
-			if (enemyBulletF)
+			if (enemyBulletF && !pause)
 			{
 				enemyBullet.x -= 1.0f;
 				objTempBulletE->SetPosition(enemyBullet);
@@ -9070,7 +9076,7 @@ void GameScene::Update()
 				playerBulletF = false;
 			}
 
-			if (playerBulletF)
+			if (playerBulletF && !pause)
 			{
 				playerBullet.x += 1.0f;
 				objTempBullet->SetPosition(playerBullet);
@@ -12072,6 +12078,7 @@ void GameScene::Stage3Reset()
 	camera->MoveEyeVector({ +100.0f, +105.0f, +100.0f });
 
 	playerBullet.x = InitBulletPos_PX;
+	playerBullet.z = 0.0f;
 	objTempBullet->SetPosition(playerBullet);
 	objTempBullet->Update();
 
