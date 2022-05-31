@@ -13,6 +13,7 @@ using namespace DirectX;
 extern int cameraMove;
 extern int prevCameraMove;
 extern int playFlag;
+extern int isStageGoing;
 
 Player* Player::Create(Model* model)
 {
@@ -62,489 +63,500 @@ void Player::Update()
 	UpdateInput();
 
 #pragma region プレイヤーの移動処理
-	//正面から見たときの移動処理
-	if (cameraMove == 1)
+	if (isStageGoing == 0)
 	{
-		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
+		//正面から見たときの移動処理
+		if (cameraMove == 1)
 		{
-			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+			if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
+				if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				else if (input->PushKey(DIK_D))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				else if (input->PushKey(DIK_W))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
+
+				else if (input->PushKey(DIK_S))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
+
+				playFlag = 1;
 			}
 
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+			//コントローラー旋回と移動処理
+			else if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
+				if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
 
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (IsButtonPush(ButtonKind::LeftButton))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::RightButton))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::UpButton))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::DownButton))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
+
+				playFlag = 1;
+			}
+			else
 			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
+				playFlag = 0;
 			}
-
-			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
-			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_A))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
-
-			else if (input->PushKey(DIK_D))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
-
-			else if (input->PushKey(DIK_W))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
-
-			else if (input->PushKey(DIK_S))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
-
-			playFlag = 1;
-		}
-		else
-		{
-			playFlag = 0;
-		}
-
-		//コントローラー旋回と移動処理
-		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
-		{
-			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
-			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
-			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::LeftButton))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
-
-			else if (IsButtonPush(ButtonKind::RightButton))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
-
-			else if (IsButtonPush(ButtonKind::UpButton))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
-
-			else if (IsButtonPush(ButtonKind::DownButton))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
-		}
-	}
-
-	//左から見たときの移動処理
-	if (cameraMove == 2)
-	{
-		//キーボードの移動処理
-		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
-		{
-			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
-			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
-			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
-			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
-			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_A))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
-
-			else if (input->PushKey(DIK_D))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
-
-			else if (input->PushKey(DIK_W))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
-
-			else if (input->PushKey(DIK_S))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
-
-			playFlag = 1;
-		}
-		else
-		{
-			playFlag = 0;
 		}
 
-		//コントローラー旋回と移動処理
-		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+		//左から見たときの移動処理
+		if (cameraMove == 2)
 		{
-			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+			//キーボードの移動処理
+			if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
+				if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
+
+				else if (input->PushKey(DIK_D))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
+
+				else if (input->PushKey(DIK_W))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				else if (input->PushKey(DIK_S))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				playFlag = 1;
 			}
 
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+			//コントローラー旋回と移動処理
+			else if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
+				if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::LeftButton))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
+				else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::RightButton))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
+				else if (IsButtonPush(ButtonKind::LeftButton))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
 
-			else if (IsButtonPush(ButtonKind::UpButton))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
+				else if (IsButtonPush(ButtonKind::RightButton))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
 
-			else if (IsButtonPush(ButtonKind::DownButton))
+				else if (IsButtonPush(ButtonKind::UpButton))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::DownButton))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				playFlag = 1;
+			}
+			else
 			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
+				playFlag = 0;
 			}
 		}
-	}
 
-	//奥側から見たときの移動処理
-	if (cameraMove == 3)
-	{
-		//キーボードの移動処理
-		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
+		//奥側から見たときの移動処理
+		if (cameraMove == 3)
 		{
-			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+			//キーボードの移動処理
+			if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
+				if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				else if (input->PushKey(DIK_D))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				else if (input->PushKey(DIK_W))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
+
+				else if (input->PushKey(DIK_S))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
+
+				playFlag = 1;
 			}
 
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+			//コントローラー旋回と移動処理
+			else if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
+				if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
 
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (IsButtonPush(ButtonKind::LeftButton))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::RightButton))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::UpButton))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::DownButton))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
+
+				playFlag = 1;
+			}
+			else
 			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
+				playFlag = 0;
 			}
-
-			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
-			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_A))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
-
-			else if (input->PushKey(DIK_D))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
-
-			else if (input->PushKey(DIK_W))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
-
-			else if (input->PushKey(DIK_S))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
-
-			playFlag = 1;
-		}
-		else
-		{
-			playFlag = 0;
-		}
-
-		//コントローラー旋回と移動処理
-		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
-		{
-			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
-			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
-			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (IsButtonPush(ButtonKind::LeftButton))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
-
-			else if (IsButtonPush(ButtonKind::RightButton))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
-
-			else if (IsButtonPush(ButtonKind::UpButton))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
-
-			else if (IsButtonPush(ButtonKind::DownButton))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
-		}
-	}
-
-	//右側から見たときの移動処理
-	if (cameraMove == 4)
-	{
-		//キーボードの移動処理
-		if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
-		{
-			if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
-			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
-			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
-			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
-			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
-
-			else if (input->PushKey(DIK_A))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
-
-			else if (input->PushKey(DIK_D))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
-
-			else if (input->PushKey(DIK_W))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
-
-			else if (input->PushKey(DIK_S))
-			{
-				position.x += Speed;
-				rotation.y = 90.0f;
-			}
-
-			playFlag = 1;
-		}
-		else
-		{
-			playFlag = 0;
 		}
 
-		//コントローラー旋回と移動処理
-		if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
+		//右側から見たときの移動処理
+		if (cameraMove == 4)
 		{
-			if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+			//キーボードの移動処理
+			if (input->PushKey(DIK_A) || input->PushKey(DIK_D) || input->PushKey(DIK_W) || input->PushKey(DIK_S))
 			{
-				rotation.y = 225.0f;
-				position.x -= Speed * 0.71f;
-				position.z -= Speed * 0.71f;
+				if (input->PushKey(DIK_A) && input->PushKey(DIK_W))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_W))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_D) && input->PushKey(DIK_S))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A) && input->PushKey(DIK_S))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
+
+				else if (input->PushKey(DIK_A))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
+
+				else if (input->PushKey(DIK_D))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
+
+				else if (input->PushKey(DIK_W))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				else if (input->PushKey(DIK_S))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				playFlag = 1;
 			}
 
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+			//コントローラー旋回と移動処理
+			else if (IsButtonPush(ButtonKind::RightButton) || IsButtonPush(ButtonKind::LeftButton) || IsButtonPush(ButtonKind::UpButton) || IsButtonPush(ButtonKind::DownButton))
 			{
-				rotation.y = 315.0f;
-				position.x -= Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
+				if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 225.0f;
+					position.x -= Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 45.0f;
-				position.x += Speed * 0.71f;
-				position.z += Speed * 0.71f;
-			}
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::UpButton))
+				{
+					rotation.y = 315.0f;
+					position.x -= Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
-			{
-				rotation.y = 135.0f;
-				position.x += Speed * 0.71f;
-				position.z -= Speed * 0.71f;
-			}
+				else if (IsButtonPush(ButtonKind::RightButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 45.0f;
+					position.x += Speed * 0.71f;
+					position.z += Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::LeftButton))
-			{
-				position.z -= Speed;
-				rotation.y = 180.0f;
-			}
+				else if (IsButtonPush(ButtonKind::LeftButton) && IsButtonPush(ButtonKind::DownButton))
+				{
+					rotation.y = 135.0f;
+					position.x += Speed * 0.71f;
+					position.z -= Speed * 0.71f;
+				}
 
-			else if (IsButtonPush(ButtonKind::RightButton))
-			{
-				position.z += Speed;
-				rotation.y = 0.0f;
-			}
+				else if (IsButtonPush(ButtonKind::LeftButton))
+				{
+					position.z -= Speed;
+					rotation.y = 180.0f;
+				}
 
-			else if (IsButtonPush(ButtonKind::UpButton))
-			{
-				position.x -= Speed;
-				rotation.y = 270.0f;
-			}
+				else if (IsButtonPush(ButtonKind::RightButton))
+				{
+					position.z += Speed;
+					rotation.y = 0.0f;
+				}
 
-			else if (IsButtonPush(ButtonKind::DownButton))
+				else if (IsButtonPush(ButtonKind::UpButton))
+				{
+					position.x -= Speed;
+					rotation.y = 270.0f;
+				}
+
+				else if (IsButtonPush(ButtonKind::DownButton))
+				{
+					position.x += Speed;
+					rotation.y = 90.0f;
+				}
+
+				playFlag = 1;
+			}
+			else
 			{
-				position.x += Speed;
-				rotation.y = 90.0f;
+				playFlag = 0;
 			}
 		}
 	}

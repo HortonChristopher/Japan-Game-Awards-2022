@@ -144,21 +144,21 @@ private: // メンバ変数 Member variables
 	bool stageMoveLeft = false;
 
 	//初めプレイですか？
-	bool t1Time = true;
-	bool t2Time = true;
-	bool t3Time = true;
-	bool at4Time = true;
-	bool t5Time = true;
-	bool t4Time = true;
-	bool firstTime = true;
-	bool secondTime = true;
-	bool thirdTime = true;
-	bool fourthTime = true;
-	bool fifthTime = true;
-	bool sixthTime = true;
-	bool seventhTime = true;
-	bool eigthTime = true;
-	bool ninthTime = true;
+	bool t1Time = false;
+	bool t2Time = false;
+	bool t3Time = false;
+	bool at4Time = false;
+	bool t5Time = false;
+	bool t4Time = false;
+	bool firstTime = false;
+	bool secondTime = false;
+	bool thirdTime = false;
+	bool fourthTime = false;
+	bool fifthTime = false;
+	bool sixthTime = false;
+	bool seventhTime = false;
+	bool eigthTime = false;
+	bool ninthTime = false;
 
 	bool temp = true;
 
@@ -688,6 +688,8 @@ private: // メンバ変数 Member variables
 	int menuSelection = 0; // ゲームクリアとオーバー画面
 	bool menuMoving = false; // ゲームクリアとオーバー画面
 	int lastScene = 0; // ゲームクリアとオーバー画面
+	int why = 0;
+	int why2 = 0;
 
 	int delayFrame = 0;
 	bool delay = false;
@@ -712,7 +714,19 @@ private: // メンバ変数 Member variables
 	XMFLOAT3 originalCamera;
 
 	//Waveのボリューム
-	const float Volume = 0.1f;
+	const float Volume_Stage = 0.07f;
+	const float Volume_Title = 0.07f;
+	const float Volume_Decision = 0.1f;
+	const float Volume_Esc = 0.1f;
+	const float Volume_GameClear = 0.07f;
+	const float Volume_GameOver = 0.07f;
+	const float Volume_MoveCursor = 0.1f;
+	const float Volume_OpenDoor = 0.05f;
+	const float Volume_StageRotation = 0.1f;
+	const float Volume_StageSelection = 0.1f;
+	const float Volume_Switch = 0.3f;
+	const float Volume_Walk = 0.5f;
+	const float Volume_Warp = 0.1f;
 
 	//ワープゾーンの回転スピード
 	const float WarpRotate = 3.0f;
